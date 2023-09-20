@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCloseClose_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCloseFail_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleHandleValid_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleOpen_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleOpenClose_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleOpenERROR_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleOpenOpen_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWrite_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteFail_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteFailBuffer_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteRead_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteRead2_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadBufferError_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadFail_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadFlush_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadFlushError_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadSEEK_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadSeekError_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadTell_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWriteReadTellError_Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{5d1787fb-1d4f-4711-9dc6-d15f6042b66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4bd201f2-ab18-4a85-97d2-1c664581e1df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_UnitTestConfiguration.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

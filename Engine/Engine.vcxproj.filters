@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Framework">
+      <UniqueIdentifier>{f04c9286-e219-4fb7-b306-f9717e9aba86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Test">
+      <UniqueIdentifier>{75066020-d788-4b2b-bc41-ace12119e0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{018c6f9a-3b75-4b64-9e16-5ef5fc18a3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Compiled">
+      <UniqueIdentifier>{c9098c9a-8b93-4fbd-9966-9a803ee39556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original">
+      <UniqueIdentifier>{3c7a2d86-b6b5-4627-9f08-50ba20e402ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Test\Unit Test Configuration">
+      <UniqueIdentifier>{0608852d-4953-4faf-8d42-335bb335dce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\Camera">
+      <UniqueIdentifier>{6522eaa0-32dc-4903-b416-40e63802de1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ShaderObject">
+      <UniqueIdentifier>{3ded6dfe-9cc7-4a62-8420-6ad034060f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{4cda4876-0d19-4d22-80d6-255299a04507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObject">
+      <UniqueIdentifier>{51ba3269-d895-41bf-a4cd-db5691d988b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GraphicsObject">
+      <UniqueIdentifier>{45324200-2da6-416c-9e59-00972da44b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_Diagrams">
+      <UniqueIdentifier>{9775dca4-63f1-4cb4-a522-f6a6afd55fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{e92ca29b-4937-4528-bd5c-8e9a35ac565c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Mesh">
+      <UniqueIdentifier>{8a894f74-093c-43c4-9200-37d30accd0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXTex">
+      <UniqueIdentifier>{b4b72b8d-072e-4003-88ce-fcb26a13c670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXTex\include">
+      <UniqueIdentifier>{5897035a-06ed-43ee-b2bb-10e340f0c291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DXTex\lib">
+      <UniqueIdentifier>{24b3fdff-eff7-4a16-9098-c8f20d2831bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TextureObject">
+      <UniqueIdentifier>{03dac8eb-2e05-4b7f-ad07-c76f6b5ac463}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Framework\__DO NOT MODIFY__">
+      <Filter>_Framework</Filter>
+    </None>
+    <None Include="GraphicsObject_Diagram.cd">
+      <Filter>src\_Diagrams</Filter>
+    </None>
+    <None Include="DXTex\include\DirectXTex.inl">
+      <Filter>DXTex\include</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Framework\Framework.h">
+      <Filter>_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Colors.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_UnitTestConfiguration.h">
+      <Filter>_Test\Unit Test Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\ColorByVertex.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\ColorByVertex.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CubeMesh.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderObject.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOColorByVertex.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>src\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GraphicsObject.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOColorByVertex.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOWireframe.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PyramidMesh.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectManager.h">
+      <Filter>src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GONull.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderObjectManager.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshManager.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CameraManager.h">
+      <Filter>src\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DiamondMesh.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CrossMesh.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DXTex\include\DirectXTex.h">
+      <Filter>DXTex\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureObject.h">
+      <Filter>src\TextureObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOFlatTexture.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\FlatTexture.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\FlatTexture.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOFlatTexture.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureObjectManager.h">
+      <Filter>src\TextureObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\ConstColor.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\ConstColor.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\LightTexture.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\LightTexture.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Null.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Null.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOLightTexture.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOLightTexture.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOConstColor.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOConstColor.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineUtils.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SONull.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshUtils.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Default.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Default.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SODefault.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plane.h">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ColorByVertex.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\FlatTexture.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\FlatTexture.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ConstColor.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ConstColor.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\LightTexture.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\LightTexture.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Default.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Default.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CubeMesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderObject.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOColorByVertex.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>src\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicsObject.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOWireframe.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameHelper.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PyramidMesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectManager.cpp">
+      <Filter>src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GONull.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderObjectManager.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshManager.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CameraManager.cpp">
+      <Filter>src\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DiamondMesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CrossMesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureObject.cpp">
+      <Filter>src\TextureObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOFlatTexture.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOFlatTexture.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureObjectManager.cpp">
+      <Filter>src\TextureObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOLightTexture.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOLightTexture.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOConstColor.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOConstColor.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOColorByVertex.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineUtils.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SONull.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SODefault.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="DXTex\lib\DirectXTex_DebugX86.lib">
+      <Filter>DXTex\lib</Filter>
+    </Library>
+    <Library Include="DXTex\lib\DirectXTex_ReleaseX86.lib">
+      <Filter>DXTex\lib</Filter>
+    </Library>
+  </ItemGroup>
+</Project>

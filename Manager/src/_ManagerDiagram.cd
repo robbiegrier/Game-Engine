@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Azul::ListBase">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAAAAAAQAAAAACBAAAAACABAAAAAACAAAACAI=</HashCode>
+      <FileName>include\ListBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Azul::DLink">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAIAAQAAAAABAAIBBBAA=</HashCode>
+      <FileName>include\DLink.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Azul::DLinkIterator" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAECAAACAAhQAAAAAAAgAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\DLinkIterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Azul::Iterator">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAECAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\Iterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Azul::DLinkedList" Collapsed="true">
+    <Position X="3.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgJAAAAAAAIAAQAAACAABAAAQACABAAAAAAiAAAACAI=</HashCode>
+      <FileName>include\DLinkedList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Azul::ManagerBase">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAIAEAAACgCgCAgAAIgQAUAAYAgAAABAAAAAAAAA=</HashCode>
+      <FileName>include\ManagerBase.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poActive" />
+      <Field Name="poReserve" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

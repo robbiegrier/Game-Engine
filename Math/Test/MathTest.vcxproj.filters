@@ -1,0 +1,752 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4Test.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_Junkfood.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_VectCrossAddSub.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_VectCrossAddSubMatrixMult.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_VectCrossAddSubMatrixMultCross.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_VectCrossCrossNorm.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_VectLine.cpp">
+      <Filter>Test\Math_Core\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Accessor_Get.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Accessor_Get_Const.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Accessor_Set.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Add_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_AddEqual_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_AssignmentOperator.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Bracket_Get.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Bracket_Get_Const.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Bracket_Set.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Copy_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Default_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Destructor_Constuctor.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Det.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_GET_ROW_0.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_GET_ROW_1.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_GET_ROW_2.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_GetInverse.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_GetTranspose.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Inverse.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_isEqual_false.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Mult_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Mult_Scale.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_MultEqual_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Scale_Equals.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Scale_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_Identity.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_ROW_0.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_ROW_1.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_ROW_2.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_Vectors.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SET_Zero.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_isEqual_false2.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_isEqual_true.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_isIdentity_false.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_isIdentity_true.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_Matrix_Identity.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Special_Matrix_Zero.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Sub_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_SubEqual_Mat3.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Transpose.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Unary_equal_Minus.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Unary_equal_Plus.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_UnaryMinus.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_UnaryPlus.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Vector_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Accessor_Get.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Accessor_Get_Const.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Accessor_Set.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Add_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_AddEqual_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_AssignmentOperator.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Bracket_Get.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Bracket_Get_Const.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Bracket_Set.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Copy_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Default_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Destructor_Constuctor.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Det.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GET_ROW_0.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GET_ROW_1.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GET_ROW_2.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GET_ROW_3.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GetInverse.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_GetTranspose.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Inverse.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_isEqual_false.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Mult_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Mult_Scale.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_MultEqual_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_RotAxisAngle.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_RotOrient.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Scale_Equals.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Scale_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_Identity.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_MatrixRotAxisAngle.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_MatrixRotOrient.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_RotX.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_RotXYZ.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_RotY.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_RotZ.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_ROW_0.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_ROW_1.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_ROW_2.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_ROW_3.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_SCALE.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_SCALE_Vect.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_Trans.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_Trans_Vect.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_Vectors.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SET_Zero.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_isEqual_false2.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_isEqual_true.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_isIdentity_false.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_isIdentity_true.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_Identity.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_SCALE.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_SCALE_Vect.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_Trans.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_Trans_Vect.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_Matrix_Zero.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_RotX.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_RotXYZ_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_RotY.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Special_RotZ.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Sub_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_SubEqual_Mat4.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Transpose.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Unary_equal_Minus.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Unary_equal_Plus.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_UnaryMinus.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_UnaryPlus.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Vector_Constructor.cpp">
+      <Filter>Test\Math_Core\Mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_ACos.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_ASin.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_ATan.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_ATan2.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_Cos.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_CosSin.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_InvSqrt.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_Sin.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_Sqrt.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_Tan.cpp">
+      <Filter>Test\Math_Core\Trig</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Add_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Assignment_Operator.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_ConstantCheck.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Constructor_Copy.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Constructor_Default.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Constructor_Individual.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Constructor_Vec3.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Destructor.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Dot.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Get_Accessors.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Get_Accessors_const.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Get_Brackets.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Get_Brackets_const.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Get_Normalize.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsEqualFalse.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsEqualFalse_default.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsEqualTrue.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsEqualTrue_default.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsZeroFalse.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsZeroFalse_default.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsZeroTrue_default.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_IsZeroTrue_True.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Len.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Mult_Mat4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Mult_Scale.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_MultEqual_Mat4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Normalize.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_PlusEqual_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Proxy.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_SampleTest.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Scale_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_ScaleEquals.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_4_Elements.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Accessors.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Accessors_Get.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Brackets.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Brackets_get.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Vec3.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Set_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Sub_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_SubEqual_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Unary_equal_Minus.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Unary_equal_Plus.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Unary_Minus.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Unary_Plus.cpp">
+      <Filter>Test\Math_Core\Vec4</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Add_Vec3.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Assignment_Operator.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_ConstantCheck.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Constructor_Copy.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Constructor_Default.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Constructor_Individual.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Constructor_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Cross.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Destructor.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Dot.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Accessors.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Accessors_const.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Angle.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Brackets.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Brackets_const.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Get_Normalize.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsEqualFalse.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsEqualFalse_default.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsEqualTrue.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsEqualTrue_default.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsZeroFalse.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsZeroFalse_default.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsZeroTrue_default.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_IsZeroTrue_True.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Len.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Mult_Mat3.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Mult_Mat4.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Mult_Scale.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_MultEqual_Mat3.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_MultEqual_Mat4.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Normalize.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_PlusEqual_Vect.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Proxy.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_SampleTest.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Scale_Vect.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_ScaleEquals.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_3_Elements.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Accessors.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Accessors_get.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Brackets.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Brackets_get.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Vec3.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Set_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Sub_Vect.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_SubEqual_Vect.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Unary_equal_Minus.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Unary_equal_Plus.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Unary_Minus.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Unary_Plus.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat3_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Mat4_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Combo_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Trig_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="VectApp_Lerp.cpp">
+      <Filter>Test\Math_App\Vec3App</Filter>
+    </ClCompile>
+    <ClCompile Include="Vect3App_Group.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3_Assignment_Operator_Vec4.cpp">
+      <Filter>Test\Math_Core\Vec3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{5d1787fb-1d4f-4711-9dc6-d15f6042b66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4bd201f2-ab18-4a85-97d2-1c664581e1df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core">
+      <UniqueIdentifier>{0e00f37f-6392-4f53-8690-e926789e09f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_App">
+      <UniqueIdentifier>{b83c8299-5676-4180-b1d3-6e6dd328e9af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_App\Vec3App">
+      <UniqueIdentifier>{da304a85-77c5-416f-abb9-f44737aaf748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Vec4">
+      <UniqueIdentifier>{08b8de80-1b7b-4e44-98ab-c4b382ac4b2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Trig">
+      <UniqueIdentifier>{83b15e6d-6c25-46dd-9f20-bdba5f6757ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Vec3">
+      <UniqueIdentifier>{94939b09-db0e-4396-abb4-a0acca3f29d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Combo">
+      <UniqueIdentifier>{b8cfb2ee-084b-444b-9385-e6128c2b2e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Mat3">
+      <UniqueIdentifier>{b925c21f-c23f-4211-acdd-a51110578159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Math_Core\Mat4">
+      <UniqueIdentifier>{946a28b5-c7fb-43d1-a717-10744af49e80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_UnitTestConfiguration.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Mat4Test.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="__DO NOT MODIFY__">
+      <Filter>Test</Filter>
+    </None>
+  </ItemGroup>
+</Project>

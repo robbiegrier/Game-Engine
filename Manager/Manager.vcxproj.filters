@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{62756e66-8839-482b-8326-513973ed48aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2b319c65-0584-4b21-b5d0-304499424029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Framework">
+      <UniqueIdentifier>{4e959753-e95b-4a1e-ab0f-7e6347d17b64}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Framework\Framework.h">
+      <Filter>_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\ProjectSettings.h">
+      <Filter>_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\ThreadFramework.h">
+      <Filter>_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DLink.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DLinkIterator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DLinkedList.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Iterator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ListBase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ManagerBase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ListNode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Framework\__DO NOT MODIFY__">
+      <Filter>_Framework</Filter>
+    </None>
+    <None Include="src\_ManagerDiagram.cd">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DLink.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DLinkIterator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DLinkedList.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ManagerBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ListNode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
