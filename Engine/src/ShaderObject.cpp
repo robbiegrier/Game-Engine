@@ -1,5 +1,7 @@
 #include "ShaderObject.h"
 #include "Engine.h"
+#include "Mesh.h"
+#include "CameraManager.h"
 
 namespace Azul
 {
@@ -15,8 +17,10 @@ namespace Azul
 	}
 
 	ShaderObject::ShaderObject()
-		: name(Name::None)
+		: name(Name::None), poConstantBuff_Projection{ nullptr }, poConstantBuff_View{ nullptr }
 	{
+		poConstantBuff_Projection = Mesh::CreateConstantBuffer(sizeof(Mat4));
+		poConstantBuff_View = Mesh::CreateConstantBuffer(sizeof(Mat4));
 	}
 
 	ShaderObject::~ShaderObject()
@@ -24,6 +28,8 @@ namespace Azul
 		SafeRelease(poInputLayout);
 		SafeRelease(poVertexShader);
 		SafeRelease(poPixelShader);
+		SafeRelease(poConstantBuff_Projection);
+		SafeRelease(poConstantBuff_View);
 	}
 
 	void ShaderObject::Open(GraphicsObject* pObject)
@@ -31,6 +37,13 @@ namespace Azul
 		Engine::GetContext()->VSSetShader(poVertexShader, nullptr, 0u);
 		Engine::GetContext()->IASetInputLayout(poInputLayout);
 		Engine::GetContext()->PSSetShader(poPixelShader, nullptr, 0u);
+
+		Camera* pCamera = CameraManager::GetCurrentCamera();
+		Engine::GetContext()->UpdateSubresource(poConstantBuff_View, 0u, nullptr, &pCamera->GetViewMatrix(), 0u, 0u);
+		Engine::GetContext()->UpdateSubresource(poConstantBuff_Projection, 0u, nullptr, &pCamera->GetProjMatrix(), 0u, 0u);
+		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::Projection, 1u, &poConstantBuff_Projection);
+		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::View, 1u, &poConstantBuff_View);
+
 		OnOpen(pObject);
 	}
 

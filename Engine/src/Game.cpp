@@ -137,32 +137,16 @@ namespace Azul
 		ShaderObject* pLightTestShader = ShaderObjectManager::Find(ShaderObject::Name::Default);
 
 		GameObjectManager::SpawnObject("PX Cube",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube),
-				pLightTestShader,
-				TextureObjectManager::Find(TextureObject::Name::Brick),
-				lightColor, lightPos
-			), Vec3(5, 0, 0)
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Brick)), Vec3(5, 0, 0)
 		);
 		GameObjectManager::SpawnObject("PX Diamond",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond),
-				pLightTestShader,
-				TextureObjectManager::Find(TextureObject::Name::Duckweed),
-				lightColor, lightPos
-			), Vec3(-7, 0, 0)
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Duckweed)), Vec3(-7, 0, 0)
 		);
 		GameObjectManager::SpawnObject("PX Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid),
-				pLightTestShader,
-				TextureObjectManager::Find(TextureObject::Name::Stone),
-				lightColor, lightPos
-			), Vec3(0, 0, 4.5)
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(0, 0, 4.5)
 		);
 		GameObjectManager::SpawnObject("Floor Plane",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Plane),
-				pLightTestShader,
-				TextureObjectManager::Find(TextureObject::Name::Brick),
-				lightColor, lightPos
-			), Vec3(0, -1.f, 0)
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Plane), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Brick)), Vec3(0, -1.f, 0)
 		);
 
 		constexpr static float markerLength = 6.f;
@@ -284,9 +268,7 @@ namespace Azul
 					new GOLightTexture(
 						MeshManager::Find(Mesh::Name::Cube),
 						ShaderObjectManager::Find(ShaderObject::Name::Default),
-						pTex,
-						lightColor,
-						lightPos
+						pTex
 					),
 					Vec3((float)xf, zCoord, (float)yf)
 				);
@@ -401,19 +383,19 @@ namespace Azul
 	void Game::LoadLightObjects()
 	{
 		pLightBlock = GameObjectManager::SpawnObject("Light Block",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::LightTexture), TextureObjectManager::Find(TextureObject::Name::Brick), lightColor, lightPos),
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Brick)),
 			Vec3(-10.f, 0.f, 14.f)
 		);
 		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
 
 		pLightPyramid = GameObjectManager::SpawnObject("Light Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), ShaderObjectManager::Find(ShaderObject::Name::LightTexture), TextureObjectManager::Find(TextureObject::Name::Duckweed), Vec3(0.f, .5f, 1.f), lightPos),
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Duckweed)),
 			Vec3(-10.f, 0.f, 10.f)
 		);
 		pLightPyramid->SetRelativeScale(Vec3(1, 1, 1));
 
 		pLightDiamond = GameObjectManager::SpawnObject("Light Diamond",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::LightTexture), TextureObjectManager::Find(TextureObject::Name::Stone), lightColor, lightPos),
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Stone)),
 			Vec3(-14.f, 0.f, 12.f)
 		);
 		pLightDiamond->SetRelativeScale(Vec3(1, 1, 1));

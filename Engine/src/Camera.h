@@ -4,6 +4,8 @@
 #include "DLink.h"
 #include "MathEngine.h"
 
+struct ID3D11Buffer;
+
 namespace Azul
 {
 	// Mathematical representation of a camera that can be injected into shaders
@@ -24,7 +26,7 @@ namespace Azul
 		Camera();
 		Camera(const Camera&) = delete;
 		Camera& operator = (const Camera&) = delete;
-		~Camera() = default;
+		~Camera();
 
 		// Initialize camera params
 		void SetPerspective(const float FieldOfView_Degs, const float AspectRatio, const float NearDist, const float FarDist);
@@ -42,6 +44,7 @@ namespace Azul
 		Mat4& GetViewMatrix();
 		Mat4& GetProjMatrix();
 		void GetLocation(Vec3& outPos) const;
+		Vec3 GetLocation() const;
 		void GetDirection(Vec3& outDir) const;
 		void GetUp(Vec3& outUp) const;
 		void GetLookAt(Vec3& outLookAt) const;

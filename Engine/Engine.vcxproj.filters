@@ -70,6 +70,9 @@
     <None Include="DXTex\include\DirectXTex.inl">
       <Filter>DXTex\include</Filter>
     </None>
+    <None Include="Shaders\Original\Default.hlsli">
+      <Filter>Shaders\Original</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Framework\Framework.h">

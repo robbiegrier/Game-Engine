@@ -1,4 +1,5 @@
 #include "EngineUtils.h"
+#include "Engine.h"
 
 namespace Azul
 {

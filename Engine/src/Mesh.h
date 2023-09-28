@@ -34,11 +34,12 @@ namespace Azul
 		// Initialization
 		ID3D11Buffer* CreateVertexBuffer(unsigned int numBytes, void* pData);
 		ID3D11Buffer* CreateIndexBuffer(unsigned int numBytes, void* pData);
-		ID3D11Buffer* CreateConstantBuffer(unsigned int numBytes);
+		static ID3D11Buffer* CreateConstantBuffer(unsigned int numBytes);
 
 		// Called during rendering
 		void ActivateModel();
 		void TransferConstantBuffer(Camera* pCam, const Mat4& pWorld);
+		void UpdateWorld(const Mat4& pWorld);
 		void RenderIndexBuffer();
 
 		// As a DLink Node

@@ -9,7 +9,7 @@ namespace Azul
 	class GOLightTexture :public GraphicsObject
 	{
 	public:
-		GOLightTexture(Mesh* mesh, ShaderObject* pShaderObj, TextureObject* pTex, const Vec3& _pLightColor, const Vec3& _pLightPos);
+		GOLightTexture(Mesh* pInMesh, ShaderObject* pInShaderObj, TextureObject* pInTex);
 		GOLightTexture() = delete;
 		GOLightTexture(const GOLightTexture&) = delete;
 		GOLightTexture& operator = (const GOLightTexture&) = delete;
@@ -19,8 +19,6 @@ namespace Azul
 		virtual void Draw() override;
 
 		TextureObject* pTex;
-		Vec3* poLightColor;
-		Vec3* poLightPos;
 	};
 }
 

@@ -87,6 +87,7 @@
     </Link>
     <FxCompile>
       <ShaderModel>4.0</ShaderModel>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shaders/Original;</AdditionalIncludeDirectories>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -178,6 +179,7 @@
     <None Include="..\Framework\__DO NOT MODIFY__" />
     <None Include="DXTex\include\DirectXTex.inl" />
     <None Include="GraphicsObject_Diagram.cd" />
+    <None Include="Shaders\Original\Default.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\File\File.vcxproj">

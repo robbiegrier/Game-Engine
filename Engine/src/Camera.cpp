@@ -1,9 +1,14 @@
 #include "Camera.h"
+#include "Engine.h"
 
 namespace Azul
 {
 	Camera::Camera()
 		: aspectRatio(0), farDist(0), fovy(0), nearDist(0)
+	{
+	}
+
+	Camera::~Camera()
 	{
 	}
 
@@ -181,6 +186,11 @@ namespace Azul
 	void Camera::GetLocation(Vec3& outPos) const
 	{
 		outPos = vPos;
+	}
+
+	Vec3 Camera::GetLocation() const
+	{
+		return vPos;
 	}
 
 	void  Camera::GetDirection(Vec3& outDir) const

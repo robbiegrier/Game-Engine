@@ -10,6 +10,8 @@ namespace Azul
 {
 	void SOConstColor::OnOpen(GraphicsObject* pObject)
 	{
+		static_cast<void>(pObject);
+
 		D3D11_RASTERIZER_DESC rasterizerDesc;
 		memset(&rasterizerDesc, 0, sizeof(D3D11_RASTERIZER_DESC));
 

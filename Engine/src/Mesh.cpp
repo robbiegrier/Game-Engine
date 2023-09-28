@@ -93,6 +93,11 @@ namespace Azul
 		Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
 	}
 
+	void Mesh::UpdateWorld(const Mat4& pWorld)
+	{
+		Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
+	}
+
 	void Mesh::ActivateModel()
 	{
 		const UINT vertexStride_pos = sizeof(VertexPos);
@@ -120,9 +125,6 @@ namespace Azul
 			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::TexCoord, 1, &poVertexBuffer_texCoord, &vertexStride_texCoord, &offset);
 		}
 
-		// Enable shader
-		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::Projection, 1u, &poConstantBuff_Projection);
-		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::View, 1u, &poConstantBuff_View);
 		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::World, 1u, &poConstantBuff_World);
 
 		if (poConstantBuff_lightColor)

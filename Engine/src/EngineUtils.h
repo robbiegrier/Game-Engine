@@ -1,5 +1,5 @@
 #ifndef _EngineUtils
-#define _EngienUtils
+#define _EngineUtils
 
 #include <d3d11.h>
 
