@@ -45,6 +45,8 @@ namespace Azul
 		buffDescObject.StructureByteStride = 0;
 		hr = Engine::GetDevice()->CreateBuffer(&buffDescObject, nullptr, &pConstBuffObject);
 		assert(SUCCEEDED(hr));
+
+		memset(pointLights, 0, sizeof(PointLight) * MaxLights);
 	}
 
 	SODefault::~SODefault()
@@ -53,14 +55,24 @@ namespace Azul
 		SafeRelease(pConstBuffLightscape);
 	}
 
-	void SODefault::SetPointLightParameters(const Vec3& pos, float r, const Vec3& att, const Vec3& amb, const Vec3& dif, const Vec3& sp)
+	void SODefault::SetPointLightParameters(int index, const Vec3& pos, float r, const Vec3& att, const Vec3& amb, const Vec3& dif, const Vec3& sp)
 	{
-		pointLight.light.ambient = Vec4(amb, 0.0f);
-		pointLight.light.diffuse = Vec4(dif, 0.0f);
-		pointLight.light.specular = Vec4(sp, 0.0f);
+		pointLight.light.ambient = Vec4(amb, 1.0f);
+		pointLight.light.diffuse = Vec4(dif, 1.0f);
+		pointLight.light.specular = Vec4(sp, 1.0f);
 		pointLight.position = Vec4(pos, 1.0f);
 		pointLight.attenuation = Vec4(att, 0.0f);
 		pointLight.range = r;
+
+		pointLights[index] = pointLight;
+	}
+
+	void SODefault::SetDirectionalLightParameters(const Vec3& dir, const Vec3& amb, const Vec3& dif, const Vec3& sp)
+	{
+		directionalLight.light.ambient = Vec4(amb, 1.0f);
+		directionalLight.light.diffuse = Vec4(dif, 1.0f);
+		directionalLight.light.specular = Vec4(sp, 1.0f);
+		directionalLight.direction = Vec4(dir, 0.0f);
 	}
 
 	void SODefault::SetCurrentObject(GraphicsObject* pObject)
@@ -83,7 +95,9 @@ namespace Azul
 	{
 		// Per Frame Lightscape data (can be optimized out of per-object rendering)
 		CBLightscape lightscape;
-		lightscape.pointLight = pointLight;
+		lightscape.numPointLights = MaxLights;
+		memcpy(lightscape.pointLights, pointLights, sizeof(PointLight) * MaxLights);
+		lightscape.directionalLight = directionalLight;
 		lightscape.eyePositionWorld = Vec4(CameraManager::GetCurrentCamera()->GetLocation(), 1.0f);
 		Engine::GetContext()->UpdateSubresource(pConstBuffLightscape, 0, nullptr, &lightscape, 0, 0);
 		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Lightscape, 1, &pConstBuffLightscape);

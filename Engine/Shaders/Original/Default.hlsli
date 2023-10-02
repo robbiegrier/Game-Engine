@@ -1,5 +1,7 @@
 #pragma pack_matrix( row_major )
 
+static const int MaxLights = 100;
+
 struct Material
 {
     float4 Ambient;
@@ -13,6 +15,12 @@ struct PointLight
     float4 Position;
     float4 Attenuation;
     float Range;
+};
+
+struct DirectionalLight
+{
+    Material LightInt;
+    float4 Direction;
 };
 
 cbuffer AA0 : register(b0) // slot 0  (ConstantBufferSlot::Projection)
@@ -42,7 +50,9 @@ cbuffer AA4 : register(b4) // slot 4 (ConstantBufferSlot::LightPos)
 
 cbuffer LightParameters : register(b5)
 {
-    PointLight pointlight;
+    int numPointLights;
+    PointLight pointlights[MaxLights];
+    DirectionalLight directionalLight;
     float4 eyePositionWorld;
 };
 

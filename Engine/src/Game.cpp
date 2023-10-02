@@ -146,8 +146,20 @@ namespace Azul
 			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(0, 0, 4.5)
 		);
 		GameObjectManager::SpawnObject("Floor Plane",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Plane), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Brick)), Vec3(0, -1.f, 0)
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Plane), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(0, -1.f, 0)
 		);
+
+		GameObjectManager::SpawnObject("BIG Pyramid",
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-50, 8, 50)
+		)->SetRelativeScale(Vec3(10.f, 10.f, 10.f));
+
+		GameObjectManager::SpawnObject("BIG Pyramid",
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-70, 6, 30)
+		)->SetRelativeScale(Vec3(7.f, 7.f, 7.f));
+
+		GameObjectManager::SpawnObject("BIG Pyramid",
+			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-30, 4, 70)
+		)->SetRelativeScale(Vec3(5.f, 5.f, 5.f));
 
 		constexpr static float markerLength = 6.f;
 		GameObjectManager::SpawnObject("X Marker",
@@ -174,6 +186,9 @@ namespace Azul
 		LoadInstancedObjects();
 
 		pPlayer = GameObjectManager::SpawnObject("Player", new Player(), Vec3(0.f, 2.f, -10.f));
+
+		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
+		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
 
 		GameObjectManager::Dump();
 		//ShaderObjectManager::Dump();
@@ -216,7 +231,9 @@ namespace Azul
 		LightSource->SetRelativeLocation(lightPos);
 
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
-		pShader->SetPointLightParameters(lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
+		pShader->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
+		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
+		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
 
 		CameraManager::Update(deltaTime);
 		GameObjectManager::Update(deltaTime);
@@ -542,7 +559,7 @@ namespace Azul
 	void Game::ClearDepthStencilBuffer()
 	{
 #ifdef _DEBUG
-		const Vec4 ClearColor = Azul::Colors::Black;
+		const Vec4 ClearColor = Azul::Colors::SkyBlue;
 #else
 		const Vec4 ClearColor = Azul::Colors::DarkDarkGrey;
 #endif

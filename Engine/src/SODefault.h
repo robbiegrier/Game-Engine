@@ -18,14 +18,18 @@ namespace Azul
 		~SODefault();
 
 		// Set the data for a point light in the scene
-		virtual void SetPointLightParameters(const Vec3& pos, float r, const Vec3& att,
-			const Vec3& amb = Vec3(1.f, 1.f, 1.f), const Vec3& dif = Vec3(1.f, 1.f, 1.f), const Vec3& sp = Vec3(1.f, 1.f, 1.f));
+		virtual void SetPointLightParameters(int index, const Vec3& pos, float r, const Vec3& att, const Vec3& amb, const Vec3& dif, const Vec3& sp);
+
+		// Set the data for the directional light in the scene
+		void SetDirectionalLightParameters(const Vec3& dir, const Vec3& amb, const Vec3& dif, const Vec3& sp);
 
 	protected:
 		virtual void OnOpen(GraphicsObject* pObject) override;
 		void SetCurrentObject(GraphicsObject* pObject);
 
 	private:
+		static constexpr int MaxLights = 100;
+
 		struct Material
 		{
 			Vec4 ambient;
@@ -41,6 +45,14 @@ namespace Azul
 			float range;
 		};
 		PointLight pointLight;
+		PointLight pointLights[MaxLights];
+
+		struct DirectionalLight
+		{
+			Material light;
+			Vec4 direction;
+		};
+		DirectionalLight directionalLight;
 
 		struct CBObject
 		{
@@ -52,7 +64,9 @@ namespace Azul
 
 		struct CBLightscape
 		{
-			PointLight pointLight;
+			int numPointLights;
+			PointLight pointLights[MaxLights];
+			DirectionalLight directionalLight;
 			Vec4 eyePositionWorld;
 		};
 		ID3D11Buffer* pConstBuffLightscape;

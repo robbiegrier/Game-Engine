@@ -4,6 +4,7 @@
 namespace Azul
 {
 	constexpr float planeScale = 100.f;
+	constexpr float tiling = 0.25f;
 
 	VertexPos PlaneMesh::g_Vertices_pos[] =
 	{
@@ -30,9 +31,9 @@ namespace Azul
 	VertexTexCoord g_PlaneVertices_texCoord[] =
 	{
 		Vec2f(0.0f, 0.0f),
-		Vec2f(planeScale, 0.0f),
-		Vec2f(0.0f, planeScale),
-		Vec2f(planeScale, planeScale)
+		Vec2f(planeScale * tiling, 0.0f),
+		Vec2f(0.0f, planeScale * tiling),
+		Vec2f(planeScale * tiling, planeScale * tiling)
 	};
 
 	VertexNorm g_PlaneVertices_norm[] =
