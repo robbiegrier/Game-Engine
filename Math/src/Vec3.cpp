@@ -2,8 +2,6 @@
 
 namespace Azul
 {
-	// Do your magic here
-
 	Vec3::Vec3()
 		: _vx(MATH_ZERO), _vy(MATH_ZERO), _vz(MATH_ZERO)
 	{
@@ -115,11 +113,12 @@ namespace Azul
 		return Vec3(_vx + inV._vx, _vy + inV._vy, _vz + inV._vz);
 	}
 
-	void Vec3::operator+=(const Vec3& inV)
+	Vec3& Vec3::operator+=(const Vec3& inV)
 	{
 		_vx += inV._vx;
 		_vy += inV._vy;
 		_vz += inV._vz;
+		return *this;
 	}
 
 	Vec3 Vec3::operator-(void) const
@@ -132,11 +131,12 @@ namespace Azul
 		return Vec3(_vx - inV._vx, _vy - inV._vy, _vz - inV._vz);
 	}
 
-	void Vec3::operator-=(const Vec3& inV)
+	Vec3& Vec3::operator-=(const Vec3& inV)
 	{
 		_vx -= inV._vx;
 		_vy -= inV._vy;
 		_vz -= inV._vz;
+		return *this;
 	}
 
 	Vec3 Vec3::operator*(const float scale) const
@@ -144,11 +144,12 @@ namespace Azul
 		return Vec3(_vx * scale, _vy * scale, _vz * scale);
 	}
 
-	void Vec3::operator*=(const float scale)
+	Vec3& Vec3::operator*=(const float scale)
 	{
 		_vx *= scale;
 		_vy *= scale;
 		_vz *= scale;
+		return *this;
 	}
 
 	Vec3 operator*(const float scale, const Vec3& inV)
@@ -165,15 +166,29 @@ namespace Azul
 		);
 	}
 
-	Vec3 Vec3::operator*=(const Mat3& m)
+	Vec3& Vec3::operator*=(const Mat3& m)
 	{
-		float xDot = (_vx * m._m0) + (_vy * m._m4) + (_vz * m._m8);
-		float yDot = (_vx * m._m1) + (_vy * m._m5) + (_vz * m._m9);
-		float zDot = (_vx * m._m2) + (_vy * m._m6) + (_vz * m._m10);
+		const float xDot = (_vx * m._m0) + (_vy * m._m4) + (_vz * m._m8);
+		const float yDot = (_vx * m._m1) + (_vy * m._m5) + (_vz * m._m9);
+		const float zDot = (_vx * m._m2) + (_vy * m._m6) + (_vz * m._m10);
 
 		_vx = xDot;
 		_vy = yDot;
 		_vz = zDot;
+		return *this;
+	}
+
+	Vec3 Vec3::operator*(const Quat& q) const
+	{
+		Vec3 output;
+		q.Lqcvq(*this, output);
+		return output;
+	}
+
+	Vec3& Vec3::operator*=(const Quat& q)
+	{
+		Vec3 result = *this * q;
+		*this = result;
 		return *this;
 	}
 
@@ -227,7 +242,7 @@ namespace Azul
 
 	float Vec3::getAngle(const Vec3& vIn) const
 	{
-		float totalLength = len() * vIn.len();
+		const float totalLength = len() * vIn.len();
 
 		if (Util::isNonZero(totalLength, MATH_TOLERANCE))
 		{

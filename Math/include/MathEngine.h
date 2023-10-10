@@ -17,8 +17,13 @@
 #include "Vec4.h"
 #include "Vec4Proxy.h"
 #include "Mat4.h"
+#include "Mat4Proxy.h"
+#include "Scale.h"
+#include "Trans.h"
+#include "Rot.h"
 #include "Mat3.h"
 #include "Trig.h"
+#include "Quat.h"
 #include "Debug.h"
 
 #endif

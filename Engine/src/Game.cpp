@@ -342,7 +342,7 @@ namespace Azul
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(0, 0, 1)), Vec3(.5f, 0.f, 0.f) * size, pC1);
 		pPyr1->SetRelativeScale(scale * .1f);
-		pPyr1->SetRelativeRotation(Mat4(Mat4::Rot1::Z, MATH_PI * 1.5f));
+		pPyr1->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.5f));
 
 		GameObject* pPyr2 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
 			new GOConstColor(
@@ -350,7 +350,7 @@ namespace Azul
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(0, 0, 1)), Vec3(0.f, .5f, 0.f) * size, pC2);
 		pPyr2->SetRelativeScale(scale * .1f);
-		pPyr2->SetRelativeRotation(Mat4(Mat4::Rot1::Z, MATH_PI * 2.f));
+		pPyr2->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 2.f));
 
 		GameObject* pPyr3 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
 			new GOConstColor(
@@ -358,7 +358,7 @@ namespace Azul
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(0, 0, 1)), Vec3(0.f, -.5f, 0.f) * size, pC3);
 		pPyr3->SetRelativeScale(scale * .1f);
-		pPyr3->SetRelativeRotation(Mat4(Mat4::Rot1::Z, MATH_PI * 1.f));
+		pPyr3->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.f));
 
 		GameObject* pPyr4 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
 			new GOConstColor(
@@ -366,7 +366,7 @@ namespace Azul
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(0, 0, 1)), Vec3(-.5f, 0.f, 0.f) * size, pC4);
 		pPyr4->SetRelativeScale(scale * .1f);
-		pPyr4->SetRelativeRotation(Mat4(Mat4::Rot1::Z, MATH_PI * 2.5f));
+		pPyr4->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 2.5f));
 	}
 
 	void Game::LoadPylon(float size, const Vec3& pos)
@@ -509,14 +509,14 @@ namespace Azul
 			scaleSign = 1.f;
 		}
 
-		pPyramid->SetRelativeRotation(Mat4(Mat4::Rot3::XYZ, rot1, rot1, rot1));
-		pPyramid1->SetRelativeRotation(Mat4(Mat4::Rot3::XYZ, rot1, 0.f, 0.f));
-		pPyramid2->SetRelativeRotation(Mat4(Mat4::Rot3::XYZ, rot1, 0.f, 0.f));
-		pPyramid3->SetRelativeRotation(Mat4(Mat4::Rot3::XYZ, rot1, 0.f, 0.f));
-		pPyramid4->SetRelativeRotation(Mat4(Mat4::Rot3::XYZ, rot1, 0.f, 0.f));
+		pPyramid->SetRelativeRotation(Rot(Rot3::XYZ, rot1, rot1, rot1));
+		pPyramid1->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
+		pPyramid2->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
+		pPyramid3->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
+		pPyramid4->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
 		rot1 += 1.f * deltaTime;
 
-		pCenter->SetRelativeRotation(Mat4(Mat4::Rot1::Z, rot1));
+		pCenter->SetRelativeRotation(Rot(Rot1::Z, rot1));
 
 		pCube1->SetRelativeLocation(pCube1->GetRelativeLocation() + Vec3(-trans1 * transSign * deltaTime, 0, 0));
 		pCube2->SetRelativeLocation(pCube2->GetRelativeLocation() + Vec3(0, trans1 * transSign * deltaTime, 0));

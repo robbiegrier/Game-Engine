@@ -18,6 +18,7 @@ namespace Azul
 	class Vec3;
 	class Mat4;
 	class Mat3;
+	class Quat;
 
 	// ----------------------------------------------------------------------
 	// Output Print for Vec4 and Mat4
@@ -29,7 +30,7 @@ namespace Azul
 		static void Print(const char *pName, const Vec3 &r);
 		static void Print(const char* pName, const Mat4 &r);
 		static void Print(const char *pName, const Mat3 &r);
-
+		static void Print(const char *pName, const Quat &r);
 	};
 
 }

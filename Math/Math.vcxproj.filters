@@ -63,6 +63,24 @@
     <ClInclude Include="include\Vec4Proxy.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Mat4Proxy.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QuatApp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rot.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scale.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Trans.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Framework\__DO NOT MODIFY__">
@@ -98,6 +116,24 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Vec4Proxy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mat4Proxy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuatApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rot.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scale.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Trans.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -75,7 +75,7 @@ namespace Azul
 	{
 		Vec3 toLookAt = (vLookAt - vPos).getNorm();
 
-		toLookAt = Vec3(Vec4(toLookAt.getNorm(), 0.f) * Mat4(Mat4::Rot1::Y, -offset[x])).getNorm();
+		toLookAt = Vec3(Vec4(toLookAt.getNorm(), 0.f) * Rot(Rot1::Y, -offset[x])).getNorm();
 		float len = toLookAt.len();
 
 		toLookAt[y] += offset[y];
@@ -132,8 +132,8 @@ namespace Azul
 
 		// Converting from OpenGL-style NDC of [-1,1] to DX's [0,1].  See note: https://anteru.net/blog/2011/12/27/1830/
 		// (Note: NDCConvert should be precomputed once and stored for reuse)
-		Mat4 B(Mat4::Trans::XYZ, 0.0f, 0.0f, 1.0f);
-		Mat4 S(Mat4::Scale::XYZ, 1.0f, 1.0f, 0.5f);
+		Trans B(0.0f, 0.0f, 1.0f);
+		Scale S(1.0f, 1.0f, 0.5f);
 
 		projMatrix = projMatrix * B * S;
 	};

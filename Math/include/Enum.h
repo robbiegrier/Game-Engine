@@ -138,6 +138,58 @@ namespace Azul
 	{
 		m15
 	};
+
+	enum class Rot3
+	{
+		XYZ,
+		XZY,
+		YXZ,
+		YZX,
+		ZXY,
+		ZYX
+		// future combos... here
+	};
+
+	enum class Rot1
+	{
+		X,
+		Y,
+		Z
+	};
+
+	enum class Orient
+	{
+		LocalToWorld,
+		WorldToLocal
+	};
+
+	enum class Axis
+	{
+		AxisAngle,
+		UnitAxisAngle
+	};
+
+	enum class Row4
+	{
+		i0,
+		i1,
+		i2,
+		i3
+	};
+
+	enum class Row3
+	{
+		i0,
+		i1,
+		i2
+	};
+
+	enum class Special
+	{
+		Zero,
+		Identity
+	};
+
 }
 
 #endif

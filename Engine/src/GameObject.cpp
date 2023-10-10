@@ -3,10 +3,6 @@
 #include "Game.h"
 #include "Camera.h"
 
-// HACK FEST --- will eventually be in managers/singleton
-extern ID3D11Device* pHackDevice;
-extern ID3D11DeviceContext* pHackDeviceContext;
-
 namespace Azul
 {
 	extern Camera* pHackCamera;
@@ -14,8 +10,8 @@ namespace Azul
 	GameObject::GameObject(GraphicsObject* pInGraphicsObject)
 		: pPos{ new Vec3(0.f, 0.f, 0.f) },
 		pScale{ new Vec3(1.f, 1.f, 1.f) },
-		pRotation{ new Mat4(Mat4::Rot1::X, 0.f) },
-		pWorld{ new Mat4(Mat4::Special::Identity) },
+		pRotation{ new Rot(Rot1::X, 0.f) },
+		pWorld{ new Mat4(Special::Identity) },
 		pGraphicsObject(pInGraphicsObject)
 	{
 		assert(pPos);
@@ -44,14 +40,14 @@ namespace Azul
 		pScale->set(v);
 	}
 
-	void GameObject::SetRelativeRotation(const Mat4& m)
+	void GameObject::SetRelativeRotation(const Rot& m)
 	{
-		pRotation->set(m);
+		*pRotation = m;
 	}
 
 	Vec3 GameObject::GetLocation() const
 	{
-		return Vec3(pWorld->get(Mat4::Row::i3));
+		return Vec3(pWorld->get(Row4::i3));
 	}
 
 	const Vec3& GameObject::GetRelativeLocation() const
@@ -78,9 +74,9 @@ namespace Azul
 	{
 		static_cast<void>(deltaTime);
 
-		Mat4 t(Mat4::Trans::XYZ, pPos->x(), pPos->y(), pPos->z());
-		Mat4 s(Mat4::Scale::XYZ, *pScale);
-		Mat4& r = *pRotation;
+		Trans t(pPos->x(), pPos->y(), pPos->z());
+		Scale s(*pScale);
+		Rot& r = *pRotation;
 
 		*pWorld = r * s * t;
 

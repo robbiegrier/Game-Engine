@@ -20,6 +20,10 @@ namespace Azul
 	class Mat4;
 	class Mat3;
 	class Vec3;
+	class Scale;
+	class Trans;
+	class Rot;
+	class Quat;
 
 	// -----------------------------------------------------------
 	//
@@ -34,6 +38,9 @@ namespace Azul
 	class Vec4 final : public Align16
 	{
 	public:
+
+		// Do your magic here
+
 		// Big 4
 		Vec4();
 		Vec4(const Vec4& inV);
@@ -67,29 +74,29 @@ namespace Azul
 		void z(const float v);
 		void w(const float v);
 
-		float x() const;
-		float y() const;
-		float z() const;
-		float w() const;
+		float x()const;
+		float y()const;
+		float z()const;
+		float w()const;
 
 		// add operators
 		Vec4 operator + (void) const;
 		Vec4 operator + (const Vec4& inV) const;
-		void operator += (const Vec4& inV);
+		Vec4& operator += (const Vec4& inV);
 
 		// sub operators
 		Vec4 operator - (const Vec4& inV) const;
-		void operator -= (const Vec4& inV);
+		Vec4& operator -= (const Vec4& inV);
 		Vec4 operator - (void) const;
 
 		// scale operators
 		Vec4 operator * (const float scale) const;
 		friend Vec4 operator *(const float scale, const Vec4& inV);
-		void operator *= (const float scale);
+		Vec4& operator *= (const float scale);
 
 		// Vec4 * Mat4
 		Vec4 operator * (const Mat4& m) const;
-		Vec4 operator *= (const Mat4& m);
+		Vec4& operator *= (const Mat4& m);
 
 		// Vec4 functions
 		Vec4& norm(void);
@@ -112,8 +119,12 @@ namespace Azul
 	private:
 
 		friend Mat4;
+		friend Scale;
+		friend Trans;
+		friend Rot;
 		friend Mat3;
 		friend Vec3;
+		friend Quat;
 
 		union
 		{

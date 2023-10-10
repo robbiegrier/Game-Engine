@@ -14,21 +14,6 @@ namespace Azul
 	class Mat3 final : public Align16
 	{
 	public:
-
-		enum class Special
-		{
-			Zero,
-			Identity
-		};
-
-		enum class Row
-		{
-			i0,
-			i1,
-			i2
-		};
-
-	public:
 		// Big 4
 		Mat3();
 		Mat3& operator = (const Mat3& A);
@@ -45,21 +30,23 @@ namespace Azul
 		explicit Mat3(const Special type);
 
 		// Get
-		Vec3 get(const Row type) const;
+		Vec3 get(const Row3 type) const;
 
 		// Set
 		void set(const Mat3& mIn);
 		void set(const Special type);
-		void set(const Row type, const Vec3& V);
+		void set(const Row3 type, const Vec3& V);
 		void set(const Vec3& V0, const Vec3& V1, const Vec3& V2);
 
 		// bracket operators
 		float& operator[] (const enum m0_enum);
 		float& operator[] (const enum m1_enum);
 		float& operator[] (const enum m2_enum);
+
 		float& operator[] (const enum m4_enum);
 		float& operator[] (const enum m5_enum);
 		float& operator[] (const enum m6_enum);
+
 		float& operator[] (const enum m8_enum);
 		float& operator[] (const enum m9_enum);
 		float& operator[] (const enum m10_enum);
@@ -67,9 +54,11 @@ namespace Azul
 		float operator[] (const enum m0_enum) const;
 		float operator[] (const enum m1_enum) const;
 		float operator[] (const enum m2_enum) const;
+
 		float operator[] (const enum m4_enum) const;
 		float operator[] (const enum m5_enum) const;
 		float operator[] (const enum m6_enum) const;
+
 		float operator[] (const enum m8_enum) const;
 		float operator[] (const enum m9_enum) const;
 		float operator[] (const enum m10_enum) const;
@@ -78,9 +67,11 @@ namespace Azul
 		void m0(const float v);
 		void m1(const float v);
 		void m2(const float v);
+
 		void m4(const float v);
 		void m5(const float v);
 		void m6(const float v);
+
 		void m8(const float v);
 		void m9(const float v);
 		void m10(const float v);
@@ -88,9 +79,11 @@ namespace Azul
 		float m0() const;
 		float m1() const;
 		float m2() const;
+
 		float m4() const;
 		float m5() const;
 		float m6() const;
+
 		float m8() const;
 		float m9() const;
 		float m10() const;
@@ -113,21 +106,21 @@ namespace Azul
 		// Add operators
 		Mat3 operator + (void) const;
 		Mat3 operator + (const Mat3& A) const;
-		void operator += (const Mat3& A);
+		Mat3& operator += (const Mat3& A);
 
 		// Sub operators
 		Mat3 operator - (void) const;
 		Mat3 operator - (const Mat3& A) const;
-		void operator -= (const Mat3& A);
+		Mat3& operator -= (const Mat3& A);
 
 		// Scale operators
 		Mat3 operator * (const float s) const;
 		friend Mat3 operator *(const float scale, const Mat3& A);
-		void operator *= (const float scale);
+		Mat3& operator *= (const float scale);
 
 		// Multiply
 		Mat3 operator * (const Mat3& A) const;
-		void  operator *= (const Mat3& A);
+		Mat3& operator *= (const Mat3& A);
 
 		// For printing
 		void Print(const char* pName) const;

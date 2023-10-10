@@ -12,6 +12,9 @@ namespace Azul
 	struct Vec4Proxy
 	{
 	public:
+
+		// Suggested inteface:
+
 		Vec4Proxy(float a, float b, float c, float d);
 
 		Vec4Proxy() = delete;
@@ -22,9 +25,11 @@ namespace Azul
 		operator float() const;
 
 		float operator * (const Vec4Proxy& r) const;
+
 		bool operator > (const Vec4Proxy& r) const;
 		bool operator < (const Vec4Proxy& r) const;
 		bool operator == (const Vec4Proxy& r) const;
+
 		bool operator >= (const Vec4Proxy& r) const;
 		bool operator <= (const Vec4Proxy& r) const;
 		bool operator != (const Vec4Proxy& r) const;

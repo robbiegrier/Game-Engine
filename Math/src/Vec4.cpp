@@ -123,12 +123,13 @@ namespace Azul
 		return Vec4(_vx + inV._vx, _vy + inV._vy, _vz + inV._vz, _vw + inV._vw);
 	}
 
-	void Vec4::operator+=(const Vec4& inV)
+	Vec4& Vec4::operator+=(const Vec4& inV)
 	{
 		_vx += inV._vx;
 		_vy += inV._vy;
 		_vz += inV._vz;
 		_vw += inV._vw;
+		return *this;
 	}
 
 	Vec4 Vec4::operator-(void) const
@@ -141,12 +142,13 @@ namespace Azul
 		return Vec4(_vx - inV._vx, _vy - inV._vy, _vz - inV._vz, _vw - inV._vw);
 	}
 
-	void Vec4::operator-=(const Vec4& inV)
+	Vec4& Vec4::operator-=(const Vec4& inV)
 	{
 		_vx -= inV._vx;
 		_vy -= inV._vy;
 		_vz -= inV._vz;
 		_vw -= inV._vw;
+		return *this;
 	}
 
 	Vec4 Vec4::operator*(const float scale) const
@@ -154,12 +156,13 @@ namespace Azul
 		return Vec4(_vx * scale, _vy * scale, _vz * scale, _vw * scale);
 	}
 
-	void Vec4::operator*=(const float scale)
+	Vec4& Vec4::operator*=(const float scale)
 	{
 		_vx *= scale;
 		_vy *= scale;
 		_vz *= scale;
 		_vw *= scale;
+		return *this;
 	}
 
 	Vec4 operator*(const float scale, const Vec4& inV)
@@ -177,12 +180,12 @@ namespace Azul
 		);
 	}
 
-	Vec4 Vec4::operator*=(const Mat4& m)
+	Vec4& Vec4::operator*=(const Mat4& m)
 	{
-		float xDot = (_vx * m._m0) + (_vy * m._m4) + (_vz * m._m8) + (_vw * m._m12);
-		float yDot = (_vx * m._m1) + (_vy * m._m5) + (_vz * m._m9) + (_vw * m._m13);
-		float zDot = (_vx * m._m2) + (_vy * m._m6) + (_vz * m._m10) + (_vw * m._m14);
-		float wDot = (_vx * m._m3) + (_vy * m._m7) + (_vz * m._m11) + (_vw * m._m15);
+		const float xDot = (_vx * m._m0) + (_vy * m._m4) + (_vz * m._m8) + (_vw * m._m12);
+		const float yDot = (_vx * m._m1) + (_vy * m._m5) + (_vz * m._m9) + (_vw * m._m13);
+		const float zDot = (_vx * m._m2) + (_vy * m._m6) + (_vz * m._m10) + (_vw * m._m14);
+		const float wDot = (_vx * m._m3) + (_vy * m._m7) + (_vz * m._m11) + (_vw * m._m15);
 
 		_vx = xDot;
 		_vy = yDot;

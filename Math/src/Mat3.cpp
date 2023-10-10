@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// Copyright 2023, Ed Keenan, all rights reserved.
+//-----------------------------------------------------------------------------
+
 #include "MathEngine.h"
 
 namespace Azul
@@ -53,7 +57,7 @@ namespace Azul
 		set(type);
 	}
 
-	Vec3 Mat3::get(const Row type) const
+	Vec3 Mat3::get(const Row3 type) const
 	{
 		return Vec3(_rows[static_cast<int>(type)]);
 	}
@@ -84,7 +88,7 @@ namespace Azul
 		}
 	}
 
-	void Mat3::set(const Row type, const Vec3& V)
+	void Mat3::set(const Row3 type, const Vec3& V)
 	{
 		_rows[static_cast<int>(type)].set(V, MATH_ZERO);
 	}
@@ -278,9 +282,9 @@ namespace Azul
 
 	float Mat3::det() const
 	{
-		float a = _m0 * ((_m5 * _m10) - (_m6 * _m9));
-		float b = _m1 * ((_m4 * _m10) - (_m6 * _m8));
-		float c = _m2 * ((_m4 * _m9) - (_m5 * _m8));
+		const float a = _m0 * ((_m5 * _m10) - (_m6 * _m9));
+		const float b = _m1 * ((_m4 * _m10) - (_m6 * _m8));
+		const float c = _m2 * ((_m4 * _m9) - (_m5 * _m8));
 
 		return a - b + c;
 	}
@@ -304,52 +308,53 @@ namespace Azul
 
 	Mat3 Mat3::getInv(void) const
 	{
-		auto m = Mat3();
+		Mat3 m;
 
-		float invDet = MATH_ONE / det();
+		const float a = (_m5 * _m10) - (_m6 * _m9);
+		const float b = (_m4 * _m10) - (_m6 * _m8);
+		const float c = (_m4 * _m9) - (_m5 * _m8);
 
-		m._m0 = (_m5 * _m10) - (_m6 * _m9);
-		m._m1 = (_m2 * _m9) - (_m1 * _m10);
-		m._m2 = (_m1 * _m6) - (_m2 * _m5);
+		const float determinant = (_m0 * a) - (_m1 * b) + (_m2 * c);
+		const float invDet = MATH_ONE / determinant;
 
-		m._m4 = (_m6 * _m8) - (_m4 * _m10);
-		m._m5 = (_m0 * _m10) - (_m2 * _m8);
-		m._m6 = (_m2 * _m4) - (_m0 * _m6);
+		m._m0 = a * invDet;
+		m._m1 = ((_m2 * _m9) - (_m1 * _m10)) * invDet;
+		m._m2 = ((_m1 * _m6) - (_m2 * _m5)) * invDet;
+		m._m4 = b * invDet;
+		m._m5 = ((_m0 * _m10) - (_m2 * _m8)) * invDet;
+		m._m6 = ((_m2 * _m4) - (_m0 * _m6)) * invDet;
+		m._m8 = c * invDet;
+		m._m9 = ((_m1 * _m8) - (_m0 * _m9)) * invDet;
+		m._m10 = ((_m0 * _m5) - (_m1 * _m4)) * invDet;
 
-		m._m8 = (_m4 * _m9) - (_m5 * _m8);
-		m._m9 = (_m1 * _m8) - (_m0 * _m9);
-		m._m10 = (_m0 * _m5) - (_m1 * _m4);
-
-		return invDet * m;
+		return m;
 	}
 
 	Mat3& Mat3::inv(void)
 	{
-		float invDet = MATH_ONE / det();
+		const float a = (_m5 * _m10) - (_m6 * _m9);
+		const float b = (_m4 * _m10) - (_m6 * _m8);
+		const float c = (_m4 * _m9) - (_m5 * _m8);
 
-		float tmp0 = (_m5 * _m10) - (_m6 * _m9);
-		float tmp1 = (_m2 * _m9) - (_m1 * _m10);
-		float tmp2 = (_m1 * _m6) - (_m2 * _m5);
+		const float determinant = (_m0 * a) - (_m1 * b) + (_m2 * c);
+		const float invDet = MATH_ONE / determinant;
 
-		float tmp4 = (_m6 * _m8) - (_m4 * _m10);
-		float tmp5 = (_m0 * _m10) - (_m2 * _m8);
-		float tmp6 = (_m2 * _m4) - (_m0 * _m6);
+		const float tmp1 = ((_m2 * _m9) - (_m1 * _m10)) * invDet;
+		const float tmp2 = ((_m1 * _m6) - (_m2 * _m5)) * invDet;
+		const float tmp5 = ((_m0 * _m10) - (_m2 * _m8)) * invDet;
+		const float tmp6 = ((_m2 * _m4) - (_m0 * _m6)) * invDet;
+		const float tmp9 = ((_m1 * _m8) - (_m0 * _m9)) * invDet;
+		const float tmp10 = ((_m0 * _m5) - (_m1 * _m4)) * invDet;
 
-		float tmp8 = (_m4 * _m9) - (_m5 * _m8);
-		float tmp9 = (_m1 * _m8) - (_m0 * _m9);
-		float tmp10 = (_m0 * _m5) - (_m1 * _m4);
-
-		_m0 = tmp0;
+		_m0 = a * invDet;
 		_m1 = tmp1;
 		_m2 = tmp2;
-		_m4 = tmp4;
+		_m4 = b * invDet;
 		_m5 = tmp5;
 		_m6 = tmp6;
-		_m8 = tmp8;
+		_m8 = c * invDet;
 		_m9 = tmp9;
 		_m10 = tmp10;
-
-		*this *= invDet;
 
 		return *this;
 	}
@@ -382,11 +387,12 @@ namespace Azul
 		);
 	}
 
-	void Mat3::operator+=(const Mat3& A)
+	Mat3& Mat3::operator+=(const Mat3& A)
 	{
 		_v0.set(_m0 + A._m0, _m1 + A._m1, _m2 + A._m2, MATH_ZERO);
 		_v1.set(_m4 + A._m4, _m5 + A._m5, _m6 + A._m6, MATH_ZERO);
 		_v2.set(_m8 + A._m8, _m9 + A._m9, _m10 + A._m10, MATH_ZERO);
+		return *this;
 	}
 
 	Mat3 Mat3::operator-(void) const
@@ -399,11 +405,12 @@ namespace Azul
 		return Mat3(Vec3(_v0 - A._v0), Vec3(_v1 - A._v1), Vec3(_v2 - A._v2));
 	}
 
-	void Mat3::operator-=(const Mat3& A)
+	Mat3& Mat3::operator-=(const Mat3& A)
 	{
 		_v0 -= A._v0;
 		_v1 -= A._v1;
 		_v2 -= A._v2;
+		return *this;
 	}
 
 	Mat3 Mat3::operator*(const float s) const
@@ -415,11 +422,12 @@ namespace Azul
 		);
 	}
 
-	void Mat3::operator*=(const float scale)
+	Mat3& Mat3::operator*=(const float scale)
 	{
 		_v0 *= scale;
 		_v1 *= scale;
 		_v2 *= scale;
+		return *this;
 	}
 
 	Mat3 operator*(const float scale, const Mat3& A)
@@ -448,7 +456,7 @@ namespace Azul
 		);
 	}
 
-	void Mat3::operator*=(const Mat3& A)
+	Mat3& Mat3::operator*=(const Mat3& A)
 	{
 		_v0 = Vec4(
 			(_m0 * A._m0) + (_m1 * A._m4) + (_m2 * A._m8),
@@ -468,6 +476,7 @@ namespace Azul
 			(_m8 * A._m2) + (_m9 * A._m6) + (_m10 * A._m10),
 			MATH_ZERO
 		);
+		return *this;
 	}
 
 	void Mat3::Print(const char* pName) const
@@ -475,3 +484,5 @@ namespace Azul
 		Debug::Print(pName, *this);
 	}
 }
+
+// ---  End of File ---

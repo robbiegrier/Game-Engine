@@ -19,8 +19,14 @@
     <ClInclude Include="include\Enum.h" />
     <ClInclude Include="include\Mat3.h" />
     <ClInclude Include="include\Mat4.h" />
+    <ClInclude Include="include\Mat4Proxy.h" />
     <ClInclude Include="include\MathApp.h" />
     <ClInclude Include="include\MathEngine.h" />
+    <ClInclude Include="include\Quat.h" />
+    <ClInclude Include="include\QuatApp.h" />
+    <ClInclude Include="include\Rot.h" />
+    <ClInclude Include="include\Scale.h" />
+    <ClInclude Include="include\Trans.h" />
     <ClInclude Include="include\Trig.h" />
     <ClInclude Include="include\Util.h" />
     <ClInclude Include="include\Vec3.h" />
@@ -36,6 +42,12 @@
     <ClCompile Include="src\Debug.cpp" />
     <ClCompile Include="src\Mat3.cpp" />
     <ClCompile Include="src\Mat4.cpp" />
+    <ClCompile Include="src\Mat4Proxy.cpp" />
+    <ClCompile Include="src\Quat.cpp" />
+    <ClCompile Include="src\QuatApp.cpp" />
+    <ClCompile Include="src\Rot.cpp" />
+    <ClCompile Include="src\Scale.cpp" />
+    <ClCompile Include="src\Trans.cpp" />
     <ClCompile Include="src\Trig.cpp" />
     <ClCompile Include="src\Util.cpp" />
     <ClCompile Include="src\Vec3.cpp" />

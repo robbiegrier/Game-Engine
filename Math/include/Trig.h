@@ -10,9 +10,12 @@ namespace Azul
 	class Trig
 	{
 	public:
-		static float cos(const float angle_radians);
-		static float sin(const float angle_radians);
-		static float tan(const float val);
+
+		// Do your magic here
+
+		static float cos(const float  angle_radians);
+		static float sin(const float  angle_radians);
+		static float tan(const float  val);
 		static float atan(const float val);
 		static float atan2(const float x, const float y);
 		static float acos(const float val);

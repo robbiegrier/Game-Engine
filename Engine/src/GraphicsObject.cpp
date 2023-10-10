@@ -5,7 +5,7 @@
 namespace Azul
 {
 	GraphicsObject::GraphicsObject(Mesh* model, ShaderObject* _pShaderObj)
-		: pModel(model), pShaderObject(_pShaderObj), pWorld{ new Mat4(Mat4::Special::Identity) }
+		: pModel(model), pShaderObject(_pShaderObj), pWorld{ new Mat4(Special::Identity) }
 	{
 	}
 

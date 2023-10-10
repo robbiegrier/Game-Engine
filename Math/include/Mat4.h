@@ -11,121 +11,106 @@
 
 namespace Azul
 {
-	class Mat4 final : public Align16
+	struct Mat4Proxy;
+
+	class Mat4 : public Align16
 	{
+	protected:
+
+		enum class Hint : uint32_t
+		{
+			Generalize = 0x0,        // generalize 4x4 inverse  (no flags)
+			Rot = 0x1,               // matrix inverse is M.T()
+			Trans = 0x2,             // matrix inverse is M(-trans)
+			RotTrans = 0x3,          // rot and trans  A_inv is A.T()
+			Scale = 0x4,             // matrix invers is M(1/scale)
+			RotScale = 0x5,          // Rot and Scale no translate
+			TransScale = 0x6,        // Trans and Scale no Translate
+			Affine = 0x7             // generalize Affine
+		};
+
+		inline void privSetGeneralHint()
+		{
+			_u_m15 &= 0xFFFFFFF8u;
+		}
+
+		inline void privSetRotHint()
+		{
+			_u_m15 |= 0b0001u;
+		}
+
+		inline void privSetTransHint()
+		{
+			_u_m15 |= 0b0010u;
+		}
+
+		inline void privSetScaleHint()
+		{
+			_u_m15 |= 0b0100u;
+		}
+
+		inline void privSetNewHint(Hint A, Hint B)
+		{
+			privSetGeneralHint();
+			_u_m15 |= static_cast<unsigned int>(A);
+			_u_m15 |= static_cast<unsigned int>(B);
+		}
+
+		inline void privSetCopyHint() const
+		{
+		}
+
+		inline Hint privGetHint() const
+		{
+			return static_cast<Hint>(_u_m15 & 0b0111u);
+		}
+
 	public:
-
-		enum class Special
-		{
-			Zero,
-			Identity
-		};
-
-		enum class Rot1
-		{
-			X,
-			Y,
-			Z
-		};
-
-		enum class Trans
-		{
-			XYZ
-		};
-
-		enum class Scale
-		{
-			XYZ
-		};
-
-		enum class Rot
-		{
-			AxisAngle,
-		};
-
-		enum class Orient
-		{
-			LocalToWorld
-		};
-
-		enum class Row
-		{
-			i0,
-			i1,
-			i2,
-			i3
-		};
-
-		enum class Rot3
-		{
-			XYZ
-			// future combos... here
-		};
-
-	public:
-
 		// Big 4
 		Mat4();
 		Mat4& operator = (const Mat4& A);
-		Mat4(const Mat4& tM);
+		Mat4(const Mat4&);
 		~Mat4();
 
 		// Big 6
 		Mat4(Mat4&&) = default;
 		Mat4& operator = (Mat4&&) = default;
 
+		//Mat4& operator = (const Quat&);
+
 		// Constructors
 		Mat4(const Vec4& tV0, const Vec4& tV1, const Vec4& tV2, const Vec4& tV3);
-		Mat4(const Rot1 type, const float angle);
-
-		Mat4(const Trans, const float tx, const float ty, const float tz);
-		Mat4(const Trans, const Vec3& vTrans);
-
-		Mat4(const Scale, const float sx, const float sy, const float sz);
-		Mat4(const Scale, const Vec3& vScale);
-
-		Mat4(const Rot3 mode, const float angle_0, const float angle_1, const float angle_2);
-
 		explicit Mat4(const Special type);
+		explicit Mat4(const Quat& q);
 
 		// Set
 		void set(const Mat4& mIn);
-
 		void set(const Vec4& V0, const Vec4& V1, const Vec4& V2, const Vec4& V3);
-		void set(const Rot1 type, const float angle);
-		void set(const Rot3 mode, const float angle_0, const float angle_1, const float angle_2);
-
-		void set(const Trans type, const float tx, const float ty, const float tz);
-		void set(const Trans type, const Vec3& vTrans);
-
-		void set(const Scale type, const float sx, const float sy, const float sz);
-		void set(const Scale type, const Vec3& vScale);
-
 		void set(const Special type);
-		void set(const Row type, const Vec4& V);
+		void set(const Row4 type, const Vec4& V);
+		void set(const Quat& q);
 
 		// Get
-		Vec4 get(const Row type) const;
-
-		bool privHasHint() const;
+		Vec4 get(const Row4 type) const;
 
 		// bracket operators
-		float& operator[] (const enum m0_enum);
-		float& operator[] (const enum m1_enum);
-		float& operator[] (const enum m2_enum);
-		float& operator[] (const enum m3_enum);
-		float& operator[] (const enum m4_enum);
-		float& operator[] (const enum m5_enum);
-		float& operator[] (const enum m6_enum);
-		float& operator[] (const enum m7_enum);
-		float& operator[] (const enum m8_enum);
-		float& operator[] (const enum m9_enum);
-		float& operator[] (const enum m10_enum);
-		float& operator[] (const enum m11_enum);
-		float& operator[] (const enum m12_enum);
-		float& operator[] (const enum m13_enum);
-		float& operator[] (const enum m14_enum);
-		float& operator[] (const enum m15_enum);
+		Mat4Proxy operator[] (const enum m0_enum);
+		Mat4Proxy operator[] (const enum m1_enum);
+		Mat4Proxy operator[] (const enum m2_enum);
+		Mat4Proxy operator[] (const enum m3_enum);
+		Mat4Proxy operator[] (const enum m4_enum);
+		Mat4Proxy operator[] (const enum m5_enum);
+		Mat4Proxy operator[] (const enum m6_enum);
+		Mat4Proxy operator[] (const enum m7_enum);
+		Mat4Proxy operator[] (const enum m8_enum);
+		Mat4Proxy operator[] (const enum m9_enum);
+		Mat4Proxy operator[] (const enum m10_enum);
+		Mat4Proxy operator[] (const enum m11_enum);
+		Mat4Proxy operator[] (const enum m12_enum);
+		Mat4Proxy operator[] (const enum m13_enum);
+		Mat4Proxy operator[] (const enum m14_enum);
+		Mat4Proxy operator[] (const enum m15_enum);
+
 		float operator[] (const enum m0_enum) const;
 		float operator[] (const enum m1_enum) const;
 		float operator[] (const enum m2_enum) const;
@@ -192,43 +177,54 @@ namespace Azul
 		// Comparison
 		bool isEqual(const Mat4& A, const float epsilon = MATH_TOLERANCE) const;
 		bool isIdentity(const float epsilon = MATH_TOLERANCE) const;
-
-		//const bool isRotation(const float epsilon = MATH_TOLERANCE) const;
+		//bool isRotation(const float epsilon = MATH_TOLERANCE) const;
 
 		// Add operators
 		Mat4 operator + (void) const;
 		Mat4 operator + (const Mat4& A) const;
-		void operator += (const Mat4& A);
+		Mat4& operator += (const Mat4& A);
 
 		// Sub operators
 		Mat4 operator - (void) const;
 		Mat4 operator - (const Mat4& A) const;
-		void operator -= (const Mat4& A);
+		Mat4& operator -= (const Mat4& A);
 
 		// Scale operators
 		Mat4 operator * (const float s) const;
 		friend Mat4 operator *(const float scale, const Mat4& A);
-		void operator *= (const float scale);
+		Mat4& operator *= (const float scale);
 
 		// Multiply
 		Mat4 operator * (const Mat4& A) const;
-		void  operator *= (const Mat4& A);
+		Mat4& operator *= (const Mat4& A);
 
-		// Problem Children
-		Mat4(const Rot, const Vec3& vAxis, const float angle_radians);
-		Mat4(const Orient type, const Vec3& dof, const Vec3& up);
+		// Simple casting to Mat4 operations... just a wrapper
+		Mat4 operator * (const Quat& q) const;
+		Mat4& operator *= (const Quat& q);
 
-		void set(const Rot, const Vec3& vAxis, const float angle_radians);
-		void set(const Orient, const Vec3& dof, const Vec3& up);
+		Mat4 operator * (const Scale& A) const;
+		Mat4& operator *= (const Scale& A);
+
+		Mat4 operator * (const Rot& A) const;
+		Mat4& operator *= (const Rot& A);
+
+		Mat4 operator * (const Trans& A) const;
+		Mat4& operator *= (const Trans& A);
 
 		// For printing
 		void Print(const char* pName) const;
 
-	private:
+	protected:
+		Mat4 privGetAdj(void) const;
 
 		friend Mat3;
 		friend Vec3;
 		friend Vec4;
+		friend Mat4Proxy;
+		friend Quat;
+		friend Scale;
+		friend Trans;
+		friend Rot;
 
 		union
 		{
@@ -270,7 +266,7 @@ namespace Azul
 				union
 				{
 					float _m15;
-					unsigned int _m15_bits;
+					unsigned int _u_m15;
 				};
 			};
 		};

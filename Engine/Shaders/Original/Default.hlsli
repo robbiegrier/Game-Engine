@@ -1,6 +1,6 @@
 #pragma pack_matrix( row_major )
 
-static const int MaxLights = 5;
+static const int MaxLights = 15;
 
 struct Material
 {

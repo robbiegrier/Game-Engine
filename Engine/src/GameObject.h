@@ -30,7 +30,7 @@ namespace Azul
 		// Mutate transform
 		void SetRelativeLocation(const Vec3& v);
 		void SetRelativeScale(const Vec3& v);
-		void SetRelativeRotation(const Mat4& m);
+		void SetRelativeRotation(const Rot& m);
 
 		// Accessors
 		const Mat4& GetWorld() const;
@@ -51,7 +51,7 @@ namespace Azul
 		// Itemized transform
 		Vec3* pPos;
 		Vec3* pScale;
-		Mat4* pRotation;
+		Rot* pRotation;
 
 		// Combined transform as world matrix
 		Mat4* pWorld;
