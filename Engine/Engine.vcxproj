@@ -64,7 +64,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -102,7 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile />
@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="..\Framework\Framework.h" />
     <ClInclude Include="DXTex\include\DirectXTex.h" />
+    <ClInclude Include="JSON\json.hpp" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Px.h" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Vx.h" />
     <ClInclude Include="Shaders\Compiled\ConstColor.Px.h" />

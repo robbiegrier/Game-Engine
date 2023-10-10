@@ -59,6 +59,9 @@
     <Filter Include="src\TextureObject">
       <UniqueIdentifier>{03dac8eb-2e05-4b7f-ad07-c76f6b5ac463}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_JSON">
+      <UniqueIdentifier>{1625a4f8-517f-4939-a437-827f56585dd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -224,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="src\Plane.h">
       <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="JSON\json.hpp">
+      <Filter>_JSON</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
