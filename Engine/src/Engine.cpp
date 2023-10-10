@@ -110,6 +110,7 @@ namespace Azul
 		HRESULT hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags_define, featureLevels, _countof(featureLevels),
 			D3D11_SDK_VERSION, &swapChainDesc, &pSwapChain, &pDevice, &featureLevel, &pContext);
 		assert(SUCCEEDED(hr));
+		static_cast<void>(hr);
 	}
 
 	void Engine::InitBackBuffer()
@@ -121,6 +122,7 @@ namespace Azul
 		hr = pDevice->CreateRenderTargetView(backBuffer, nullptr, &pRenderTargetView);
 		assert(SUCCEEDED(hr));
 		SafeRelease(backBuffer);
+		static_cast<void>(hr);
 	}
 
 	void Engine::InitDepthStencilBuffer()
@@ -154,6 +156,7 @@ namespace Azul
 
 		HRESULT hr = pDevice->CreateDepthStencilState(&depthStencilStateDesc, &pDepthStencilState);
 		assert(SUCCEEDED(hr));
+		static_cast<void>(hr);
 	}
 
 	void Engine::InitRasterizerState()
@@ -173,6 +176,7 @@ namespace Azul
 
 		HRESULT hr = pDevice->CreateRasterizerState(&rasterizerDesc, &pRasterizerState);
 		assert(SUCCEEDED(hr));
+		static_cast<void>(hr);
 	}
 
 	void Engine::InitViewport()

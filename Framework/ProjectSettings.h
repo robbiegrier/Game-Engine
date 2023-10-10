@@ -24,9 +24,9 @@
 // --------------------------------------
 
 // minimum versions
-#define TEST_WINSDK_VER "10.0.19041.0"
-#define TEST_TOOLS_VER "14.29.30133"
-#define TEST_COMPILER_VER "192930133"
+#define TEST_WINSDK_VER "10.0.22621.0"
+#define TEST_TOOLS_VER "14.35.32215"
+#define TEST_COMPILER_VER "193532217"
 
 
 #endif 

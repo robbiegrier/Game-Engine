@@ -43,12 +43,15 @@
 //    v.1.23 - using namespace ThreadFramework, chrono_literals
 //    v.1.24 - using namespace chronos
 //    v.1.25 - baseline S2023
+//    v.1.26 - Thread end() on simple banner not removing name (accidently gets recycled)
+//    v.1.27 - Race condtion between Main() SetName and Thread's SimpleBanner
+//    v.1.28 - double check needed for getName in SimpleBanner
 //----------------------------------------------------------------------------- 
 
 #ifndef THREAD_FRAMEWORK_VER_H
 #define THREAD_FRAMEWORK_VER_H
 
-#define THREAD_FRAMEWORK_VER "1.25"
+#define THREAD_FRAMEWORK_VER "1.28"
 
 #endif
 
@@ -379,6 +382,8 @@ namespace ThreadFramework
 			
 			bool status(true);
 
+			assert(threadName);
+
 			// is the string name too big?
 			const size_t N = strlen(threadName) + 1;
 			assert(N <= THREAD_NAME_SIZE);
@@ -488,7 +493,7 @@ namespace ThreadFramework
 		}
 
 		// given std::Thread
-		static const char * const GetName(const std::thread &t0)
+		static const char * GetName(const std::thread &t0)
 		{
 			Debug *pDebug = privInstance();
 			assert(pDebug);
@@ -561,7 +566,7 @@ namespace ThreadFramework
 		}
 
 		// given ThreadID
-		static const char * const GetName(const DWORD threadId)
+		static const char * GetName(const DWORD threadId)
 		{
 			Debug *pDebug = privInstance();
 			assert(pDebug);
@@ -570,7 +575,7 @@ namespace ThreadFramework
 		}
 
 		// inside Current thread...
-		static const char * const GetCurrentName()
+		static const char * GetCurrentName()
 		{
 			Debug *pDebug = privInstance();
 			assert(pDebug);
@@ -771,7 +776,7 @@ public:  // HACK
 			return p;
 
 		}
-		const ThreadID privGetID(const std::thread &t0)
+		ThreadID privGetID(const std::thread &t0)
 		{
 			// OMG - a const cast?
 			// reason... if you have a thread reference... I want no way of modifying the data
@@ -914,7 +919,7 @@ namespace ThreadFramework
 		BannerBase &operator=(const BannerBase &) = default;
 		virtual ~BannerBase() = default;
 
-		const char *const GetBannerName()
+		const char * GetBannerName()
 		{
 			return this->BannerName;
 		}
@@ -959,6 +964,9 @@ namespace ThreadFramework
 			privPrint();
 		}
 
+		SimpleBanner(const SimpleBanner &) = delete;
+		SimpleBanner &operator = (const SimpleBanner &);
+
 		~SimpleBanner()
 		{
 			privPrintEnd();
@@ -968,31 +976,62 @@ namespace ThreadFramework
 		void privPrint()
 		{
 			const ThreadID _ThreadID = this->tID;
-
-			const size_t numTabs = (size_t) this->tabs;
-
 			char s[Debug::DebugBuffSize];
-			char * p = this->privAddTabs(s, numTabs);
 
-			sprintf_s(p, Debug::DebugBuffSize - numTabs, "thread(%5d) %s: begin()\n",
+			// RACE condition HACK...
+			// Main threads set's name... but thread gets launched faster
+			// than Main can finish... spin unit its finish
+			// count is always one... no need for while loop
+			
+			int YieldMax = 5000;
+			int count = 0;
+			while( (Debug::GetDictionary()->GetName(_ThreadID)) == nullptr)
+			{
+				std::this_thread::yield();
+				count++;
+				
+				// infinite loop safety exit
+				if(count >= YieldMax)
+				{
+					break;
+			}
+			}
+
+			if(pName == nullptr )
+			{
+				this->pName = Debug::GetDictionary()->GetName(_ThreadID);
+				this->tabs = Debug::GetDictionary()->GetNumTabs(_ThreadID);
+
+				//Trace::out("Cx:%d shit %s\n", count, Debug::GetDictionary()->GetName(_ThreadID));
+			}
+
+			char * p = this->privAddTabs(s, (size_t)this->tabs);
+
+			sprintf_s(p, Debug::DebugBuffSize - this->tabs, "thread(%5d) %s: begin()\n",
 				_ThreadID,
 				this->pName);
-
+			
 			Debug::privOut(s);
 		}
 
 		void privPrintEnd()
 		{
 			const ThreadID _ThreadID = this->tID;
-
-			const size_t numTabs = (size_t) this->tabs;
-
 			char s[Debug::DebugBuffSize];
-			char * p = this->privAddTabs(s, numTabs);
 
-			sprintf_s(p, Debug::DebugBuffSize - numTabs, "thread(%5d) %s: end()\n",
+			char *p = this->privAddTabs(s, (size_t)this->tabs);
+
+			sprintf_s(p, Debug::DebugBuffSize - this->tabs, "thread(%5d) %s: end()\n",
 				_ThreadID,
 				this->pName);
+
+			Dictionary *pDict = Debug::GetDictionary();
+			assert(pDict);
+			AZUL_UNUSED_VAR(pDict);
+
+			bool status = pDict->RemoveFromMap(_ThreadID);
+			assert(status);
+			AZUL_UNUSED_VAR(status);
 
 			Debug::privOut(s);
 		}

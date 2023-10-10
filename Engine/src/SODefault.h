@@ -28,7 +28,7 @@ namespace Azul
 		void SetCurrentObject(GraphicsObject* pObject);
 
 	private:
-		static constexpr int MaxLights = 100;
+		static constexpr int MaxLights = 5;
 
 		struct Material
 		{
