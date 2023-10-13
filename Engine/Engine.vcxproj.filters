@@ -62,6 +62,9 @@
     <Filter Include="_JSON">
       <UniqueIdentifier>{1625a4f8-517f-4939-a437-827f56585dd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_TinyGLTF">
+      <UniqueIdentifier>{8d2dee84-59c5-4dc3-a5cf-9be785713fbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -75,6 +78,9 @@
     </None>
     <None Include="Shaders\Original\Default.hlsli">
       <Filter>Shaders\Original</Filter>
+    </None>
+    <None Include="TinyGLTF\tinygltf.pdb">
+      <Filter>_TinyGLTF</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +237,15 @@
     <ClInclude Include="JSON\json.hpp">
       <Filter>_JSON</Filter>
     </ClInclude>
+    <ClInclude Include="TinyGLTF\stb_image.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyGLTF\stb_image_write.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyGLTF\tiny_gltf.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -367,6 +382,9 @@
     <ClCompile Include="src\Plane.cpp">
       <Filter>src\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="TinyGLTF\tiny_gltf.cc">
+      <Filter>_TinyGLTF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="DXTex\lib\DirectXTex_DebugX86.lib">
@@ -374,6 +392,9 @@
     </Library>
     <Library Include="DXTex\lib\DirectXTex_ReleaseX86.lib">
       <Filter>DXTex\lib</Filter>
+    </Library>
+    <Library Include="TinyGLTF\tinygltf.lib">
+      <Filter>_TinyGLTF</Filter>
     </Library>
   </ItemGroup>
 </Project>

@@ -4,11 +4,15 @@
 #include "PCSTreeForwardIterator.h"
 
 #include "json.hpp"
+#include "tiny_gltf.h"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
 	static_cast<void>(prevInstance);
 	static_cast<void>(cmdLine);
+
+	tinygltf::ColorValue v = { 1, 2, 3 };
+	tinygltf::Model model;
 
 	nlohmann::json printer = {
 		{"Engine", true},

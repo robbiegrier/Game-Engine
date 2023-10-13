@@ -198,9 +198,19 @@ namespace Azul
 		set(q);
 	}
 
+	Rot::Rot(const Special val)
+	{
+		set(val);
+	}
+
 	void Rot::set(const Quat& q)
 	{
 		*this = Rot(Mat4(q));
+	}
+
+	void Rot::set(const Special val)
+	{
+		Mat4::set(val);
 	}
 
 	Mat4 Rot::operator*(const Mat4& A) const

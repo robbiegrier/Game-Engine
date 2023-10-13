@@ -64,7 +64,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -102,7 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile />
@@ -175,12 +175,16 @@
     <ClInclude Include="src\TextureObject.h" />
     <ClInclude Include="src\TextureObjectManager.h" />
     <ClInclude Include="src\_UnitTestConfiguration.h" />
+    <ClInclude Include="TinyGLTF\stb_image.h" />
+    <ClInclude Include="TinyGLTF\stb_image_write.h" />
+    <ClInclude Include="TinyGLTF\tiny_gltf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__" />
     <None Include="DXTex\include\DirectXTex.inl" />
     <None Include="GraphicsObject_Diagram.cd" />
     <None Include="Shaders\Original\Default.hlsli" />
+    <None Include="TinyGLTF\tinygltf.pdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\File\File.vcxproj">
@@ -348,6 +352,7 @@
     <ClCompile Include="src\SONull.cpp" />
     <ClCompile Include="src\TextureObject.cpp" />
     <ClCompile Include="src\TextureObjectManager.cpp" />
+    <ClCompile Include="TinyGLTF\tiny_gltf.cc" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DXTex\lib\DirectXTex_DebugX86.lib">
@@ -356,6 +361,7 @@
     <Library Include="DXTex\lib\DirectXTex_ReleaseX86.lib">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Library>
+    <Library Include="TinyGLTF\tinygltf.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

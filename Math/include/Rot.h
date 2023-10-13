@@ -30,8 +30,10 @@ namespace Azul
 
 		explicit Rot(const Mat4& m);
 		explicit Rot(const Quat& q);
+		explicit Rot(const Special val);
 
 		void set(const Quat& q);
+		void set(const Special val);
 
 		Mat4 operator * (const Mat4& A) const;
 		Rot& operator *= (const Mat4& A) = delete;

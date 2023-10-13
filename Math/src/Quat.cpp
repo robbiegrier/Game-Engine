@@ -28,13 +28,13 @@ namespace Azul
 		set(vx, vy, vz, real);
 	}
 
-	Quat::Quat(const Mat4& mIn)
+	Quat::Quat(const Rot& mIn)
 	{
 		set(mIn);
 	}
 
 	Quat::Quat(const Special value)
-		: Quat(Mat4(value))
+		: Quat(Rot(value))
 	{
 	}
 

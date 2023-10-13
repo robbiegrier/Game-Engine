@@ -31,7 +31,7 @@ namespace Azul
 		Quat(const Vec3& vect, const float real);
 		Quat(const float vx, const float vy, const float vz, const float real);
 
-		explicit Quat(const Mat4& mIn);
+		explicit Quat(const Rot& mIn);
 		explicit Quat(const Special  value);
 
 		Quat(const Rot1 type, const float angle);
