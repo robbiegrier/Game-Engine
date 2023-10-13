@@ -5,6 +5,7 @@
 
 #include "json.hpp"
 #include "tiny_gltf.h"
+#include "modelData.pb.h"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
@@ -13,6 +14,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 
 	tinygltf::ColorValue v = { 1, 2, 3 };
 	tinygltf::Model model;
+
+	modelData_proto prototmp;
 
 	nlohmann::json printer = {
 		{"Engine", true},

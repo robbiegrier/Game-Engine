@@ -64,7 +64,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF;$(SolutionDir)Engine\Proto;$(SolutionDir)Engine\Proto\absl</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -89,6 +89,9 @@
       <ShaderModel>4.0</ShaderModel>
       <AdditionalIncludeDirectories>$(SolutionDir)Shaders/Original;</AdditionalIncludeDirectories>
     </FxCompile>
+    <PreBuildEvent>
+      <Command>"$(SolutionDir)Engine\Proto\libs\debug\protoc.exe" --proto_path=$(SolutionDir)Engine\src --cpp_out=$(SolutionDir)Engine\src $(SolutionDir)Engine\src\*.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -102,7 +105,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDir)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\JSON;$(SolutionDir)Engine\TinyGLTF;$(SolutionDir)Engine\Proto;$(SolutionDir)Engine\Proto\absl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile />
@@ -122,11 +125,154 @@
       </EntryPointSymbol>
       <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;winmm.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>"$(SolutionDir)Engine\Proto\libs\release\protoc.exe" --proto_path=$(SolutionDir)Engine\src --cpp_out=$(SolutionDir)Engine\src $(SolutionDir)Engine\src\*.proto</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Framework\Framework.h" />
     <ClInclude Include="DXTex\include\DirectXTex.h" />
     <ClInclude Include="JSON\json.hpp" />
+    <ClInclude Include="Proto\google\protobuf\any.h" />
+    <ClInclude Include="Proto\google\protobuf\any.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\api.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\arena.h" />
+    <ClInclude Include="Proto\google\protobuf\arenastring.h" />
+    <ClInclude Include="Proto\google\protobuf\arenaz_sampler.h" />
+    <ClInclude Include="Proto\google\protobuf\arena_align.h" />
+    <ClInclude Include="Proto\google\protobuf\arena_allocation_policy.h" />
+    <ClInclude Include="Proto\google\protobuf\arena_cleanup.h" />
+    <ClInclude Include="Proto\google\protobuf\arena_test_util.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\annotation_test_util.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\code_generator.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\command_line_interface.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\command_line_interface_tester.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\cpp_generator.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\enum.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\extension.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\field.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\file.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\generator.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\helpers.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\message.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\message_layout_helper.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\names.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\options.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\padding_optimizer.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\parse_function_generator.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\service.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\tracker.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\cpp\unittest.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\importer.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\mock_code_generator.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\package_info.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\parser.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\plugin.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\plugin.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\retention.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\scc.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\subprocess.h" />
+    <ClInclude Include="Proto\google\protobuf\compiler\zip_writer.h" />
+    <ClInclude Include="Proto\google\protobuf\cpp_features.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\descriptor.h" />
+    <ClInclude Include="Proto\google\protobuf\descriptor.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\descriptor_database.h" />
+    <ClInclude Include="Proto\google\protobuf\descriptor_legacy.h" />
+    <ClInclude Include="Proto\google\protobuf\descriptor_visitor.h" />
+    <ClInclude Include="Proto\google\protobuf\duration.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\dynamic_message.h" />
+    <ClInclude Include="Proto\google\protobuf\empty.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\endian.h" />
+    <ClInclude Include="Proto\google\protobuf\explicitly_constructed.h" />
+    <ClInclude Include="Proto\google\protobuf\extension_set.h" />
+    <ClInclude Include="Proto\google\protobuf\extension_set_inl.h" />
+    <ClInclude Include="Proto\google\protobuf\feature_resolver.h" />
+    <ClInclude Include="Proto\google\protobuf\field_access_listener.h" />
+    <ClInclude Include="Proto\google\protobuf\field_mask.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_enum_reflection.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_enum_util.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_bases.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_reflection.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_tctable_decl.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_tctable_gen.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_tctable_impl.h" />
+    <ClInclude Include="Proto\google\protobuf\generated_message_util.h" />
+    <ClInclude Include="Proto\google\protobuf\has_bits.h" />
+    <ClInclude Include="Proto\google\protobuf\implicit_weak_message.h" />
+    <ClInclude Include="Proto\google\protobuf\inlined_string_field.h" />
+    <ClInclude Include="Proto\google\protobuf\internal_message_util.h" />
+    <ClInclude Include="Proto\google\protobuf\internal_visibility.h" />
+    <ClInclude Include="Proto\google\protobuf\internal_visibility_for_testing.h" />
+    <ClInclude Include="Proto\google\protobuf\io\coded_stream.h" />
+    <ClInclude Include="Proto\google\protobuf\io\gzip_stream.h" />
+    <ClInclude Include="Proto\google\protobuf\io\io_win32.h" />
+    <ClInclude Include="Proto\google\protobuf\io\package_info.h" />
+    <ClInclude Include="Proto\google\protobuf\io\printer.h" />
+    <ClInclude Include="Proto\google\protobuf\io\strtod.h" />
+    <ClInclude Include="Proto\google\protobuf\io\test_zero_copy_stream.h" />
+    <ClInclude Include="Proto\google\protobuf\io\tokenizer.h" />
+    <ClInclude Include="Proto\google\protobuf\io\zero_copy_sink.h" />
+    <ClInclude Include="Proto\google\protobuf\io\zero_copy_stream.h" />
+    <ClInclude Include="Proto\google\protobuf\io\zero_copy_stream_impl.h" />
+    <ClInclude Include="Proto\google\protobuf\io\zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\map.h" />
+    <ClInclude Include="Proto\google\protobuf\map_entry.h" />
+    <ClInclude Include="Proto\google\protobuf\map_entry_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\map_field.h" />
+    <ClInclude Include="Proto\google\protobuf\map_field_inl.h" />
+    <ClInclude Include="Proto\google\protobuf\map_field_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\map_lite_test_util.h" />
+    <ClInclude Include="Proto\google\protobuf\map_test_util.h" />
+    <ClInclude Include="Proto\google\protobuf\map_test_util_impl.h" />
+    <ClInclude Include="Proto\google\protobuf\map_type_handler.h" />
+    <ClInclude Include="Proto\google\protobuf\message.h" />
+    <ClInclude Include="Proto\google\protobuf\message_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\metadata.h" />
+    <ClInclude Include="Proto\google\protobuf\metadata_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\package_info.h" />
+    <ClInclude Include="Proto\google\protobuf\parse_context.h" />
+    <ClInclude Include="Proto\google\protobuf\port.h" />
+    <ClInclude Include="Proto\google\protobuf\raw_ptr.h" />
+    <ClInclude Include="Proto\google\protobuf\reflection.h" />
+    <ClInclude Include="Proto\google\protobuf\reflection_internal.h" />
+    <ClInclude Include="Proto\google\protobuf\reflection_mode.h" />
+    <ClInclude Include="Proto\google\protobuf\reflection_ops.h" />
+    <ClInclude Include="Proto\google\protobuf\reflection_tester.h" />
+    <ClInclude Include="Proto\google\protobuf\repeated_field.h" />
+    <ClInclude Include="Proto\google\protobuf\repeated_ptr_field.h" />
+    <ClInclude Include="Proto\google\protobuf\serial_arena.h" />
+    <ClInclude Include="Proto\google\protobuf\service.h" />
+    <ClInclude Include="Proto\google\protobuf\source_context.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\string_block.h" />
+    <ClInclude Include="Proto\google\protobuf\string_member_robber.h" />
+    <ClInclude Include="Proto\google\protobuf\struct.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\stubs\callback.h" />
+    <ClInclude Include="Proto\google\protobuf\stubs\common.h" />
+    <ClInclude Include="Proto\google\protobuf\stubs\platform_macros.h" />
+    <ClInclude Include="Proto\google\protobuf\stubs\port.h" />
+    <ClInclude Include="Proto\google\protobuf\stubs\status_macros.h" />
+    <ClInclude Include="Proto\google\protobuf\test_textproto.h" />
+    <ClInclude Include="Proto\google\protobuf\test_util.h" />
+    <ClInclude Include="Proto\google\protobuf\test_util2.h" />
+    <ClInclude Include="Proto\google\protobuf\test_util_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\text_format.h" />
+    <ClInclude Include="Proto\google\protobuf\thread_safe_arena.h" />
+    <ClInclude Include="Proto\google\protobuf\timestamp.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\type.pb.h" />
+    <ClInclude Include="Proto\google\protobuf\unknown_field_set.h" />
+    <ClInclude Include="Proto\google\protobuf\util\delimited_message_util.h" />
+    <ClInclude Include="Proto\google\protobuf\util\field_comparator.h" />
+    <ClInclude Include="Proto\google\protobuf\util\field_mask_util.h" />
+    <ClInclude Include="Proto\google\protobuf\util\json_util.h" />
+    <ClInclude Include="Proto\google\protobuf\util\message_differencer.h" />
+    <ClInclude Include="Proto\google\protobuf\util\package_info.h" />
+    <ClInclude Include="Proto\google\protobuf\util\time_util.h" />
+    <ClInclude Include="Proto\google\protobuf\util\type_resolver.h" />
+    <ClInclude Include="Proto\google\protobuf\util\type_resolver_util.h" />
+    <ClInclude Include="Proto\google\protobuf\varint_shuffle.h" />
+    <ClInclude Include="Proto\google\protobuf\wire_format.h" />
+    <ClInclude Include="Proto\google\protobuf\wire_format_lite.h" />
+    <ClInclude Include="Proto\google\protobuf\wrappers.pb.h" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Px.h" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Vx.h" />
     <ClInclude Include="Shaders\Compiled\ConstColor.Px.h" />
@@ -160,6 +306,7 @@
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshManager.h" />
     <ClInclude Include="src\MeshUtils.h" />
+    <ClInclude Include="src\modelData.pb.h" />
     <ClInclude Include="src\Plane.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PyramidMesh.h" />
@@ -183,7 +330,16 @@
     <None Include="..\Framework\__DO NOT MODIFY__" />
     <None Include="DXTex\include\DirectXTex.inl" />
     <None Include="GraphicsObject_Diagram.cd" />
+    <None Include="Proto\google\protobuf\map_test.inc" />
+    <None Include="Proto\google\protobuf\map_test_util.inc" />
+    <None Include="Proto\google\protobuf\message_unittest.inc" />
+    <None Include="Proto\google\protobuf\port_def.inc" />
+    <None Include="Proto\google\protobuf\port_undef.inc" />
+    <None Include="Proto\google\protobuf\proto3_lite_unittest.inc" />
+    <None Include="Proto\google\protobuf\test_util.inc" />
+    <None Include="Proto\google\protobuf\wire_format_unittest.inc" />
     <None Include="Shaders\Original\Default.hlsli" />
+    <None Include="src\modelData.proto" />
     <None Include="TinyGLTF\tinygltf.pdb" />
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +495,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\MeshManager.cpp" />
+    <ClCompile Include="src\modelData.pb.cc" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PyramidMesh.cpp" />
@@ -359,6 +516,534 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </Library>
     <Library Include="DXTex\lib\DirectXTex_ReleaseX86.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_bad_any_cast_impl.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_bad_optional_access.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_bad_variant_access.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_base.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_city.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_civil_time.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cord.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cordz_functions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cordz_handle.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cordz_info.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cordz_sample_token.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_cord_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_crc32c.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_crc_cord_state.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_crc_cpu_detect.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_crc_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_debugging_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_demangle_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_die_if_null.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_examine_stack.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_exponential_biased.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_failure_signal_handler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_commandlineflag.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_commandlineflag_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_config.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_marshalling.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_parse.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_private_handle_accessor.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_program_name.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_reflection.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_usage.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_flags_usage_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_graphcycles_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_hash.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_hashtablez_sampler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_int128.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_kernel_timeout_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_leak_check.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_entry.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_flags.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_globals.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_initialize.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_check_op.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_conditions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_format.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_globals.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_log_sink_set.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_message.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_nullguard.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_internal_proto.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_severity.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_log_sink.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_low_level_hash.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_malloc_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_periodic_sampler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_distributions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_distribution_test_util.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_platform.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_pool_urbg.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_randen.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_randen_hwaes.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_randen_hwaes_impl.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_randen_slow.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_internal_seed_material.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_seed_gen_exception.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_random_seed_sequences.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_raw_hash_set.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_raw_logging_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_scoped_set_env.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_spinlock_wait.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_stacktrace.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_status.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_statusor.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_strerror.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_strings.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_strings_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_string_view.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_str_format_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_symbolize.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_synchronization.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_throw_delegate.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_time.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\absl_time_zone.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\libprotobuf-lited.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\utf8_range.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\debug\utf8_validity.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_bad_any_cast_impl.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_bad_optional_access.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_bad_variant_access.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_base.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_city.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_civil_time.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cord.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cordz_functions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cordz_handle.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cordz_info.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cordz_sample_token.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_cord_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_crc32c.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_crc_cord_state.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_crc_cpu_detect.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_crc_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_debugging_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_demangle_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_die_if_null.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_examine_stack.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_exponential_biased.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_failure_signal_handler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_commandlineflag.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_commandlineflag_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_config.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_marshalling.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_parse.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_private_handle_accessor.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_program_name.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_reflection.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_usage.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_flags_usage_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_graphcycles_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_hash.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_hashtablez_sampler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_int128.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_kernel_timeout_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_leak_check.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_entry.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_flags.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_globals.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_initialize.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_check_op.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_conditions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_format.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_globals.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_log_sink_set.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_message.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_nullguard.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_internal_proto.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_severity.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_log_sink.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_low_level_hash.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_malloc_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_periodic_sampler.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_distributions.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_distribution_test_util.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_platform.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_pool_urbg.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_randen.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_randen_hwaes.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_randen_hwaes_impl.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_randen_slow.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_internal_seed_material.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_seed_gen_exception.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_random_seed_sequences.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_raw_hash_set.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_raw_logging_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_scoped_set_env.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_spinlock_wait.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_stacktrace.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_status.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_statusor.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_strerror.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_strings.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_strings_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_string_view.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_str_format_internal.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_symbolize.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_synchronization.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_throw_delegate.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_time.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\absl_time_zone.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\libprotobuf-lite.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\utf8_range.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="Proto\libs\release\utf8_validity.lib">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Library>
     <Library Include="TinyGLTF\tinygltf.lib" />
