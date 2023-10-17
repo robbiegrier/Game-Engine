@@ -56,7 +56,6 @@ namespace Azul
 
 		struct CBObject
 		{
-			Mat4 world;
 			Mat4 inverse;
 			Material material;
 		};

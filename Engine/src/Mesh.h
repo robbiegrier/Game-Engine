@@ -39,7 +39,6 @@ namespace Azul
 		// Called during rendering
 		void ActivateModel();
 		void TransferConstantBuffer(Camera* pCam, const Mat4& pWorld);
-		void UpdateWorld(const Mat4& pWorld);
 		void RenderIndexBuffer();
 
 		// As a DLink Node
@@ -60,12 +59,8 @@ namespace Azul
 		ID3D11Buffer* poVertexBuffer_color;
 		ID3D11Buffer* poVertexBuffer_norm;
 		ID3D11Buffer* poVertexBuffer_texCoord;
-
 		ID3D11Buffer* poIndexBuffer;
-
-		ID3D11Buffer* poConstantBuff_Projection;
 		ID3D11Buffer* poConstantBuff_World;
-		ID3D11Buffer* poConstantBuff_View;
 
 	public:
 		ID3D11Buffer* poConstantBuff_lightColor;

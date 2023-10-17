@@ -21,7 +21,7 @@ VS_OUTPUT main(AppData_pos inPos, AppData_tex inTex, AppData_norm inNorm)
     output.positionModelSpace = float4(inPos.position, 1.0f); // We pass along the raw model space position 
     output.norm = float4(inNorm.norm, 0.0f); // and the face normal
 
-    output.position = mul(float4(inPos.position, 1.0f), world);
+    output.position = mul(float4(inPos.position, 1.0f), worldMatrix);
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
     output.textureCoordinate = inTex.tex;

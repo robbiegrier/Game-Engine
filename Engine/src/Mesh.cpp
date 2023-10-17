@@ -12,9 +12,7 @@ namespace Azul
 		poVertexBuffer_norm{ nullptr },
 		poVertexBuffer_texCoord{ nullptr },
 		poIndexBuffer{ nullptr },
-		poConstantBuff_Projection{ nullptr },
 		poConstantBuff_World{ nullptr },
-		poConstantBuff_View{ nullptr },
 		poConstantBuff_lightColor{ nullptr },
 		poConstantBuff_lightPos{ nullptr }
 	{
@@ -42,9 +40,7 @@ namespace Azul
 		SafeRelease(poVertexBuffer_norm);
 		SafeRelease(poVertexBuffer_texCoord);
 		SafeRelease(poIndexBuffer);
-		SafeRelease(poConstantBuff_Projection);
 		SafeRelease(poConstantBuff_World);
-		SafeRelease(poConstantBuff_View);
 		SafeRelease(poConstantBuff_lightColor);
 		SafeRelease(poConstantBuff_lightPos);
 	}
@@ -87,15 +83,9 @@ namespace Azul
 	void Mesh::TransferConstantBuffer(Camera* pCam, const Mat4& pWorld)
 	{
 		assert(pCam);
+		static_cast<void>(pWorld);
 
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_View, 0u, nullptr, &pCam->GetViewMatrix(), 0u, 0u);
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_Projection, 0u, nullptr, &pCam->GetProjMatrix(), 0u, 0u);
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
-	}
-
-	void Mesh::UpdateWorld(const Mat4& pWorld)
-	{
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
+		//Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
 	}
 
 	void Mesh::ActivateModel()
@@ -125,7 +115,7 @@ namespace Azul
 			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::TexCoord, 1, &poVertexBuffer_texCoord, &vertexStride_texCoord, &offset);
 		}
 
-		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::World, 1u, &poConstantBuff_World);
+		//Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::World, 1u, &poConstantBuff_World);
 
 		if (poConstantBuff_lightColor)
 		{

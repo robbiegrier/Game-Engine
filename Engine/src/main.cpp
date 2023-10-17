@@ -12,6 +12,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	static_cast<void>(prevInstance);
 	static_cast<void>(cmdLine);
 
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
+
 	tinygltf::ColorValue v = { 1, 2, 3 };
 	tinygltf::Model model;
 
@@ -27,5 +29,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 
 	int output = Azul::Game::Launch(hInstance, cmdShow);
 	Azul::Game::Teardown();
+
+	google::protobuf::ShutdownProtobufLibrary();
+
 	return output;
 }

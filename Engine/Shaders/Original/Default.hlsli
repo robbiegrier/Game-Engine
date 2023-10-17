@@ -58,7 +58,6 @@ cbuffer LightParameters : register(b5)
 
 cbuffer InstanceData : register(b6)
 {
-    float4x4 world;
     float4x4 inverse;
     Material material;
 };

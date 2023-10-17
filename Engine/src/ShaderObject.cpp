@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Mesh.h"
 #include "CameraManager.h"
+#include "GraphicsObject.h"
 
 namespace Azul
 {
@@ -17,10 +18,11 @@ namespace Azul
 	}
 
 	ShaderObject::ShaderObject()
-		: name(Name::None), poConstantBuff_Projection{ nullptr }, poConstantBuff_View{ nullptr }
+		: name(Name::None), pConstBuffProjection{ nullptr }, pConstBuffView{ nullptr }, pConstBuffObjectUniversal{ nullptr }
 	{
-		poConstantBuff_Projection = Mesh::CreateConstantBuffer(sizeof(Mat4));
-		poConstantBuff_View = Mesh::CreateConstantBuffer(sizeof(Mat4));
+		pConstBuffProjection = Mesh::CreateConstantBuffer(sizeof(Mat4));
+		pConstBuffView = Mesh::CreateConstantBuffer(sizeof(Mat4));
+		pConstBuffObjectUniversal = Mesh::CreateConstantBuffer(sizeof(CBObjectUniversal));
 	}
 
 	ShaderObject::~ShaderObject()
@@ -28,8 +30,9 @@ namespace Azul
 		SafeRelease(poInputLayout);
 		SafeRelease(poVertexShader);
 		SafeRelease(poPixelShader);
-		SafeRelease(poConstantBuff_Projection);
-		SafeRelease(poConstantBuff_View);
+		SafeRelease(pConstBuffProjection);
+		SafeRelease(pConstBuffView);
+		SafeRelease(pConstBuffObjectUniversal);
 	}
 
 	void ShaderObject::Open(GraphicsObject* pObject)
@@ -38,11 +41,16 @@ namespace Azul
 		Engine::GetContext()->IASetInputLayout(poInputLayout);
 		Engine::GetContext()->PSSetShader(poPixelShader, nullptr, 0u);
 
-		Camera* pCamera = CameraManager::GetCurrentCamera();
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_View, 0u, nullptr, &pCamera->GetViewMatrix(), 0u, 0u);
-		Engine::GetContext()->UpdateSubresource(poConstantBuff_Projection, 0u, nullptr, &pCamera->GetProjMatrix(), 0u, 0u);
-		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::Projection, 1u, &poConstantBuff_Projection);
-		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::View, 1u, &poConstantBuff_View);
+		Engine::GetContext()->UpdateSubresource(pConstBuffView, 0u, nullptr, &CameraManager::GetCurrentCamera()->GetViewMatrix(), 0u, 0u);
+		Engine::GetContext()->UpdateSubresource(pConstBuffProjection, 0u, nullptr, &CameraManager::GetCurrentCamera()->GetProjMatrix(), 0u, 0u);
+		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::Projection, 1u, &pConstBuffProjection);
+		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::View, 1u, &pConstBuffView);
+
+		// Object Specific
+		CBObjectUniversal object;
+		object.world = pObject->GetWorld();
+		Engine::GetContext()->UpdateSubresource(pConstBuffObjectUniversal, 0, nullptr, &object, 0, 0);
+		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::World, 1u, &pConstBuffObjectUniversal);
 
 		OnOpen(pObject);
 	}

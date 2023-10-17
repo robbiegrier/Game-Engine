@@ -3,6 +3,7 @@
 
 #include <d3d11.h>
 #include "DLink.h"
+#include "MathEngine.h"
 
 namespace Azul
 {
@@ -62,8 +63,14 @@ namespace Azul
 		ID3D11VertexShader* poVertexShader = nullptr;
 		ID3D11PixelShader* poPixelShader = nullptr;
 
-		ID3D11Buffer* poConstantBuff_Projection;
-		ID3D11Buffer* poConstantBuff_View;
+		struct CBObjectUniversal
+		{
+			Mat4 world;
+		};
+		ID3D11Buffer* pConstBuffObjectUniversal;
+
+		ID3D11Buffer* pConstBuffProjection;
+		ID3D11Buffer* pConstBuffView;
 	};
 }
 

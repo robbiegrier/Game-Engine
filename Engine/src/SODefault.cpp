@@ -82,7 +82,6 @@ namespace Azul
 		Vec3 testSpec = Vec3(0.5f, 0.5f, 1.0f);
 
 		CBObject object;
-		object.world = pObject->GetWorld();
 		object.inverse = pObject->GetWorld().getInv();
 		object.material.ambient = Vec4(testAmb, 1.0f);
 		object.material.diffuse = Vec4(testDiff, 1.0f);

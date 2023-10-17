@@ -238,8 +238,6 @@ namespace Azul
 		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
 
 		// Create the constant buffers for the variables defined in the vertex shader.
-		poConstantBuff_Projection = CreateConstantBuffer(sizeof(Mat4));
-		poConstantBuff_View = CreateConstantBuffer(sizeof(Mat4));
 		poConstantBuff_World = CreateConstantBuffer(sizeof(Mat4));
 
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
