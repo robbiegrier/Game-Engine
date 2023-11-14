@@ -1,0 +1,18 @@
+//----------------------------------------------------------------------------
+// Copyright 2023, Ed Keenan, all rights reserved.
+//----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+import "meshData.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message azulModel_proto
+{
+	repeated meshData_proto meshes = 1;
+
+	optional uint32 converterVersion = 2;
+}
+
+// -- End of File ---

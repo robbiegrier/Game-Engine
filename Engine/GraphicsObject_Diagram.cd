@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Azul::Render">
+  <Class Name="Render">
     <Position X="4.5" Y="1.5" Width="1.5" />
     <Members>
       <Method Name="~Render" Hidden="true" />
@@ -12,71 +12,77 @@
       <FileName>src\Render.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::GraphicsObject">
+  <Class Name="GraphicsObject">
     <Position X="4.5" Y="3.75" Width="1.5" />
     <Members>
       <Method Name="~GraphicsObject" Hidden="true" />
       <Method Name="operator=" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQCABAAAAAIAAAAAAAAAAAQAABAhEAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACABAAAAAYAAAgAAAAAAAQAABAhEAAAAAA=</HashCode>
       <FileName>src\GraphicsObject.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="pModel" />
+      <Field Name="pShaderObj" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Azul::Model" Collapsed="true">
+  <Class Name="Model" Collapsed="true">
     <Position X="7.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AWAAAAAAgAAAAgAAkAAEAAAAAAAjBAAABQgiAIACAAA=</HashCode>
       <FileName>src\Model.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::ShaderObject" Collapsed="true">
+  <Class Name="ShaderObject" Collapsed="true">
     <Position X="7.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAECAIQEAAgAgAAAABAEQAAAAABgQSEADAA=</HashCode>
+      <HashCode>QAAAAAAAAAECAIQAAAgAAAAAABAAQAAAAAAgASEACAA=</HashCode>
       <FileName>src\ShaderObject.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::CubeModel" Collapsed="true">
+  <Class Name="CubeModel" Collapsed="true">
     <Position X="7.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAAIA=</HashCode>
       <FileName>src\CubeModel.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::SOColorByVertex" Collapsed="true">
+  <Class Name="ShaderObject_ColorByVertex" Collapsed="true">
     <Position X="6.75" Y="6.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>src\SOColorByVertex.h</FileName>
+      <HashCode>AAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>src\ShaderObject_ColorByVertex.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::GameObject">
+  <Class Name="GameObject">
     <Position X="1.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABRAACACAAAAAgAAAAAAAAAAAAAAgAigAAAhAooAAAA=</HashCode>
+      <HashCode>ABQAAAAAAAAAAgAAAARAAAAAAAAAAAEQAAAgAAIAAAA=</HashCode>
       <FileName>src\GameObject.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poWorld" />
+      <Field Name="poGraphicsObject" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Azul::Mat4" Collapsed="true">
-    <Position X="1.75" Y="6.75" Width="1.5" />
+    <Position X="1.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CIAAKAAAAQCBAAgAAAQAwwAAAkEgEAAAgAAwAAAEQAA=</HashCode>
-      <FileName>C:\Users\robbi\Desktop\spring\keenan2023spring_gam475\student\rgrier\Working\Math\include\Mat4.h</FileName>
+      <HashCode>CIBCOAAAAQCBAAkAGAQAwwJAAkEiEAAAgAAwAAAMQAA=</HashCode>
+      <FileName>C:\code\keenan2023spring_gam475\instructor\Lecture\Week_08\Engine - 3.3.0 - Graphics Object\Math\include\Mat4.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Azul::GOColorByVertex">
-    <Position X="4" Y="7" Width="2.5" />
+  <Class Name="GraphicsObject_ColorByVertex">
+    <Position X="4" Y="6.25" Width="2.5" />
     <Members>
-      <Method Name="~GOColorByVertex" Hidden="true" />
+      <Method Name="~GraphicsObject_ColorByVertex" Hidden="true" />
+      <Method Name="GraphicsObject_ColorByVertex" Hidden="true" />
       <Method Name="operator=" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AIAABAAAABAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAgA=</HashCode>
-      <FileName>src\GOColorByVertex.h</FileName>
+      <HashCode>AIAABAAAABAAIgEAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>src\GraphicsObject_ColorByVertex.h</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

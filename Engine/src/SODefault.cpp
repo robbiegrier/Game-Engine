@@ -105,7 +105,6 @@ namespace Azul
 		// Per object data
 		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Object, 1, &pConstBuffObject);
 		Engine::GetContext()->PSSetConstantBuffers((UINT)ConstBuffSlot::Object, 1, &pConstBuffObject);
-		pObject->GetModel()->ActivateModel();
 		SetCurrentObject(pObject);
 	}
 }

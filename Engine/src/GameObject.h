@@ -30,6 +30,7 @@ namespace Azul
 		// Mutate transform
 		void SetRelativeLocation(const Vec3& v);
 		void SetRelativeScale(const Vec3& v);
+		void SetRelativeScale(float s);
 		void SetRelativeRotation(const Rot& m);
 
 		// Accessors
@@ -43,9 +44,15 @@ namespace Azul
 		// Get the low level graphics object
 		GraphicsObject* GetGraphicsObject() const;
 
+		void SetRenderShell(bool render);
+		static void SetRenderShellGlobal(bool render);
+
 	protected:
 		// Overridable tick method called once per frame
 		virtual void Tick(float deltaTime) { static_cast<void>(deltaTime); }
+
+		bool renderShell;
+		static bool globalRenderShell;
 
 	private:
 		// Itemized transform
@@ -58,6 +65,8 @@ namespace Azul
 
 		// Low level graphics object
 		GraphicsObject* pGraphicsObject;
+
+		GraphicsObject* pShell;
 	};
 }
 

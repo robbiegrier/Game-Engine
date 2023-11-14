@@ -1,5 +1,6 @@
 #include "EngineUtils.h"
 #include "Engine.h"
+#include "File.h"
 
 namespace Azul
 {
@@ -127,5 +128,38 @@ namespace Azul
 		}
 
 		return 0;
+	}
+
+	std::string EngineUtils::FileToString(const char* const pMeshFileName)
+	{
+		File::Handle fh;
+		File::Error ferror;
+		DWORD length;
+
+		ferror = File::Open(fh, pMeshFileName, File::Mode::READ);
+		assert(ferror == File::Error::SUCCESS);
+
+		ferror = File::Seek(fh, File::Position::END, 0);
+		assert(ferror == File::Error::SUCCESS);
+
+		ferror = File::Tell(fh, length);
+		assert(ferror == File::Error::SUCCESS);
+
+		ferror = File::Seek(fh, File::Position::BEGIN, 0);
+		assert(ferror == File::Error::SUCCESS);
+
+		char* poBuff = new char[length];
+		assert(poBuff);
+
+		ferror = File::Read(fh, poBuff, length);
+		assert(ferror == File::Error::SUCCESS);
+
+		ferror = File::Close(fh);
+		assert(ferror == File::Error::SUCCESS);
+
+		std::string output = std::string(poBuff, length);
+		delete[] poBuff;
+
+		return output;
 	}
 }

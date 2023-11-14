@@ -11,12 +11,12 @@ namespace Azul
 
 	VertexPos DiamondMesh::g_Vertices_pos[] =
 	{
-		Vec3(-dmdHalfW, diamondCenter, dmdHalfW),
-		Vec3(-dmdHalfW, diamondCenter, -dmdHalfW),
-		Vec3(dmdHalfW, diamondCenter, dmdHalfW),
-		Vec3(dmdHalfW, diamondCenter, -dmdHalfW),
-		Vec3(diamondCenter, +dmdHalfH, diamondCenter),
-		Vec3(diamondCenter, -dmdHalfH, diamondCenter),
+		Vec3f(-dmdHalfW, diamondCenter, dmdHalfW),
+		Vec3f(-dmdHalfW, diamondCenter, -dmdHalfW),
+		Vec3f(dmdHalfW, diamondCenter, dmdHalfW),
+		Vec3f(dmdHalfW, diamondCenter, -dmdHalfW),
+		Vec3f(diamondCenter, +dmdHalfH, diamondCenter),
+		Vec3f(diamondCenter, -dmdHalfH, diamondCenter),
 	};
 
 	VertexColor DiamondMesh::g_Vertices_color[] =
@@ -72,20 +72,15 @@ namespace Azul
 	DiamondMesh::DiamondMesh()
 		: Mesh(NUM_VERTS, NUM_INDICES)
 	{
-		// Create an initialize the vertex buffer.
 		poVertexBuffer_pos = CreateVertexBuffer(sizeof(g_Vertices_pos), g_Vertices_pos);
 		poVertexBuffer_color = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
 		poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_DiamondVertices_texCoord), g_DiamondVertices_texCoord);
 		poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_DiamondVertices_norm), g_DiamondVertices_norm);
-
-		// Create and initialize the index buffer.
 		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
-
-		// Create the constant buffers for the variables defined in the vertex shader.
-		poConstantBuff_World = CreateConstantBuffer(sizeof(Mat4));
-
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+
+		HackSetBoundingSphereData(g_Vertices_pos);
 	}
 
 	DiamondMesh::~DiamondMesh()

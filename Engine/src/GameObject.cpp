@@ -2,23 +2,29 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "Camera.h"
+#include "MeshManager.h"
+#include "ShaderObjectManager.h"
+#include "GOConstColor.h"
 
 namespace Azul
 {
-	extern Camera* pHackCamera;
+	bool GameObject::globalRenderShell = true;
 
 	GameObject::GameObject(GraphicsObject* pInGraphicsObject)
 		: pPos{ new Vec3(0.f, 0.f, 0.f) },
 		pScale{ new Vec3(1.f, 1.f, 1.f) },
 		pRotation{ new Rot(Rot1::X, 0.f) },
 		pWorld{ new Mat4(Special::Identity) },
-		pGraphicsObject(pInGraphicsObject)
+		pGraphicsObject(pInGraphicsObject),
+		renderShell(true)
 	{
 		assert(pPos);
 		assert(pScale);
 		assert(pRotation);
 		assert(pWorld);
 		assert(pGraphicsObject);
+
+		pShell = new GOConstColor(MeshManager::Find(Mesh::Name::Sphere), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(.9f, .15f, .15f));
 	}
 
 	GameObject::~GameObject()
@@ -28,6 +34,7 @@ namespace Azul
 		delete pRotation;
 		delete pGraphicsObject;
 		delete pWorld;
+		delete pShell;
 	}
 
 	void GameObject::SetRelativeLocation(const Vec3& v)
@@ -38,6 +45,11 @@ namespace Azul
 	void GameObject::SetRelativeScale(const Vec3& v)
 	{
 		pScale->set(v);
+	}
+
+	void GameObject::SetRelativeScale(float s)
+	{
+		pScale->set(s, s, s);
 	}
 
 	void GameObject::SetRelativeRotation(const Rot& m)
@@ -70,6 +82,16 @@ namespace Azul
 		return pGraphicsObject;
 	}
 
+	void GameObject::SetRenderShell(bool render)
+	{
+		renderShell = render;
+	}
+
+	void GameObject::SetRenderShellGlobal(bool render)
+	{
+		globalRenderShell = render;
+	}
+
 	void GameObject::Update(float deltaTime)
 	{
 		static_cast<void>(deltaTime);
@@ -87,11 +109,28 @@ namespace Azul
 
 		pGraphicsObject->SetWorld(*pWorld);
 
+		if (pGraphicsObject->GetModel())
+		{
+			Trans shellTrans(pGraphicsObject->GetModel()->GetBoundSphereCenter());
+			float shellRadius = pGraphicsObject->GetModel()->GetBoundingSphereRadius();
+			Scale shellScale(shellRadius, shellRadius, shellRadius);
+			pShell->SetWorld(shellScale * shellTrans * *pWorld);
+		}
+		else
+		{
+			pShell->SetWorld(*pWorld);
+		}
+
 		Tick(deltaTime);
 	}
 
 	void GameObject::Draw()
 	{
 		pGraphicsObject->Render();
+
+		if (renderShell && globalRenderShell)
+		{
+			pShell->Render();
+		}
 	}
 }

@@ -27,19 +27,19 @@
     <ClInclude Include="include\DLinkIterator.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\DLinkedList.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Iterator.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\ListBase.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ManagerBase.h">
+    <ClInclude Include="include\DLinkedList.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\ListNode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ManagerBase.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,10 +61,10 @@
     <ClCompile Include="src\DLinkedList.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ManagerBase.cpp">
+    <ClCompile Include="src\ListNode.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ListNode.cpp">
+    <ClCompile Include="src\ManagerBase.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Mesh.h"
+#include "BoundingSphere.h"
 
 namespace Azul
 {
@@ -12,9 +13,9 @@ namespace Azul
 		poVertexBuffer_norm{ nullptr },
 		poVertexBuffer_texCoord{ nullptr },
 		poIndexBuffer{ nullptr },
-		poConstantBuff_World{ nullptr },
 		poConstantBuff_lightColor{ nullptr },
-		poConstantBuff_lightPos{ nullptr }
+		poConstantBuff_lightPos{ nullptr },
+		pBoundingSphereCenter{ new Vec3() }
 	{
 	}
 
@@ -33,6 +34,34 @@ namespace Azul
 		}
 	}
 
+	float Mesh::GetBoundingSphereRadius() const
+	{
+		return boundingSphereRadius;
+	}
+
+	const Vec3& Mesh::GetBoundSphereCenter() const
+	{
+		return *pBoundingSphereCenter;
+	}
+
+	void Mesh::HackSetBoundingSphereData(VertexPos* pData)
+	{
+		Sphere sphere;
+		Vec3* pVerts = new Vec3[(unsigned int)this->numVerts];
+		for (unsigned int i = 0; i < this->numVerts; i++)
+		{
+			pVerts[i].set(pData[i].Position.x,
+				pData[i].Position.y,
+				pData[i].Position.z);
+			//Trace::out("%d:  %f %f %f\n", i, pVerts[i][x], pVerts[i][y], pVerts[i][z]);
+		}
+		RitterSphere(sphere, pVerts, this->numVerts);
+		boundingSphereRadius = sphere.rad;
+		pBoundingSphereCenter->set(sphere.cntr[x], sphere.cntr[y], sphere.cntr[z]);
+
+		delete[] pVerts;
+	}
+
 	Mesh::~Mesh()
 	{
 		SafeRelease(poVertexBuffer_pos);
@@ -40,13 +69,15 @@ namespace Azul
 		SafeRelease(poVertexBuffer_norm);
 		SafeRelease(poVertexBuffer_texCoord);
 		SafeRelease(poIndexBuffer);
-		SafeRelease(poConstantBuff_World);
 		SafeRelease(poConstantBuff_lightColor);
 		SafeRelease(poConstantBuff_lightPos);
+		delete pBoundingSphereCenter;
 	}
 
 	void Mesh::RenderIndexBuffer()
 	{
+		ActivateModel();
+
 		// Set (point to ) Index buffer: Render configuration: Triangles
 		Engine::GetContext()->IASetIndexBuffer(poIndexBuffer, DXGI_FORMAT_R32_UINT, 0u);
 		Engine::GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -84,6 +115,7 @@ namespace Azul
 	{
 		assert(pCam);
 		static_cast<void>(pWorld);
+		static_cast<void>(pCam);
 
 		//Engine::GetContext()->UpdateSubresource(poConstantBuff_World, 0u, nullptr, &pWorld, 0u, 0u);
 	}
@@ -114,8 +146,6 @@ namespace Azul
 			const UINT vertexStride_texCoord = sizeof(VertexTexCoord);
 			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::TexCoord, 1, &poVertexBuffer_texCoord, &vertexStride_texCoord, &offset);
 		}
-
-		//Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::World, 1u, &poConstantBuff_World);
 
 		if (poConstantBuff_lightColor)
 		{

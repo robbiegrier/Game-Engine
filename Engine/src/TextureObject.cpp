@@ -9,8 +9,7 @@
 namespace Azul
 {
 	TextureObject::TextureObject()
-		:name(TextureObject::Name::None), TexResourceSlot(0), SamplerSlot(0),
-		poTextureRV(nullptr), poSampler(nullptr)
+		:name(TextureObject::Name::None), TexResourceSlot(0), SamplerSlot(0), poTextureRV(nullptr), poSampler(nullptr)
 	{
 	}
 
@@ -28,7 +27,13 @@ namespace Azul
 		HRESULT hr = LoadFromTGAFile(filepath, nullptr, testTexture);
 		assert(SUCCEEDED(hr));
 
-		CreateShaderResourceView(Engine::GetDevice(), testTexture.GetImage(0, 0, 0), testTexture.GetImageCount(), testTexture.GetMetadata(), &poTextureRV);
+		CreateShaderResourceView(
+			Engine::GetDevice(), 
+			testTexture.GetImage(0, 0, 0), 
+			testTexture.GetImageCount(), 
+			testTexture.GetMetadata(), 
+			&poTextureRV
+		);
 
 		D3D11_SAMPLER_DESC sampDesc;
 		ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -37,7 +42,7 @@ namespace Azul
 		sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-		sampDesc.MinLOD = 0;
+		sampDesc.MinLOD = 0.f;
 		sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 		hr = Engine::GetDevice()->CreateSamplerState(&sampDesc, &poSampler);
 		assert(SUCCEEDED(hr));

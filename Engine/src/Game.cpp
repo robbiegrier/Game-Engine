@@ -34,6 +34,9 @@
 #include "GONull.h"
 #include "SONull.h"
 #include "SODefault.h"
+#include "MeshProto.h"
+#include "TextureProto.h"
+#include "MeshSphere.h"
 
 namespace Azul
 {
@@ -61,7 +64,10 @@ namespace Azul
 	GameObject* pCenter;
 	GameObject* pTexObject;
 	GameObject* LightSource;
+	GameObject* LightSource1;
+	GameObject* LightSource2;
 	GameObject* pPlayer;
+	GameObject* pAntiqueCamera;
 
 	Vec3 lightColor = Vec3(Azul::Colors::LightYellow);
 	Vec3 lightPos = Vec3(0, 5, 0);
@@ -88,6 +94,11 @@ namespace Azul
 
 	bool Game::LoadContent()
 	{
+		azulModel_proto aB_proto;
+		aB_proto.ParseFromString(EngineUtils::FileToString("desert_rocks.proto.azul"));
+		azulModel desertRocksData;
+		desertRocksData.Deserialize(aB_proto);
+
 		ShaderObjectManager::Create();
 		ShaderObjectManager::Add(ShaderObject::Name::Null, new SONull());
 		ShaderObjectManager::Add(ShaderObject::Name::ColorByVertex, new SOColorByVertex());
@@ -97,22 +108,78 @@ namespace Azul
 		ShaderObjectManager::Add(ShaderObject::Name::Default, new SODefault());
 
 		TextureObjectManager::Create();
-		TextureObjectManager::Add(TextureObject::Name::Brick, new TextureObject(TextureObject::Name::Brick, L"RedBrick.tga"));
-		TextureObjectManager::Add(TextureObject::Name::Rocks, new TextureObject(TextureObject::Name::Rocks, L"Rocks.tga"));
-		TextureObjectManager::Add(TextureObject::Name::Duckweed, new TextureObject(TextureObject::Name::Duckweed, L"Duckweed.tga"));
-		TextureObjectManager::Add(TextureObject::Name::Stone, new TextureObject(TextureObject::Name::Stone, L"Stone.tga"));
+		TextureObjectManager::Add(TextureObject::Name::Brick, new TextureProto("RedBrick.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Rocks, new TextureProto("Rocks.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Duckweed, new TextureProto("Duckweed.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Stone, new TextureProto("Stone.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Desert, new TextureProto("desert.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Crate, new TextureProto("wooden crate.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Frigate, new TextureProto("space_frigate.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Fish, new TextureProto("BarramundiFish.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::DogHouse, new TextureProto("doghouse0908.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::R2D2, new TextureProto("R2-D2.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Duck, new TextureProto("Duck.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Corset, new TextureProto("Corset.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::AntiqueCameraTripod, new TextureProto("AntiqueCamera.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::AntiqueCamera, new TextureProto("AntiqueCamera.proto.azul", 1));
+		TextureObjectManager::Add(TextureObject::Name::Dog, new TextureProto("dog.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::WesternTownHouse, new TextureProto("western_town_house.proto.azul", 0));
+		int textI = 0;
+		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock1, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock2, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock3, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock4, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock5, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock6, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock7, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock8, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock9, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock10, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock11, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock12, new TextureProto(desertRocksData.meshes[textI++]));
+		TextureObjectManager::Add(TextureObject::Name::DesertRock13, new TextureProto(desertRocksData.meshes[textI++]));
 
 		MeshManager::Create();
+		MeshManager::Add(Mesh::Name::Sphere, new MeshSphere());
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
 		MeshManager::Add(Mesh::Name::Pyramid, new PyramidMesh());
 		MeshManager::Add(Mesh::Name::Diamond, new DiamondMesh());
 		MeshManager::Add(Mesh::Name::Cross, new CrossMesh());
 		MeshManager::Add(Mesh::Name::Plane, new PlaneMesh());
+		MeshManager::Add(Mesh::Name::Crate, new MeshProto("wooden crate.proto.azul"));
+		MeshManager::Add(Mesh::Name::Frigate, new MeshProto("space_frigate.proto.azul"));
+		MeshManager::Add(Mesh::Name::Bracket, new MeshProto("bracket.proto.azul"));
+		MeshManager::Add(Mesh::Name::Fish, new MeshProto("BarramundiFish.proto.azul"));
+		MeshManager::Add(Mesh::Name::DogHouse, new MeshProto("doghouse0908.proto.azul"));
+		MeshManager::Add(Mesh::Name::R2D2, new MeshProto("R2-D2.proto.azul"));
+		MeshManager::Add(Mesh::Name::Duck, new MeshProto("Duck.proto.azul"));
+		MeshManager::Add(Mesh::Name::Corset, new MeshProto("Corset.proto.azul"));
+		MeshManager::Add(Mesh::Name::AntiqueCameraTripod, new MeshProto("AntiqueCamera.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::AntiqueCamera, new MeshProto("AntiqueCamera.proto.azul", 1));
+		MeshManager::Add(Mesh::Name::Dog, new MeshProto("dog.proto.azul"));
+		MeshManager::Add(Mesh::Name::WesternTownHouse, new MeshProto("western_town_house.proto.azul", 0));
+
+		int meshI = 0;
+		MeshManager::Add(Mesh::Name::DesertRock0, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock1, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock2, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock3, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock4, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock5, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock6, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock7, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock8, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock9, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock10, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock11, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock12, new MeshProto(desertRocksData.meshes[meshI++]));
+		MeshManager::Add(Mesh::Name::DesertRock13, new MeshProto(desertRocksData.meshes[meshI++]));
 
 		CameraManager::Create();
 
 		Camera* pCamera = CameraManager::Add(Camera::Name::Default, new Camera());
-		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(), Vec3(0.f, 2.f, -10.f));
+		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0.f, 10.f, 14.5f), Vec3(10.f, 15.f, -10.f));
 		pCamera->SetPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::High, new Camera());
@@ -131,51 +198,232 @@ namespace Azul
 
 		GameObjectManager::Create();
 
-		LightSource = GameObjectManager::SpawnObject("Light", new GOConstColor(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), lightColor), lightPos);
+		LightSource = GameObjectManager::SpawnObject(
+			"Light Yellow",
+			new GOConstColor(
+				MeshManager::Find(Mesh::Name::Diamond),
+				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+				lightColor),
+			lightPos);
+
 		LightSource->SetRelativeScale(Vec3(.1f, .1f, .1f));
 
-		ShaderObject* pLightTestShader = ShaderObjectManager::Find(ShaderObject::Name::Default);
+		LightSource1 = GameObjectManager::SpawnObject(
+			"Light Red",
+			new GOConstColor(
+				MeshManager::Find(Mesh::Name::Diamond),
+				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+				Vec3(1.f, 0.f, 0.f)),
+			lightPos + Vec3(5, 0, 0));
 
-		GameObjectManager::SpawnObject("PX Cube",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Brick)), Vec3(5, 0, 0)
-		);
-		GameObjectManager::SpawnObject("PX Diamond",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Duckweed)), Vec3(-7, 0, 0)
-		);
-		GameObjectManager::SpawnObject("PX Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(0, 0, 4.5)
-		);
-		GameObjectManager::SpawnObject("Floor Plane",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Plane), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(0, -1.f, 0)
+		LightSource1->SetRelativeScale(Vec3(.1f, .1f, .1f));
+
+		LightSource2 = GameObjectManager::SpawnObject(
+			"Light Blue",
+			new GOConstColor(
+				MeshManager::Find(Mesh::Name::Diamond),
+				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+				Vec3(0.f, 0.f, 1.f)),
+			lightPos + Vec3(-5, 0, 0));
+
+		LightSource2->SetRelativeScale(Vec3(.1f, .1f, .1f));
+
+		GameObject* pFish = GameObjectManager::SpawnObject(
+			"Strange Fish",
+			Mesh::Name::Fish,
+			TextureObject::Name::Fish,
+			Vec3(20.f, 3.f, 20.f)
 		);
 
-		GameObjectManager::SpawnObject("BIG Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-50, 8, 50)
+		pFish->SetRelativeScale(10.f);
+
+		GameObject* pDogHouse = GameObjectManager::SpawnObject(
+			"Dog House",
+			Mesh::Name::DogHouse,
+			TextureObject::Name::DogHouse,
+			Vec3(0.f, -1.f, 30.f)
+		);
+
+		pDogHouse->SetRelativeScale(5.f);
+
+		GameObjectManager::SpawnObject(
+			"R2D2",
+			Mesh::Name::R2D2,
+			TextureObject::Name::R2D2,
+			Vec3(60.f, .5f, -50.f)
+		)->SetRelativeRotation(Rot(Rot1::Y, MATH_PI2 * .01f));
+
+		GameObject* pDuck = GameObjectManager::SpawnObject(
+			"Duck",
+			Mesh::Name::Duck,
+			TextureObject::Name::Duck,
+			Vec3(-10.f, -.25f, -20.f)
+		);
+
+		pDuck->SetRelativeScale(0.05f);
+
+		GameObject* pCorset = GameObjectManager::SpawnObject(
+			"Corset",
+			Mesh::Name::Corset,
+			TextureObject::Name::Corset,
+			Vec3(-20.f, 1.f, 20.f)
+		);
+
+		pCorset->SetRelativeScale(30.f);
+
+		Vec3 cameraPos = Vec3(0.f, -1.f, -10.f);
+
+		GameObject* pAntiqueCameraTripod = GameObjectManager::SpawnObject(
+			"Antique Camera Tripod",
+			Mesh::Name::AntiqueCameraTripod,
+			TextureObject::Name::AntiqueCameraTripod,
+			cameraPos
+		);
+
+		pAntiqueCameraTripod->SetRelativeScale(0.5f);
+
+		pAntiqueCamera = GameObjectManager::SpawnObject(
+			"Antique Camera",
+			Mesh::Name::AntiqueCamera,
+			TextureObject::Name::AntiqueCamera,
+			Vec3(), pAntiqueCameraTripod
+		);
+
+		GameObjectManager::SpawnObject(
+			"Dog",
+			Mesh::Name::Dog,
+			TextureObject::Name::Dog,
+			Vec3(-2.f, -1.f, 10.f)
+		);
+
+		GameObject* pHouse = GameObjectManager::SpawnObject(
+			"Western Town House",
+			Mesh::Name::WesternTownHouse,
+			TextureObject::Name::WesternTownHouse,
+			Vec3(-40.f, -1.f, -40.f)
+		);
+
+		pHouse->SetRelativeScale(.3f);
+		pHouse->SetRelativeRotation(Rot(Rot1::X, -MATH_PI / 2.f));
+
+		GameObject* pDesertRock = GameObjectManager::SpawnObject(
+			"Desert Rock",
+			Mesh::Name::DesertRock12,
+			TextureObject::Name::DesertRock12,
+			Vec3(80.f, -1.f, -80.f)
+		);
+		pDesertRock->SetRelativeRotation(Rot(Rot3::XYZ, -MATH_PI2, -MATH_PI4, 0.f));
+		pDesertRock->SetRelativeScale(3.f);
+
+		pDesertRock = GameObjectManager::SpawnObject(
+			"Desert Rock 11",
+			Mesh::Name::DesertRock11,
+			TextureObject::Name::DesertRock11,
+			Vec3(58.f, 7.f, -90.f)
+		);
+
+		pDesertRock->SetRelativeRotation(Rot(Rot3::XYZ, -MATH_PI2, -MATH_PI4, 0.f));
+		pDesertRock->SetRelativeScale(5.f);
+
+		pDesertRock = GameObjectManager::SpawnObject(
+			"Desert Rock 0",
+			Mesh::Name::DesertRock0,
+			TextureObject::Name::DesertRock0,
+			Vec3(35.f, 3.f, -85.f)
+		);
+
+		pDesertRock->SetRelativeRotation(Rot(Rot3::XYZ, -MATH_PI2, MATH_PI / 2.f, 0.f));
+		pDesertRock->SetRelativeScale(Vec3(8.f, 8.f, 8.f));
+
+		GameObjectManager::SpawnObject(
+			"Test Cross",
+			Mesh::Name::Cross,
+			TextureObject::Name::Crate,
+			Vec3(50.f, 0.f, 0.f)
+		);
+
+		GameObjectManager::SpawnObject(
+			"Wooden Crate",
+			Mesh::Name::Crate,
+			TextureObject::Name::Crate,
+			Vec3(5.f, 0.f, 0.f)
+		);
+
+		GameObjectManager::SpawnObject(
+			"Bracket",
+			Mesh::Name::Bracket,
+			TextureObject::Name::Brick,
+			Vec3(-7.f, 0.f, 0.f)
+		);
+
+		GameObjectManager::SpawnObject(
+			"Space Frigate",
+			Mesh::Name::Frigate,
+			TextureObject::Name::Frigate,
+			Vec3(0.f, 10.f, 14.5f)
+		)->SetRelativeScale(Vec3(0.25f, 0.25f, 0.25f));
+
+		GameObjectManager::SpawnObject(
+			"Floor Plane",
+			Mesh::Name::Plane,
+			TextureObject::Name::Desert,
+			Vec3(0.f, -1.f, 0.f)
+		);
+
+		GameObjectManager::SpawnObject(
+			"BIG Pyramid",
+			new GOLightTexture(
+				MeshManager::Find(Mesh::Name::Pyramid),
+				ShaderObjectManager::Find(ShaderObject::Name::Default),
+				TextureObjectManager::Find(TextureObject::Name::Desert)
+			),
+			Vec3(-50, 8, 50)
 		)->SetRelativeScale(Vec3(10.f, 10.f, 10.f));
 
-		GameObjectManager::SpawnObject("BIG Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-70, 6, 30)
+		GameObjectManager::SpawnObject(
+			"BIG Pyramid",
+			new GOLightTexture(
+				MeshManager::Find(Mesh::Name::Pyramid),
+				ShaderObjectManager::Find(ShaderObject::Name::Default),
+				TextureObjectManager::Find(TextureObject::Name::Desert)
+			),
+			Vec3(-70, 6, 30)
 		)->SetRelativeScale(Vec3(7.f, 7.f, 7.f));
 
-		GameObjectManager::SpawnObject("BIG Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), pLightTestShader, TextureObjectManager::Find(TextureObject::Name::Stone)), Vec3(-30, 4, 70)
+		GameObjectManager::SpawnObject(
+			"BIG Pyramid",
+			new GOLightTexture(
+				MeshManager::Find(Mesh::Name::Pyramid),
+				ShaderObjectManager::Find(ShaderObject::Name::Default),
+				TextureObjectManager::Find(TextureObject::Name::Desert)
+			),
+			Vec3(-30, 4, 70)
 		)->SetRelativeScale(Vec3(5.f, 5.f, 5.f));
 
-		constexpr static float markerLength = 6.f;
-		GameObjectManager::SpawnObject("X Marker",
+		constexpr static float markerLength = 20.f;
+		GameObject* pXMarker = GameObjectManager::SpawnObject("X Marker",
 			new GOConstColor(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(Azul::Colors::Blue)), Vec3(markerLength / 4.f, 0.f, 0.f)
-		)->SetRelativeScale(Vec3(markerLength, .001f, .001f));
+		);
 
-		GameObjectManager::SpawnObject("Y Marker",
+		pXMarker->SetRelativeScale(Vec3(markerLength, .001f, .001f));
+		pXMarker->SetRenderShell(false);
+
+		GameObject* pYMarker = GameObjectManager::SpawnObject("Y Marker",
 			new GOConstColor(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(Azul::Colors::Yellow)), Vec3(0.f, markerLength / 4.f, 0.f)
-		)->SetRelativeScale(Vec3(0.001f, markerLength, .001f));
+		);
 
-		GameObjectManager::SpawnObject("Z Marker",
+		pYMarker->SetRelativeScale(Vec3(0.001f, markerLength, .001f));
+		pYMarker->SetRenderShell(false);
+
+		GameObject* pZMarker = GameObjectManager::SpawnObject("Z Marker",
 			new GOConstColor(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(Azul::Colors::Red)), Vec3(0.f, 0.f, markerLength / 4.f)
-		)->SetRelativeScale(Vec3(0.001f, 0.001f, markerLength));
+		);
+
+		pZMarker->SetRelativeScale(Vec3(0.001f, 0.001f, markerLength));
+		pZMarker->SetRenderShell(false);
 
 		//LoadFloor(13);
 		LoadClock(2, Vec3(0.f, 30.f, 80.f));
@@ -183,12 +431,14 @@ namespace Azul
 		LoadColorObjects();
 		LoadLightObjects();
 		LoadMovingObjects();
-		LoadInstancedObjects();
+		//LoadInstancedObjects();
 
 		pPlayer = GameObjectManager::SpawnObject("Player", new Player(), Vec3(0.f, 2.f, -10.f));
 
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
+
+		GameObject::SetRenderShellGlobal(false);
 
 		GameObjectManager::Dump();
 		//ShaderObjectManager::Dump();
@@ -229,11 +479,26 @@ namespace Azul
 		}
 
 		LightSource->SetRelativeLocation(lightPos);
+		LightSource1->SetRelativeLocation(lightPos + Vec3(5, 0, 0));
+		LightSource2->SetRelativeLocation(lightPos + Vec3(-5, 0, 0));
 
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
 		pShader->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
 		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
 		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
+
+		static float cameraTheta = 0.f;
+
+		if (GetKeyState('Z') & 0x8000)
+		{
+			cameraTheta += 2 * deltaTime;
+		}
+		else if (GetKeyState('C') & 0x8000)
+		{
+			cameraTheta -= 2 * deltaTime;
+		}
+
+		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
 
 		CameraManager::Update(deltaTime);
 		GameObjectManager::Update(deltaTime);

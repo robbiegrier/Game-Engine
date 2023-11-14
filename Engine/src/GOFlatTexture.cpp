@@ -18,7 +18,6 @@ namespace Azul
 	void GOFlatTexture::ActivateGraphics()
 	{
 		pTex->ActivateTexture();
-		pModel->ActivateModel();
 
 		pModel->TransferConstantBuffer(CameraManager::GetCurrentCamera(), *pWorld);
 	}

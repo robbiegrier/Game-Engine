@@ -2,10 +2,8 @@
 #include "PCSTree.h"
 #include "PCSNode.h"
 #include "PCSTreeForwardIterator.h"
-
 #include "json.hpp"
-#include "tiny_gltf.h"
-#include "modelData.pb.h"
+#include "meshData.pb.h"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
@@ -14,14 +12,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-	tinygltf::ColorValue v = { 1, 2, 3 };
-	tinygltf::Model model;
-
-	modelData_proto prototmp;
+	//Test::RunTests();
 
 	nlohmann::json printer = {
 		{"Engine", true},
-		{"Version", 1.0},
+		{"Version", 2.0},
 	};
 
 	Trace::out(printer.dump(4).c_str());

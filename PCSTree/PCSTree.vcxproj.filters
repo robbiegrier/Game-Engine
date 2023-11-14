@@ -43,6 +43,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="include\--- Add Header files here ---.txt">
+      <Filter>include</Filter>
+    </Text>
+    <Text Include="src\--- Add Source files here ---.txt">
+      <Filter>src</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\PCSNode.cpp">
       <Filter>src</Filter>
     </ClCompile>

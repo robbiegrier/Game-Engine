@@ -8,7 +8,7 @@ namespace Azul
 {
 	class GraphicsObject;
 
-	class SODefault : public ShaderObject
+	class SODefault : public ShaderObject, public Align16
 	{
 	public:
 		// Big four

@@ -32,6 +32,8 @@ namespace Azul
 		Vec3f(const float a, const float b, const float c)
 			: x(a), y(b), z(c) {}
 
+		Vec3f operator*(float s) { return Vec3f(x * s, y * s, z * s); }
+
 		float x;
 		float y;
 		float z;
@@ -45,7 +47,7 @@ namespace Azul
 
 	struct VertexPos
 	{
-		Vec3 Position;
+		Vec3f Position;
 	};
 
 	struct VertexNorm

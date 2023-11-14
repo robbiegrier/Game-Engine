@@ -5,38 +5,38 @@ namespace Azul
 {
 	VertexPos CrossMesh::g_Vertices_pos[] =
 	{
-		Vec3(-1.0f, -1.0f, -1.0f), // 0
-		Vec3(-1.0f,  1.0f, -1.0f), // 1
-		Vec3(1.0f,  1.0f, -1.0f) , // 2
-		Vec3(1.0f, -1.0f, -1.0f) , // 3
-		Vec3(-1.0f, -1.0f,  1.0f), // 4
-		Vec3(-1.0f,  1.0f,  1.0f), // 5
-		Vec3(1.0f,  1.0f,  1.0f) , // 6
-		Vec3(1.0f, -1.0f,  1.0f),  // 7
+		Vec3f(-1.0f, -1.0f, -1.0f), // 0
+		Vec3f(-1.0f,  1.0f, -1.0f), // 1
+		Vec3f(1.0f,  1.0f, -1.0f) , // 2
+		Vec3f(1.0f, -1.0f, -1.0f) , // 3
+		Vec3f(-1.0f, -1.0f,  1.0f), // 4
+		Vec3f(-1.0f,  1.0f,  1.0f), // 5
+		Vec3f(1.0f,  1.0f,  1.0f) , // 6
+		Vec3f(1.0f, -1.0f,  1.0f),  // 7
 
 		// top
-		Vec3(-1.0f,  3.0f, -1.0f), // 8
-		Vec3(1.0f,  3.0f, -1.0f),  // 9
-		Vec3(-1.0f,  3.0f,  1.0f), // 10
-		Vec3(1.0f,  3.0f,  1.0f),  // 11
+		Vec3f(-1.0f,  3.0f, -1.0f), // 8
+		Vec3f(1.0f,  3.0f, -1.0f),  // 9
+		Vec3f(-1.0f,  3.0f,  1.0f), // 10
+		Vec3f(1.0f,  3.0f,  1.0f),  // 11
 
 		// bottom
-		Vec3(-1.0f,  -3.0f, -1.0f),// 12
-		Vec3(1.0f,  -3.0f, -1.0f), // 13
-		Vec3(-1.0f, -3.0f,  1.0f), // 14
-		Vec3(1.0f,  -3.0f,  1.0f), // 15
+		Vec3f(-1.0f,  -3.0f, -1.0f),// 12
+		Vec3f(1.0f,  -3.0f, -1.0f), // 13
+		Vec3f(-1.0f, -3.0f,  1.0f), // 14
+		Vec3f(1.0f,  -3.0f,  1.0f), // 15
 
 		// left
-		Vec3(-3.0f, -1.0f, -1.0f), // 16
-		Vec3(-3.0f,  1.0f, -1.0f), // 17
-		Vec3(-3.0f, -1.0f,  1.0f), // 18
-		Vec3(-3.0f,  1.0f,  1.0f), // 19
+		Vec3f(-3.0f, -1.0f, -1.0f), // 16
+		Vec3f(-3.0f,  1.0f, -1.0f), // 17
+		Vec3f(-3.0f, -1.0f,  1.0f), // 18
+		Vec3f(-3.0f,  1.0f,  1.0f), // 19
 
 		// right
-		Vec3(3.0f, -1.0f, -1.0f),  // 20
-		Vec3(3.0f,  1.0f, -1.0f),  // 21
-		Vec3(3.0f, -1.0f,  1.0f),  // 22
-		Vec3(3.0f,  1.0f,  1.0f),  // 23
+		Vec3f(3.0f, -1.0f, -1.0f),  // 20
+		Vec3f(3.0f,  1.0f, -1.0f),  // 21
+		Vec3f(3.0f, -1.0f,  1.0f),  // 22
+		Vec3f(3.0f,  1.0f,  1.0f),  // 23
 	};
 
 	VertexColor CrossMesh::g_Vertices_color[] =
@@ -228,20 +228,15 @@ namespace Azul
 	CrossMesh::CrossMesh()
 		: Mesh(NUM_VERTS, NUM_INDICES)
 	{
-		// Create an initialize the vertex buffer.
 		poVertexBuffer_pos = CreateVertexBuffer(sizeof(g_Vertices_pos), g_Vertices_pos);
 		poVertexBuffer_color = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
 		poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_CrossVertices_texCoord), g_CrossVertices_texCoord);
 		poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_CrossVertices_norm), g_CrossVertices_norm);
-
-		// Create and initialize the index buffer.
 		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
-
-		// Create the constant buffers for the variables defined in the vertex shader.
-		poConstantBuff_World = CreateConstantBuffer(sizeof(Mat4));
-
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+
+		HackSetBoundingSphereData(g_Vertices_pos);
 	}
 
 	CrossMesh::~CrossMesh()

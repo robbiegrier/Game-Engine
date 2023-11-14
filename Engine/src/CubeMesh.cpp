@@ -6,64 +6,64 @@ namespace Azul
 	VertexPos CubeMesh::g_Vertices_pos[] =
 	{
 		// Triangle 0
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(0.25f, -0.25f,  -0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f,  -0.25f),
 
 		// Triangle 1
-		Vec3(0.25f,  -0.25f, -0.25f),
-		Vec3(0.25f,   0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f,  -0.25f, -0.25f),
+		Vec3f(0.25f,   0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
 
 		// Triangle 2
-		Vec3(0.25f, -0.25f, -0.25f),
-		Vec3(0.25f, -0.25f,  0.25f),
-		Vec3(0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f, -0.25f),
 
 		// Triangle 3
-		Vec3(0.25f, -0.25f,  0.25f),
-		Vec3(0.25f,  0.25f,  0.25f),
-		Vec3(0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f, -0.25f),
 
 		// Triangle 4
-		Vec3(0.25f,  -0.25f,  0.25f),
-		Vec3(-0.25f,  -0.25f,  0.25f),
-		Vec3(0.25f,   0.25f,  0.25f),
+		Vec3f(0.25f,  -0.25f,  0.25f),
+		Vec3f(-0.25f,  -0.25f,  0.25f),
+		Vec3f(0.25f,   0.25f,  0.25f),
 
 		// Triangle 5
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
-		Vec3(0.25f,   0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
+		Vec3f(0.25f,   0.25f,  0.25f),
 
 		// Triangle 6
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
 
 		// Triangle 7
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
 
 		// Triangle 8
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(0.25f, -0.25f,   0.25f),
-		Vec3(0.25f, -0.25f,  -0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f, -0.25f,   0.25f),
+		Vec3f(0.25f, -0.25f,  -0.25f),
 
 		// Triangle 9
-		Vec3(0.25f, -0.25f,  -0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f, -0.25f,  -0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
 
 		// Triangle 10
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(0.25f,  0.25f,  -0.25f),
-		Vec3(0.25f,  0.25f,   0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f,  0.25f,  -0.25f),
+		Vec3f(0.25f,  0.25f,   0.25f),
 
 		// Triangle 11
-		Vec3(0.25f,  0.25f,   0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f)
+		Vec3f(0.25f,  0.25f,   0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f)
 	};
 
 	VertexColor CubeMesh::g_Vertices_color[] =
@@ -266,13 +266,11 @@ namespace Azul
 		poVertexBuffer_color = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
 		poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_CubeVertices_texCoord), g_CubeVertices_texCoord);
 		poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_CubeVertices_norm), g_CubeVertices_norm);
-
 		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
-
-		poConstantBuff_World = CreateConstantBuffer(sizeof(Mat4));
-
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+
+		HackSetBoundingSphereData(g_Vertices_pos);
 	}
 
 	CubeMesh::~CubeMesh()

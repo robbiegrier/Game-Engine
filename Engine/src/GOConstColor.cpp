@@ -23,13 +23,12 @@ namespace Azul
 
 	void GOConstColor::ActivateGraphics()
 	{
-		pModel->ActivateModel();
 		pModel->TransferConstantBuffer(CameraManager::GetCurrentCamera(), *pWorld);
-		Engine::GetContext()->UpdateSubresource(pModel->poConstantBuff_lightColor, 0, nullptr, poLightColor, 0, 0);
 	}
 
 	void GOConstColor::Draw()
 	{
+		Engine::GetContext()->UpdateSubresource(pModel->poConstantBuff_lightColor, 0, nullptr, poLightColor, 0, 0);
 		pModel->RenderIndexBuffer();
 	}
 }

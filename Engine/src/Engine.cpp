@@ -265,6 +265,7 @@ namespace Azul
 
 	void Engine::UpdateWindowName(float deltaTime)
 	{
+		deltaTime = std::max(0.001f, deltaTime);
 		const int fpsSample = (int)(1.f / deltaTime);
 		fpsSamples[fpsSampleIndex] = fpsSample;
 

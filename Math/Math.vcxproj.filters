@@ -12,13 +12,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Framework\Framework.h">
+    <ClInclude Include="..\Framework\Framework.h">
       <Filter>_Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\ProjectSettings.h">
+    <ClInclude Include="..\Framework\ProjectSettings.h">
       <Filter>_Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\ThreadFramework.h">
+    <ClInclude Include="..\Framework\ThreadFramework.h">
       <Filter>_Framework</Filter>
     </ClInclude>
     <ClInclude Include="include\Constants.h">
@@ -36,10 +36,28 @@
     <ClInclude Include="include\Mat4.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Mat4Proxy.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="include\MathApp.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\MathEngine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QuatApp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rot.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scale.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Trans.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\Trig.h">
@@ -63,29 +81,12 @@
     <ClInclude Include="include\Vec4Proxy.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Mat4Proxy.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Quat.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\QuatApp.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rot.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Scale.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Trans.h">
-      <Filter>include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Framework\__DO NOT MODIFY__">
+    <None Include="..\Framework\__DO NOT MODIFY__">
       <Filter>_Framework</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Debug.cpp">
@@ -95,6 +96,24 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Mat4.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mat4Proxy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuatApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rot.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scale.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Trans.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Trig.cpp">
@@ -116,24 +135,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Vec4Proxy.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mat4Proxy.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quat.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\QuatApp.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rot.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scale.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Trans.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

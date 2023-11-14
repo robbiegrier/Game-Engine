@@ -5,6 +5,7 @@
 #include "MeshUtils.h"
 #include "Camera.h"
 #include "DLink.h"
+#include "DLinkedList.h"
 
 namespace Azul
 {
@@ -15,11 +16,40 @@ namespace Azul
 	public:
 		enum class Name
 		{
+			Sphere,
 			Cube,
 			Pyramid,
 			Diamond,
 			Cross,
 			Plane,
+			Crate,
+			Frigate,
+			Bracket,
+			Fish,
+			DogHouse,
+			Duck,
+			R2D2,
+			Corset,
+			AntiqueCameraTripod,
+			AntiqueCamera,
+			Dog,
+			Dog1,
+			WesternTownHouse,
+			WesternTownHouse1,
+			DesertRock0,
+			DesertRock1,
+			DesertRock2,
+			DesertRock3,
+			DesertRock4,
+			DesertRock5,
+			DesertRock6,
+			DesertRock7,
+			DesertRock8,
+			DesertRock9,
+			DesertRock10,
+			DesertRock11,
+			DesertRock12,
+			DesertRock13,
 			Null,
 			None
 		};
@@ -49,7 +79,12 @@ namespace Azul
 		Name GetName() const;
 		const char* NameToString();
 
+		float GetBoundingSphereRadius() const;
+		const Vec3& GetBoundSphereCenter() const;
+
 	protected:
+		void HackSetBoundingSphereData(VertexPos* pData);
+
 		Name name;
 
 		unsigned int numVerts;
@@ -60,7 +95,9 @@ namespace Azul
 		ID3D11Buffer* poVertexBuffer_norm;
 		ID3D11Buffer* poVertexBuffer_texCoord;
 		ID3D11Buffer* poIndexBuffer;
-		ID3D11Buffer* poConstantBuff_World;
+
+		float boundingSphereRadius;
+		Vec3* pBoundingSphereCenter;
 
 	public:
 		ID3D11Buffer* poConstantBuff_lightColor;

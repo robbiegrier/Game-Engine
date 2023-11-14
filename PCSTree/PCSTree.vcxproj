@@ -24,6 +24,10 @@
     <None Include="..\Framework\__DO NOT MODIFY__" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="include\--- Add Header files here ---.txt" />
+    <Text Include="src\--- Add Source files here ---.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\PCSNode.cpp" />
     <ClCompile Include="src\PCSTree.cpp" />
     <ClCompile Include="src\PCSTreeForwardIterator.cpp" />
@@ -107,6 +111,10 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -145,6 +153,10 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

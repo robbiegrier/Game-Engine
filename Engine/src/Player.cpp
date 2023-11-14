@@ -9,6 +9,7 @@ namespace Azul
 	Player::Player()
 		: GameObject(new GONull())
 	{
+		renderShell = false;
 	}
 
 	void Player::Tick(float deltaTime)
@@ -26,6 +27,15 @@ namespace Azul
 		if (walkMode)
 		{
 			ProcessGravity(deltaTime);
+		}
+
+		if (GetKeyState('N') & 0x8000)
+		{
+			globalRenderShell = false;
+		}
+		else if (GetKeyState('M') & 0x8000)
+		{
+			globalRenderShell = true;
 		}
 	}
 
@@ -125,7 +135,7 @@ namespace Azul
 
 		Vec3 cameraPos;
 		CameraManager::GetCurrentCamera()->GetLocation(cameraPos);
-		if (cameraPos[y] > 1.0f)
+		if (cameraPos[y] > 3.5f)
 		{
 			cameraMove[y] -= gravityStrength;
 		}

@@ -20,6 +20,10 @@
     <None Include="..\Framework\__DO NOT MODIFY__" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="include\--- Add Include files here ---.txt" />
+    <Text Include="src\--- Add Source files here ---.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\File.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -101,7 +105,8 @@
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command>rem copy "$(ProjectDir)Keenan\*.*" "$(SolutionDir)$(Configuration)"</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,7 +147,8 @@
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command>rem copy "$(ProjectDir)Keenan\*.*" "$(SolutionDir)$(Configuration)"</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

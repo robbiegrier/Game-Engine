@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MeshNodeMan">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABIAAAAAAAAAAAAAAAABhAAAAABMAEAgAAAAAAAIAAA=</HashCode>
+      <FileName>src\MeshNodeMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManBase">
+    <Position X="0.75" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CIAAAIAFAAACgCgAAgAAIgQAUAAIAgAAABAAAAAAAAA=</HashCode>
+      <FileName>C:\code\keenan2023spring_gam475\instructor\Lecture\Week_09\Engine - 4.3.0 - MeshMan\Manager\include\ManBase.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poReserve" />
+      <Field Name="poActive" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ListBase" Collapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAAAAAAAs=</HashCode>
+      <FileName>C:\code\keenan2023spring_gam475\instructor\Lecture\Week_09\Engine - 4.3.0 - MeshMan\Manager\include\ListBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshNode" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAACAABhAAAAAAAgAAAAAAAQAAAAABgCAAABAA=</HashCode>
+      <FileName>src\MeshNode.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="poMesh" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DLink" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAIAAQAAAAABAAIBBBAA=</HashCode>
+      <FileName>C:\code\keenan2023spring_gam475\instructor\Lecture\Week_09\Engine - 4.3.0 - MeshMan\Manager\include\DLink.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mesh" Collapsed="true">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAAgAUAAgAAkAAEAAAAAAAnRAAABQBgQIACBAA=</HashCode>
+      <FileName>src\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

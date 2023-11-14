@@ -31,6 +31,8 @@ namespace Azul
 		static GameObject* SpawnObject(const char* const pName, GraphicsObject* pGraphicsObject, const Vec3& location, GameObject* pParent = nullptr);
 		static GameObject* SpawnObject(const char* const pName, GameObject* pGameObject, const Vec3& location, GameObject* pParent = nullptr);
 
+		static GameObject* SpawnObject(const char* const pName, Mesh::Name model, TextureObject::Name texture, const Vec3& location, GameObject* pParent = nullptr);
+
 	private:
 		// Singleton
 		static GameObjectManager& GetInstance();

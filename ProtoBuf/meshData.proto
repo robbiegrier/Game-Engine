@@ -1,0 +1,37 @@
+//----------------------------------------------------------------------------
+// Copyright 2023, Ed Keenan, all rights reserved.
+//----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+import "vboData.proto";
+import "textureData.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message meshData_proto
+{
+	enum RENDER_MODE
+	{
+		MODE_POINTS         = 0;
+		MODE_LINE           = 1;
+		MODE_LINE_LOOP      = 2;
+		MODE_LINE_STRIP     = 3;
+		MODE_TRIANGLES      = 4;
+		MODE_TRIANGLE_STRIP = 5;
+		MODE_TRIANGLE_FAN   = 6;
+	};
+	optional bytes             pMeshName   = 1;
+	optional RENDER_MODE       mode        = 2;
+	optional uint32            triCount    = 3;
+	optional uint32            vertCount   = 4;
+	optional vboData_proto     vbo_vert    = 5;
+	optional vboData_proto     vbo_norm    = 6;
+	optional vboData_proto     vbo_uv      = 7;
+	optional vboData_proto     vbo_index   = 8;
+	optional textureData_proto text_color  = 9;
+	optional float boundingSphereRadius = 10;
+	repeated float boundingSphereCenter = 11;
+}
+
+// -- End of File ---

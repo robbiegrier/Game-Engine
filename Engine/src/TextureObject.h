@@ -18,6 +18,34 @@ namespace Azul
 			Brick,
 			Stone,
 			Rocks,
+			Desert,
+			Crate,
+			Frigate,
+			Bracket,
+			Fish,
+			DogHouse,
+			Duck,
+			R2D2,
+			Corset,
+			AntiqueCameraTripod,
+			AntiqueCamera,
+			Dog,
+			WesternTownHouse,
+			WesternTownHouse1,
+			DesertRock0,
+			DesertRock1,
+			DesertRock2,
+			DesertRock3,
+			DesertRock4,
+			DesertRock5,
+			DesertRock6,
+			DesertRock7,
+			DesertRock8,
+			DesertRock9,
+			DesertRock10,
+			DesertRock11,
+			DesertRock12,
+			DesertRock13,
 			None
 		};
 
@@ -44,7 +72,7 @@ namespace Azul
 		void SetName(TextureObject::Name _name);
 		const char* NameToString();
 
-	private:
+	protected:
 		TextureObject::Name name;
 		ID3D11ShaderResourceView* poTextureRV;
 		ID3D11SamplerState* poSampler;

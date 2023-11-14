@@ -4,14 +4,14 @@
 namespace Azul
 {
 	constexpr float planeScale = 100.f;
-	constexpr float tiling = 0.25f;
+	constexpr float tiling = 0.1f;
 
 	VertexPos PlaneMesh::g_Vertices_pos[] =
 	{
-		Vec3(-planeScale,  0.f, -planeScale),
-		Vec3(-planeScale, 0.f, planeScale),
-		Vec3(planeScale, 0.f, -planeScale),
-		Vec3(planeScale,  0.f, planeScale)
+		Vec3f(-planeScale,  0.f, -planeScale),
+		Vec3f(-planeScale, 0.f, planeScale),
+		Vec3f(planeScale, 0.f, -planeScale),
+		Vec3f(planeScale,  0.f, planeScale)
 	};
 
 	VertexColor PlaneMesh::g_Vertices_color[] =
@@ -51,13 +51,11 @@ namespace Azul
 		poVertexBuffer_color = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
 		poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_PlaneVertices_texCoord), g_PlaneVertices_texCoord);
 		poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_PlaneVertices_norm), g_PlaneVertices_norm);
-
 		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
-
-		poConstantBuff_World = CreateConstantBuffer(sizeof(Mat4));
-
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+
+		HackSetBoundingSphereData(g_Vertices_pos);
 	}
 
 	PlaneMesh::~PlaneMesh()

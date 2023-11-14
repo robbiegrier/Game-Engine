@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{ED602E5D-031C-4AF8-B6A6-4B34E0073B27}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3} = {4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math", "Math\Math.vcxproj", "{D999076E-F08B-48FC-B732-E43E13041A07}"
 EndProject
@@ -14,6 +17,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PCSTree", "PCSTree\PCSTree.vcxproj", "{233C224A-93C0-4D17-8C3D-5578525A1DC3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Manager", "Manager\Manager.vcxproj", "{B8872086-A0E1-472F-8121-88D08B4C1BFC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtoBuf", "ProtoBuf\ProtoBuf.vcxproj", "{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,10 @@ Global
 		{B8872086-A0E1-472F-8121-88D08B4C1BFC}.Debug|x86.Build.0 = Debug|Win32
 		{B8872086-A0E1-472F-8121-88D08B4C1BFC}.Release|x86.ActiveCfg = Release|Win32
 		{B8872086-A0E1-472F-8121-88D08B4C1BFC}.Release|x86.Build.0 = Release|Win32
+		{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}.Debug|x86.Build.0 = Debug|Win32
+		{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}.Release|x86.ActiveCfg = Release|Win32
+		{4C53FB3C-02A8-4922-9DDB-3ABE1FACACC3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

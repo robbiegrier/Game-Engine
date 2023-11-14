@@ -10,6 +10,7 @@ namespace Azul
 	public:
 		static DXGI_RATIONAL QueryRefreshRate(UINT screenWidth, UINT screenHeight, BOOL vsync);
 		static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+		static std::string FileToString(const char* const pMeshFileName);
 	};
 }
 

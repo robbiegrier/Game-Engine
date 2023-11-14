@@ -31,6 +31,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="include\--- Add Include files here ---.txt">
+      <Filter>include</Filter>
+    </Text>
+    <Text Include="src\--- Add Source files here ---.txt">
+      <Filter>src</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\File.cpp">
       <Filter>src</Filter>
     </ClCompile>

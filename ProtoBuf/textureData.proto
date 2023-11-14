@@ -1,0 +1,73 @@
+//----------------------------------------------------------------------------
+// Copyright 2023, Ed Keenan, all rights reserved.
+//----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+message textureData_proto
+{
+	enum TEXTURE_TYPE
+	{
+		JPEG = 0;
+		PNG = 1;
+		BMP = 2;
+		GIF = 3;
+	};
+
+	enum TEXTURE_MAG_FILTER
+	{
+		MAG_NEAREST = 0;
+		MAG_LINEAR = 1;
+	};
+
+	enum TEXTURE_MIN_FILTER
+	{
+		MIN_NEAREST = 0;
+		MIN_LINEAR = 1;
+		MIN_NEAREST_MIPMAP_NEAREST = 2;
+		MIN_LINEAR_MIPMAP_NEAREST = 3;
+		MIN_NEAREST_MIPMAP_LINEAR = 4;
+		MIN_LINEAR_MIPMAP_LINEAR = 5;
+	};
+
+	enum TEXTURE_WRAP
+	{
+		WRAP_CLAMP_TO_EDGE = 0;
+		WRAP_MIRRORED_REPEAT = 1;
+		WRAP_REPEAT = 2;
+	};
+	enum TEXTURE_COMPONENT
+	{
+		BYTE = 0;
+		UNSIGNED_BYTE = 1;
+		SHORT = 2;
+		UNSIGNED_SHORT = 3;
+		INT = 4;
+		UNSIGNED_INT = 5;
+		FLOAT = 6;
+		DOUBLE = 7;
+	};
+
+	optional TEXTURE_TYPE        textType     = 1;
+	optional TEXTURE_MAG_FILTER  magFilter    = 2;
+	optional TEXTURE_MIN_FILTER  minFilter    = 3;
+	optional TEXTURE_WRAP        wrapS        = 4;
+	optional TEXTURE_WRAP        wrapT        = 5;
+	optional uint32              width        = 6;
+	optional uint32              height       = 7;
+	optional uint32              component    = 8;
+	optional uint32              bits         = 9;
+	optional uint32              as_is        = 10;
+	optional TEXTURE_COMPONENT   pixel_type   = 11;
+	optional uint32              fileNameSize = 12;
+	optional bytes               fileNameData = 13;
+	optional uint32              dataSize     = 14;
+	optional bytes               poData       = 15;
+
+	optional uint32			   textureMD5Hash  = 16;
+
+}
+
+// -- End of File ---
