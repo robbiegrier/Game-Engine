@@ -50,6 +50,8 @@ namespace Azul
 			DesertRock11,
 			DesertRock12,
 			DesertRock13,
+			UnitSphere,
+			UnitIcoSphere,
 			Null,
 			None
 		};

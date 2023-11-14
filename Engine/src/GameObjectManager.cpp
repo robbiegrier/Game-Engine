@@ -46,7 +46,7 @@ namespace Azul
 		Trace::out("Destroyed GameObjectManager.\n");
 	}
 
-	void GameObjectManager::Update(float deltaTime)
+	void GameObjectManager::Update(AnimTime deltaTime)
 	{
 		GameObjectManager& self = GetInstance();
 		PCSTreeForwardIterator it(self.objects.GetRoot());

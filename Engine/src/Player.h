@@ -12,7 +12,7 @@ namespace Azul
 		Player();
 		~Player() = default;
 
-		virtual void Tick(float deltaTime);
+		virtual void Tick(AnimTime deltaTime) override;
 
 	private:
 		void CheckSwitchCameraInput();

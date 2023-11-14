@@ -1,5 +1,5 @@
-#ifndef _Colors
-#define _Colors
+#ifndef _AzulColors
+#define _AzulColors
 
 #include "MathEngine.h"
 

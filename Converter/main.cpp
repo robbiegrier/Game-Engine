@@ -109,6 +109,15 @@ void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, c
 	{
 		tinygltf::Mesh& gltfMesh = gltfModel.meshes[i];
 		tinygltf::Primitive& primitive = gltfMesh.primitives[0];
+
+		if (primitive.material < 0)
+		{
+			tinygltf::Material mat;
+			mat.name = pFileName;
+			gltfModel.materials.push_back(mat);
+			primitive.material = 0;
+		}
+
 		tinygltf::Material& gltfMaterial = gltfModel.materials[primitive.material];
 		meshData& runModel = azulRunModel.meshes[i];
 

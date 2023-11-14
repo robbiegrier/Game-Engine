@@ -12,11 +12,13 @@ namespace Azul
 		renderShell = false;
 	}
 
-	void Player::Tick(float deltaTime)
+	void Player::Tick(AnimTime deltaTime)
 	{
+		float moveScale = toSeconds(deltaTime);
+
 		CheckSwitchCameraInput();
-		CheckMovement(deltaTime);
-		CheckLookAt(deltaTime);
+		CheckMovement(moveScale);
+		CheckLookAt(moveScale);
 		ToggleLookAtMode();
 		ToggleFramerateMode();
 
@@ -26,7 +28,7 @@ namespace Azul
 
 		if (walkMode)
 		{
-			ProcessGravity(deltaTime);
+			ProcessGravity(moveScale);
 		}
 
 		if (GetKeyState('N') & 0x8000)

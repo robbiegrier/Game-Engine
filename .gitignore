@@ -399,3 +399,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+*.pb.cc
+*.pb.h
+*.proto.azul
+*.Vx.h
+*.Px.h

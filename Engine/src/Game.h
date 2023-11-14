@@ -30,6 +30,8 @@ namespace Azul
 		virtual	void ClearDepthStencilBuffer() override;
 
 	private:
+		void EndFrame();
+
 		// Demo methods
 		void LoadFloor(int size);
 		void LoadClock(float size, const Vec3& pos);
@@ -39,10 +41,14 @@ namespace Azul
 		void LoadMovingObjects();
 		void LoadInstancedObjects();
 		void UpdateDemo(float deltaTime);
+		void UpdateTimerDemo(float deltaTime);
 
 		// Singleton
 		static Game& GetInstance();
 		static Game* pInstance;
+
+		AnimTimer intervalTimer;
+		AnimTimer globalTimer;
 	};
 }
 

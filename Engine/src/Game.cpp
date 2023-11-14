@@ -1,11 +1,8 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include "Game.h"
-#include "Engine.h"
-#include "MathEngine.h"
 #include "Camera.h"
 #include "Colors.h"
-#include "GameObject.h"
 #include "ShaderObject.h"
 #include "SOColorByVertex.h"
 #include "Mesh.h"
@@ -86,6 +83,8 @@ namespace Azul
 
 	Game::Game()
 	{
+		globalTimer.Tic();
+		intervalTimer.Tic();
 	}
 
 	Game::~Game()
@@ -141,7 +140,7 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::DesertRock13, new TextureProto(desertRocksData.meshes[textI++]));
 
 		MeshManager::Create();
-		MeshManager::Add(Mesh::Name::Sphere, new MeshSphere());
+		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
 		MeshManager::Add(Mesh::Name::Pyramid, new PyramidMesh());
 		MeshManager::Add(Mesh::Name::Diamond, new DiamondMesh());
@@ -159,6 +158,8 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::AntiqueCamera, new MeshProto("AntiqueCamera.proto.azul", 1));
 		MeshManager::Add(Mesh::Name::Dog, new MeshProto("dog.proto.azul"));
 		MeshManager::Add(Mesh::Name::WesternTownHouse, new MeshProto("western_town_house.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::UnitSphere, new MeshProto("UnitSphere.proto.azul"));
+		MeshManager::Add(Mesh::Name::UnitIcoSphere, new MeshProto("UnitIcoSphere.proto.azul"));
 
 		int meshI = 0;
 		MeshManager::Add(Mesh::Name::DesertRock0, new MeshProto(desertRocksData.meshes[meshI++]));
@@ -425,6 +426,20 @@ namespace Azul
 		pZMarker->SetRelativeScale(Vec3(0.001f, 0.001f, markerLength));
 		pZMarker->SetRenderShell(false);
 
+		GameObjectManager::SpawnObject("Sphere",
+			new GOConstColor(
+				MeshManager::Find(Mesh::Name::UnitSphere),
+				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+				Vec3(Azul::Colors::Orange)), Vec3(0, 20, 0)
+		);
+
+		GameObjectManager::SpawnObject("Ico Sphere",
+			new GOConstColor(
+				MeshManager::Find(Mesh::Name::UnitIcoSphere),
+				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+				Vec3(Azul::Colors::Green)), Vec3(5, 20, 0)
+		);
+
 		//LoadFloor(13);
 		LoadClock(2, Vec3(0.f, 30.f, 80.f));
 		LoadPylon(1, Vec3(30.f, 7.f, 0.f));
@@ -451,57 +466,10 @@ namespace Azul
 	{
 		UpdateDemo(deltaTime);
 
-		if (GetKeyState('F') & 0x8000)
-		{
-			lightPos[y] += 10 * deltaTime;
-		}
-		if (GetKeyState('V') & 0x8000)
-		{
-			lightPos[y] -= 10 * deltaTime;
-		}
-
-		if (GetKeyState('E') & 0x8000)
-		{
-			lightPos[x] += 10 * deltaTime;
-		}
-		if (GetKeyState('T') & 0x8000)
-		{
-			lightPos[x] -= 10 * deltaTime;
-		}
-
-		if (GetKeyState('4') & 0x8000)
-		{
-			lightPos[z] += 10 * deltaTime;
-		}
-		if (GetKeyState('R') & 0x8000)
-		{
-			lightPos[z] -= 10 * deltaTime;
-		}
-
-		LightSource->SetRelativeLocation(lightPos);
-		LightSource1->SetRelativeLocation(lightPos + Vec3(5, 0, 0));
-		LightSource2->SetRelativeLocation(lightPos + Vec3(-5, 0, 0));
-
-		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
-		pShader->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
-		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
-		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
-
-		static float cameraTheta = 0.f;
-
-		if (GetKeyState('Z') & 0x8000)
-		{
-			cameraTheta += 2 * deltaTime;
-		}
-		else if (GetKeyState('C') & 0x8000)
-		{
-			cameraTheta -= 2 * deltaTime;
-		}
-
-		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
-
 		CameraManager::Update(deltaTime);
-		GameObjectManager::Update(deltaTime);
+		GameObjectManager::Update(intervalTimer.Toc());
+
+		EndFrame();
 	}
 
 	void Game::Render()
@@ -516,6 +484,11 @@ namespace Azul
 		TextureObjectManager::Destroy();
 		MeshManager::Destroy();
 		CameraManager::Destroy();
+	}
+
+	void Game::EndFrame()
+	{
+		intervalTimer.Tic();
 	}
 
 	void Game::LoadFloor(int size)
@@ -808,6 +781,71 @@ namespace Azul
 		{
 			texTransSign = -1.f;
 		}
+
+		if (GetKeyState('F') & 0x8000)
+		{
+			lightPos[y] += 10 * deltaTime;
+		}
+		if (GetKeyState('V') & 0x8000)
+		{
+			lightPos[y] -= 10 * deltaTime;
+		}
+
+		if (GetKeyState('E') & 0x8000)
+		{
+			lightPos[x] += 10 * deltaTime;
+		}
+		if (GetKeyState('T') & 0x8000)
+		{
+			lightPos[x] -= 10 * deltaTime;
+		}
+
+		if (GetKeyState('4') & 0x8000)
+		{
+			lightPos[z] += 10 * deltaTime;
+		}
+		if (GetKeyState('R') & 0x8000)
+		{
+			lightPos[z] -= 10 * deltaTime;
+		}
+
+		LightSource->SetRelativeLocation(lightPos);
+		LightSource1->SetRelativeLocation(lightPos + Vec3(5, 0, 0));
+		LightSource2->SetRelativeLocation(lightPos + Vec3(-5, 0, 0));
+
+		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
+		pShader->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
+		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
+		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
+
+		static float cameraTheta = 0.f;
+
+		if (GetKeyState('Z') & 0x8000)
+		{
+			cameraTheta += 2 * deltaTime;
+		}
+		else if (GetKeyState('C') & 0x8000)
+		{
+			cameraTheta -= 2 * deltaTime;
+		}
+
+		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
+
+		//UpdateTimerDemo(deltaTime);
+	}
+
+	void Game::UpdateTimerDemo(float deltaTime)
+	{
+		static int i = 0;
+		Trace::out("%d: %f\n", i++, deltaTime);
+
+		AnimTime elapsedTime = intervalTimer.Toc();
+		int timeInSeconds_ms = AnimTime::Quotient(elapsedTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
+		AnimTime timeInMs_remainder = AnimTime::Remainder(elapsedTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
+		int timeInSeconds_us_remainder = AnimTime::Quotient(timeInMs_remainder, AnimTime(AnimTime::Duration::ONE_MICROSECOND));
+
+		Trace::out(" time in     ms : %d \n", timeInSeconds_ms);
+		Trace::out(" remainder   us : %d \n", timeInSeconds_us_remainder);
 	}
 
 	Game& Game::GetInstance()

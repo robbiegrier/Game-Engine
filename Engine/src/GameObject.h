@@ -2,13 +2,13 @@
 #define _GameObject
 
 #include <d3d11.h>
-
 #include "MathEngine.h"
 #include "Camera.h"
 #include "Mesh.h"
 #include "ShaderObject.h"
 #include "GraphicsObject.h"
 #include "PCSNode.h"
+#include "AnimTime.h"
 
 namespace Azul
 {
@@ -24,7 +24,7 @@ namespace Azul
 		virtual ~GameObject();
 
 		// Core update and draw
-		void Update(float deltaTime);
+		void Update(AnimTime deltaTime);
 		void Draw();
 
 		// Mutate transform
@@ -47,9 +47,11 @@ namespace Azul
 		void SetRenderShell(bool render);
 		static void SetRenderShellGlobal(bool render);
 
+		static float toSeconds(const AnimTime& abstractTime);
+
 	protected:
 		// Overridable tick method called once per frame
-		virtual void Tick(float deltaTime) { static_cast<void>(deltaTime); }
+		virtual void Tick(AnimTime deltaTime) { static_cast<void>(deltaTime); }
 
 		bool renderShell;
 		static bool globalRenderShell;

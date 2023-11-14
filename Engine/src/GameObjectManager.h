@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "ShaderObject.h"
 #include "TextureObject.h"
+#include "AnimTime.h"
 
 namespace Azul
 {
@@ -21,7 +22,7 @@ namespace Azul
 		static void Dump();
 
 		// Core update and draw
-		static void Update(float deltaTime);
+		static void Update(AnimTime deltaTime);
 		static void Draw();
 
 		// Spawn factory methods

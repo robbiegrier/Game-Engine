@@ -1,7 +1,4 @@
-#include "MathEngine.h"
 #include "GameObject.h"
-#include "Game.h"
-#include "Camera.h"
 #include "MeshManager.h"
 #include "ShaderObjectManager.h"
 #include "GOConstColor.h"
@@ -24,7 +21,7 @@ namespace Azul
 		assert(pWorld);
 		assert(pGraphicsObject);
 
-		pShell = new GOConstColor(MeshManager::Find(Mesh::Name::Sphere), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(.9f, .15f, .15f));
+		pShell = new GOConstColor(MeshManager::Find(Mesh::Name::Sphere), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(0.5f, 0.5f, 0.5f));
 	}
 
 	GameObject::~GameObject()
@@ -92,7 +89,15 @@ namespace Azul
 		globalRenderShell = render;
 	}
 
-	void GameObject::Update(float deltaTime)
+	float GameObject::toSeconds(const AnimTime& abstractTime)
+	{
+		int timeInSeconds_ms = AnimTime::Quotient(abstractTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
+		AnimTime timeInMs_remainder = AnimTime::Remainder(abstractTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
+		int timeInSeconds_us_remainder = AnimTime::Quotient(timeInMs_remainder, AnimTime(AnimTime::Duration::ONE_MICROSECOND));
+		return (timeInSeconds_ms * 0.001f) + (timeInSeconds_us_remainder * 0.000001f);
+	}
+
+	void GameObject::Update(AnimTime deltaTime)
 	{
 		static_cast<void>(deltaTime);
 
