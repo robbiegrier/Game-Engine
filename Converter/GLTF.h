@@ -6,10 +6,13 @@
 #define GLTF_H
 
 #include "tiny_gltf.h"
-using namespace tinygltf;
-
+#include "MeshLayout.h"
 #include "meshData.h"
 #include "GLTF_Helper.h"
+#include "MathEngine.h"
+
+using namespace tinygltf;
+using namespace Azul;
 
 struct GLB_header
 {
@@ -23,6 +26,40 @@ struct CHUNK_header
 	uint32_t chunkLength;
 	uint32_t chunkType;
 	unsigned char chunkData[];
+};
+
+struct skin_weight_joint_index
+{
+	skin_weight_joint_index() = default;
+	~skin_weight_joint_index() = default;
+	size_t	index;
+	Vec4f	skinWeight;
+	Vec4si	jointIndex;
+};
+
+struct LocalToGlobalIndex
+{
+	LocalToGlobalIndex(size_t _local, size_t _global, size_t _joint)
+		: localIndex(_local), globalIndex(_global), JointIndex(_joint)
+	{}
+
+	size_t localIndex;   // new model
+	size_t globalIndex;  // original model
+	size_t JointIndex;   // Here for verification...should be same value for every index
+};
+
+struct BoneMesh
+{
+	std::string boneName;
+	size_t      vertCount;
+	size_t      jointIndex;
+	Mat4        inverseMatrix;  // single - Inverse Matrix based on JointIndex
+	bool        corrected;      // pos/norms corrected
+	std::vector< LocalToGlobalIndex > l2gIndex;   // x
+	std::vector<Vec3f> pos;
+	std::vector<Vec3f> norms;
+	std::vector<Vec2f> text_coord;
+	std::vector<Vec3ui> index;                 // x
 };
 
 class GLTF
@@ -42,6 +79,23 @@ public:
 	static bool SetVBO_index(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff);
 	static bool SetTexture(Model& gltfModel, unsigned int index, textureData& text, char* pBinaryBuff);
 	static bool SetExternalTexture(const char* const filename, unsigned int index, textureData& text);
+
+	static bool SetVBO_BONE(Model& gltfModel,
+		const char* pKey,
+		vboData& vbo,
+		char* pBuffStart,
+		unsigned int byteLength,
+		unsigned int count);
+
+	static bool SetVBO_BONE_index(Model& gltfModel,
+		vboData& vbo,
+		char* pBuffStart,
+		unsigned int byteLength,
+		unsigned int count);
+
+	static bool LoadBinary(Model& model, const char* const pFileName);
+	static bool OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex);
+	static bool OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex);
 };
 
 #endif

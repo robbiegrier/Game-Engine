@@ -538,4 +538,185 @@ bool GLTF::SetExternalTexture(const char* const filename, unsigned int index, te
 	return true;
 }
 
-// --- End of File ---
+bool GLTF::SetVBO_BONE_index(Model& gltfModel, vboData& vbo, char* pBuffStart, unsigned int byteLength, unsigned int count)
+{
+	// Get the accessor, buffer view
+	vbo.enabled = true;
+
+	auto index = gltfModel.meshes[0].primitives[0].indices;
+	assert(index > 0);
+
+	auto accessor = gltfModel.accessors[(size_t)index];
+	size_t buffIndex = (size_t)accessor.bufferView;
+	auto bufferView = gltfModel.bufferViews[buffIndex];
+
+	vbo.targetType = vboDataConverter::GetTarget(bufferView.target);
+
+	// it was converted to unsigned int earlier...
+	assert(vbo.componentType == vboData::VBO_COMPONENT::UNSIGNED_INT);
+	vbo.componentType = vboData::VBO_COMPONENT::UNSIGNED_INT;
+
+	vbo.vboType = vboDataConverter::GetType(accessor.type);
+
+	vbo.count = count;
+	vbo.dataSize = byteLength;
+
+	assert(pBuffStart);
+
+	// in case there's data
+	delete[] vbo.poData;
+
+	if (vbo.componentType == vboData::VBO_COMPONENT::UNSIGNED_SHORT)
+	{
+		// Convert the unsigned short into unsigned int buffer
+		// Engine will now be all unsigned int for index buffer
+		unsigned int* pIndexData = new unsigned int[vbo.count]();
+		unsigned int* pTmp = pIndexData;
+		unsigned short* pShort = (unsigned short*)pBuffStart;
+
+		for (unsigned int i = 0; i < vbo.count; i++)
+		{
+			// convert it
+			*pTmp++ = *pShort++;
+		}
+
+		// this is the output buffer
+		vbo.poData = (unsigned char*)pIndexData;
+		// update the data
+		vbo.dataSize = vbo.count * sizeof(unsigned int);
+		// update the component
+		vbo.componentType = vboData::VBO_COMPONENT::UNSIGNED_INT;
+	}
+	else if (vbo.componentType == vboData::VBO_COMPONENT::UNSIGNED_INT)
+	{
+		vbo.poData = new unsigned char[vbo.dataSize]();
+		assert(vbo.poData);
+		memcpy_s(vbo.poData, vbo.dataSize, pBuffStart, vbo.dataSize);
+	}
+	else
+	{
+		assert(false);
+	}
+
+	return true;
+}
+
+bool GLTF::SetVBO_BONE(Model& gltfModel, const char* pKey, vboData& vbo, char* pBuffStart, unsigned int byteLength, unsigned int count)
+{
+	// Get the accessor, buffer view
+	vbo.enabled = false;
+
+	assert(pKey);
+	auto map = gltfModel.meshes[0].primitives[0].attributes;
+	auto it = map.find(pKey);
+
+	if (it != map.end())
+	{
+		// Get the accessor, buffer view
+		vbo.enabled = true;
+
+		auto index = it->second;
+
+		auto accessor = gltfModel.accessors[(size_t)index];
+		size_t buffIndex = (size_t)accessor.bufferView;
+		auto bufferView = gltfModel.bufferViews[buffIndex];
+
+		vbo.targetType = vboDataConverter::GetTarget(bufferView.target);
+		vbo.componentType = vboDataConverter::GetComponent(accessor.componentType);
+		vbo.vboType = vboDataConverter::GetType(accessor.type);
+
+		vbo.count = count;
+		vbo.dataSize = byteLength;
+
+		assert(pBuffStart);
+
+		// in case there's data
+		delete[] vbo.poData;
+
+		vbo.poData = new unsigned char[vbo.dataSize]();
+		assert(vbo.poData);
+		memcpy_s(vbo.poData, vbo.dataSize, pBuffStart, vbo.dataSize);
+	}
+
+	return vbo.enabled;
+}
+
+bool GLTF::LoadBinary(Model& model, const char* const pFileName)
+{
+	TinyGLTF loader;
+	std::string err;
+	std::string warn;
+
+	bool status = loader.LoadBinaryFromFile(&model, &err, &warn, pFileName);
+
+	if (!warn.empty())
+	{
+		Trace::out("Warn: %s\n", warn.c_str());
+		assert(false);
+	}
+
+	if (!err.empty())
+	{
+		Trace::out("Err: %s\n", err.c_str());
+		assert(false);
+	}
+
+	if (!status)
+	{
+		Trace::out2("Failed to parse glTF\n");
+		assert(false);
+	}
+
+	return status;
+}
+
+bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex)
+{
+	//Trace::out("Quat bone:%d Frame:%d \n", NodeIndex, FrameIndex);
+	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
+	auto QuatAAccessor = model.accessors[AccessorIndex];
+	auto QuatABuffView = model.bufferViews[(size_t)QuatAAccessor.bufferView];
+
+	pBuff = pBuff + QuatABuffView.byteOffset;
+	assert(QuatAAccessor.componentType == TINYGLTF_COMPONENT_TYPE_FLOAT);
+	assert(QuatAAccessor.type == TINYGLTF_TYPE_VEC4);
+	Vec4f* pVect4 = (Vec4f*)pBuff;
+	for (size_t i = 0; i < QuatAAccessor.count; i++)
+	{
+		if (FrameIndex == i)
+		{
+			Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", NodeIndex,
+				pVect4->x, pVect4->y, pVect4->z, pVect4->w);
+		}
+		pVect4++;
+	}
+
+	//Trace::out("\n");
+
+	return true;
+}
+
+bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex)
+{
+	//Trace::out("Trans bone:%d Frame:%d \n", NodeIndex, FrameIndex);
+	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
+	auto TransAccessor = model.accessors[AccessorIndex];
+	auto TransBuffView = model.bufferViews[(size_t)TransAccessor.bufferView];
+
+	pBuff = pBuff + TransBuffView.byteOffset;
+	assert(TransAccessor.componentType == TINYGLTF_COMPONENT_TYPE_FLOAT);
+	assert(TransAccessor.type == TINYGLTF_TYPE_VEC3);
+	Vec3f* pVect3 = (Vec3f*)pBuff;
+	for (size_t i = 0; i < TransAccessor.count; i++)
+	{
+		if (FrameIndex == i)
+		{
+			Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);  \n", NodeIndex,
+				pVect3->x, pVect3->y, pVect3->z);
+		}
+		pVect3++;
+	}
+	//Trace::out("\n");
+
+	return true;
+}

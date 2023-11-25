@@ -234,6 +234,8 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClInclude Include="..\TinyGLTF\stb_image_write.h" />
     <ClInclude Include="..\TinyGLTF\tiny_gltf.h" />
     <ClInclude Include="BoundingSphere.h" />
+    <ClInclude Include="ChickenBot.h" />
+    <ClInclude Include="ConvertAnim.h" />
     <ClInclude Include="GLTF.h" />
     <ClInclude Include="GLTF_Helper.h" />
     <ClInclude Include="md5.h" />
@@ -611,6 +613,8 @@ REM copy .\..\Models\*.tga .\..\data</Command>
   <ItemGroup>
     <ClCompile Include="..\TinyGLTF\tiny_gltf.cc" />
     <ClCompile Include="BoundingSphere.cpp" />
+    <ClCompile Include="ChickenBot.cpp" />
+    <ClCompile Include="ConvertAnim.cpp" />
     <ClCompile Include="GLTF.cpp" />
     <ClCompile Include="GLTF_Helper.cpp" />
     <ClCompile Include="main.cpp" />

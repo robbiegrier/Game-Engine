@@ -52,6 +52,14 @@ namespace Azul
 			DesertRock13,
 			UnitSphere,
 			UnitIcoSphere,
+			Bone,
+			Bone_001,
+			Bone_L,
+			Bone_L_001,
+			Bone_L_002,
+			Bone_R,
+			Bone_R_001,
+			Bone_R_002,
 			Null,
 			None
 		};

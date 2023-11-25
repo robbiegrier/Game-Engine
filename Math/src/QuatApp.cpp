@@ -17,6 +17,12 @@ namespace Azul
 	void QuatApp::Slerp(Quat& result, const Quat& source, const Quat& target, const float slerpFactor)
 	{
 		float tmpCos = source.dot(target);
+
+		if (abs(tmpCos) >= 1.0f) {
+			result = source;
+			return;
+		}
+
 		Quat tmpTarget = target;
 
 		if (tmpCos < 0.f)
@@ -28,7 +34,7 @@ namespace Azul
 		const float theta = Trig::acos(tmpCos);
 		const float sinTheta = Trig::sin(theta);
 
-		if (Util::isZero(sinTheta, 0.0000001f))
+		if (Util::isZero(sinTheta, 0.000001f))
 		{
 			result = Quat();
 		}

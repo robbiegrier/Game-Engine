@@ -5,15 +5,15 @@
 #ifndef GLTF_HELPER_H
 #define GLTF_HELPER_H
 
-class Vec3f
+class Vec3fx
 {
 public:
 	float x, y, z = 0.f;
-	Vec3f() = default;
-	Vec3f(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
-	Vec3f(const Vec3f&) = default;
-	Vec3f& operator =(const Vec3f&) = default;
-	~Vec3f() = default;
+	Vec3fx() = default;
+	Vec3fx(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
+	Vec3fx(const Vec3fx&) = default;
+	Vec3fx& operator =(const Vec3fx&) = default;
+	~Vec3fx() = default;
 };
 
 class StringThis

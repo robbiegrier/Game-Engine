@@ -24,7 +24,7 @@ namespace Azul
 		virtual ~GameObject();
 
 		// Core update and draw
-		void Update(AnimTime deltaTime);
+		virtual void Update(AnimTime deltaTime);
 		void Draw();
 
 		// Mutate transform
@@ -56,7 +56,7 @@ namespace Azul
 		bool renderShell;
 		static bool globalRenderShell;
 
-	private:
+	protected:
 		// Itemized transform
 		Vec3* pPos;
 		Vec3* pScale;

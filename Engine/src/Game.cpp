@@ -34,6 +34,11 @@
 #include "MeshProto.h"
 #include "TextureProto.h"
 #include "MeshSphere.h"
+#include "Clip.h"
+#include "AnimController.h"
+#include "GameObjectBasic.h"
+#include "Anim.h"
+#include "ClipManager.h"
 
 namespace Azul
 {
@@ -42,6 +47,14 @@ namespace Azul
 	ShaderObject* poShaderColorByVertex;
 	Mesh* pModelPyramid;
 	Mesh* pModelCube;
+
+	AnimController* pAnimController;
+	AnimController* pAnimController1;
+	AnimController* pAnimController2;
+	AnimController* pAnimController3;
+	AnimController* pAnimController4;
+
+	AnimTime animDeltaTime;
 
 	GameObject* pPyramid;
 	GameObject* pPyramid1;
@@ -67,7 +80,7 @@ namespace Azul
 	GameObject* pAntiqueCamera;
 
 	Vec3 lightColor = Vec3(Azul::Colors::LightYellow);
-	Vec3 lightPos = Vec3(0, 5, 0);
+	Vec3 lightPos = Vec3(50, 2, -40);
 
 	int WINAPI Game::Launch(HINSTANCE pInstanceHandle, int cmdShow)
 	{
@@ -123,6 +136,7 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::AntiqueCamera, new TextureProto("AntiqueCamera.proto.azul", 1));
 		TextureObjectManager::Add(TextureObject::Name::Dog, new TextureProto("dog.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::WesternTownHouse, new TextureProto("western_town_house.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::ChickenBot, new TextureProto("walk_mesh.proto.azul", 0));
 		int textI = 0;
 		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::DesertRock1, new TextureProto(desertRocksData.meshes[textI++]));
@@ -138,6 +152,15 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::DesertRock11, new TextureProto(desertRocksData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::DesertRock12, new TextureProto(desertRocksData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::DesertRock13, new TextureProto(desertRocksData.meshes[textI++]));
+
+		TextureObjectManager::Add(TextureObject::Name::Bone, new TextureProto("Bone.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_001, new TextureProto("Bone_001.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_L, new TextureProto("Bone_L.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_L_001, new TextureProto("Bone_L_001.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_L_002, new TextureProto("Bone_L_002.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_R, new TextureProto("Bone_R.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_R_001, new TextureProto("Bone_R_001.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Bone_R_002, new TextureProto("Bone_R_002.proto.azul", 0));
 
 		MeshManager::Create();
 		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
@@ -177,10 +200,22 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::DesertRock12, new MeshProto(desertRocksData.meshes[meshI++]));
 		MeshManager::Add(Mesh::Name::DesertRock13, new MeshProto(desertRocksData.meshes[meshI++]));
 
+		MeshManager::Add(Mesh::Name::Bone, new MeshProto("Bone.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_001, new MeshProto("Bone_001.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_L, new MeshProto("Bone_L.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_L_001, new MeshProto("Bone_L_001.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_L_002, new MeshProto("Bone_L_002.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_R, new MeshProto("Bone_R.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_R_001, new MeshProto("Bone_R_001.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::Bone_R_002, new MeshProto("Bone_R_002.proto.azul", 0));
+
+		Vec3 robotPos = Vec3(30, 3, 30);
+		Vec3 animPos = Vec3(30, -1, -50);
+
 		CameraManager::Create();
 
 		Camera* pCamera = CameraManager::Add(Camera::Name::Default, new Camera());
-		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0.f, 10.f, 14.5f), Vec3(10.f, 15.f, -10.f));
+		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), animPos + (Vec3(0, 2, 0)), animPos + Vec3(-10, 2, 0));
 		pCamera->SetPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::High, new Camera());
@@ -198,6 +233,106 @@ namespace Azul
 		CameraManager::SetCurrentCamera(Camera::Name::Default);
 
 		GameObjectManager::Create();
+
+		ClipManager::Create();
+		ClipManager::Add(Clip::Name::Walk, new Clip(NUM_BONES, Clip::Name::Walk));
+		ClipManager::Add(Clip::Name::SidestepRight, new Clip(NUM_BONES, Clip::Name::SidestepRight));
+		ClipManager::Add(Clip::Name::HitFront, new Clip(NUM_BONES, Clip::Name::HitFront));
+		ClipManager::Add(Clip::Name::Run, new Clip(NUM_BONES, Clip::Name::Run));
+		ClipManager::Add(Clip::Name::ShotUp, new Clip(NUM_BONES, Clip::Name::ShotUp));
+
+		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
+		animDeltaTime = delta;
+
+		pAnimController = new AnimController(animDeltaTime, Clip::Name::Run);
+
+		pAnimController1 = new AnimController(delta, Clip::Name::HitFront);
+		pAnimController1->GetObjectPivot()->SetTrans(Vec3(30, -1, -50) + Vec3(0, 4, 4));
+		pAnimController1->GetObjectPivot()->SetScale(Vec3(50.f, 50.f, 50.f));
+
+		pAnimController2 = new AnimController(delta, Clip::Name::SidestepRight);
+		pAnimController2->GetObjectPivot()->SetTrans(Vec3(30, -1, -50) + Vec3(0, 0, 4));
+		pAnimController2->GetObjectPivot()->SetScale(Vec3(50.f, 50.f, 50.f));
+
+		pAnimController3 = new AnimController(delta, Clip::Name::ShotUp);
+		pAnimController3->GetObjectPivot()->SetTrans(Vec3(30, -1, -50) + Vec3(0, 0, -4));
+		pAnimController3->GetObjectPivot()->SetScale(Vec3(50.f, 50.f, 50.f));
+
+		pAnimController4 = new AnimController(delta, Clip::Name::Walk);
+		pAnimController4->GetObjectPivot()->SetTrans(Vec3(30, -1, -50) + Vec3(0, 4, -4));
+		pAnimController4->GetObjectPivot()->SetScale(Vec3(50.f, 50.f, 50.f));
+
+		//GameObject* pBone = GameObjectManager::SpawnObject(
+		//	"Bone",
+		//	Mesh::Name::Bone,
+		//	TextureObject::Name::Bone,
+		//	robotPos
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_001",
+		//	Mesh::Name::Bone_001,
+		//	TextureObject::Name::Bone_001,
+		//	robotPos + Vec3(0, 0, 3)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_L",
+		//	Mesh::Name::Bone_L,
+		//	TextureObject::Name::Bone_L,
+		//	robotPos + Vec3(-2, 0, 0)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_R",
+		//	Mesh::Name::Bone_R,
+		//	TextureObject::Name::Bone_R,
+		//	robotPos + Vec3(2, 0, 0)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_L_001",
+		//	Mesh::Name::Bone_L_001,
+		//	TextureObject::Name::Bone_L_001,
+		//	robotPos + Vec3(-2, 0, 5)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_R_001",
+		//	Mesh::Name::Bone_R_001,
+		//	TextureObject::Name::Bone_R_001,
+		//	robotPos + Vec3(2, 0, 5)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_L_002",
+		//	Mesh::Name::Bone_L_002,
+		//	TextureObject::Name::Bone_L_002,
+		//	robotPos + Vec3(-2, 0, 9)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
+
+		//pBone = GameObjectManager::SpawnObject(
+		//	"Bone_R_002",
+		//	Mesh::Name::Bone_R_002,
+		//	TextureObject::Name::Bone_R_002,
+		//	robotPos + Vec3(2, 0, 9)
+		//);
+		//pBone->SetRelativeScale(200.f);
+		//pBone->SetRelativeRotation(Rot(Rot1::Y, -MATH_PI2));
 
 		LightSource = GameObjectManager::SpawnObject(
 			"Light Yellow",
@@ -454,17 +589,67 @@ namespace Azul
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
 
 		GameObject::SetRenderShellGlobal(false);
+		Engine::ToggleMaxFramerate(true);
 
 		GameObjectManager::Dump();
 		//ShaderObjectManager::Dump();
 		//MeshManager::Dump();
 		//CameraManager::Dump();
+		//ClipManager::Dump();
 		return true;
 	}
 
 	void Game::Update(float deltaTime)
 	{
 		UpdateDemo(deltaTime);
+
+		pAnimController->Update();
+		pAnimController1->Update();
+		pAnimController2->Update();
+		pAnimController3->Update();
+		pAnimController4->Update();
+
+		if (GetKeyState('5') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::Walk);
+		}
+		else if (GetKeyState('6') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::Run);
+		}
+		else if (GetKeyState('7') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::ShotUp);
+		}
+		else if (GetKeyState('8') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::HitFront);
+		}
+		else if (GetKeyState('9') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::SidestepRight);
+		}
+		else if (GetKeyState('1') & 0x8000)
+		{
+			animDeltaTime = animDeltaTime - (0.025f * AnimTime(AnimTime::Duration::FILM_24_FRAME));
+		}
+		else if (GetKeyState('2') & 0x8000)
+		{
+			animDeltaTime = animDeltaTime + (0.025f * AnimTime(AnimTime::Duration::FILM_24_FRAME));
+		}
+
+		static bool isReversePressed = false;
+		if (GetKeyState('3') & 0x8000 && !isReversePressed)
+		{
+			isReversePressed = true;
+			animDeltaTime = -animDeltaTime;
+		}
+		else if (!(GetKeyState('3') & 0x8000) && isReversePressed)
+		{
+			isReversePressed = false;
+		}
+
+		pAnimController->GetTimerController()->SetDeltaTime(animDeltaTime);
 
 		CameraManager::Update(deltaTime);
 		GameObjectManager::Update(intervalTimer.Toc());
@@ -484,6 +669,13 @@ namespace Azul
 		TextureObjectManager::Destroy();
 		MeshManager::Destroy();
 		CameraManager::Destroy();
+		ClipManager::Destroy();
+
+		delete pAnimController;
+		delete pAnimController1;
+		delete pAnimController2;
+		delete pAnimController3;
+		delete pAnimController4;
 	}
 
 	void Game::EndFrame()

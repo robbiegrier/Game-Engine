@@ -89,6 +89,12 @@
     <Filter Include="_Proto\include\google\protobuf\util">
       <UniqueIdentifier>{e9acfbe3-a121-478e-89c8-93fbd24ca9bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Animation">
+      <UniqueIdentifier>{b51d3f15-daea-479d-95ac-89875df42f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObject\Special">
+      <UniqueIdentifier>{3e6d248f-7ce6-4d02-8f91-2173401e0678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -717,6 +723,45 @@
     <ClInclude Include="src\MeshSphere.h">
       <Filter>src\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="src\Anim.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimController.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bone.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Clip.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mixer.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimerController.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectAnim.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectAnimSkeleton.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectAnimSkin.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectBasic.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectRigid.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skeleton.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipManager.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -897,6 +942,45 @@
     </ClCompile>
     <ClCompile Include="src\MeshSphere.cpp">
       <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Anim.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimController.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bone.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clip.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mixer.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimerController.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectAnim.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectAnimSkeleton.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectAnimSkin.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectBasic.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectRigid.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skeleton.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipManager.cpp">
+      <Filter>src\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

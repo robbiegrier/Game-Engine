@@ -283,15 +283,25 @@
     <ClInclude Include="Shaders\Compiled\LightTexture.Vx.h" />
     <ClInclude Include="Shaders\Compiled\Null.Px.h" />
     <ClInclude Include="Shaders\Compiled\Null.Vx.h" />
+    <ClInclude Include="src\Anim.h" />
+    <ClInclude Include="src\AnimController.h" />
+    <ClInclude Include="src\Bone.h" />
     <ClInclude Include="src\BoundingSphere.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CameraManager.h" />
+    <ClInclude Include="src\Clip.h" />
+    <ClInclude Include="src\ClipManager.h" />
     <ClInclude Include="src\Colors.h" />
     <ClInclude Include="src\CrossMesh.h" />
     <ClInclude Include="src\CubeMesh.h" />
     <ClInclude Include="src\DiamondMesh.h" />
     <ClInclude Include="src\EngineUtils.h" />
+    <ClInclude Include="src\GameObjectAnim.h" />
+    <ClInclude Include="src\GameObjectAnimSkeleton.h" />
+    <ClInclude Include="src\GameObjectAnimSkin.h" />
+    <ClInclude Include="src\GameObjectBasic.h" />
     <ClInclude Include="src\GameObjectManager.h" />
+    <ClInclude Include="src\GameObjectRigid.h" />
     <ClInclude Include="src\GOColorByVertex.h" />
     <ClInclude Include="src\GOConstColor.h" />
     <ClInclude Include="src\GOFlatTexture.h" />
@@ -307,12 +317,14 @@
     <ClInclude Include="src\MeshProto.h" />
     <ClInclude Include="src\MeshSphere.h" />
     <ClInclude Include="src\MeshUtils.h" />
+    <ClInclude Include="src\Mixer.h" />
     <ClInclude Include="src\Plane.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PyramidMesh.h" />
     <ClInclude Include="src\Render.h" />
     <ClInclude Include="src\ShaderObject.h" />
     <ClInclude Include="src\ShaderObjectManager.h" />
+    <ClInclude Include="src\Skeleton.h" />
     <ClInclude Include="src\SOColorByVertex.h" />
     <ClInclude Include="src\SOConstColor.h" />
     <ClInclude Include="src\SODefault.h" />
@@ -322,6 +334,7 @@
     <ClInclude Include="src\TextureObject.h" />
     <ClInclude Include="src\TextureObjectManager.h" />
     <ClInclude Include="src\TextureProto.h" />
+    <ClInclude Include="src\TimerController.h" />
     <ClInclude Include="src\Verify.h" />
     <ClInclude Include="src\WICTextureLoader.h" />
     <ClInclude Include="Test\md5.h" />
@@ -506,14 +519,24 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Anim.cpp" />
+    <ClCompile Include="src\AnimController.cpp" />
+    <ClCompile Include="src\Bone.cpp" />
     <ClCompile Include="src\BoundingSphere.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CameraManager.cpp" />
+    <ClCompile Include="src\Clip.cpp" />
+    <ClCompile Include="src\ClipManager.cpp" />
     <ClCompile Include="src\CrossMesh.cpp" />
     <ClCompile Include="src\CubeMesh.cpp" />
     <ClCompile Include="src\DiamondMesh.cpp" />
     <ClCompile Include="src\EngineUtils.cpp" />
+    <ClCompile Include="src\GameObjectAnim.cpp" />
+    <ClCompile Include="src\GameObjectAnimSkeleton.cpp" />
+    <ClCompile Include="src\GameObjectAnimSkin.cpp" />
+    <ClCompile Include="src\GameObjectBasic.cpp" />
     <ClCompile Include="src\GameObjectManager.cpp" />
+    <ClCompile Include="src\GameObjectRigid.cpp" />
     <ClCompile Include="src\GOColorByVertex.cpp" />
     <ClCompile Include="src\GOConstColor.cpp" />
     <ClCompile Include="src\GOFlatTexture.cpp" />
@@ -530,11 +553,13 @@
     <ClCompile Include="src\MeshManager.cpp" />
     <ClCompile Include="src\MeshProto.cpp" />
     <ClCompile Include="src\MeshSphere.cpp" />
+    <ClCompile Include="src\Mixer.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PyramidMesh.cpp" />
     <ClCompile Include="src\ShaderObject.cpp" />
     <ClCompile Include="src\ShaderObjectManager.cpp" />
+    <ClCompile Include="src\Skeleton.cpp" />
     <ClCompile Include="src\SOColorByVertex.cpp" />
     <ClCompile Include="src\SOConstColor.cpp" />
     <ClCompile Include="src\SODefault.cpp" />
@@ -544,6 +569,7 @@
     <ClCompile Include="src\TextureObject.cpp" />
     <ClCompile Include="src\TextureObjectManager.cpp" />
     <ClCompile Include="src\TextureProto.cpp" />
+    <ClCompile Include="src\TimerController.cpp" />
     <ClCompile Include="src\Verify.cpp" />
     <ClCompile Include="src\WICTextureLoader.cpp" />
     <ClCompile Include="Test\Index_Test.cpp" />

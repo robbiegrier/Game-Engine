@@ -46,6 +46,15 @@ namespace Azul
 			DesertRock11,
 			DesertRock12,
 			DesertRock13,
+			Bone,
+			Bone_001,
+			Bone_L,
+			Bone_L_001,
+			Bone_L_002,
+			Bone_R,
+			Bone_R_001,
+			Bone_R_002,
+			ChickenBot,
 			None
 		};
 

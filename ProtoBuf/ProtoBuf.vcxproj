@@ -282,6 +282,7 @@
     <ClInclude Include="azulModel.pb.h" />
     <ClInclude Include="meshData.h" />
     <ClInclude Include="meshData.pb.h" />
+    <ClInclude Include="MeshLayout.h" />
     <ClInclude Include="textureData.h" />
     <ClInclude Include="textureData.pb.h" />
     <ClInclude Include="vboData.h" />

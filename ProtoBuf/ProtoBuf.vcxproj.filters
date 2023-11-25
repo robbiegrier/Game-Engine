@@ -573,6 +573,9 @@
     <ClInclude Include="azulModel.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeshLayout.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Proto\libs\debug\absl_bad_any_cast_impl.lib">

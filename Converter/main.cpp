@@ -9,6 +9,8 @@
 #include "azulModel.h"
 #include "md5.h"
 #include "BoundingSphere.h"
+#include "ChickenBot.h"
+#include "ConvertAnim.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -374,6 +376,9 @@ int main(int argc, char* argv[])
 	{
 		ConvertModel(file.c_str());
 	}
+
+	ConvertAnim("shot_up.glb");
+	CreateChickenBotModels();
 
 	google::protobuf::ShutdownProtobufLibrary();
 

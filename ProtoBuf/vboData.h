@@ -45,26 +45,23 @@ public:
 
 public:
 	vboData();
-	vboData(const vboData &);
-	vboData &operator = (const vboData &);
+	vboData(const vboData&);
+	vboData& operator = (const vboData&);
 	~vboData();
 
 	vboData(VBO_TARGET     targetType,
-			VBO_COMPONENT  componetType,
-			VBO_TYPE       vboType,
-			unsigned int   attribIndex,
-			unsigned int   count,
-			unsigned int   dataSize,
-			unsigned char *poData);
+		VBO_COMPONENT  componetType,
+		VBO_TYPE       vboType,
+		unsigned int   attribIndex,
+		unsigned int   count,
+		unsigned int   dataSize,
+		unsigned char* poData);
 
+	// Serialization
+	void Serialize(vboData_proto& out) const;
+	void Deserialize(const vboData_proto& in);
 
-
-
-	// Serialization 
-	void Serialize(vboData_proto &out) const;
-	void Deserialize(const vboData_proto &in);
-
-	void Print(const char *const pName) const;
+	void Print(const char* const pName) const;
 
 public:
 	VBO_TARGET     targetType;
@@ -73,8 +70,8 @@ public:
 	unsigned int   attribIndex;
 	unsigned int   count;
 	unsigned int   dataSize;
-	unsigned char *poData;
-
+	unsigned char* poData;
+	bool enabled = true;
 };
 
 #endif
