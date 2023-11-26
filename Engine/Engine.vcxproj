@@ -64,7 +64,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDIr)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Proto;$(SolutionDir)Proto\absl;$(SolutionDIr)JSON;$(SolutionDir)ProtoBuf;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework;$(ProjectDir)Test;$(ProjectDir)src;$(ProjectDir)Shaders\Compiled;$(SolutionDir)Math\include;$(SolutionDir)Time\include;$(SolutionDir)File\include;$(SolutionDIr)PCSTree\include;$(SolutionDir)Manager\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Proto;$(SolutionDir)Proto\absl;$(SolutionDIr)JSON;$(SolutionDir)ProtoBuf;$(SolutionDir)GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -77,6 +77,7 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <EnablePREfast>false</EnablePREfast>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -357,6 +358,9 @@
   <ItemGroup>
     <ProjectReference Include="..\File\File.vcxproj">
       <Project>{c5702f9d-c1b9-4338-94ed-e8accfe1b808}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GUI\GUI.vcxproj">
+      <Project>{47612570-79fb-4fb2-96b0-26f6f20368a2}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Manager\Manager.vcxproj">
       <Project>{b8872086-a0e1-472f-8121-88d08b4c1bfc}</Project>

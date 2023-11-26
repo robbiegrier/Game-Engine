@@ -589,7 +589,7 @@ namespace Azul
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
 
 		GameObject::SetRenderShellGlobal(false);
-		Engine::ToggleMaxFramerate(true);
+		Engine::ToggleMaxFramerate(false);
 
 		GameObjectManager::Dump();
 		//ShaderObjectManager::Dump();
