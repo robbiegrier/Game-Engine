@@ -39,6 +39,8 @@
 #include "GameObjectBasic.h"
 #include "Anim.h"
 #include "ClipManager.h"
+#include "imgui.h"
+#include "PCSTreeForwardIterator.h"
 
 namespace Azul
 {
@@ -738,35 +740,35 @@ namespace Azul
 				Vec3(1, 0, 0)), pos);
 		pCenter->SetRelativeScale(scale);
 
-		GameObject* pC1 = GameObjectManager::SpawnObject("Clock Inner Cube",
+		GameObject* pC1 = GameObjectManager::SpawnObject("Clock Inner Cube 1",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Cube),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(1, 0, 1)), Vec3(3.f, 0.f, 0.f) * size, pCenter);
 		pC1->SetRelativeScale(scale * 2);
 
-		GameObject* pC2 = GameObjectManager::SpawnObject("Clock Inner Cube",
+		GameObject* pC2 = GameObjectManager::SpawnObject("Clock Inner Cube 2",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Cube),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(1, 0, 1)), Vec3(0.f, 3.f, 0.f) * size, pCenter);
 		pC2->SetRelativeScale(scale * 2);
 
-		GameObject* pC3 = GameObjectManager::SpawnObject("Clock Inner Cube",
+		GameObject* pC3 = GameObjectManager::SpawnObject("Clock Inner Cube 3",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Cube),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(1, 0, 1)), Vec3(0.f, -3.f, 0.f) * size, pCenter);
 		pC3->SetRelativeScale(scale * 2);
 
-		GameObject* pC4 = GameObjectManager::SpawnObject("Clock Inner Cube",
+		GameObject* pC4 = GameObjectManager::SpawnObject("Clock Inner Cube 4",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Cube),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
 				Vec3(1, 0, 1)), Vec3(-3.f, 0.f, 0.f) * size, pCenter);
 		pC4->SetRelativeScale(scale * 2);
 
-		GameObject* pPyr1 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
+		GameObject* pPyr1 = GameObjectManager::SpawnObject("Clock Outer Pyramid 1",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Pyramid),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
@@ -774,7 +776,7 @@ namespace Azul
 		pPyr1->SetRelativeScale(scale * .1f);
 		pPyr1->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.5f));
 
-		GameObject* pPyr2 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
+		GameObject* pPyr2 = GameObjectManager::SpawnObject("Clock Outer Pyramid 2",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Pyramid),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
@@ -782,7 +784,7 @@ namespace Azul
 		pPyr2->SetRelativeScale(scale * .1f);
 		pPyr2->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 2.f));
 
-		GameObject* pPyr3 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
+		GameObject* pPyr3 = GameObjectManager::SpawnObject("Clock Outer Pyramid 3",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Pyramid),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
@@ -790,7 +792,7 @@ namespace Azul
 		pPyr3->SetRelativeScale(scale * .1f);
 		pPyr3->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.f));
 
-		GameObject* pPyr4 = GameObjectManager::SpawnObject("Clock Outer Pyramid",
+		GameObject* pPyr4 = GameObjectManager::SpawnObject("Clock Outer Pyramid 4",
 			new GOConstColor(
 				MeshManager::Find(Mesh::Name::Pyramid),
 				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
@@ -806,7 +808,7 @@ namespace Azul
 
 		Vec3 scale = Vec3(size, size, size);
 
-		pPyramid = GameObjectManager::SpawnObject("Pyramid", Mesh::Name::Diamond, ShaderObject::Name::ColorByVertex, pos);
+		pPyramid = GameObjectManager::SpawnObject("Diamond Main", Mesh::Name::Diamond, ShaderObject::Name::ColorByVertex, pos);
 		pPyramid1 = GameObjectManager::SpawnObject("Small Pyramid 1", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(1.3f, 1.3f, 1.3f), pPyramid);
 		pPyramid2 = GameObjectManager::SpawnObject("Small Pyramid 2", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(-1.3f, 1.3f, 1.3f), pPyramid);
 		pPyramid3 = GameObjectManager::SpawnObject("Small Pyramid 3", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(-1.3f, 1.3f, -1.3f), pPyramid);
@@ -851,26 +853,26 @@ namespace Azul
 	void Game::LoadMovingObjects()
 	{
 		pCube1 = GameObjectManager::SpawnObject("Small Cube 1", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(3.f, 10.f, -30.f));
-		pCube2 = GameObjectManager::SpawnObject("Small Cube 1", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(0.f, 10.f, -30.f));
-		pCube3 = GameObjectManager::SpawnObject("Small Cube 1", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(-3.f, 10.f, -30.f));
+		pCube2 = GameObjectManager::SpawnObject("Small Cube 2", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(0.f, 10.f, -30.f));
+		pCube3 = GameObjectManager::SpawnObject("Small Cube 3", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(-3.f, 10.f, -30.f));
 
 		pCube1->SetRelativeScale(Vec3(.8f, .8f, .8f));
 		pCube2->SetRelativeScale(Vec3(.8f, .8f, .8f));
 		pCube3->SetRelativeScale(Vec3(.8f, .8f, .8f));
 
-		pTexture1 = GameObjectManager::SpawnObject("Texture Block",
+		pTexture1 = GameObjectManager::SpawnObject("Texture Block 1",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Rocks)),
 			Vec3(-10.f, 0.f, -14.f)
 		);
 		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
 
-		pTexture2 = GameObjectManager::SpawnObject("Texture Block",
+		pTexture2 = GameObjectManager::SpawnObject("Texture Block 2",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Stone)),
 			Vec3(-8.f, 0.f, -16.f)
 		);
 		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
 
-		pTexture3 = GameObjectManager::SpawnObject("Texture Block",
+		pTexture3 = GameObjectManager::SpawnObject("Texture Block 3",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Brick)),
 			Vec3(-12.f, 0.f, -12.f)
 		);
@@ -879,19 +881,19 @@ namespace Azul
 
 	void Game::LoadInstancedObjects()
 	{
-		GameObject* pInst1 = GameObjectManager::SpawnObject("Instance Cross",
+		GameObject* pInst1 = GameObjectManager::SpawnObject("Instance Cross 1",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Rocks)),
 			Vec3(-15.f, 0.f, 0.f)
 		);
 		pInst1->SetRelativeScale(Vec3(0.5f, 0.5f, 0.1f));
 
-		GameObject* pInst2 = GameObjectManager::SpawnObject("Instance Cross",
+		GameObject* pInst2 = GameObjectManager::SpawnObject("Instance Cross 2",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::LightTexture), TextureObjectManager::Find(TextureObject::Name::Duckweed)),
 			Vec3(-15.f, 0.f, 3.f)
 		);
 		pInst2->SetRelativeScale(Vec3(0.5f, 0.5f, 0.1f));
 
-		GameObject* pInst3 = GameObjectManager::SpawnObject("Instance Cross",
+		GameObject* pInst3 = GameObjectManager::SpawnObject("Instance Cross 3",
 			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Brick)),
 			Vec3(-15.f, 0.f, -3.f)
 		);
@@ -1024,7 +1026,75 @@ namespace Azul
 		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
 
 		//UpdateTimerDemo(deltaTime);
+		bool open = true;
+		ImGui::SetNextWindowPos(ImVec2(0, 0));
+		ImGui::SetNextWindowSize(ImVec2((float)(Engine::GetWindowWidth() / 5), (float)Engine::GetWindowHeight()));
+		ImGui::Begin("Objects", &open);
+
+		bool selection = false;
+		TreeBuildHelper(GameObjectManager::GetAllObjects().GetRoot(), selection);
+
+		ImGui::End();
+
+		ImGui::ShowStyleEditor();
+		ImGui::ShowUserGuide();
 	}
+
+	void Game::TreeBuildHelper(PCSNode* pNode, bool& selection)
+	{
+		if (pNode)
+		{
+			char* name = new char[64];
+			pNode->GetName(name, 64);
+
+			if (pNode->GetChild())
+			{
+				bool treeOpen = ImGui::TreeNode(name);
+
+				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) && !selection)
+				{
+					selection = true;
+
+					GameObject* pObject = GameObjectManager::FindObject(name);
+
+					if (pObject)
+					{
+						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
+							pObject->GetLocation() + Vec3(0, 8, 15));
+					}
+				}
+
+				if (treeOpen)
+				{
+					TreeBuildHelper(pNode->GetChild(), selection);
+
+					ImGui::TreePop();
+				}
+			}
+			else
+			{
+				if (ImGui::Selectable(name))
+				{
+				}
+				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) && !selection)
+				{
+					selection = true;
+
+					GameObject* pObject = GameObjectManager::FindObject(name);
+
+					if (pObject)
+					{
+						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
+							pObject->GetLocation() + Vec3(0, 8, 15));
+					}
+				}
+			}
+
+			delete name;
+
+			TreeBuildHelper(pNode->GetNextSibling(), selection);
+		}
+	};
 
 	void Game::UpdateTimerDemo(float deltaTime)
 	{
@@ -1051,16 +1121,11 @@ namespace Azul
 		return *pInstance;
 	}
 
-	void Game::ClearDepthStencilBuffer()
+	void Game::ClearDepthStencilBuffer(const Vec4& color)
 	{
-#ifdef _DEBUG
-		const Vec4 ClearColor = Azul::Colors::SkyBlue;
-#else
-		const Vec4 ClearColor = Azul::Colors::DarkDarkGrey;
-#endif
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
-		pContext->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&ClearColor);
+		pContext->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&color);
 		pContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, (FLOAT)clearDepth, (UINT8)clearStencil);
 	}
 }

@@ -1255,13 +1255,13 @@ public:
 //============================================
 #if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
 
-#define AZUL_PLACEMENT_NEW_BEGIN	assert(true/*MemTrace::GetPlacementNewCount() == 0*/); \
+#define AZUL_PLACEMENT_NEW_BEGIN	assert(MemTrace::GetPlacementNewCount() == 0); \
 												__pragma(push_macro("new")) \
 												MemTrace::IncrementPlacementNewCount();
 
 #define AZUL_PLACEMENT_NEW_END      __pragma(pop_macro("new")) \
 												MemTrace::DecrementPlacementNewCount(); \
-												assert(true/*MemTrace::GetPlacementNewCount() == 0*/);
+												assert(MemTrace::GetPlacementNewCount() == 0);
 #else
 #define AZUL_PLACEMENT_NEW_BEGIN	__pragma(push_macro("new"))
 
