@@ -1025,6 +1025,9 @@ namespace Azul
 
 		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
 
+		float wh = (float)Engine::GetWindowHeight();
+		float ww = (float)Engine::GetWindowWidth();
+
 		//UpdateTimerDemo(deltaTime);
 		bool open = true;
 		ImGui::SetNextWindowPos(ImVec2(0, 0));
@@ -1033,11 +1036,25 @@ namespace Azul
 
 		bool selection = false;
 		TreeBuildHelper(GameObjectManager::GetAllObjects().GetRoot(), selection);
-
 		ImGui::End();
 
 		ImGui::ShowStyleEditor();
 		ImGui::ShowUserGuide();
+
+		ImGui::SetNextWindowPos(ImVec2(ww / 5.f, wh - (wh / 4.f)));
+		ImGui::SetNextWindowSize(ImVec2(ww - (ww / 5.f), wh / 4.f));
+		ImGui::Begin("Prototypes");
+		static bool cratePressed = false;
+		ImGui::Button("Crate 2");
+		ImGui::Button("Crate 3", { 50.f, 50.f });
+		ImGui::SmallButton("blah");
+		ImGui::End();
+	}
+
+	bool IsGoToRequested()
+	{
+		return ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) ||
+			ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
 	}
 
 	void Game::TreeBuildHelper(PCSNode* pNode, bool& selection)
@@ -1051,7 +1068,7 @@ namespace Azul
 			{
 				bool treeOpen = ImGui::TreeNode(name);
 
-				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) && !selection)
+				if (IsGoToRequested() && !selection)
 				{
 					selection = true;
 
@@ -1076,7 +1093,7 @@ namespace Azul
 				if (ImGui::Selectable(name))
 				{
 				}
-				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) && !selection)
+				if (IsGoToRequested() && !selection)
 				{
 					selection = true;
 
