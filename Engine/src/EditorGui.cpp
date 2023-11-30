@@ -9,9 +9,26 @@
 #include "CameraManager.h"
 #include "GameObject.h"
 #include "TextureObjectManager.h"
+#include "Viewport.h"
 
 namespace Azul
 {
+	void EditorGui::AlignForWidth(float width, float alignment)
+	{
+		float avail = ImGui::GetContentRegionAvail().x;
+		float off = (avail - width) * alignment;
+		if (off > 0.0f)
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+	}
+
+	void EditorGui::AlignForHeight(float height, float alignment)
+	{
+		float avail = ImGui::GetContentRegionAvail().y;
+		float off = (avail - height) * alignment;
+		if (off > 0.0f)
+			ImGui::SetCursorPosY(ImGui::GetCursorPosY() + off);
+	}
+
 	void EditorGui::Update()
 	{
 		EditorGui& self = GetInstance();
@@ -46,20 +63,30 @@ namespace Azul
 		ImGui::ShowUserGuide();
 
 		ImGui::Begin("World", &open);
-		ImGui::Text("width: %d, height: %d", worldWidth, worldHeight);
 
-		if (ImGui::Button("bigify"))
+		//if (ImGui::Button("bigify"))
+		//{
+		//	self.pWorldViewport->Resize(self.pWorldViewport->GetWidth() + 10, self.pWorldViewport->GetHeight() + 10);
+		//}
+
+		const UINT padding = 20;
+
+		self.pWorldViewport->ResizeByWidth((UINT)ImGui::GetWindowWidth() - padding);
+
+		if (ImGui::GetWindowHeight() < self.pWorldViewport->GetHeight())
 		{
-			InitializeWindow(worldWidth + 10, worldHeight + 10);
+			self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
 		}
 
+		AlignForWidth((float)self.pWorldViewport->GetWidth());
+		AlignForHeight((float)self.pWorldViewport->GetHeight());
+		//ImGui::Text("width: %d, height: %d", self.pWorldViewport->GetWidth(), self.pWorldViewport->GetHeight());
 		ImGui::Image(
-			self.shaderResourceViewMap,
-			ImVec2((float)worldWidth, (float)worldHeight),
-			ImVec2(0.0f, 0.0f),
-			ImVec2(1.0f, 1.0f),
+			self.pWorldViewport->GetShaderResourceView(),
+			ImVec2((float)self.pWorldViewport->GetWidth(), (float)self.pWorldViewport->GetHeight()),
+			ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
 			ImVec4(1.0f, 1.0f, 1.0f, 1.0f),
-			ImGui::GetStyleColorVec4(ImGuiCol_Border)
+			ImGui::GetStyleColorVec4(ImGuiCol_::ImGuiCol_BorderShadow)
 		);
 		ImGui::End();
 	}
@@ -141,89 +168,10 @@ namespace Azul
 		ImGui_ImplWin32_Init(Engine::GetWindowHandle());
 		ImGui_ImplDX11_Init(Engine::GetDevice(), Engine::GetContext());
 
-		D3D11_TEXTURE2D_DESC textureDesc;
-		D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
-		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
-
-		///////////////////////// Map's Texture
-		// Initialize the  texture description.
-		ZeroMemory(&textureDesc, sizeof(textureDesc));
-
 		EditorGui& self = GetInstance();
+
 		static const UINT scaleDiv = 2;
-		self.worldWidth = Engine::GetWindowWidth() / scaleDiv;
-		self.worldHeight = Engine::GetWindowHeight() / scaleDiv;
-
-		// Setup the texture description.
-		// We will have our map be a square
-		// We will need to have this texture bound as a render target AND a shader resource
-		textureDesc.Width = self.worldWidth;
-		textureDesc.Height = self.worldHeight;
-		textureDesc.MipLevels = 1;
-		textureDesc.ArraySize = 1;
-		textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-		textureDesc.SampleDesc.Count = 1;
-		textureDesc.Usage = D3D11_USAGE_DEFAULT;
-		textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-		textureDesc.CPUAccessFlags = 0;
-		textureDesc.MiscFlags = 0;
-
-		// Create the texture
-		Engine::GetDevice()->CreateTexture2D(&textureDesc, NULL, &self.renderTargetTextureMap);
-
-		/////////////////////// Map's Render Target
-		// Setup the description of the render target view.
-		renderTargetViewDesc.Format = textureDesc.Format;
-		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-		renderTargetViewDesc.Texture2D.MipSlice = 0;
-
-		// Create the render target view.
-		Engine::GetDevice()->CreateRenderTargetView(self.renderTargetTextureMap, &renderTargetViewDesc, &self.renderTargetViewMap);
-
-		/////////////////////// Map's Shader Resource View
-		// Setup the description of the shader resource view.
-		shaderResourceViewDesc.Format = textureDesc.Format;
-		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
-		shaderResourceViewDesc.Texture2D.MipLevels = 1;
-
-		// Create the shader resource view.
-		Engine::GetDevice()->CreateShaderResourceView(self.renderTargetTextureMap, &shaderResourceViewDesc, &self.shaderResourceViewMap);
-
-		D3D11_TEXTURE2D_DESC depthStencilBufferDesc{ 0 };
-		depthStencilBufferDesc.ArraySize = 1;
-		depthStencilBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		depthStencilBufferDesc.CPUAccessFlags = 0;
-		depthStencilBufferDesc.Format = DXGI_FORMAT_D32_FLOAT;
-		depthStencilBufferDesc.Width = self.worldWidth;
-		depthStencilBufferDesc.Height = self.worldHeight;
-		depthStencilBufferDesc.MipLevels = 1;
-		depthStencilBufferDesc.SampleDesc.Count = 1;
-		depthStencilBufferDesc.SampleDesc.Quality = 0;
-		depthStencilBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-
-		HRESULT hr = Engine::GetDevice()->CreateTexture2D(&depthStencilBufferDesc, nullptr, &self.pDepthStencilBuffer);
-		assert(SUCCEEDED(hr));
-
-		hr = Engine::GetDevice()->CreateDepthStencilView(self.pDepthStencilBuffer, nullptr, &self.pDepthStencilView);
-		assert(SUCCEEDED(hr));
-
-		D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc{ 0 };
-		depthStencilStateDesc.DepthEnable = TRUE;
-		depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
-		depthStencilStateDesc.StencilEnable = FALSE;
-
-		hr = Engine::GetDevice()->CreateDepthStencilState(&depthStencilStateDesc, &self.pDepthStencilState);
-		assert(SUCCEEDED(hr));
-		static_cast<void>(hr);
-
-		self.viewport.Width = static_cast<float>(self.worldWidth);
-		self.viewport.Height = static_cast<float>(self.worldHeight);
-		self.viewport.TopLeftX = 0.0f;
-		self.viewport.TopLeftY = 0.0f;
-		self.viewport.MinDepth = 0.0f;
-		self.viewport.MaxDepth = 1.0f;
+		self.pWorldViewport = new Viewport(Engine::GetWindowWidth() / scaleDiv, Engine::GetWindowHeight() / scaleDiv);
 	}
 
 	void EditorGui::NewFrame()
@@ -241,129 +189,18 @@ namespace Azul
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-		Engine::GetContext()->RSSetViewports(1, &self.viewport);
-
-		Engine::GetContext()->OMSetRenderTargets(1, &self.renderTargetViewMap, self.pDepthStencilView);
-
-		// Set (point to ) the Depth functions to be used
-		Engine::GetContext()->OMSetDepthStencilState(self.pDepthStencilState, 1);
-
-		//// Now clear the render target
-		Vec4 col = Vec4(1, .5, .5, 1);
-		Engine::GetContext()->ClearRenderTargetView(self.renderTargetViewMap, (const FLOAT*)&col);
-		float clearDepth = 1.0f;
-		uint8_t clearStencil = 0;
-		Engine::GetContext()->ClearDepthStencilView(self.pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, (FLOAT)clearDepth, (UINT8)clearStencil);
-
+		self.pWorldViewport->Activate();
 		GameObjectManager::Draw();
 	}
 
 	void EditorGui::Cleanup()
 	{
 		EditorGui& self = GetInstance();
-		SafeRelease(self.renderTargetTextureMap);
-		SafeRelease(self.renderTargetViewMap);
-		SafeRelease(self.shaderResourceViewMap);
-		SafeRelease(self.pDepthStencilBuffer);
-		SafeRelease(self.pDepthStencilView);
-		SafeRelease(self.pDepthStencilState);
+		delete self.pWorldViewport;
 
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 		ImGui::DestroyContext();
-	}
-
-	void EditorGui::InitializeWindow(UINT width, UINT height)
-	{
-		EditorGui& self = GetInstance();
-		self.worldWidth = width;
-		self.worldHeight = height;
-
-		SafeRelease(self.renderTargetTextureMap);
-		SafeRelease(self.renderTargetViewMap);
-		SafeRelease(self.shaderResourceViewMap);
-		SafeRelease(self.pDepthStencilBuffer);
-		SafeRelease(self.pDepthStencilView);
-		SafeRelease(self.pDepthStencilState);
-
-		D3D11_TEXTURE2D_DESC textureDesc;
-		D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
-		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
-
-		///////////////////////// Map's Texture
-		// Initialize the  texture description.
-		ZeroMemory(&textureDesc, sizeof(textureDesc));
-
-		// Setup the texture description.
-		// We will have our map be a square
-		// We will need to have this texture bound as a render target AND a shader resource
-		textureDesc.Width = self.worldWidth;
-		textureDesc.Height = self.worldHeight;
-		textureDesc.MipLevels = 1;
-		textureDesc.ArraySize = 1;
-		textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-		textureDesc.SampleDesc.Count = 1;
-		textureDesc.Usage = D3D11_USAGE_DEFAULT;
-		textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-		textureDesc.CPUAccessFlags = 0;
-		textureDesc.MiscFlags = 0;
-
-		// Create the texture
-		Engine::GetDevice()->CreateTexture2D(&textureDesc, NULL, &self.renderTargetTextureMap);
-
-		/////////////////////// Map's Render Target
-		// Setup the description of the render target view.
-		renderTargetViewDesc.Format = textureDesc.Format;
-		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-		renderTargetViewDesc.Texture2D.MipSlice = 0;
-
-		// Create the render target view.
-		Engine::GetDevice()->CreateRenderTargetView(self.renderTargetTextureMap, &renderTargetViewDesc, &self.renderTargetViewMap);
-
-		/////////////////////// Map's Shader Resource View
-		// Setup the description of the shader resource view.
-		shaderResourceViewDesc.Format = textureDesc.Format;
-		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
-		shaderResourceViewDesc.Texture2D.MipLevels = 1;
-
-		// Create the shader resource view.
-		Engine::GetDevice()->CreateShaderResourceView(self.renderTargetTextureMap, &shaderResourceViewDesc, &self.shaderResourceViewMap);
-
-		D3D11_TEXTURE2D_DESC depthStencilBufferDesc{ 0 };
-		depthStencilBufferDesc.ArraySize = 1;
-		depthStencilBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		depthStencilBufferDesc.CPUAccessFlags = 0;
-		depthStencilBufferDesc.Format = DXGI_FORMAT_D32_FLOAT;
-		depthStencilBufferDesc.Width = self.worldWidth;
-		depthStencilBufferDesc.Height = self.worldHeight;
-		depthStencilBufferDesc.MipLevels = 1;
-		depthStencilBufferDesc.SampleDesc.Count = 1;
-		depthStencilBufferDesc.SampleDesc.Quality = 0;
-		depthStencilBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-
-		HRESULT hr = Engine::GetDevice()->CreateTexture2D(&depthStencilBufferDesc, nullptr, &self.pDepthStencilBuffer);
-		assert(SUCCEEDED(hr));
-
-		hr = Engine::GetDevice()->CreateDepthStencilView(self.pDepthStencilBuffer, nullptr, &self.pDepthStencilView);
-		assert(SUCCEEDED(hr));
-
-		D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc{ 0 };
-		depthStencilStateDesc.DepthEnable = TRUE;
-		depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
-		depthStencilStateDesc.StencilEnable = FALSE;
-
-		hr = Engine::GetDevice()->CreateDepthStencilState(&depthStencilStateDesc, &self.pDepthStencilState);
-		assert(SUCCEEDED(hr));
-		static_cast<void>(hr);
-
-		self.viewport.Width = static_cast<float>(self.worldWidth);
-		self.viewport.Height = static_cast<float>(self.worldHeight);
-		self.viewport.TopLeftX = 0.0f;
-		self.viewport.TopLeftY = 0.0f;
-		self.viewport.MinDepth = 0.0f;
-		self.viewport.MaxDepth = 1.0f;
 	}
 
 	EditorGui& EditorGui::GetInstance()
