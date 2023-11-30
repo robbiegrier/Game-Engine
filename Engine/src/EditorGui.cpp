@@ -71,15 +71,22 @@ namespace Azul
 
 		const UINT padding = 20;
 
-		self.pWorldViewport->ResizeByWidth((UINT)ImGui::GetWindowWidth() - padding);
+		static ImVec2 windowSize = ImGui::GetWindowSize();
+		ImVec2 windowSizeTmp = ImGui::GetWindowSize();
 
-		if (ImGui::GetWindowHeight() < self.pWorldViewport->GetHeight())
+		if ((fabs(windowSize.x) - fabs(windowSizeTmp.x) > MATH_TOLERANCE) || (fabs(windowSize.y) - fabs(windowSizeTmp.y) > MATH_TOLERANCE))
 		{
-			self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
+			self.pWorldViewport->ResizeByWidth((UINT)ImGui::GetWindowWidth() - padding);
+
+			if (ImGui::GetWindowHeight() < self.pWorldViewport->GetHeight())
+			{
+				self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
+			}
+
+			AlignForWidth((float)self.pWorldViewport->GetWidth());
+			AlignForHeight((float)self.pWorldViewport->GetHeight());
 		}
 
-		AlignForWidth((float)self.pWorldViewport->GetWidth());
-		AlignForHeight((float)self.pWorldViewport->GetHeight());
 		//ImGui::Text("width: %d, height: %d", self.pWorldViewport->GetWidth(), self.pWorldViewport->GetHeight());
 		ImGui::Image(
 			self.pWorldViewport->GetShaderResourceView(),
