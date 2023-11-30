@@ -84,8 +84,8 @@ namespace Azul
 
 		// Display Parameters
 		const char* pName;
-		const int windowWidth;
-		const int windowHeight;
+		int windowWidth;
+		int windowHeight;
 		BOOL vsync;
 
 		// FPS sampling for display

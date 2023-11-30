@@ -64,17 +64,13 @@ namespace Azul
 
 		ImGui::Begin("World", &open);
 
-		//if (ImGui::Button("bigify"))
-		//{
-		//	self.pWorldViewport->Resize(self.pWorldViewport->GetWidth() + 10, self.pWorldViewport->GetHeight() + 10);
-		//}
-
 		const UINT padding = 20;
 
-		static ImVec2 windowSize = ImGui::GetWindowSize();
+		static ImVec2 windowSize = ImVec2{ -1.f, -1.f };
 		ImVec2 windowSizeTmp = ImGui::GetWindowSize();
+		//ImVec2 windowSizeTmp = ImVec2((float)self.pWorldViewport->GetWidth() + padding, (float)self.pWorldViewport->GetHeight() + padding);
 
-		if ((fabs(windowSize.x) - fabs(windowSizeTmp.x) > MATH_TOLERANCE) || (fabs(windowSize.y) - fabs(windowSizeTmp.y) > MATH_TOLERANCE))
+		if ((fabs(fabs(windowSize.x) - fabs(windowSizeTmp.x)) > MATH_TOLERANCE) || (fabs(fabs(windowSize.y) - fabs(windowSizeTmp.y)) > MATH_TOLERANCE))
 		{
 			self.pWorldViewport->ResizeByWidth((UINT)ImGui::GetWindowWidth() - padding);
 
@@ -82,10 +78,12 @@ namespace Azul
 			{
 				self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
 			}
-
-			AlignForWidth((float)self.pWorldViewport->GetWidth());
-			AlignForHeight((float)self.pWorldViewport->GetHeight());
 		}
+
+		windowSize = ImGui::GetWindowSize();
+
+		AlignForWidth((float)self.pWorldViewport->GetWidth());
+		AlignForHeight((float)self.pWorldViewport->GetHeight());
 
 		//ImGui::Text("width: %d, height: %d", self.pWorldViewport->GetWidth(), self.pWorldViewport->GetHeight());
 		ImGui::Image(

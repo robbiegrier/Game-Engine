@@ -234,7 +234,7 @@ namespace Azul
 				Update(deltaTime);
 
 				// Draw
-				ClearDepthStencilBuffer({ 0.529411793f, 0.807843208f, 0.921568692f, 1.000000000f });
+				ClearDepthStencilBuffer({ 0.1f, 0.1f, 0.1f, 1.000000000f });
 
 				if (!editorMode)
 				{
@@ -415,8 +415,62 @@ namespace Azul
 	void Engine::Resize(unsigned int w, unsigned int h)
 	{
 		Engine& self = GetEngineInstance();
-		self.g_ResizeWidth = w;
-		self.g_ResizeHeight = h;
+
+		const float aspectRatio = static_cast<float>(w) / static_cast<float>(h);
+
+		self.windowWidth = w;
+		self.windowHeight = (int)(static_cast<float>(w) / aspectRatio);
+
+		if (self.pSwapChain)
+		{
+			GetContext()->OMSetRenderTargets(0, 0, 0);
+
+			// Release all outstanding references to the swap chain's buffers.
+			//self.pRenderTargetView->Release();
+
+			SafeRelease(self.pRenderTargetView);
+
+			HRESULT hr;
+			// Preserve the existing buffer count and format.
+			// Automatically choose the width and height to match the client rect for HWNDs.
+			hr = self.pSwapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0);
+
+			// Perform error handling here!
+
+			// Get buffer and create a render-target-view.
+			SafeRelease(self.pDepthStencilBuffer);
+			ID3D11Texture2D* pBuffer;
+			hr = self.pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBuffer);
+			// Perform error handling here!
+
+			hr = GetDevice()->CreateRenderTargetView(pBuffer, NULL, &self.pRenderTargetView);
+			// Perform error handling here!
+			SafeRelease(pBuffer);
+			//pBuffer->Release();
+
+			GetContext()->OMSetRenderTargets(1, &self.pRenderTargetView, NULL);
+
+			SafeRelease(self.pDepthStencilView);
+			SafeRelease(self.pDepthStencilBuffer);
+			SafeRelease(self.pDepthStencilState);
+			SafeRelease(self.pRasterizerState);
+
+			//self.InitSwapChain();
+			//self.InitBackBuffer();
+			self.InitDepthStencilBuffer();
+			self.InitDepthStencilState();
+			self.InitRasterizerState();
+			//InitViewport();
+
+			// Set up the viewport.
+			self.viewport.Width = (float)self.windowWidth;
+			self.viewport.Height = (float)self.windowHeight;
+			self.viewport.MinDepth = 0.0f;
+			self.viewport.MaxDepth = 1.0f;
+			self.viewport.TopLeftX = 0;
+			self.viewport.TopLeftY = 0;
+			GetContext()->RSSetViewports(1, &self.viewport);
+		}
 	}
 
 	ID3D11DepthStencilView* Engine::GetDepthStencilView()

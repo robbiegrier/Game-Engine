@@ -129,7 +129,7 @@ namespace Azul
 			if (wParam == SIZE_MINIMIZED)
 				return 0;
 			Engine::Resize((UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
-			break;
+			return 1;
 			//case WM_SYSCOMMAND:
 			//	if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
 			//		return 0;
