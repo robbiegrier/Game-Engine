@@ -81,6 +81,10 @@ namespace Azul
 		void SetName(TextureObject::Name _name);
 		const char* NameToString();
 
+		ID3D11ShaderResourceView* GetResourceView() const { return poTextureRV; }
+		int GetWidth() const { return width; }
+		int GetHeight() const { return height; }
+
 	protected:
 		TextureObject::Name name;
 		ID3D11ShaderResourceView* poTextureRV;
@@ -89,6 +93,8 @@ namespace Azul
 		int TexResourceSlot;
 		int SamplerSlot;
 		int refCount = 0;
+		int width;
+		int height;
 	};
 }
 

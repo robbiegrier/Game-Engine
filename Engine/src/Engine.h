@@ -28,6 +28,7 @@ namespace Azul
 		static ID3D11DeviceContext* GetContext();
 		static HWND GetWindowHandle();
 		static void Resize(unsigned int w, unsigned int h);
+		static ID3D11DepthStencilView* GetDepthStencilView();
 
 	protected:
 		// Big four

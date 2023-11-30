@@ -215,7 +215,7 @@ namespace Azul
 		CameraManager::Create();
 
 		Camera* pCamera = CameraManager::Add(Camera::Name::Default, new Camera());
-		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), animPos + (Vec3(0, 2, 0)), animPos + Vec3(-10, 2, 0));
+		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 0), Vec3(-30, 30, 30));
 		pCamera->SetPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::High, new Camera());

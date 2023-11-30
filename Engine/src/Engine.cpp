@@ -223,14 +223,27 @@ namespace Azul
 				previousTime = currentTime;
 				SetDefaultTargetMode();
 
+				static bool editorMode = true;
+
 				// Update
-				EditorGui::NewFrame();
+				if (editorMode)
+				{
+					EditorGui::NewFrame();
+				}
+
 				Update(deltaTime);
 
 				// Draw
 				ClearDepthStencilBuffer({ 0.529411793f, 0.807843208f, 0.921568692f, 1.000000000f });
-				Render();
-				EditorGui::Draw();
+
+				if (!editorMode)
+				{
+					Render();
+				}
+				else
+				{
+					EditorGui::Draw();
+				}
 
 				// Present
 				LockFramerate(engineTime);
@@ -404,6 +417,11 @@ namespace Azul
 		Engine& self = GetEngineInstance();
 		self.g_ResizeWidth = w;
 		self.g_ResizeHeight = h;
+	}
+
+	ID3D11DepthStencilView* Engine::GetDepthStencilView()
+	{
+		return GetEngineInstance().pDepthStencilView;
 	}
 
 	Engine& Engine::GetEngineInstance()
