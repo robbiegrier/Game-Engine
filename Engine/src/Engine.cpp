@@ -1,12 +1,8 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
-
 #include "Engine.h"
 #include "MathEngine.h"
-
-#include "imgui.h"
-#include "backends/imgui_impl_win32.h"
-#include "backends/imgui_impl_dx11.h"
+#include "EditorGui.h"
 
 LPCSTR g_WindowClassName = "EngineWindowClass";
 
@@ -38,6 +34,7 @@ namespace Azul
 	{
 		InitApplication(pInstanceHandle, cmdShow);
 		InitDirectX();
+		EditorGui::Initialize();
 
 		return Run();
 	}
@@ -56,7 +53,6 @@ namespace Azul
 		InitDepthStencilState();
 		InitRasterizerState();
 		InitViewport();
-		ImGui_ImplDX11_Init(pDevice, pContext);
 	}
 
 	int Engine::InitWindowClass(HINSTANCE pInstanceHandle)
@@ -92,20 +88,6 @@ namespace Azul
 
 		ShowWindow(pWindowHandle, cmdShow);
 		UpdateWindow(pWindowHandle);
-
-		// Setup Dear ImGui context
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-		// Setup Dear ImGui style
-		ImGui::StyleColorsDark();
-		//ImGui::StyleColorsLight();
-
-		// Setup Platform/Renderer backends
-		ImGui_ImplWin32_Init(pWindowHandle);
 	}
 
 	void Engine::InitSwapChain()
@@ -225,10 +207,6 @@ namespace Azul
 			return -1;
 		}
 
-		/*bool show_demo_window = true;
-		bool show_another_window = false;*/
-		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
 		while (msg.message != WM_QUIT)
 		{
 			engineTime.Tic();
@@ -243,67 +221,19 @@ namespace Azul
 				DWORD currentTime = timeGetTime();
 				float deltaTime = (currentTime - previousTime) / 1000.0f;
 				previousTime = currentTime;
-
-				// Cap the delta time to the max time step (useful if your
-				// debugging and you don't want the deltaTime value to explode.
-				//deltaTime = std::min<float>(deltaTime, maxTimeStep);
 				SetDefaultTargetMode();
 
-				// Handle window resize (we don't resize directly in the WM_SIZE handler)
-			/*	if (g_ResizeWidth != 0 && g_ResizeHeight != 0)
-				{
-					CleanupRenderTarget();
-					pSwapChain->ResizeBuffers(0, g_ResizeWidth, g_ResizeHeight, DXGI_FORMAT_UNKNOWN, 0);
-					g_ResizeWidth = g_ResizeHeight = 0;
-					CreateRenderTarget();
-				}*/
-
-				ImGui_ImplDX11_NewFrame();
-				ImGui_ImplWin32_NewFrame();
-				ImGui::NewFrame();
-
-				//if (show_demo_window)
-				//	ImGui::ShowDemoWindow(&show_demo_window); // Show demo window! :)
-				//{
-				//	static float f = 0.0f;
-				//	static int counter = 0;
-
-				//	ImGui::Begin("Objects");
-				//	ImGui::Text("Welcome to the editor!");
-				//	ImGui::Checkbox("Demo Window", &show_demo_window);
-				//	ImGui::Checkbox("Another Window", &show_another_window);
-
-				//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-				//	ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-				//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-				//		counter++;
-				//	ImGui::SameLine();
-				//	ImGui::Text("counter = %d", counter);
-
-				//	ImGuiIO& io = ImGui::GetIO();
-				//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-				//	ImGui::End();
-				//}
-
-				//if (show_another_window)
-				//{
-				//	ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-				//	ImGui::Text("Hello from another window!");
-				//	if (ImGui::Button("Close Me"))
-				//		show_another_window = false;
-				//	ImGui::End();
-				//}
-
+				// Update
+				EditorGui::NewFrame();
 				Update(deltaTime);
-				Vec4 color = Vec4(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-				ClearDepthStencilBuffer(color);
+
+				// Draw
+				ClearDepthStencilBuffer({ 0.529411793f, 0.807843208f, 0.921568692f, 1.000000000f });
 				Render();
-				ImGui::Render();
+				EditorGui::Draw();
 
-				ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
+				// Present
 				LockFramerate(engineTime);
-
 				Present();
 				UpdateWindowName(deltaTime);
 			}
@@ -464,6 +394,11 @@ namespace Azul
 		return GetEngineInstance().pContext;
 	}
 
+	HWND Engine::GetWindowHandle()
+	{
+		return GetEngineInstance().pWindowHandle;
+	}
+
 	void Engine::Resize(unsigned int w, unsigned int h)
 	{
 		Engine& self = GetEngineInstance();
@@ -487,9 +422,7 @@ namespace Azul
 		SafeRelease(pSwapChain);
 		SafeRelease(pContext);
 
-		ImGui_ImplDX11_Shutdown();
-		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext();
+		EditorGui::Cleanup();
 
 #ifdef _DEBUG
 		HRESULT hr = S_OK;

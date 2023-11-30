@@ -39,8 +39,6 @@
 #include "GameObjectBasic.h"
 #include "Anim.h"
 #include "ClipManager.h"
-#include "imgui.h"
-#include "PCSTreeForwardIterator.h"
 
 namespace Azul
 {
@@ -598,6 +596,7 @@ namespace Azul
 		//MeshManager::Dump();
 		//CameraManager::Dump();
 		//ClipManager::Dump();
+
 		return true;
 	}
 
@@ -1025,93 +1024,8 @@ namespace Azul
 
 		pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
 
-		float wh = (float)Engine::GetWindowHeight();
-		float ww = (float)Engine::GetWindowWidth();
-
 		//UpdateTimerDemo(deltaTime);
-		bool open = true;
-		ImGui::SetNextWindowPos(ImVec2(0, 0));
-		ImGui::SetNextWindowSize(ImVec2((float)(Engine::GetWindowWidth() / 5), (float)Engine::GetWindowHeight()));
-		ImGui::Begin("Objects", &open);
-
-		bool selection = false;
-		TreeBuildHelper(GameObjectManager::GetAllObjects().GetRoot(), selection);
-		ImGui::End();
-
-		ImGui::ShowStyleEditor();
-		ImGui::ShowUserGuide();
-
-		ImGui::SetNextWindowPos(ImVec2(ww / 5.f, wh - (wh / 4.f)));
-		ImGui::SetNextWindowSize(ImVec2(ww - (ww / 5.f), wh / 4.f));
-		ImGui::Begin("Prototypes");
-		static bool cratePressed = false;
-		ImGui::Button("Crate 2");
-		ImGui::Button("Crate 3", { 50.f, 50.f });
-		ImGui::SmallButton("blah");
-		ImGui::End();
 	}
-
-	bool IsGoToRequested()
-	{
-		return ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Middle) ||
-			ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
-	}
-
-	void Game::TreeBuildHelper(PCSNode* pNode, bool& selection)
-	{
-		if (pNode)
-		{
-			char* name = new char[64];
-			pNode->GetName(name, 64);
-
-			if (pNode->GetChild())
-			{
-				bool treeOpen = ImGui::TreeNode(name);
-
-				if (IsGoToRequested() && !selection)
-				{
-					selection = true;
-
-					GameObject* pObject = GameObjectManager::FindObject(name);
-
-					if (pObject)
-					{
-						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
-							pObject->GetLocation() + Vec3(0, 8, 15));
-					}
-				}
-
-				if (treeOpen)
-				{
-					TreeBuildHelper(pNode->GetChild(), selection);
-
-					ImGui::TreePop();
-				}
-			}
-			else
-			{
-				if (ImGui::Selectable(name))
-				{
-				}
-				if (IsGoToRequested() && !selection)
-				{
-					selection = true;
-
-					GameObject* pObject = GameObjectManager::FindObject(name);
-
-					if (pObject)
-					{
-						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
-							pObject->GetLocation() + Vec3(0, 8, 15));
-					}
-				}
-			}
-
-			delete name;
-
-			TreeBuildHelper(pNode->GetNextSibling(), selection);
-		}
-	};
 
 	void Game::UpdateTimerDemo(float deltaTime)
 	{

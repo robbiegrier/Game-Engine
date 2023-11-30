@@ -43,8 +43,6 @@ namespace Azul
 		void UpdateDemo(float deltaTime);
 		void UpdateTimerDemo(float deltaTime);
 
-		void TreeBuildHelper(class PCSNode* pNode, bool& selection);
-
 		// Singleton
 		static Game& GetInstance();
 		static Game* pInstance;

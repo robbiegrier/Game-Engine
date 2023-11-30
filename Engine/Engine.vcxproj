@@ -296,6 +296,7 @@
     <ClInclude Include="src\CrossMesh.h" />
     <ClInclude Include="src\CubeMesh.h" />
     <ClInclude Include="src\DiamondMesh.h" />
+    <ClInclude Include="src\EditorGui.h" />
     <ClInclude Include="src\EngineUtils.h" />
     <ClInclude Include="src\GameObjectAnim.h" />
     <ClInclude Include="src\GameObjectAnimSkeleton.h" />
@@ -534,6 +535,7 @@
     <ClCompile Include="src\CrossMesh.cpp" />
     <ClCompile Include="src\CubeMesh.cpp" />
     <ClCompile Include="src\DiamondMesh.cpp" />
+    <ClCompile Include="src\EditorGui.cpp" />
     <ClCompile Include="src\EngineUtils.cpp" />
     <ClCompile Include="src\GameObjectAnim.cpp" />
     <ClCompile Include="src\GameObjectAnimSkeleton.cpp" />
