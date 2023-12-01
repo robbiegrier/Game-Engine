@@ -47,6 +47,9 @@ namespace Azul
 		// Get the low level graphics object
 		GraphicsObject* GetGraphicsObject() const;
 
+		void RenderShell();
+		void SetShellColor(const Vec4& inColor);
+
 		void SetRenderShell(bool render);
 		static void SetRenderShellGlobal(bool render);
 

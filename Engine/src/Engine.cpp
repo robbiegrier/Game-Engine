@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "MathEngine.h"
 #include "EditorGui.h"
+#include "CameraManager.h"
 
 LPCSTR g_WindowClassName = "EngineWindowClass";
 
@@ -417,7 +418,7 @@ namespace Azul
 		const float aspectRatio = static_cast<float>(w) / static_cast<float>(h);
 
 		self.windowWidth = w;
-		self.windowHeight = (int)(static_cast<float>(w) / aspectRatio);
+		self.windowHeight = h;
 
 		if (self.pSwapChain)
 		{
@@ -468,6 +469,8 @@ namespace Azul
 			self.viewport.TopLeftX = 0;
 			self.viewport.TopLeftY = 0;
 			GetContext()->RSSetViewports(1, &self.viewport);
+
+			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.windowWidth / (float)self.windowHeight);
 		}
 	}
 

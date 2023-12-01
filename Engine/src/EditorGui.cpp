@@ -179,6 +179,8 @@ namespace Azul
 			{
 				self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
 			}
+
+			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.pWorldViewport->GetWidth() / (float)self.pWorldViewport->GetHeight());
 		}
 
 		windowSize = ImGui::GetWindowSize();
@@ -221,6 +223,8 @@ namespace Azul
 				float& valScale = pSelection->RelativeScale()[x];
 				ImGui::DragFloat3("Scale", &valScale, 0.5f);
 			}
+
+			pSelection->SetShellColor(Vec4(1.f, 0.2f, 0.2f, 1.f));
 		}
 		ImGui::End();
 	}
@@ -330,6 +334,11 @@ namespace Azul
 
 		self.pWorldViewport->Activate();
 		GameObjectManager::Draw();
+
+		if (self.pSelection)
+		{
+			self.pSelection->RenderShell();
+		}
 	}
 
 	void EditorGui::Cleanup()

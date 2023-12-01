@@ -38,6 +38,11 @@ namespace Azul
 		vPos = inPos;
 	}
 
+	void Camera::SetAspectRatio(float inAspectRatio)
+	{
+		aspectRatio = inAspectRatio;
+	}
+
 	void Camera::AddLocationOffset(const Vec3& offset)
 	{
 		Vec3 tmpPos = vPos;

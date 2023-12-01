@@ -32,6 +32,8 @@ namespace Azul
 		void SetPerspective(const float FieldOfView_Degs, const float AspectRatio, const float NearDist, const float FarDist);
 		void SetOrientAndPosition(const Vec3& Up_vect, const Vec3& inLookAt_pt, const Vec3& pos_pt);
 
+		void SetAspectRatio(float inAspectRatio);
+
 		// Mutate camera state
 		void AddLocationOffset(const Vec3& offset);
 		void AddHorizontalLocationOffset(const Vec3& offset);

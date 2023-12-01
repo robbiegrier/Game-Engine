@@ -94,6 +94,16 @@ namespace Azul
 		return pGraphicsObject;
 	}
 
+	void GameObject::RenderShell()
+	{
+		pShell->Render();
+	}
+
+	void GameObject::SetShellColor(const Vec4& inColor)
+	{
+		static_cast<GOConstColor*>(pShell)->poLightColor->set(inColor);
+	}
+
 	void GameObject::SetRenderShell(bool render)
 	{
 		renderShell = render;
