@@ -10,7 +10,7 @@ namespace Azul
 	GameObject::GameObject(GraphicsObject* pInGraphicsObject)
 		: pPos{ new Vec3(0.f, 0.f, 0.f) },
 		pScale{ new Vec3(1.f, 1.f, 1.f) },
-		pRotation{ new Rot(Rot1::X, 0.f) },
+		pRotation{ new Quat(Rot1::X, 0.f) },
 		pWorld{ new Mat4(Special::Identity) },
 		pGraphicsObject(pInGraphicsObject),
 		renderShell(true)
@@ -64,6 +64,21 @@ namespace Azul
 		return *pPos;
 	}
 
+	Vec3& GameObject::RelativeLocation()
+	{
+		return *pPos;
+	}
+
+	Quat& GameObject::RelativeRotation()
+	{
+		return *pRotation;
+	}
+
+	Vec3& GameObject::RelativeScale()
+	{
+		return *pScale;
+	}
+
 	const Mat4& GameObject::GetWorld() const
 	{
 		return *pWorld;
@@ -103,7 +118,7 @@ namespace Azul
 
 		Trans t(pPos->x(), pPos->y(), pPos->z());
 		Scale s(*pScale);
-		Rot& r = *pRotation;
+		Rot r = Rot(*pRotation);
 
 		*pWorld = r * s * t;
 

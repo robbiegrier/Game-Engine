@@ -29,6 +29,8 @@ namespace Azul
 		static HWND GetWindowHandle();
 		static void Resize(unsigned int w, unsigned int h);
 		static ID3D11DepthStencilView* GetDepthStencilView();
+		static bool GetEditorMode();
+		static void SetEditorMode(bool enabled);
 
 	protected:
 		// Big four
@@ -96,6 +98,7 @@ namespace Azul
 
 		unsigned int g_ResizeWidth = 0;
 		unsigned int g_ResizeHeight = 0;
+		bool editorMode = true;
 
 		// Derived Singleton
 		static Engine* pEngineInstance;

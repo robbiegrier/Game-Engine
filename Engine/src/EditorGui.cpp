@@ -181,7 +181,27 @@ namespace Azul
 		ImGui::End();
 
 		ImGui::Begin("Inspector");
-		ImGui::Text("Put Inspector here");
+
+		if (pSelection)
+		{
+			char* pName = new char[PCSNode::NAME_SIZE];
+			pSelection->GetName(pName, PCSNode::NAME_SIZE);
+			ImGui::Text(pName);
+			delete pName;
+
+			if (ImGui::CollapsingHeader("Transform"))
+			{
+				ImGui::SeparatorText("Translation");
+				float& valTrans = pSelection->RelativeLocation()[x];
+				ImGui::DragFloat3("Translate", &valTrans, 0.5f);
+				ImGui::SeparatorText("Rotation");
+				Quat& rotVal = pSelection->RelativeRotation();
+				ImGui::DragFloat4("Rotate", &rotVal[x], 0.01f, -1.f, 1.f);
+				ImGui::SeparatorText("Scale");
+				float& valScale = pSelection->RelativeScale()[x];
+				ImGui::DragFloat3("Scale", &valScale, 0.5f);
+			}
+		}
 		ImGui::End();
 	}
 
@@ -206,6 +226,8 @@ namespace Azul
 					{
 						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
 							pObject->GetLocation() + Vec3(0, 8, 15));
+
+						pSelection = pObject;
 					}
 				}
 
@@ -232,6 +254,8 @@ namespace Azul
 					{
 						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
 							pObject->GetLocation() + Vec3(0, 8, 15));
+
+						pSelection = pObject;
 					}
 				}
 			}

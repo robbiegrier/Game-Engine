@@ -7,6 +7,7 @@
 namespace Azul
 {
 	class Viewport;
+	class GameObject;
 
 	class EditorGui
 	{
@@ -29,6 +30,8 @@ namespace Azul
 		static bool IsGoToRequested();
 
 		Viewport* pWorldViewport;
+
+		GameObject* pSelection = nullptr;
 	};
 }
 

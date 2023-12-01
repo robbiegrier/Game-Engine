@@ -210,14 +210,27 @@ namespace Azul
 		{
 			useMouseLook = true;
 			walkMode = true;
-
 			Engine::SetMouseVisibility(false);
 		}
 		else if (GetKeyState('G') & 0x8000)
 		{
 			useMouseLook = false;
 			walkMode = false;
+			Engine::SetMouseVisibility(true);
+		}
 
+		if (GetKeyState('P') & 0x8000)
+		{
+			Engine::SetEditorMode(false);
+			useMouseLook = true;
+			walkMode = true;
+			Engine::SetMouseVisibility(false);
+		}
+		else if (GetKeyState('O') & 0x8000)
+		{
+			Engine::SetEditorMode(true);
+			useMouseLook = false;
+			walkMode = false;
 			Engine::SetMouseVisibility(true);
 		}
 	}

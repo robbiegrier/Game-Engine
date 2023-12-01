@@ -223,8 +223,6 @@ namespace Azul
 				previousTime = currentTime;
 				SetDefaultTargetMode();
 
-				static bool editorMode = true;
-
 				// Update
 				if (editorMode)
 				{
@@ -476,6 +474,16 @@ namespace Azul
 	ID3D11DepthStencilView* Engine::GetDepthStencilView()
 	{
 		return GetEngineInstance().pDepthStencilView;
+	}
+
+	bool Engine::GetEditorMode()
+	{
+		return GetEngineInstance().editorMode;
+	}
+
+	void Engine::SetEditorMode(bool enabled)
+	{
+		GetEngineInstance().editorMode = enabled;
 	}
 
 	Engine& Engine::GetEngineInstance()

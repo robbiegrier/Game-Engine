@@ -37,6 +37,9 @@ namespace Azul
 		const Mat4& GetWorld() const;
 		Vec3 GetLocation() const;
 		const Vec3& GetRelativeLocation() const;
+		Vec3& RelativeLocation();
+		Quat& RelativeRotation();
+		Vec3& RelativeScale();
 
 		// Get the parent in the object heirarchy
 		GameObject* GetParentGameObject() const;
@@ -60,7 +63,7 @@ namespace Azul
 		// Itemized transform
 		Vec3* pPos;
 		Vec3* pScale;
-		Rot* pRotation;
+		Quat* pRotation;
 
 		// Combined transform as world matrix
 		Mat4* pWorld;
