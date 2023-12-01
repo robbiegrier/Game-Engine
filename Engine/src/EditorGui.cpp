@@ -10,6 +10,8 @@
 #include "GameObject.h"
 #include "TextureObjectManager.h"
 #include "Viewport.h"
+#include "Mesh.h"
+#include "TextureObject.h"
 
 namespace Azul
 {
@@ -117,29 +119,47 @@ namespace Azul
 		ImGui::ShowStyleEditor();
 
 		bool open = true;
-		ImGui::Begin("Objects", &open);
+		ImGui::Begin("Scene", &open);
 
-		if (ImGui::BeginTabBar("##Tabs", ImGuiTabBarFlags_None))
+		bool selection = false;
+		TreeBuildHelper(GameObjectManager::GetAllObjects().GetRoot()->GetChild(), selection);
+		ImGui::End();
+
+		Mesh::Name meshToSpawn = Mesh::Name::None;
+		TextureObject::Name textureToSpawn = TextureObject::Name::Rocks;
+		Vec3 spawnScale = Vec3(1, 1, 1);
+
+		ImGui::Begin("Pallete");
+		if (ImGui::Button("Unit Cube")) meshToSpawn = Mesh::Name::Cube;
+		if (ImGui::Button("Unit Sphere")) meshToSpawn = Mesh::Name::Sphere;
+		if (ImGui::Button("Unit Pyramid")) meshToSpawn = Mesh::Name::Pyramid;
+		if (ImGui::Button("Wooden Crate"))
 		{
-			if (ImGui::BeginTabItem("Scene"))
-			{
-				bool selection = false;
-				TreeBuildHelper(GameObjectManager::GetAllObjects().GetRoot()->GetChild(), selection);
-				ImGui::EndTabItem();
-			}
-			if (ImGui::BeginTabItem("Pallete"))
-			{
-				static const ImVec2 buttonSize(100.f, 75.f);
-				ImGui::Button("Unit Cube", buttonSize);
-				ImGui::Button("Unit Sphere", buttonSize);
-				ImGui::Button("Unit Pyramid", buttonSize);
-				ImGui::Button("Wooden Crate", buttonSize);
-				ImGui::Button("Chicken Bot", buttonSize);
-				ImGui::EndTabItem();
-			}
-			ImGui::EndTabBar();
+			meshToSpawn = Mesh::Name::Crate;
+			textureToSpawn = TextureObject::Name::Crate;
+		}
+		if (ImGui::Button("Chicken Bot"))
+		{
+			meshToSpawn = Mesh::Name::Bone;
+			textureToSpawn = TextureObject::Name::ChickenBot;
+			spawnScale = Vec3(300, 300, 300);
 		}
 		ImGui::End();
+
+		if (meshToSpawn != Mesh::Name::None)
+		{
+			static int spawned = 0;
+			static float spawnDistance = 10.f;
+			Vec3 spawnPos = CameraManager::GetCurrentCamera()->GetLocation() + (-CameraManager::GetCurrentCamera()->GetDirection().getNorm() * spawnDistance);
+
+			std::string strName = std::string("Spawned Object ") + std::to_string(++spawned);
+
+			GameObjectManager::SpawnObject(strName.c_str(),
+				meshToSpawn,
+				textureToSpawn,
+				spawnPos
+			)->SetRelativeScale(spawnScale);
+		}
 
 		ImGui::ShowUserGuide();
 

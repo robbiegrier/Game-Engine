@@ -16,7 +16,7 @@ namespace Azul
 	{
 		float moveScale = toSeconds(deltaTime);
 
-		CheckSwitchCameraInput();
+		//CheckSwitchCameraInput();
 		CheckMovement(moveScale);
 		CheckLookAt(moveScale);
 		ToggleLookAtMode();

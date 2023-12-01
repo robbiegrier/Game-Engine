@@ -46,8 +46,10 @@ namespace Azul
 		void GetLocation(Vec3& outPos) const;
 		Vec3 GetLocation() const;
 		void GetDirection(Vec3& outDir) const;
+		const Vec3& GetDirection() const;
 		void GetUp(Vec3& outUp) const;
 		void GetLookAt(Vec3& outLookAt) const;
+		const Vec3& GetLookAt() const;
 		void GetRight(Vec3& outRight) const;
 
 		// Name
