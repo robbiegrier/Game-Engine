@@ -116,8 +116,6 @@ namespace Azul
 
 		EditorGui& self = GetInstance();
 
-		ImGui::ShowStyleEditor();
-
 		bool open = true;
 		ImGui::Begin("Scene", &open);
 
@@ -165,21 +163,12 @@ namespace Azul
 
 		ImGui::Begin("World", &open);
 
-		const UINT padding = 20;
-
 		static ImVec2 windowSize = ImVec2{ -1.f, -1.f };
 		ImVec2 windowSizeTmp = ImGui::GetWindowSize();
-		//ImVec2 windowSizeTmp = ImVec2((float)self.pWorldViewport->GetWidth() + padding, (float)self.pWorldViewport->GetHeight() + padding);
 
 		if ((fabs(fabs(windowSize.x) - fabs(windowSizeTmp.x)) > MATH_TOLERANCE) || (fabs(fabs(windowSize.y) - fabs(windowSizeTmp.y)) > MATH_TOLERANCE))
 		{
-			self.pWorldViewport->ResizeByWidth((UINT)ImGui::GetWindowWidth() - padding);
-
-			if (ImGui::GetWindowHeight() < self.pWorldViewport->GetHeight())
-			{
-				self.pWorldViewport->ResizeByHeight((UINT)ImGui::GetWindowHeight() - padding);
-			}
-
+			self.pWorldViewport->Resize((UINT)ImGui::GetWindowWidth(), (UINT)ImGui::GetWindowHeight());
 			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.pWorldViewport->GetWidth() / (float)self.pWorldViewport->GetHeight());
 		}
 
@@ -188,13 +177,12 @@ namespace Azul
 		AlignForWidth((float)self.pWorldViewport->GetWidth());
 		AlignForHeight((float)self.pWorldViewport->GetHeight());
 
-		//ImGui::Text("width: %d, height: %d", self.pWorldViewport->GetWidth(), self.pWorldViewport->GetHeight());
 		ImGui::Image(
 			self.pWorldViewport->GetShaderResourceView(),
 			ImVec2((float)self.pWorldViewport->GetWidth(), (float)self.pWorldViewport->GetHeight()),
 			ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
 			ImVec4(1.0f, 1.0f, 1.0f, 1.0f),
-			ImGui::GetStyleColorVec4(ImGuiCol_::ImGuiCol_BorderShadow)
+			ImVec4(0.f, 0.f, 0.f, 0.f)
 		);
 		ImGui::End();
 
@@ -214,18 +202,19 @@ namespace Azul
 			if (ImGui::CollapsingHeader("Transform"))
 			{
 				ImGui::SeparatorText("Translation");
-				float& valTrans = pSelection->RelativeLocation()[x];
-				ImGui::DragFloat3("Translate", &valTrans, 0.5f);
+				ImGui::DragFloat3("Translate", (float*)&pSelection->RelativeLocation(), 0.5f);
 				ImGui::SeparatorText("Rotation");
-				Quat& rotVal = pSelection->RelativeRotation();
-				ImGui::DragFloat4("Rotate", &rotVal[x], 0.01f, -1.f, 1.f);
+				ImGui::DragFloat4("Rotate", (float*)&pSelection->RelativeRotation(), 0.01f, -1.f, 1.f);
 				ImGui::SeparatorText("Scale");
-				float& valScale = pSelection->RelativeScale()[x];
-				ImGui::DragFloat3("Scale", &valScale, 0.5f);
+				ImGui::DragFloat3("Scale", (float*)&pSelection->RelativeScale(), 0.5f);
 			}
 
 			pSelection->SetShellColor(Vec4(1.f, 0.2f, 0.2f, 1.f));
 		}
+		ImGui::End();
+
+		ImGui::Begin("Settings");
+		ImGui::ShowStyleEditor();
 		ImGui::End();
 	}
 
@@ -235,22 +224,32 @@ namespace Azul
 		{
 			char* name = new char[64];
 			pNode->GetName(name, 64);
+			GameObject* pObject = GameObjectManager::FindObject(name);
+
+			bool isCurrentlySelected = pObject != nullptr && pObject == pSelection;
 
 			if (pNode->GetChild())
 			{
-				bool treeOpen = ImGui::TreeNode(name);
+				ImGuiTreeNodeFlags flags{ 0 };
+
+				if (isCurrentlySelected) flags |= ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Selected;
+
+				bool treeOpen = ImGui::TreeNodeEx(name, flags);
 
 				if (IsGoToRequested() && !selection)
 				{
 					selection = true;
-
-					GameObject* pObject = GameObjectManager::FindObject(name);
 
 					if (pObject)
 					{
 						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
 							pObject->GetLocation() + Vec3(0, 8, 15));
 
+						pSelection = pObject;
+					}
+
+					if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && !selection)
+					{
 						pSelection = pObject;
 					}
 				}
@@ -265,22 +264,23 @@ namespace Azul
 			else
 			{
 				ImGui::Bullet();
-				if (ImGui::Selectable(name))
+				if (ImGui::Selectable(name, isCurrentlySelected))
 				{
 				}
 				if (IsGoToRequested() && !selection)
 				{
 					selection = true;
 
-					GameObject* pObject = GameObjectManager::FindObject(name);
-
 					if (pObject)
 					{
 						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
 							pObject->GetLocation() + Vec3(0, 8, 15));
-
-						pSelection = pObject;
 					}
+				}
+
+				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && !selection)
+				{
+					pSelection = pObject;
 				}
 			}
 

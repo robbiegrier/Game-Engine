@@ -1,5 +1,6 @@
 #include "Viewport.h"
 #include "Engine.h"
+#include "CameraManager.h"
 
 namespace Azul
 {
@@ -17,25 +18,32 @@ namespace Azul
 	void Viewport::Activate()
 	{
 		Engine::GetContext()->RSSetViewports(1, &viewport);
-
-		Engine::GetContext()->OMSetRenderTargets(1, &renderTargetViewMap, pDepthStencilView);
-
-		// Set (point to ) the Depth functions to be used
+		Engine::GetContext()->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
 		Engine::GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 
-		//// Now clear the render target
 		Vec4 col = Vec4(.25f, .5f, 1.f, 1.f);
-		Engine::GetContext()->ClearRenderTargetView(renderTargetViewMap, (const FLOAT*)&col);
+		Engine::GetContext()->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&col);
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
 		Engine::GetContext()->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, (FLOAT)clearDepth, (UINT8)clearStencil);
+		CameraManager::GetCurrentCamera()->SetAspectRatio((float)worldWidth / (float)worldHeight);
+	}
+
+	void Viewport::Resize(UINT inWidth, UINT inHeight)
+	{
+		if (inWidth == worldWidth && inHeight == worldHeight) return;
+
+		worldWidth = inWidth;
+		worldHeight = inHeight;
+
+		Refresh();
 	}
 
 	void Viewport::ResizeByWidth(UINT inWidth)
 	{
 		if (inWidth == worldWidth) return;
 
-		const float aspectRatio = 6.f / 4.f;
+		const float aspectRatio = static_cast<float>(worldWidth) / static_cast<float>(worldHeight);
 		worldWidth = inWidth;
 		worldHeight = (UINT)(static_cast<float>(worldWidth) / aspectRatio);
 
@@ -46,7 +54,7 @@ namespace Azul
 	{
 		if (inHeight == worldHeight) return;
 
-		const float aspectRatio = 6.f / 4.f;
+		const float aspectRatio = static_cast<float>(worldWidth) / static_cast<float>(worldHeight);
 		worldHeight = inHeight;
 		worldWidth = (UINT)(static_cast<float>(worldHeight) * aspectRatio);
 
@@ -61,13 +69,8 @@ namespace Azul
 		D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
 		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
 
-		///////////////////////// Map's Texture
-		// Initialize the  texture description.
 		ZeroMemory(&textureDesc, sizeof(textureDesc));
 
-		// Setup the texture description.
-		// We will have our map be a square
-		// We will need to have this texture bound as a render target AND a shader resource
 		textureDesc.Width = worldWidth;
 		textureDesc.Height = worldHeight;
 		textureDesc.MipLevels = 1;
@@ -78,28 +81,18 @@ namespace Azul
 		textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 		textureDesc.CPUAccessFlags = 0;
 		textureDesc.MiscFlags = 0;
+		Engine::GetDevice()->CreateTexture2D(&textureDesc, NULL, &pRenderTargetTexture);
 
-		// Create the texture
-		Engine::GetDevice()->CreateTexture2D(&textureDesc, NULL, &renderTargetTextureMap);
-
-		/////////////////////// Map's Render Target
-		// Setup the description of the render target view.
 		renderTargetViewDesc.Format = textureDesc.Format;
 		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 		renderTargetViewDesc.Texture2D.MipSlice = 0;
+		Engine::GetDevice()->CreateRenderTargetView(pRenderTargetTexture, &renderTargetViewDesc, &pRenderTargetView);
 
-		// Create the render target view.
-		Engine::GetDevice()->CreateRenderTargetView(renderTargetTextureMap, &renderTargetViewDesc, &renderTargetViewMap);
-
-		/////////////////////// Map's Shader Resource View
-		// Setup the description of the shader resource view.
 		shaderResourceViewDesc.Format = textureDesc.Format;
 		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
 		shaderResourceViewDesc.Texture2D.MipLevels = 1;
-
-		// Create the shader resource view.
-		Engine::GetDevice()->CreateShaderResourceView(renderTargetTextureMap, &shaderResourceViewDesc, &shaderResourceViewMap);
+		Engine::GetDevice()->CreateShaderResourceView(pRenderTargetTexture, &shaderResourceViewDesc, &pShaderResourceView);
 
 		D3D11_TEXTURE2D_DESC depthStencilBufferDesc{ 0 };
 		depthStencilBufferDesc.ArraySize = 1;
@@ -139,9 +132,9 @@ namespace Azul
 
 	void Viewport::Clean()
 	{
-		SafeRelease(renderTargetTextureMap);
-		SafeRelease(renderTargetViewMap);
-		SafeRelease(shaderResourceViewMap);
+		SafeRelease(pRenderTargetTexture);
+		SafeRelease(pRenderTargetView);
+		SafeRelease(pShaderResourceView);
 		SafeRelease(pDepthStencilBuffer);
 		SafeRelease(pDepthStencilView);
 		SafeRelease(pDepthStencilState);

@@ -16,20 +16,21 @@ namespace Azul
 
 		void Activate();
 
+		void Resize(UINT inWidth, UINT inHeight);
 		void ResizeByWidth(UINT inWidth);
 		void ResizeByHeight(UINT inHeight);
 
 		UINT GetWidth() const { return worldWidth; }
 		UINT GetHeight() const { return worldHeight; }
-		ID3D11ShaderResourceView* GetShaderResourceView() const { return shaderResourceViewMap; }
+		ID3D11ShaderResourceView* GetShaderResourceView() const { return pShaderResourceView; }
 
 	private:
 		void Refresh();
 		void Clean();
 
-		ID3D11Texture2D* renderTargetTextureMap;
-		ID3D11RenderTargetView* renderTargetViewMap;
-		ID3D11ShaderResourceView* shaderResourceViewMap;
+		ID3D11Texture2D* pRenderTargetTexture;
+		ID3D11RenderTargetView* pRenderTargetView;
+		ID3D11ShaderResourceView* pShaderResourceView;
 		ID3D11DepthStencilView* pDepthStencilView;
 		ID3D11Texture2D* pDepthStencilBuffer;
 		ID3D11DepthStencilState* pDepthStencilState;

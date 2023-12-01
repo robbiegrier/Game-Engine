@@ -237,6 +237,7 @@ namespace Azul
 
 				if (!editorMode)
 				{
+					CameraManager::GetCurrentCamera()->SetAspectRatio((float)windowWidth / (float)windowHeight);
 					Render();
 				}
 				else
@@ -414,8 +415,6 @@ namespace Azul
 	void Engine::Resize(unsigned int w, unsigned int h)
 	{
 		Engine& self = GetEngineInstance();
-
-		const float aspectRatio = static_cast<float>(w) / static_cast<float>(h);
 
 		self.windowWidth = w;
 		self.windowHeight = h;
