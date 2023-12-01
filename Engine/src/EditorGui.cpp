@@ -142,6 +142,21 @@ namespace Azul
 			textureToSpawn = TextureObject::Name::ChickenBot;
 			spawnScale = Vec3(300, 300, 300);
 		}
+		if (ImGui::Button("Desert Rock 0")) { meshToSpawn = Mesh::Name::DesertRock0; textureToSpawn = TextureObject::Name::DesertRock0; }
+		if (ImGui::Button("Desert Rock 1")) { meshToSpawn = Mesh::Name::DesertRock1; textureToSpawn = TextureObject::Name::DesertRock1; }
+		if (ImGui::Button("Desert Rock 2")) { meshToSpawn = Mesh::Name::DesertRock2; textureToSpawn = TextureObject::Name::DesertRock2; }
+		if (ImGui::Button("Desert Rock 3")) { meshToSpawn = Mesh::Name::DesertRock3; textureToSpawn = TextureObject::Name::DesertRock3; }
+		if (ImGui::Button("Desert Rock 4")) { meshToSpawn = Mesh::Name::DesertRock4; textureToSpawn = TextureObject::Name::DesertRock4; }
+		if (ImGui::Button("Desert Rock 5")) { meshToSpawn = Mesh::Name::DesertRock5; textureToSpawn = TextureObject::Name::DesertRock5; }
+		if (ImGui::Button("Desert Rock 6")) { meshToSpawn = Mesh::Name::DesertRock6; textureToSpawn = TextureObject::Name::DesertRock6; }
+		if (ImGui::Button("Desert Rock 7")) { meshToSpawn = Mesh::Name::DesertRock7; textureToSpawn = TextureObject::Name::DesertRock7; }
+		if (ImGui::Button("Desert Rock 8")) { meshToSpawn = Mesh::Name::DesertRock8; textureToSpawn = TextureObject::Name::DesertRock8; }
+		if (ImGui::Button("Desert Rock 9")) { meshToSpawn = Mesh::Name::DesertRock9; textureToSpawn = TextureObject::Name::DesertRock9; }
+		if (ImGui::Button("Desert Rock 10")) { meshToSpawn = Mesh::Name::DesertRock10; textureToSpawn = TextureObject::Name::DesertRock10; }
+		if (ImGui::Button("Desert Rock 11")) { meshToSpawn = Mesh::Name::DesertRock11; textureToSpawn = TextureObject::Name::DesertRock11; }
+		if (ImGui::Button("Desert Rock 12")) { meshToSpawn = Mesh::Name::DesertRock12; textureToSpawn = TextureObject::Name::DesertRock12; }
+		if (ImGui::Button("Desert Rock 13")) { meshToSpawn = Mesh::Name::DesertRock13; textureToSpawn = TextureObject::Name::DesertRock13; }
+
 		ImGui::End();
 
 		if (meshToSpawn != Mesh::Name::None)
@@ -158,8 +173,6 @@ namespace Azul
 				spawnPos
 			)->SetRelativeScale(spawnScale);
 		}
-
-		ImGui::ShowUserGuide();
 
 		ImGui::Begin("World", &open);
 
@@ -208,6 +221,13 @@ namespace Azul
 				ImGui::SeparatorText("Scale");
 				ImGui::DragFloat3("Scale", (float*)&pSelection->RelativeScale(), 0.5f);
 			}
+			if (ImGui::CollapsingHeader("Graphics"))
+			{
+				GraphicsObject* pGO = pSelection->GetGraphicsObject();
+
+				ImGui::BulletText("Model: %s", pGO->GetModel() ? pGO->GetModel()->NameToString() : "nullptr");
+				ImGui::BulletText("Shader: %s", pGO->GetModel() ? pGO->GetShader()->NameToString() : "nullptr");
+			}
 
 			pSelection->SetShellColor(Vec4(1.f, 0.2f, 0.2f, 1.f));
 		}
@@ -247,11 +267,11 @@ namespace Azul
 
 						pSelection = pObject;
 					}
+				}
 
-					if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && !selection)
-					{
-						pSelection = pObject;
-					}
+				if (ImGui::IsItemClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && !selection)
+				{
+					pSelection = pObject;
 				}
 
 				if (treeOpen)

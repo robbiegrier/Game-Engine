@@ -29,6 +29,7 @@ namespace Azul
 
 		// Accessors
 		Mesh* GetModel() const;
+		ShaderObject* GetShader() const;
 		const Mat4& GetWorld() const;
 
 	protected:

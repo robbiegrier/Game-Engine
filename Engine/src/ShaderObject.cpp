@@ -10,8 +10,18 @@ namespace Azul
 	{
 		switch (name)
 		{
+		case Name::Default:
+			return "Lit Texture (Default)";
 		case Name::ColorByVertex:
 			return "ColorByVertex";
+		case Name::FlatTexture:
+			return "FlatTexture";
+		case Name::LightTexture:
+			return "LightTexture";
+		case Name::ConstColor:
+			return "ConstColor";
+		case Name::Null:
+			return "Null";
 		default:
 			return "None";
 		}

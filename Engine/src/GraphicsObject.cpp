@@ -27,6 +27,11 @@ namespace Azul
 		return pModel;
 	}
 
+	ShaderObject* GraphicsObject::GetShader() const
+	{
+		return pShaderObject;
+	}
+
 	const Mat4& GraphicsObject::GetWorld() const
 	{
 		return *pWorld;
