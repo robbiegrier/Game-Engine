@@ -35,8 +35,13 @@ namespace Azul
 
 		// Accessors
 		const Mat4& GetWorld() const;
-		Vec3 GetLocation() const;
+
+		Vec3 GetWorldLocation() const;
+		Vec3 GetWorldScale() const;
+
 		const Vec3& GetRelativeLocation() const;
+		const Vec3& GetRelativeScale() const;
+
 		Vec3& RelativeLocation();
 		Quat& RelativeRotation();
 		Vec3& RelativeScale();

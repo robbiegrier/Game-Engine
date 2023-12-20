@@ -12,6 +12,7 @@
 #include "Viewport.h"
 #include "Mesh.h"
 #include "TextureObject.h"
+#include "EditorThemes.h"
 
 namespace Azul
 {
@@ -236,6 +237,21 @@ namespace Azul
 		ImGui::Begin("Settings");
 		ImGui::ShowStyleEditor();
 		ImGui::End();
+
+		ImGui::Begin("Preferences");
+		const char* themeChoices[] = { "Dark", "Light", "Retro", "Azul" };
+		static int currentChoice = 0;
+		static int previousChoice = -1;
+		ImGui::Combo("Color Themes", &currentChoice, themeChoices, IM_ARRAYSIZE(themeChoices));
+		if (previousChoice != currentChoice)
+		{
+			if (currentChoice == 0) EditorThemes::Dark();
+			else if (currentChoice == 1) EditorThemes::Light();
+			else if (currentChoice == 2) EditorThemes::Retro();
+			else if (currentChoice == 3) EditorThemes::Azul();
+		}
+		previousChoice = currentChoice;
+		ImGui::End();
 	}
 
 	void EditorGui::TreeBuildHelper(PCSNode* pNode, bool& selection)
@@ -262,8 +278,8 @@ namespace Azul
 
 					if (pObject)
 					{
-						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
-							pObject->GetLocation() + Vec3(0, 8, 15));
+						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetWorldLocation(),
+							pObject->GetWorldLocation() + Vec3(0, 8, 15));
 
 						pSelection = pObject;
 					}
@@ -293,8 +309,8 @@ namespace Azul
 
 					if (pObject)
 					{
-						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetLocation(),
-							pObject->GetLocation() + Vec3(0, 8, 15));
+						CameraManager::GetCurrentCamera()->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), pObject->GetWorldLocation(),
+							pObject->GetWorldLocation() + Vec3(0, 8, 15));
 					}
 				}
 
@@ -324,7 +340,7 @@ namespace Azul
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.Fonts->AddFontFromFileTTF("../Models/Ubuntu-Regular.ttf", 18.f);
+		io.Fonts->AddFontFromFileTTF("../Models/Ubuntu-Regular.ttf", 16.f);
 
 		ImGui::StyleColorsDark();
 

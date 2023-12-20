@@ -953,11 +953,11 @@ namespace Azul
 		pCube2->SetRelativeLocation(pCube2->GetRelativeLocation() + Vec3(0, trans1 * transSign * deltaTime, 0));
 		pCube3->SetRelativeLocation(pCube3->GetRelativeLocation() + Vec3(trans1 * transSign * deltaTime, 0, 0));
 
-		if (pCube2->GetLocation()[y] < 0.f)
+		if (pCube2->GetWorldLocation()[y] < 0.f)
 		{
 			transSign = 1.f;
 		}
-		else if (pCube2->GetLocation()[y] > 10.f)
+		else if (pCube2->GetWorldLocation()[y] > 10.f)
 		{
 			transSign = -1.f;
 		}
@@ -966,11 +966,11 @@ namespace Azul
 		pTexture2->SetRelativeLocation(pTexture2->GetRelativeLocation() + Vec3(texTrans1 * texTransSign * deltaTime, 0, 0));
 		pTexture3->SetRelativeLocation(pTexture3->GetRelativeLocation() + Vec3(texTrans1 * texTransSign * deltaTime, 0, 0));
 
-		if (pTexture1->GetLocation()[x] < -15.f)
+		if (pTexture1->GetWorldLocation()[x] < -15.f)
 		{
 			texTransSign = 1.f;
 		}
-		else if (pTexture1->GetLocation()[x] > 10.f)
+		else if (pTexture1->GetWorldLocation()[x] > 10.f)
 		{
 			texTransSign = -1.f;
 		}

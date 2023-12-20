@@ -777,6 +777,9 @@
     <ClInclude Include="src\Viewport.h">
       <Filter>src\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorThemes.h">
+      <Filter>src\Editor\Gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -1002,6 +1005,9 @@
     </ClCompile>
     <ClCompile Include="src\Viewport.cpp">
       <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorThemes.cpp">
+      <Filter>src\Editor\Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

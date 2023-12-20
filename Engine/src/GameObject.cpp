@@ -54,14 +54,38 @@ namespace Azul
 		*pRotation = m;
 	}
 
-	Vec3 GameObject::GetLocation() const
+	Vec3 GameObject::GetWorldLocation() const
 	{
-		return Vec3(pWorld->get(Row4::i3));
+		if (GetParentGameObject())
+		{
+			return Vec3(Vec4(GetParentGameObject()->GetWorldLocation(), 1.0f) * Trans(GetRelativeLocation()));
+		}
+		else
+		{
+			return GetRelativeLocation();
+		}
+	}
+
+	Vec3 GameObject::GetWorldScale() const
+	{
+		if (GetParentGameObject())
+		{
+			return Vec3(Vec4(GetParentGameObject()->GetWorldScale(), 1.0f) * Scale(GetRelativeScale()));
+		}
+		else
+		{
+			return GetRelativeScale();
+		}
 	}
 
 	const Vec3& GameObject::GetRelativeLocation() const
 	{
 		return *pPos;
+	}
+
+	const Vec3& GameObject::GetRelativeScale() const
+	{
+		return *pScale;
 	}
 
 	Vec3& GameObject::RelativeLocation()
@@ -142,9 +166,22 @@ namespace Azul
 		if (pGraphicsObject->GetModel())
 		{
 			Trans shellTrans(pGraphicsObject->GetModel()->GetBoundSphereCenter());
-			float shellRadius = pGraphicsObject->GetModel()->GetBoundingSphereRadius();
+			const float shellRadius = pGraphicsObject->GetModel()->GetBoundingSphereRadius();
 			Scale shellScale(shellRadius, shellRadius, shellRadius);
-			pShell->SetWorld(shellScale * shellTrans * *pWorld);
+
+			Mat4 shellWorld = shellScale * shellTrans * *pWorld;
+
+			float swScaleX = shellWorld.get(Row4::i0).len();
+			float swScaleY = shellWorld.get(Row4::i1).len();
+			float swScaleZ = shellWorld.get(Row4::i2).len();
+
+			float maxSwScale = std::max(std::max(swScaleX, swScaleY), swScaleZ);
+
+			shellWorld.set(Row4::i0, Vec4(1.f, 0.f, 0.f, 0.f) * maxSwScale);
+			shellWorld.set(Row4::i1, Vec4(0.f, 1.f, 0.f, 0.f) * maxSwScale);
+			shellWorld.set(Row4::i2, Vec4(0.f, 0.f, 1.f, 0.f) * maxSwScale);
+
+			pShell->SetWorld(shellWorld);
 		}
 		else
 		{

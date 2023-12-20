@@ -21,7 +21,7 @@ namespace Azul
 		Engine::GetContext()->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
 		Engine::GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 
-		Vec4 col = Vec4(.25f, .5f, 1.f, 1.f);
+		Vec4 col = Vec4{ 0.1f, 0.1f, 0.1f, 1.000000000f };
 		Engine::GetContext()->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&col);
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
