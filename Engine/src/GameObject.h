@@ -35,14 +35,25 @@ namespace Azul
 
 		// Accessors
 		const Mat4& GetWorld() const;
-		Vec3 GetLocation() const;
+
+		Vec3 GetWorldLocation() const;
+		Vec3 GetWorldScale() const;
+
 		const Vec3& GetRelativeLocation() const;
+		const Vec3& GetRelativeScale() const;
+
+		Vec3& RelativeLocation();
+		Quat& RelativeRotation();
+		Vec3& RelativeScale();
 
 		// Get the parent in the object heirarchy
 		GameObject* GetParentGameObject() const;
 
 		// Get the low level graphics object
 		GraphicsObject* GetGraphicsObject() const;
+
+		void RenderShell();
+		void SetShellColor(const Vec4& inColor);
 
 		void SetRenderShell(bool render);
 		static void SetRenderShellGlobal(bool render);
@@ -60,7 +71,7 @@ namespace Azul
 		// Itemized transform
 		Vec3* pPos;
 		Vec3* pScale;
-		Rot* pRotation;
+		Quat* pRotation;
 
 		// Combined transform as world matrix
 		Mat4* pWorld;

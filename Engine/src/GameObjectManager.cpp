@@ -81,6 +81,31 @@ namespace Azul
 			TextureObjectManager::Find(texture), location, pParent);
 	}
 
+	GameObject* GameObjectManager::FindObject(const char* const pName)
+	{
+		GameObjectManager& self = GetInstance();
+
+		char* pCompare = new char[PCSNode::NAME_SIZE];
+		GameObject* pOutput = nullptr;
+
+		PCSTreeForwardIterator it(self.objects.GetRoot());
+		for (it.First(); !it.IsDone(); it.Next())
+		{
+			GameObject* pObject = (GameObject*)it.Current();
+			pObject->GetName(pCompare, PCSNode::NAME_SIZE);
+
+			if (strcmp(pCompare, pName) == 0)
+			{
+				pOutput = pObject;
+				break;
+			}
+		}
+
+		delete pCompare;
+
+		return pOutput;
+	}
+
 	GameObject* GameObjectManager::SpawnObject(const char* const pName, Mesh* pModel, ShaderObject* pShader, const Vec3& location, GameObject* pParent)
 	{
 		GameObjectManager& self = GetInstance();

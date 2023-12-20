@@ -46,6 +46,9 @@ namespace Azul
 		desc.CPUAccessFlags = 0;
 		desc.MiscFlags = 0;
 
+		width = desc.Width;
+		height = desc.Height;
+
 		D3D11_SUBRESOURCE_DATA subResource;
 		subResource.pSysMem = mB.text_color.poData;
 		subResource.SysMemPitch = desc.Width * 4;

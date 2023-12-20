@@ -1,7 +1,9 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
-
 #include "Engine.h"
+#include "MathEngine.h"
+#include "EditorGui.h"
+#include "CameraManager.h"
 
 LPCSTR g_WindowClassName = "EngineWindowClass";
 
@@ -33,6 +35,7 @@ namespace Azul
 	{
 		InitApplication(pInstanceHandle, cmdShow);
 		InitDirectX();
+		EditorGui::Initialize();
 
 		return Run();
 	}
@@ -219,15 +222,30 @@ namespace Azul
 				DWORD currentTime = timeGetTime();
 				float deltaTime = (currentTime - previousTime) / 1000.0f;
 				previousTime = currentTime;
+				SetDefaultTargetMode();
 
-				// Cap the delta time to the max time step (useful if your
-				// debugging and you don't want the deltaTime value to explode.
-				//deltaTime = std::min<float>(deltaTime, maxTimeStep);
+				// Update
+				if (editorMode)
+				{
+					EditorGui::NewFrame();
+				}
 
 				Update(deltaTime);
-				ClearDepthStencilBuffer();
-				SetDefaultTargetMode();
-				Render();
+
+				// Draw
+				ClearDepthStencilBuffer({ 0.1f, 0.1f, 0.1f, 1.000000000f });
+
+				if (!editorMode)
+				{
+					CameraManager::GetCurrentCamera()->SetAspectRatio((float)windowWidth / (float)windowHeight);
+					Render();
+				}
+				else
+				{
+					EditorGui::Draw();
+				}
+
+				// Present
 				LockFramerate(engineTime);
 				Present();
 				UpdateWindowName(deltaTime);
@@ -307,6 +325,23 @@ namespace Azul
 		return GetEngineInstance().windowHeight;
 	}
 
+	void Engine::CreateRenderTarget()
+	{
+		ID3D11Texture2D* pBackBuffer;
+		pSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
+		pDevice->CreateRenderTargetView(pBackBuffer, nullptr, &pRenderTargetView);
+		pBackBuffer->Release();
+	}
+
+	void Engine::CleanupRenderTarget()
+	{
+		if (pRenderTargetView)
+		{
+			pRenderTargetView->Release();
+			pRenderTargetView = nullptr;
+		}
+	}
+
 	float Engine::GetAspectRatio()
 	{
 		RECT clientRect;
@@ -372,6 +407,87 @@ namespace Azul
 		return GetEngineInstance().pContext;
 	}
 
+	HWND Engine::GetWindowHandle()
+	{
+		return GetEngineInstance().pWindowHandle;
+	}
+
+	void Engine::Resize(unsigned int w, unsigned int h)
+	{
+		Engine& self = GetEngineInstance();
+
+		self.windowWidth = w;
+		self.windowHeight = h;
+
+		if (self.pSwapChain)
+		{
+			GetContext()->OMSetRenderTargets(0, 0, 0);
+
+			// Release all outstanding references to the swap chain's buffers.
+			//self.pRenderTargetView->Release();
+
+			SafeRelease(self.pRenderTargetView);
+
+			HRESULT hr;
+			// Preserve the existing buffer count and format.
+			// Automatically choose the width and height to match the client rect for HWNDs.
+			hr = self.pSwapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0);
+
+			// Perform error handling here!
+
+			// Get buffer and create a render-target-view.
+			SafeRelease(self.pDepthStencilBuffer);
+			ID3D11Texture2D* pBuffer;
+			hr = self.pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBuffer);
+			// Perform error handling here!
+
+			hr = GetDevice()->CreateRenderTargetView(pBuffer, NULL, &self.pRenderTargetView);
+			// Perform error handling here!
+			SafeRelease(pBuffer);
+			//pBuffer->Release();
+
+			GetContext()->OMSetRenderTargets(1, &self.pRenderTargetView, NULL);
+
+			SafeRelease(self.pDepthStencilView);
+			SafeRelease(self.pDepthStencilBuffer);
+			SafeRelease(self.pDepthStencilState);
+			SafeRelease(self.pRasterizerState);
+
+			//self.InitSwapChain();
+			//self.InitBackBuffer();
+			self.InitDepthStencilBuffer();
+			self.InitDepthStencilState();
+			self.InitRasterizerState();
+			//InitViewport();
+
+			// Set up the viewport.
+			self.viewport.Width = (float)self.windowWidth;
+			self.viewport.Height = (float)self.windowHeight;
+			self.viewport.MinDepth = 0.0f;
+			self.viewport.MaxDepth = 1.0f;
+			self.viewport.TopLeftX = 0;
+			self.viewport.TopLeftY = 0;
+			GetContext()->RSSetViewports(1, &self.viewport);
+
+			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.windowWidth / (float)self.windowHeight);
+		}
+	}
+
+	ID3D11DepthStencilView* Engine::GetDepthStencilView()
+	{
+		return GetEngineInstance().pDepthStencilView;
+	}
+
+	bool Engine::GetEditorMode()
+	{
+		return GetEngineInstance().editorMode;
+	}
+
+	void Engine::SetEditorMode(bool enabled)
+	{
+		GetEngineInstance().editorMode = enabled;
+	}
+
 	Engine& Engine::GetEngineInstance()
 	{
 		assert(pEngineInstance);
@@ -387,6 +503,8 @@ namespace Azul
 		SafeRelease(pRasterizerState);
 		SafeRelease(pSwapChain);
 		SafeRelease(pContext);
+
+		EditorGui::Cleanup();
 
 #ifdef _DEBUG
 		HRESULT hr = S_OK;

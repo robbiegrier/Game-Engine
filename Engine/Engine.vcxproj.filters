@@ -95,6 +95,15 @@
     <Filter Include="src\GameObject\Special">
       <UniqueIdentifier>{3e6d248f-7ce6-4d02-8f91-2173401e0678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Editor">
+      <UniqueIdentifier>{48730d8a-748b-4dd3-8591-6f1807f9a973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Gui">
+      <UniqueIdentifier>{7e7f2cbd-8633-4f7f-bf57-024432cf896e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics">
+      <UniqueIdentifier>{2cbde127-1d67-421f-8b25-03dd26b32769}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -762,6 +771,15 @@
     <ClInclude Include="src\ClipManager.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorGui.h">
+      <Filter>src\Editor\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Viewport.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorThemes.h">
+      <Filter>src\Editor\Gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -981,6 +999,15 @@
     </ClCompile>
     <ClCompile Include="src\ClipManager.cpp">
       <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorGui.cpp">
+      <Filter>src\Editor\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewport.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorThemes.cpp">
+      <Filter>src\Editor\Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

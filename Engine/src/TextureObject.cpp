@@ -9,7 +9,7 @@
 namespace Azul
 {
 	TextureObject::TextureObject()
-		:name(TextureObject::Name::None), TexResourceSlot(0), SamplerSlot(0), poTextureRV(nullptr), poSampler(nullptr)
+		:name(TextureObject::Name::None), TexResourceSlot(0), SamplerSlot(0), poTextureRV(nullptr), poSampler(nullptr), width(0), height(0)
 	{
 	}
 
@@ -21,19 +21,22 @@ namespace Azul
 
 	TextureObject::TextureObject(TextureObject::Name _name, LPCWSTR filepath, D3D11_FILTER filter)
 		:name(_name), TexResourceSlot(0), SamplerSlot(0),
-		poTextureRV(nullptr), poSampler(nullptr)
+		poTextureRV(nullptr), poSampler(nullptr), width(0), height(0)
 	{
 		DirectX::ScratchImage testTexture;
 		HRESULT hr = LoadFromTGAFile(filepath, nullptr, testTexture);
 		assert(SUCCEEDED(hr));
 
 		CreateShaderResourceView(
-			Engine::GetDevice(), 
-			testTexture.GetImage(0, 0, 0), 
-			testTexture.GetImageCount(), 
-			testTexture.GetMetadata(), 
+			Engine::GetDevice(),
+			testTexture.GetImage(0, 0, 0),
+			testTexture.GetImageCount(),
+			testTexture.GetMetadata(),
 			&poTextureRV
 		);
+
+		width = testTexture.GetMetadata().width;
+		height = testTexture.GetMetadata().height;
 
 		D3D11_SAMPLER_DESC sampDesc;
 		ZeroMemory(&sampDesc, sizeof(sampDesc));

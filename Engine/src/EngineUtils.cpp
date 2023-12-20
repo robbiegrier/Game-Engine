@@ -2,6 +2,10 @@
 #include "Engine.h"
 #include "File.h"
 
+#include "imgui.h"
+#include "backends/imgui_impl_win32.h"
+#include "backends/imgui_impl_dx11.h"
+
 namespace Azul
 {
 	// Find Refresh rate: http://www.rastertek.com/dx11tut03.html
@@ -99,6 +103,10 @@ namespace Azul
 		PAINTSTRUCT paintStruct;
 		HDC hDC;
 
+		extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+		if (ImGui_ImplWin32_WndProcHandler(hwnd, message, wParam, lParam))
+			return true;
+
 		switch (message)
 		{
 		case WM_PAINT:
@@ -116,6 +124,16 @@ namespace Azul
 			}
 		}
 		break;
+
+		case WM_SIZE:
+			if (wParam == SIZE_MINIMIZED)
+				return 0;
+			Engine::Resize((UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+			return 1;
+			//case WM_SYSCOMMAND:
+			//	if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
+			//		return 0;
+			//	break;
 
 		case WM_DESTROY:
 		{

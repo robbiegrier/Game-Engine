@@ -10,7 +10,7 @@ namespace Azul
 	GameObject::GameObject(GraphicsObject* pInGraphicsObject)
 		: pPos{ new Vec3(0.f, 0.f, 0.f) },
 		pScale{ new Vec3(1.f, 1.f, 1.f) },
-		pRotation{ new Rot(Rot1::X, 0.f) },
+		pRotation{ new Quat(Rot1::X, 0.f) },
 		pWorld{ new Mat4(Special::Identity) },
 		pGraphicsObject(pInGraphicsObject),
 		renderShell(true)
@@ -54,14 +54,53 @@ namespace Azul
 		*pRotation = m;
 	}
 
-	Vec3 GameObject::GetLocation() const
+	Vec3 GameObject::GetWorldLocation() const
 	{
-		return Vec3(pWorld->get(Row4::i3));
+		if (GetParentGameObject())
+		{
+			return Vec3(Vec4(GetParentGameObject()->GetWorldLocation(), 1.0f) * Trans(GetRelativeLocation()));
+		}
+		else
+		{
+			return GetRelativeLocation();
+		}
+	}
+
+	Vec3 GameObject::GetWorldScale() const
+	{
+		if (GetParentGameObject())
+		{
+			return Vec3(Vec4(GetParentGameObject()->GetWorldScale(), 1.0f) * Scale(GetRelativeScale()));
+		}
+		else
+		{
+			return GetRelativeScale();
+		}
 	}
 
 	const Vec3& GameObject::GetRelativeLocation() const
 	{
 		return *pPos;
+	}
+
+	const Vec3& GameObject::GetRelativeScale() const
+	{
+		return *pScale;
+	}
+
+	Vec3& GameObject::RelativeLocation()
+	{
+		return *pPos;
+	}
+
+	Quat& GameObject::RelativeRotation()
+	{
+		return *pRotation;
+	}
+
+	Vec3& GameObject::RelativeScale()
+	{
+		return *pScale;
 	}
 
 	const Mat4& GameObject::GetWorld() const
@@ -77,6 +116,16 @@ namespace Azul
 	GraphicsObject* GameObject::GetGraphicsObject() const
 	{
 		return pGraphicsObject;
+	}
+
+	void GameObject::RenderShell()
+	{
+		pShell->Render();
+	}
+
+	void GameObject::SetShellColor(const Vec4& inColor)
+	{
+		static_cast<GOConstColor*>(pShell)->poLightColor->set(inColor);
 	}
 
 	void GameObject::SetRenderShell(bool render)
@@ -103,7 +152,7 @@ namespace Azul
 
 		Trans t(pPos->x(), pPos->y(), pPos->z());
 		Scale s(*pScale);
-		Rot& r = *pRotation;
+		Rot r = Rot(*pRotation);
 
 		*pWorld = r * s * t;
 
@@ -117,9 +166,22 @@ namespace Azul
 		if (pGraphicsObject->GetModel())
 		{
 			Trans shellTrans(pGraphicsObject->GetModel()->GetBoundSphereCenter());
-			float shellRadius = pGraphicsObject->GetModel()->GetBoundingSphereRadius();
+			const float shellRadius = pGraphicsObject->GetModel()->GetBoundingSphereRadius();
 			Scale shellScale(shellRadius, shellRadius, shellRadius);
-			pShell->SetWorld(shellScale * shellTrans * *pWorld);
+
+			Mat4 shellWorld = shellScale * shellTrans * *pWorld;
+
+			float swScaleX = shellWorld.get(Row4::i0).len();
+			float swScaleY = shellWorld.get(Row4::i1).len();
+			float swScaleZ = shellWorld.get(Row4::i2).len();
+
+			float maxSwScale = std::max(std::max(swScaleX, swScaleY), swScaleZ);
+
+			shellWorld.set(Row4::i0, Vec4(1.f, 0.f, 0.f, 0.f) * maxSwScale);
+			shellWorld.set(Row4::i1, Vec4(0.f, 1.f, 0.f, 0.f) * maxSwScale);
+			shellWorld.set(Row4::i2, Vec4(0.f, 0.f, 1.f, 0.f) * maxSwScale);
+
+			pShell->SetWorld(shellWorld);
 		}
 		else
 		{

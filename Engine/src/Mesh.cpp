@@ -23,10 +23,73 @@ namespace Azul
 	{
 		switch (name)
 		{
+		case Name::Sphere:
+			return "Sphere";
 		case Name::Cube:
 			return "Cube";
 		case Name::Pyramid:
 			return "Pyramid";
+		case Name::Diamond:
+			return "Diamond";
+		case Name::Cross:
+			return "Cross";
+		case Name::Plane:
+			return "Plane";
+		case Name::Crate:
+			return "Crate";
+		case Name::Frigate:
+			return "Frigate";
+		case Name::Bracket:
+			return "Bracket";
+		case Name::Fish:
+			return "Fish";
+		case Name::DogHouse:
+			return "DogHouse";
+		case Name::Duck:
+			return "Duck";
+		case Name::R2D2:
+			return "R2D2";
+		case Name::Corset:
+			return "Corset";
+		case Name::AntiqueCameraTripod:
+			return "AntiqueCameraTripod";
+		case Name::AntiqueCamera:
+			return "AntiqueCamera";
+		case Name::Dog:
+			return "Dog";
+		case Name::Dog1:
+			return "Dog1";
+		case Name::WesternTownHouse:
+		case Name::WesternTownHouse1:
+			return "WesternTownHouse";
+		case Name::DesertRock0:
+		case Name::DesertRock1:
+		case Name::DesertRock2:
+		case Name::DesertRock3:
+		case Name::DesertRock4:
+		case Name::DesertRock5:
+		case Name::DesertRock6:
+		case Name::DesertRock7:
+		case Name::DesertRock8:
+		case Name::DesertRock9:
+		case Name::DesertRock10:
+		case Name::DesertRock11:
+		case Name::DesertRock12:
+		case Name::DesertRock13:
+			return "DesertRock";
+		case Name::UnitSphere:
+			return "UnitSphere";
+		case Name::UnitIcoSphere:
+			return "UnitIcoSphere";
+		case Name::Bone:
+		case Name::Bone_001:
+		case Name::Bone_L:
+		case Name::Bone_L_001:
+		case Name::Bone_L_002:
+		case Name::Bone_R:
+		case Name::Bone_R_001:
+		case Name::Bone_R_002:
+			return "Bone";
 		case Name::Null:
 			return "Null";
 		default:

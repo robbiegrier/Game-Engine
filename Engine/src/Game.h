@@ -27,7 +27,7 @@ namespace Azul
 		virtual void UnloadContent() override;
 		virtual void Update(float deltaTime) override;
 		virtual void Render() override;
-		virtual	void ClearDepthStencilBuffer() override;
+		virtual	void ClearDepthStencilBuffer(const Vec4& color) override;
 
 	private:
 		void EndFrame();

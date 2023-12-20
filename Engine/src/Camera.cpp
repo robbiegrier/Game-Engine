@@ -38,6 +38,11 @@ namespace Azul
 		vPos = inPos;
 	}
 
+	void Camera::SetAspectRatio(float inAspectRatio)
+	{
+		aspectRatio = inAspectRatio;
+	}
+
 	void Camera::AddLocationOffset(const Vec3& offset)
 	{
 		Vec3 tmpPos = vPos;
@@ -198,6 +203,11 @@ namespace Azul
 		outDir = vDir;
 	}
 
+	const Vec3& Camera::GetDirection() const
+	{
+		return vDir;
+	}
+
 	void  Camera::GetUp(Vec3& outUp) const
 	{
 		outUp = vUp;
@@ -206,6 +216,11 @@ namespace Azul
 	void Camera::GetLookAt(Vec3& outLookAt) const
 	{
 		outLookAt = vLookAt;
+	}
+
+	const Vec3& Camera::GetLookAt() const
+	{
+		return vLookAt;
 	}
 
 	void Camera::GetRight(Vec3& outRight) const

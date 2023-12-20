@@ -4,9 +4,9 @@
 //
 // Framework - for Keenan's C++ classes
 //
-//    One header to rule them all, 
-//        one header to find them, 
-//        one header to bring them all 
+//    One header to rule them all,
+//        one header to find them,
+//        one header to bring them all
 //        and in the Linker bind them.   <thank you Tolkien>
 //
 //    Don't try to understand it... its very complicated
@@ -18,16 +18,16 @@
 //        Performance timer - hardware cycle count micro timer for performance tracking
 //        File logging - Printing data to an external logging file
 //        Memory Alignment Base class - keeping alignment to 16 bytes for SIMD
-//    
+//
 // ---------------------------------------------------------------------------
-//    v.2.5.0 
+//    v.2.5.0
 //    v.2.6   - Baseline
 //    v.2.6.1 - fixed warning TestRegistry
 //    v.2.7   - Baseline
 //    v.2.8   - warning 5039 windows.h
 //    v.2.9   - fence
 //    v.2.10  - msc_ver 1914, win 10.0.17
-//    v.2.11  - warning fixes 
+//    v.2.11  - warning fixes
 //    v.2.12  - mutex on all trace::out
 //    v.2.13  - fixed warnings on mutex and default copy const / assignment
 //    v.2.14  - FileIO remove new... so you can overload new/delete
@@ -37,12 +37,12 @@
 //    v.2.19  - WinSDK, Compiler, Framework version reporting
 //    v.2.20  - WinSDK, Compiler, Framework version reporting in Release mode
 //    v.2.21  - x64 info header
-//    v.2.22  - Timer renamed to PerformanceTimer 
+//    v.2.22  - Timer renamed to PerformanceTimer
 //    v.2.23  - Mem Tracking now works with placement and alignment new
 //    v.2.24  - new tracking with file names and line numbers
 //    v.2.25  - fixing collision with unused_var() macros in align16
 //    v.2.26  - any order for the link, removed FileIO.cpp and PerformanceTimer.cpp
-//    v.2.27  - atomics in Timer 
+//    v.2.27  - atomics in Timer
 //    v.2.28  - remove dynamic cast, warnings on atomic
 //    v.2.29  - placement new on align16
 //    v.2.30  - HUGE rework of UnitTest.h removed UnitTest.cpp
@@ -72,7 +72,7 @@
 //    v.3.23  - MemTrace::LeakCount()
 //    v.3.24  - placement new
 //    v.3.25  - REPLACE_ME_STUB()
-//    v.3.26  - bogus compiler warning in compiler C6011 
+//    v.3.26  - bogus compiler warning in compiler C6011
 //    v.3.27  - INSERT_CODE_HERE
 //    v.3.28  - code analysis warning
 //    v.3.29  - warning for new 19.25 compiler that's not honored in earlier
@@ -93,7 +93,7 @@
 //    v.3.44  - watermark 2021
 //    v.3.45  - placement new bug, fence to check
 //    v.3.46  - floating point precision bug in release
-//    v.3.47  - CHECK_EQUAL 
+//    v.3.47  - CHECK_EQUAL
 //    v.3.48  - Fix ThreadFramework.h in release new compiler
 //    v.3.49  - improve printing on fail
 //    v.3.50  - Magic
@@ -114,7 +114,7 @@
 //    v.3.67  - ReduceTestPrints
 //    v.3.671 - tweak on 588 prints
 //    v.3.68  - Increase Trace::out buff size to 1K
-//    v.3.69  - merger of different framework.h 
+//    v.3.69  - merger of different framework.h
 //    v.3.70  - SIMD support
 //    v.3.71  - CRC on raw buffer
 //    v.3.72  - Warning fix, teaching pc
@@ -130,7 +130,7 @@
 //    v.3.82 - Fall 2023
 //    v.3.83 - ThreadFramework race condition SetName
 //    v.3.84 - ThreadFramework 1.28 getName() issue
-//----------------------------------------------------------------------------- 
+//-----------------------------------------------------------------------------
 
 #ifndef FRAMEWORK_H
 #define FRAMEWORK_H
@@ -142,7 +142,7 @@
 #undef THREAD_FRAMEWORK_VER_H
 
 #ifdef USE_THREAD_FRAMEWORK
-	#include "ThreadFramework.h"
+#include "ThreadFramework.h"
 #else
 	// do not display thread version banner
 #endif
@@ -159,14 +159,14 @@
 //      Make sure Framework.h is any project include directory
 //
 // Add to your defines:
-//      Properties/C++/Preprocessor/Preprocessor Definition 
+//      Properties/C++/Preprocessor/Preprocessor Definition
 //           -> add WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";
 //           -> add SOLUTION_DIR=R"($(SolutionDir))";
 //           -> add TOOLS_VERSION=R"($(VCToolsVersion))";
 //
 // Turn off Memory Tracking...
 //     Comment out the #define MEM_TRACKING_ENABLED
-// 
+//
 // --------------------------------------------------------
 
 // Comment out this line to turn off memory tracking
@@ -178,39 +178,39 @@
 // Enable SSE support
 //#define SIMD_SUPPORT_PRINTS
 
-// Teaching fiasco 
+// Teaching fiasco
 //#define TEACHING_PC
 
 // default warning... please setup correctly
 #ifndef WINDOWS_TARGET_PLATFORM
-	#error  WINDOWS_TARGET_PLATFORM --- MISSING ---
+#error  WINDOWS_TARGET_PLATFORM --- MISSING ---
 #endif
 
 #ifndef TOOLS_VERSION
-	#error  TOOLS_VERSION --- MISSING ---
+#error  TOOLS_VERSION --- MISSING ---
 #endif
 
 #ifndef SOLUTION_DIR
-	#error SOLUTION_DIR --- MISSING ---
+#error SOLUTION_DIR --- MISSING ---
 #endif
 
 // Build Mode:
 #ifdef _DEBUG
-	#ifdef _M_X64
-		#define BUILD_CONFIG_MODE "x64 Debug  "
-	#else
-		#define BUILD_CONFIG_MODE "x86 Debug  "
-	#endif
+#ifdef _M_X64
+#define BUILD_CONFIG_MODE "x64 Debug  "
 #else
-	#ifdef _M_X64
-		#define BUILD_CONFIG_MODE "x64 Release"
-	#else
-		#ifdef MR_FAST   // Only used in optimized class
-			#define BUILD_CONFIG_MODE "MR_FAST    "
-		#else
-			#define BUILD_CONFIG_MODE "x86 Release"
-		#endif
-	#endif
+#define BUILD_CONFIG_MODE "x86 Debug  "
+#endif
+#else
+#ifdef _M_X64
+#define BUILD_CONFIG_MODE "x64 Release"
+#else
+#ifdef MR_FAST   // Only used in optimized class
+#define BUILD_CONFIG_MODE "MR_FAST    "
+#else
+#define BUILD_CONFIG_MODE "x86 Release"
+#endif
+#endif
 #endif
 
 // -----------------------------------------------------------------------------
@@ -249,26 +249,24 @@
 #pragma warning( disable : 4200 ) // nonstandard extension used : zero-sized array in struct/union
 #pragma warning( disable : 5246 ) // the initialization of a subobject should be wrapped in braces
 
-
-
 #include "ProjectSettings.h"
 
 #ifdef TEACHING_PC
-	#define IDEWinSDKCheck { CHECK(true); }
+#define IDEWinSDKCheck { CHECK(true); }
 
-	#define IDEToolsCheck { CHECK(true); }
+#define IDEToolsCheck { CHECK(true); }
 
-	#define IDECompilerCheck { CHECK(true); }
+#define IDECompilerCheck { CHECK(true); }
 #else
-	#define IDEWinSDKCheck { char  winSDK_ver[13]; \
+#define IDEWinSDKCheck { char  winSDK_ver[13]; \
 								 sprintf_s(winSDK_ver, 13, "%s", WINDOWS_TARGET_PLATFORM); \
 								 CHECK(strcmp(winSDK_ver, TEST_WINSDK_VER) >= 0); }
 
-	#define IDEToolsCheck { char tools_ver[12]; \
+#define IDEToolsCheck { char tools_ver[12]; \
 								sprintf_s(tools_ver, 12, "%s", TOOLS_VERSION); \
 								CHECK(strcmp(tools_ver, TEST_TOOLS_VER) >= 0); }
 
-	#define IDECompilerCheck { char compiler_ver[10]; \
+#define IDECompilerCheck { char compiler_ver[10]; \
 								   sprintf_s(compiler_ver, 10, "%d", _MSC_FULL_VER); \
 								   CHECK(strcmp(compiler_ver, TEST_COMPILER_VER) >= 0); }
 #endif
@@ -280,49 +278,48 @@
 #include <assert.h>
 #include <stdio.h>
 #include <cmath>
-#include <stdlib.h>  
-#include <crtdbg.h>  
-
+#include <stdlib.h>
+#include <crtdbg.h>
 
 // -----------------------------------------------------
-// Many standard includes have serious warnings 
+// Many standard includes have serious warnings
 //     need to wrap for Wall warnings
 //
-// Todo: reverify with major compiler releases... 
+// Todo: reverify with major compiler releases...
 //       Come on Microsoft.. clean up your code
 // -----------------------------------------------------
 
 #pragma warning( push )
-	#pragma warning( disable : 4820 ) // 'bytes' bytes padding added after construct 'member_name'
-	#define NOMINMAX
-	#include <Windows.h>
-#pragma warning( pop ) 
+#pragma warning( disable : 4820 ) // 'bytes' bytes padding added after construct 'member_name'
+#define NOMINMAX
+#include <Windows.h>
+#pragma warning( pop )
 
 #pragma warning( push )
-	#pragma warning( disable : 4365 )   
-	#pragma warning( disable : 4774 )
-	#include <string>
-#pragma warning( pop ) 
+#pragma warning( disable : 4365 )
+#pragma warning( disable : 4774 )
+#include <string>
+#pragma warning( pop )
 
 #pragma warning( push )
-	#pragma warning( disable : 4365 ) // 'classname': class has virtual functions, but destructor is not virtual\n instances of this class may not be destructed correctly
-	#pragma warning( disable : 4623 ) // 'derived class': default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
-	#pragma warning( disable : 4625 ) // 'derived class': copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
-	#pragma warning( disable : 4626 ) // 'derived class': assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
-	#pragma warning( disable : 4820 ) // 'bytes' bytes padding added after construct 'member_name'
-	#pragma warning( disable : 5026 ) // 'type': move constructor was implicitly defined as deleted
-	#pragma warning( disable : 5027 ) // 'type': move assignment operator was implicitly defined as deleted
-	#include <mutex>
-#pragma warning( pop ) 
+#pragma warning( disable : 4365 ) // 'classname': class has virtual functions, but destructor is not virtual\n instances of this class may not be destructed correctly
+#pragma warning( disable : 4623 ) // 'derived class': default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
+#pragma warning( disable : 4625 ) // 'derived class': copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
+#pragma warning( disable : 4626 ) // 'derived class': assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+#pragma warning( disable : 4820 ) // 'bytes' bytes padding added after construct 'member_name'
+#pragma warning( disable : 5026 ) // 'type': move constructor was implicitly defined as deleted
+#pragma warning( disable : 5027 ) // 'type': move assignment operator was implicitly defined as deleted
+#include <mutex>
+#pragma warning( pop )
 
 #pragma warning( push )
-	#pragma warning( disable : 4365 )  // 'classname': class has virtual functions, but destructor is not virtual\n instances of this class may not be destructed correctly
-	#pragma warning( disable : 4625 ) // 'derived class': copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
-	#pragma warning( disable : 4626 ) // 'derived class': assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
-	#pragma warning( disable : 5026 ) // 'type': move constructor was implicitly defined as deleted
-	#pragma warning( disable : 5027 ) // 'type': move assignment operator was implicitly defined as deleted
-	#include <atomic>
-#pragma warning( pop ) 
+#pragma warning( disable : 4365 )  // 'classname': class has virtual functions, but destructor is not virtual\n instances of this class may not be destructed correctly
+#pragma warning( disable : 4625 ) // 'derived class': copy constructor was implicitly defined as deleted because a base class copy constructor is inaccessible or deleted
+#pragma warning( disable : 4626 ) // 'derived class': assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+#pragma warning( disable : 5026 ) // 'type': move constructor was implicitly defined as deleted
+#pragma warning( disable : 5027 ) // 'type': move assignment operator was implicitly defined as deleted
+#include <atomic>
+#pragma warning( pop )
 
 #include <iostream>
 #include <vector>
@@ -336,8 +333,6 @@
 #define AZUL_INSERT_CODE_HERE             // do nothing
 #define AZUL_UNUSED_VAR(x) (void(x))
 
-
-
 #ifdef SIMD_SUPPORT_PRINTS
 	// InstructionSet.cpp
 	// Compile by using: cl /EHsc /W4 InstructionSet.cpp
@@ -345,14 +340,13 @@
 	// Uses the __cpuid intrinsic to get information about
 	// CPU extended instruction set support.
 
-
 class InstructionSet
 {
 public:
 	// getters
 	std::string Vendor(void) { return this->vendor_; }
 	std::string Brand(void) { return this->brand_; }
-	
+
 	bool SSE3(void) { return this->f_1_ECX_[0]; }
 	bool PCLMULQDQ(void) { return this->f_1_ECX_[1]; }
 	bool MONITOR(void) { return this->f_1_ECX_[3]; }
@@ -369,7 +363,7 @@ public:
 	bool AVX(void) { return this->f_1_ECX_[28]; }
 	bool F16C(void) { return this->f_1_ECX_[29]; }
 	bool RDRAND(void) { return this->f_1_ECX_[30]; }
-	
+
 	bool MSR(void) { return this->f_1_EDX_[5]; }
 	bool CX8(void) { return this->f_1_EDX_[8]; }
 	bool SEP(void) { return this->f_1_EDX_[11]; }
@@ -379,7 +373,7 @@ public:
 	bool FXSR(void) { return this->f_1_EDX_[24]; }
 	bool SSE(void) { return this->f_1_EDX_[25]; }
 	bool SSE2(void) { return this->f_1_EDX_[26]; }
-	
+
 	bool FSGSBASE(void) { return this->f_7_EBX_[0]; }
 	bool BMI1(void) { return this->f_7_EBX_[3]; }
 	bool HLE(void) { return this->isIntel_ && this->f_7_EBX_[4]; }
@@ -395,22 +389,22 @@ public:
 	bool AVX512ER(void) { return this->f_7_EBX_[27]; }
 	bool AVX512CD(void) { return this->f_7_EBX_[28]; }
 	bool SHA(void) { return this->f_7_EBX_[29]; }
-	
+
 	bool PREFETCHWT1(void) { return this->f_7_ECX_[0]; }
-	
+
 	bool LAHF(void) { return this->f_81_ECX_[0]; }
 	bool LZCNT(void) { return this->isIntel_ && this->f_81_ECX_[5]; }
 	bool ABM(void) { return this->isAMD_ && this->f_81_ECX_[5]; }
 	bool SSE4a(void) { return this->isAMD_ && this->f_81_ECX_[6]; }
 	bool XOP(void) { return this->isAMD_ && this->f_81_ECX_[11]; }
 	bool TBM(void) { return this->isAMD_ && this->f_81_ECX_[21]; }
-	
+
 	bool SYSCALL(void) { return this->isIntel_ && this->f_81_EDX_[11]; }
 	bool MMXEXT(void) { return this->isAMD_ && this->f_81_EDX_[22]; }
 	bool RDTSCP(void) { return this->isIntel_ && this->f_81_EDX_[27]; }
 	bool _3DNOWEXT(void) { return this->isAMD_ && this->f_81_EDX_[30]; }
 	bool _3DNOW(void) { return this->isAMD_ && this->f_81_EDX_[31]; }
-	
+
 	////static const InstructionSet *poInstance = nullptr;
 
 	//static InstructionSet *privGetInstance()
@@ -431,10 +425,9 @@ public:
 	//	}
 	//}
 
-
 public:
 	InstructionSet()
-		: 
+		:
 		nIds_{ 0 },
 		nExIds_{ 0 },
 		isIntel_{ false },
@@ -448,7 +441,6 @@ public:
 		data_{},
 		extdata_{}
 	{
-
 		std::array<int, 4> cpui;
 
 		// Calling __cpuid with 0x0 as the function_id argument
@@ -465,9 +457,9 @@ public:
 		// Capture vendor string
 		char vendor[0x20];
 		memset(vendor, 0, sizeof(vendor));
-		*reinterpret_cast<int *>(vendor) = data_[0][1];
-		*reinterpret_cast<int *>(vendor + 4) = data_[0][3];
-		*reinterpret_cast<int *>(vendor + 8) = data_[0][2];
+		*reinterpret_cast<int*>(vendor) = data_[0][1];
+		*reinterpret_cast<int*>(vendor + 4) = data_[0][3];
+		*reinterpret_cast<int*>(vendor + 8) = data_[0][2];
 		vendor_ = vendor;
 		if (vendor_ == "GenuineIntel")
 		{
@@ -521,8 +513,6 @@ public:
 			memcpy(brand + 32, extdata_[4].data(), sizeof(cpui));
 			brand_ = brand;
 		}
-
-
 	};
 
 	int nIds_;
@@ -539,18 +529,14 @@ public:
 	std::bitset<32> f_81_EDX_;
 	std::vector<std::array<int, 4>> data_;
 	std::vector<std::array<int, 4>> extdata_;
-
 };
 
-
-
 #endif
-
 
 // -----------------------------------------------------------------------
 // Copyright 2023, Ed Keenan, all rights reserved.
 //
-// Memory Tracker 
+// Memory Tracker
 //      Homemade Memory Tracker sitting on top of CRTDEBUG
 //      Works by macro trick.. replacing everyone's new with macro
 //      Problems with placement new() need to follow instructions
@@ -568,9 +554,9 @@ public:
 		// ---------------------------------------------------------------------------
 		// One instructions to rule them all:
 		//
-		//   To Enable: 
+		//   To Enable:
 		//           #define MEM_TRACKER_ENABLED
-		//   To Disable: 
+		//   To Disable:
 		//           Comment out #define MEM_TRACKER_ENABLED
 		//
 		//      Include Framework.h to every file:
@@ -581,7 +567,7 @@ public:
 		//               This will add this file automagically to all files (great!)
 		//
 		//  placement new() label:
-        //      
+		//
 		//      No memory tracking __SHOULD__ take place on placement new
 		//      So you need to tell the Memory Tracking system to ignore this placement new
 		//      Add 3 lines around placement new to allow it to compile
@@ -595,198 +581,285 @@ public:
 		//
 		//      AZUL_PLACEMENT_NEW_END     <----- Add 3/3 --------------
 		//
-		//      Note: 
+		//      Note:
 		//           Need to have matching BEGIN/END macros or an assert will happen
 		//
 		//   Issue with new(std::nothrow)
 		//      This needs to be tracked... but the macro trick is a problem
-		//      
+		//
 		// ---------------------------------------------------------------------------
 
-		enum class MemTracker
-		{
-			Disabled
-		};
+enum class MemTracker
+{
+	Disabled
+};
 
-		#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
-			#define MEMORY_TRACKING_ENABLE_STRING "enabled         "
-		#else
-			#define MEMORY_TRACKING_ENABLE_STRING "--> DISABLED <--"
-		#endif
-
-		class MemTrace
-		{
-		private:
-			static const unsigned int MemTraceBuffSize = 256;
-			static const unsigned int MemStringSize = 512;
-			static const int MemoryCheck_Disable_Magic_num = -1581;
-
-		public:
-			// -----------------------------------------------------
-			// Only found this structure in documentation
-			// created a shadow structure to allow error reporting 
-			// -----------------------------------------------------
-			typedef struct _CrtMemBlockHeader
-			{
-				static const unsigned int nNoMansLandSize = 4; // said in doc that its 4
-
-				struct _CrtMemBlockHeader *pBlockHeaderNext;
-				struct _CrtMemBlockHeader *pBlockHeaderPrev;
-				char *szFileName;    // File name
-				int nLine;           // Line number
-				int nBlockUse;       // Type of block   
-				size_t nDataSize;    // Size of user block
-				long lRequest;       // Allocation number
-				unsigned char gap[nNoMansLandSize];
-
-				// ---------------------------------------------------
-				// In an actual memory block in the debug heap,
-				//    this structure is followed by:
-				//       unsigned char data[nDataSize];
-				//       unsigned char anotherGap[nNoMansLandSize];
-				// ---------------------------------------------------
-
-			} _CrtMemBlockHeader;
-
-		public:
-			// Big Six
-			MemTrace() noexcept
-				:
-				mtx(),
-				mtxMemLeakCount(),
-				MemLeakCount_Start{ 0 },
-				PlacementNew_Count{ 0 },
-				PlacementNew_mtx()
-			{
-				memset(&privBuff[0], 0, MemTraceBuffSize);
-				this->PlacementNew_Count = 0;
-			}
-			MemTrace(const MemTrace &) = delete;
-			MemTrace(MemTrace &&) = delete;
-			MemTrace & operator = (const MemTrace &) = delete;
-			MemTrace & operator = (MemTrace &&) = delete;
-			~MemTrace() = default;
-
-		private:
-			// displays a printf to the output window
-			void privOut(const char * const fmt, ...) noexcept
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-
-				std::lock_guard<std::mutex> lck(rTrace.mtx);
-
-				va_list args;
-
-				#pragma warning( push )
-					#pragma warning( disable : 26492 )
-					#pragma warning( disable : 26481 )
-					va_start(args, fmt);
-				#pragma warning( pop )
-
-				vsprintf_s(&rTrace.privBuff[0], MemTraceBuffSize, fmt, args);
-				OutputDebugString(&rTrace.privBuff[0]);
-
-				// va_end(args); - original.. below to new code
-				args = static_cast<va_list> (nullptr);
-			}
-
-			char *privStripDir( const char * const pInName) noexcept
-			{
-				char *pReturn = (char *) (pInName);
-
-				const char *pch = pInName;
-
-				while (pch != nullptr)
-				{
-					pch = strstr(pch, "\\");
-					if (pch != nullptr)
-					{
-						pch += 1;
-						pReturn = (char *)pch;
-					}
-				}
-
-				return pReturn;
-			}
-
-			void privDisplayLogLink() noexcept
-			{
-				char sBuff[MemTrace::MemStringSize] = { 0 };
-				GetCurrentDirectory(MemTrace::MemStringSize, sBuff);
-
-				const char *pch = &sBuff[0];
-				char *pSlash = nullptr;
-
-				while (pch != nullptr)
-				{
-					pch = strstr(pch, "\\");
-					if (pch != nullptr)
-					{
-						pch += 1;
-						pSlash = (char *)pch;
-					}
-				}
-
-				const size_t numBytes = (size_t) (pSlash - sBuff);
-
-				char pBuff[MemTrace::MemStringSize] = { 0 };
-				memcpy_s(pBuff, MemTrace::MemStringSize, sBuff, numBytes);
-
-				char pString[MemTrace::MemStringSize] = SOLUTION_DIR;
-				strcat_s(pString, MemTrace::MemStringSize, "Logs\\MemTrackerLog.txt");
-
-				this->privOut("\n");
-				this->privOut("     MemTrackerLog Link: \n");
-				this->privOut("          %s(1) : <double-click>\n", &pString[strlen(SOLUTION_DIR)]);
-				this->privOut("\n");
-			}
-
-			bool privSSEMessage(const char *const pName, bool flag)
-			{
-				this->privOut("** %12s %13s   **\n", pName, flag ? 
-					" ready             " : 
-					" --> DISABLED <--  ");
-				return flag;
-			};
-
-		public:
-			static int ApplicationMemLeakCount() noexcept
-			{
 #if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
+#define MEMORY_TRACKING_ENABLE_STRING "enabled         "
+#else
+#define MEMORY_TRACKING_ENABLE_STRING "--> DISABLED <--"
+#endif
+
+class MemTrace
+{
+private:
+	static const unsigned int MemTraceBuffSize = 256;
+	static const unsigned int MemStringSize = 512;
+	static const int MemoryCheck_Disable_Magic_num = -1581;
+
+public:
+	// -----------------------------------------------------
+	// Only found this structure in documentation
+	// created a shadow structure to allow error reporting
+	// -----------------------------------------------------
+	typedef struct _CrtMemBlockHeader
+	{
+		static const unsigned int nNoMansLandSize = 4; // said in doc that its 4
+
+		struct _CrtMemBlockHeader* pBlockHeaderNext;
+		struct _CrtMemBlockHeader* pBlockHeaderPrev;
+		char* szFileName;    // File name
+		int nLine;           // Line number
+		int nBlockUse;       // Type of block
+		size_t nDataSize;    // Size of user block
+		long lRequest;       // Allocation number
+		unsigned char gap[nNoMansLandSize];
+
+		// ---------------------------------------------------
+		// In an actual memory block in the debug heap,
+		//    this structure is followed by:
+		//       unsigned char data[nDataSize];
+		//       unsigned char anotherGap[nNoMansLandSize];
+		// ---------------------------------------------------
+	} _CrtMemBlockHeader;
+
+public:
+	// Big Six
+	MemTrace() noexcept
+		:
+		mtx(),
+		mtxMemLeakCount(),
+		MemLeakCount_Start{ 0 },
+		PlacementNew_Count{ 0 },
+		PlacementNew_mtx()
+	{
+		memset(&privBuff[0], 0, MemTraceBuffSize);
+		this->PlacementNew_Count = 0;
+	}
+	MemTrace(const MemTrace&) = delete;
+	MemTrace(MemTrace&&) = delete;
+	MemTrace& operator = (const MemTrace&) = delete;
+	MemTrace& operator = (MemTrace&&) = delete;
+	~MemTrace() = default;
+
+private:
+	// displays a printf to the output window
+	void privOut(const char* const fmt, ...) noexcept
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+
+		std::lock_guard<std::mutex> lck(rTrace.mtx);
+
+		va_list args;
+
+#pragma warning( push )
+#pragma warning( disable : 26492 )
+#pragma warning( disable : 26481 )
+		va_start(args, fmt);
+#pragma warning( pop )
+
+		vsprintf_s(&rTrace.privBuff[0], MemTraceBuffSize, fmt, args);
+		OutputDebugString(&rTrace.privBuff[0]);
+
+		// va_end(args); - original.. below to new code
+		args = static_cast<va_list> (nullptr);
+	}
+
+	char* privStripDir(const char* const pInName) noexcept
+	{
+		char* pReturn = (char*)(pInName);
+
+		const char* pch = pInName;
+
+		while (pch != nullptr)
+		{
+			pch = strstr(pch, "\\");
+			if (pch != nullptr)
+			{
+				pch += 1;
+				pReturn = (char*)pch;
+			}
+		}
+
+		return pReturn;
+	}
+
+	void privDisplayLogLink() noexcept
+	{
+		char sBuff[MemTrace::MemStringSize] = { 0 };
+		GetCurrentDirectory(MemTrace::MemStringSize, sBuff);
+
+		const char* pch = &sBuff[0];
+		char* pSlash = nullptr;
+
+		while (pch != nullptr)
+		{
+			pch = strstr(pch, "\\");
+			if (pch != nullptr)
+			{
+				pch += 1;
+				pSlash = (char*)pch;
+			}
+		}
+
+		const size_t numBytes = (size_t)(pSlash - sBuff);
+
+		char pBuff[MemTrace::MemStringSize] = { 0 };
+		memcpy_s(pBuff, MemTrace::MemStringSize, sBuff, numBytes);
+
+		char pString[MemTrace::MemStringSize] = SOLUTION_DIR;
+		strcat_s(pString, MemTrace::MemStringSize, "Logs\\MemTrackerLog.txt");
+
+		this->privOut("\n");
+		this->privOut("     MemTrackerLog Link: \n");
+		this->privOut("          %s(1) : <double-click>\n", &pString[strlen(SOLUTION_DIR)]);
+		this->privOut("\n");
+	}
+
+	bool privSSEMessage(const char* const pName, bool flag)
+	{
+		this->privOut("** %12s %13s   **\n", pName, flag ?
+			" ready             " :
+			" --> DISABLED <--  ");
+		return flag;
+	};
+
+public:
+	static int ApplicationMemLeakCount() noexcept
+	{
+#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
+		FILE* pMailBoxFile = nullptr;
+		int val = 0;
+		char pStringMailBox[MemTrace::MemStringSize] = SOLUTION_DIR;
+		strcat_s(pStringMailBox, MemTrace::MemStringSize, "Logs\\MemMailBox.bin");
+		fopen_s(&pMailBoxFile, pStringMailBox, "rb");
+		if (pMailBoxFile != nullptr)
+		{
+			fread_s(&val, sizeof(int), sizeof(int), 1, pMailBoxFile);
+			fclose(pMailBoxFile);
+		}
+#else
+		int val = 0;
+#endif
+		return val;
+	}
+
+	static int LeakCount() noexcept
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
+
+		int NormBlockLeakCount = rTrace.privLeakCount();
+
+		return NormBlockLeakCount;
+	}
+
+	int privLeakCount()
+	{
+#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
+		_CrtMemState state{ 0 };
+		_CrtMemCheckpoint(&state);
+
+		_CrtMemBlockHeader* pTmp;
+		pTmp = reinterpret_cast<MemTrace::_CrtMemBlockHeader*> (state.pBlockHeader);
+
+		int NormBlockLeakCount = 0;
+
+		// Walk to the end of list && see if there is any leaks
+		while (pTmp != nullptr)
+		{
+			if (pTmp->nBlockUse == _NORMAL_BLOCK)
+			{
+				NormBlockLeakCount++;
+			}
+
+			if (pTmp->pBlockHeaderNext == nullptr)
+			{
+				break;
+			}
+			pTmp = pTmp->pBlockHeaderNext;
+		}
+#else
+		int NormBlockLeakCount = 0;
+#endif
+
+		return NormBlockLeakCount;
+	}
+
+	static void ProcessEnd() noexcept
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+
+		// This is included so you can have one universal include
+		std::call_once(rTrace.ProcessEndFlag, [&rTrace]() noexcept
+			{
+				FILE* pFile = nullptr;
 				FILE* pMailBoxFile = nullptr;
-				int val = 0;
+
+				char pString[MemTrace::MemStringSize] = "\"";
+				strcat_s(pString, MemTrace::MemStringSize, SOLUTION_DIR);
+				strcat_s(pString, MemTrace::MemStringSize, "Logs\"\0\"");
+
+				char pMkLogDir[MemTrace::MemStringSize] = "if not exist ";
+				strcat_s(pMkLogDir, MemTrace::MemStringSize, pString);
+				strcat_s(pMkLogDir, MemTrace::MemStringSize, " mkdir ");
+				strcat_s(pMkLogDir, MemTrace::MemStringSize, pString);
+				system(pMkLogDir);
+
+				char pString2[MemTrace::MemStringSize] = SOLUTION_DIR;
+				strcat_s(pString2, MemTrace::MemStringSize, "Logs\\MemTrackerLog.txt");
+				fopen_s(&pFile, pString2, "w");
+
 				char pStringMailBox[MemTrace::MemStringSize] = SOLUTION_DIR;
 				strcat_s(pStringMailBox, MemTrace::MemStringSize, "Logs\\MemMailBox.bin");
-				fopen_s(&pMailBoxFile, pStringMailBox, "rb");
-				if (pMailBoxFile != nullptr)
+				fopen_s(&pMailBoxFile, pStringMailBox, "wb");
+
+				assert(pFile);
+				if (pFile != nullptr)
 				{
-					fread_s(&val, sizeof(int), sizeof(int), 1, pMailBoxFile);
-					fclose(pMailBoxFile);
+					fprintf(pFile, "\n");
+					fprintf(pFile, "****************************************\n");
+					fprintf(pFile, "\n");
+					fprintf(pFile, "  MemTrackerLog \n");
+					fprintf(pFile, "\n");
+					fprintf(pFile, "       %s  \n", __DATE__);
+					fprintf(pFile, "       %s  \n", __TIME__);
+					fprintf(pFile, "\n");
+					fprintf(pFile, "****************************************\n");
+					fprintf(pFile, "\n");
+					fprintf(pFile, "External Libs: \n");
+					fprintf(pFile, "\n");
 				}
-#else
-				int val = 0;
-#endif
-				return val;
-			}
-
-			static int LeakCount() noexcept
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
-
-				int NormBlockLeakCount = rTrace.privLeakCount();
-
-				return NormBlockLeakCount;
-			}
-
-			int privLeakCount()
-			{
-#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
 				_CrtMemState state{ 0 };
 				_CrtMemCheckpoint(&state);
 
+				rTrace.privOut("\n");
 				_CrtMemBlockHeader* pTmp;
 				pTmp = reinterpret_cast<MemTrace::_CrtMemBlockHeader*> (state.pBlockHeader);
+
+				unsigned int i = 0;
+
+				size_t appMaxIndex = 0;
+				size_t appMaxSize = 0;
+				size_t appCount = 0;
+				size_t appTotalSize = 0;
+				_CrtMemBlockHeader* pAppMaxTmp = nullptr;
+
+				size_t extMaxIndex = 0;
+				size_t extMaxSize = 0;
+				size_t extCount = 0;
+				size_t extTotalSize = 0;
+				_CrtMemBlockHeader* pExtMaxTmp = nullptr;
 
 				int NormBlockLeakCount = 0;
 
@@ -804,565 +877,467 @@ public:
 					}
 					pTmp = pTmp->pBlockHeaderNext;
 				}
-#else
-				int NormBlockLeakCount = 0;
-#endif
 
-				return NormBlockLeakCount;
-			}
+				if (MemTrace::GetPlacementNewCount() != 0)
+				{
+					rTrace.privOut("--------------------------------\n");
+					printf("--------------------------------\n");
 
-			static void ProcessEnd() noexcept
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-			
-		
-				// This is included so you can have one universal include
-				std::call_once(rTrace.ProcessEndFlag, [&rTrace]() noexcept
+					rTrace.privOut(">>> CRASH: placement new macro mismatch <<<<<<\n");
+					printf(">>> CRASH: placement new macro mismatch <<<<<<\n");
+					rTrace.privOut("--------------------------------\n");
+					printf("--------------------------------\n");
+
+					assert(MemTrace::GetPlacementNewCount() == 0);
+				}
+
+				if (NormBlockLeakCount > 0)
+				{
+					rTrace.privOut("------------------------------------------------------\n");
+					rTrace.privOut(">>>   Memory Tracking: Leaks detected              <<<\n");
+					rTrace.privOut(">>>   Double-click on file string to Leak location <<<\n");
+					rTrace.privOut("------------------------------------------------------\n");
+					rTrace.privOut("\n");
+
+					while (pTmp != nullptr)
 					{
-						FILE* pFile = nullptr;
-						FILE* pMailBoxFile = nullptr;
-
-						char pString[MemTrace::MemStringSize] = "\"";
-						strcat_s(pString, MemTrace::MemStringSize, SOLUTION_DIR);
-						strcat_s(pString, MemTrace::MemStringSize, "Logs\"\0\"");
-
-						char pMkLogDir[MemTrace::MemStringSize] = "if not exist ";
-						strcat_s(pMkLogDir, MemTrace::MemStringSize, pString);
-						strcat_s(pMkLogDir, MemTrace::MemStringSize, " mkdir ");
-						strcat_s(pMkLogDir, MemTrace::MemStringSize, pString);
-						system(pMkLogDir);
-
-						char pString2[MemTrace::MemStringSize] = SOLUTION_DIR;
-						strcat_s(pString2, MemTrace::MemStringSize, "Logs\\MemTrackerLog.txt");
-						fopen_s(&pFile, pString2, "w");
-
-						char pStringMailBox[MemTrace::MemStringSize] = SOLUTION_DIR;
-						strcat_s(pStringMailBox, MemTrace::MemStringSize, "Logs\\MemMailBox.bin");
-						fopen_s(&pMailBoxFile, pStringMailBox, "wb");
-
-						assert(pFile);
-						if (pFile != nullptr)
+						if (pTmp->nBlockUse == _NORMAL_BLOCK)
 						{
-							fprintf(pFile, "\n");
-							fprintf(pFile, "****************************************\n");
-							fprintf(pFile, "\n");
-							fprintf(pFile, "  MemTrackerLog \n");
-							fprintf(pFile, "\n");
-							fprintf(pFile, "       %s  \n", __DATE__);
-							fprintf(pFile, "       %s  \n", __TIME__);
-							fprintf(pFile, "\n");
-							fprintf(pFile, "****************************************\n");
-							fprintf(pFile, "\n");
-							fprintf(pFile, "External Libs: \n");
-							fprintf(pFile, "\n");
-						}
-						_CrtMemState state{ 0 };
-						_CrtMemCheckpoint(&state);
-
-						rTrace.privOut("\n");
-						_CrtMemBlockHeader *pTmp;
-						pTmp = reinterpret_cast<MemTrace::_CrtMemBlockHeader *> (state.pBlockHeader);
-
-						unsigned int i = 0;
-
-						size_t appMaxIndex = 0;
-						size_t appMaxSize = 0;
-						size_t appCount = 0;
-						size_t appTotalSize = 0;
-						_CrtMemBlockHeader *pAppMaxTmp = nullptr;
-
-						size_t extMaxIndex = 0;
-						size_t extMaxSize = 0;
-						size_t extCount = 0;
-						size_t extTotalSize = 0;
-						_CrtMemBlockHeader *pExtMaxTmp = nullptr;
-
-						int NormBlockLeakCount = 0;
-
-						// Walk to the end of list && see if there is any leaks
-						while (pTmp != nullptr)
-						{
-							if (pTmp->nBlockUse == _NORMAL_BLOCK)
+							// treat allocation with/without names as different groups
+							if (pTmp->szFileName == nullptr)
 							{
-								NormBlockLeakCount++;
-							}
-
-							if (pTmp->pBlockHeaderNext == nullptr)
-							{
-								break;
-							}
-							pTmp = pTmp->pBlockHeaderNext;
-						}
-						
-						if (MemTrace::GetPlacementNewCount() != 0)
-						{
-							rTrace.privOut("--------------------------------\n");
-							printf("--------------------------------\n");
-
-							rTrace.privOut(">>> CRASH: placement new macro mismatch <<<<<<\n");
-							printf(">>> CRASH: placement new macro mismatch <<<<<<\n");
-							rTrace.privOut("--------------------------------\n");
-							printf("--------------------------------\n");
-
-							assert(MemTrace::GetPlacementNewCount() == 0);
-						}
-
-						if (NormBlockLeakCount > 0)
-						{
-							rTrace.privOut("------------------------------------------------------\n");
-							rTrace.privOut(">>>   Memory Tracking: Leaks detected              <<<\n");
-							rTrace.privOut(">>>   Double-click on file string to Leak location <<<\n");
-							rTrace.privOut("------------------------------------------------------\n");
-							rTrace.privOut("\n");
-
-							while (pTmp != nullptr)
-							{
-								if (pTmp->nBlockUse == _NORMAL_BLOCK)
+								extTotalSize += pTmp->nDataSize;
+								extCount++;
+								if (extMaxSize < pTmp->nDataSize)
 								{
-									// treat allocation with/without names as different groups
-									if (pTmp->szFileName == nullptr)
-									{
-										extTotalSize += pTmp->nDataSize;
-										extCount++;
-										if (extMaxSize < pTmp->nDataSize)
-										{
-											extMaxSize = pTmp->nDataSize;
-											extMaxIndex = i;
-											pExtMaxTmp = pTmp;
-										}
-										if (pFile != nullptr)
-										{
-											fprintf(pFile, "Leak(%d)  %d bytes ref:%d \n", (int)i, (int)pTmp->nDataSize, (int)pTmp->lRequest);
-										}
-									}
-									else
-									{
-										appTotalSize += pTmp->nDataSize;
-										appCount++;
-										if (appMaxSize < pTmp->nDataSize)
-										{
-											appMaxSize = pTmp->nDataSize;
-											appMaxIndex = i;
-											pAppMaxTmp = pTmp;
-										}
-
-										if (appCount < 101)
-										{
-											rTrace.privOut("Leak(%d)  %d bytes ref:%d %s \n", i, pTmp->nDataSize, pTmp->lRequest, rTrace.privStripDir(pTmp->szFileName));
-											rTrace.privOut("   %s(%d) : <double-click> \n", &pTmp->szFileName[0], pTmp->nLine);
-											rTrace.privOut("\n");
-										}
-										if (appCount == 101)
-										{
-											rTrace.privOut("--> ...Leak exceeds 100... <-- \n");
-											rTrace.privOut("\n");
-										}
-									}
-
-									i++;
+									extMaxSize = pTmp->nDataSize;
+									extMaxIndex = i;
+									pExtMaxTmp = pTmp;
 								}
-								pTmp = pTmp->pBlockHeaderPrev;
-							}
-
-							rTrace.privOut("Memory Tracking statistics \n");
-							rTrace.privOut("\n");
-							rTrace.privOut("     Application files: \n");
-							rTrace.privOut("                num of leaks: %d \n", appCount);
-							rTrace.privOut("          total bytes leaked: %d \n", appTotalSize);
-							if (pAppMaxTmp != nullptr)
-							{
-								rTrace.privOut("          largest individual: Leak(%d) size: %d \n", appMaxIndex, pAppMaxTmp->nDataSize);
-							}
-							rTrace.privOut("\n");
-							rTrace.privOut("     External Libs: \n");
-							rTrace.privOut("                num of leaks: %d \n", extCount);
-							rTrace.privOut("          total bytes leaked: %d \n", extTotalSize);
-
-							if (pExtMaxTmp != nullptr)
-							{
-								rTrace.privOut("          largest individual: Leak(%d) size: %d \n", extMaxIndex, pExtMaxTmp->nDataSize);
-							}
-							if (pFile != nullptr)
-							{
-								fprintf(pFile, "\n");
-								fprintf(pFile, "Memory Tracking Stats:\n");
-								fprintf(pFile, "\n");
-								fprintf(pFile, "     Application files: \n");
-								fprintf(pFile, "                num of leaks: %d \n", (int)appCount);
-								fprintf(pFile, "          total bytes leaked: %d \n", (int)appTotalSize);
-								if (pAppMaxTmp != nullptr)
+								if (pFile != nullptr)
 								{
-									fprintf(pFile, "          largest individual: Leak(%d) size: %d \n", (int)appMaxIndex, (int)pAppMaxTmp->nDataSize);
+									fprintf(pFile, "Leak(%d)  %d bytes ref:%d \n", (int)i, (int)pTmp->nDataSize, (int)pTmp->lRequest);
 								}
-								fprintf(pFile, "\n");
-								fprintf(pFile, "     External Libs: \n");
-								fprintf(pFile, "                num of leaks: %d \n", (int)extCount);
-								fprintf(pFile, "          total bytes leaked: %d \n", (int)extTotalSize);
-
-								if (pExtMaxTmp != nullptr)
+							}
+							else
+							{
+								appTotalSize += pTmp->nDataSize;
+								appCount++;
+								if (appMaxSize < pTmp->nDataSize)
 								{
-									fprintf(pFile, "          largest individual: Leak(%d) size: %d \n", (int)extMaxIndex, (int)pExtMaxTmp->nDataSize);
+									appMaxSize = pTmp->nDataSize;
+									appMaxIndex = i;
+									pAppMaxTmp = pTmp;
 								}
 
-								fprintf(pFile, "\n");
-								fprintf(pFile, "CRT Debug Stats: \n");
-								fprintf(pFile, "\n");
-								fprintf(pFile, "    %d bytes in %d Free Blocks \n", (int)state.lSizes[_FREE_BLOCK], (int)state.lCounts[_FREE_BLOCK]);
-								fprintf(pFile, "    %d bytes in %d Normal Blocks \n", (int)state.lSizes[_NORMAL_BLOCK], (int)state.lCounts[_NORMAL_BLOCK]);
-								fprintf(pFile, "    %d bytes in %d CRT Blocks \n", (int)state.lSizes[_CRT_BLOCK], (int)state.lCounts[_CRT_BLOCK]);
-								fprintf(pFile, "    %d bytes in %d Ignore Blocks \n", (int)state.lSizes[_IGNORE_BLOCK], (int)state.lCounts[_IGNORE_BLOCK]);
-								fprintf(pFile, "    %d bytes in %d Client Blocks \n", (int)state.lSizes[_CLIENT_BLOCK], (int)state.lCounts[_CLIENT_BLOCK]);
+								if (appCount < 101)
+								{
+									rTrace.privOut("Leak(%d)  %d bytes ref:%d %s \n", i, pTmp->nDataSize, pTmp->lRequest, rTrace.privStripDir(pTmp->szFileName));
+									rTrace.privOut("   %s(%d) : <double-click> \n", &pTmp->szFileName[0], pTmp->nLine);
+									rTrace.privOut("\n");
+								}
+								if (appCount == 101)
+								{
+									rTrace.privOut("--> ...Leak exceeds 100... <-- \n");
+									rTrace.privOut("\n");
+								}
 							}
-							rTrace.privDisplayLogLink();
-						
-						}
-	
-						rTrace.privOut("--------------------------------\n");
-						printf("--------------------------------\n");
-						if (appCount)
-						{
-							rTrace.privOut(">>> Memory Tracking: FAIL <<<<<<\n");
-							printf(">>> Memory Tracking: FAIL <<<<<<\n");
-						}
-						else 
-						{
-							rTrace.privOut("    Memory Tracking: passed \n");
-							printf("    Memory Tracking: passed \n");
-						}
-						rTrace.privOut("--------------------------------\n");
-						rTrace.privOut("    Memory Tracking: end()      \n");
-						rTrace.privOut("--------------------------------\n");
-						printf("--------------------------------\n");
-						printf("    Memory Tracking: end()      \n");
-						printf("--------------------------------\n");
-						printf("\n");
 
-						//_CrtMemPrintStatistics(&state);
-						assert(pMailBoxFile);
-						if (pMailBoxFile != nullptr)
-						{
-							fwrite(&appCount,sizeof(int),1,pMailBoxFile);
+							i++;
 						}
-						if (pMailBoxFile != nullptr)
-						{
-							fclose(pMailBoxFile);
-						}
-						if (pFile != nullptr)
-						{
-							fclose(pFile);
-						}
-
+						pTmp = pTmp->pBlockHeaderPrev;
 					}
-				);
-			};
 
-			static void ProcessBegin() noexcept
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-
-				// This is included so you can have one universal include
-				std::call_once(rTrace.ProcessBeginFlag, [&rTrace]() noexcept
+					rTrace.privOut("Memory Tracking statistics \n");
+					rTrace.privOut("\n");
+					rTrace.privOut("     Application files: \n");
+					rTrace.privOut("                num of leaks: %d \n", appCount);
+					rTrace.privOut("          total bytes leaked: %d \n", appTotalSize);
+					if (pAppMaxTmp != nullptr)
 					{
+						rTrace.privOut("          largest individual: Leak(%d) size: %d \n", appMaxIndex, pAppMaxTmp->nDataSize);
+					}
+					rTrace.privOut("\n");
+					rTrace.privOut("     External Libs: \n");
+					rTrace.privOut("                num of leaks: %d \n", extCount);
+					rTrace.privOut("          total bytes leaked: %d \n", extTotalSize);
 
-						rTrace.privOut("\n");
-						rTrace.privOut("****************************************\n");
-						rTrace.privOut("**      Framework: %s               **\n", FRAMEWORK_VER);
-						rTrace.privOut("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
-						rTrace.privOut("**  Tools Version: %s        **\n", TOOLS_VERSION);
-						rTrace.privOut("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
-						rTrace.privOut("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
-						rTrace.privOut("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
-						rTrace.privOut("****************************************\n");
+					if (pExtMaxTmp != nullptr)
+					{
+						rTrace.privOut("          largest individual: Leak(%d) size: %d \n", extMaxIndex, pExtMaxTmp->nDataSize);
+					}
+					if (pFile != nullptr)
+					{
+						fprintf(pFile, "\n");
+						fprintf(pFile, "Memory Tracking Stats:\n");
+						fprintf(pFile, "\n");
+						fprintf(pFile, "     Application files: \n");
+						fprintf(pFile, "                num of leaks: %d \n", (int)appCount);
+						fprintf(pFile, "          total bytes leaked: %d \n", (int)appTotalSize);
+						if (pAppMaxTmp != nullptr)
+						{
+							fprintf(pFile, "          largest individual: Leak(%d) size: %d \n", (int)appMaxIndex, (int)pAppMaxTmp->nDataSize);
+						}
+						fprintf(pFile, "\n");
+						fprintf(pFile, "     External Libs: \n");
+						fprintf(pFile, "                num of leaks: %d \n", (int)extCount);
+						fprintf(pFile, "          total bytes leaked: %d \n", (int)extTotalSize);
+
+						if (pExtMaxTmp != nullptr)
+						{
+							fprintf(pFile, "          largest individual: Leak(%d) size: %d \n", (int)extMaxIndex, (int)pExtMaxTmp->nDataSize);
+						}
+
+						fprintf(pFile, "\n");
+						fprintf(pFile, "CRT Debug Stats: \n");
+						fprintf(pFile, "\n");
+						fprintf(pFile, "    %d bytes in %d Free Blocks \n", (int)state.lSizes[_FREE_BLOCK], (int)state.lCounts[_FREE_BLOCK]);
+						fprintf(pFile, "    %d bytes in %d Normal Blocks \n", (int)state.lSizes[_NORMAL_BLOCK], (int)state.lCounts[_NORMAL_BLOCK]);
+						fprintf(pFile, "    %d bytes in %d CRT Blocks \n", (int)state.lSizes[_CRT_BLOCK], (int)state.lCounts[_CRT_BLOCK]);
+						fprintf(pFile, "    %d bytes in %d Ignore Blocks \n", (int)state.lSizes[_IGNORE_BLOCK], (int)state.lCounts[_IGNORE_BLOCK]);
+						fprintf(pFile, "    %d bytes in %d Client Blocks \n", (int)state.lSizes[_CLIENT_BLOCK], (int)state.lCounts[_CLIENT_BLOCK]);
+					}
+					rTrace.privDisplayLogLink();
+				}
+
+				rTrace.privOut("--------------------------------\n");
+				printf("--------------------------------\n");
+				if (appCount)
+				{
+					rTrace.privOut(">>> Memory Tracking: FAIL <<<<<<\n");
+					printf(">>> Memory Tracking: FAIL <<<<<<\n");
+				}
+				else
+				{
+					rTrace.privOut("    Memory Tracking: passed \n");
+					printf("    Memory Tracking: passed \n");
+				}
+				rTrace.privOut("--------------------------------\n");
+				rTrace.privOut("    Memory Tracking: end()      \n");
+				rTrace.privOut("--------------------------------\n");
+				printf("--------------------------------\n");
+				printf("    Memory Tracking: end()      \n");
+				printf("--------------------------------\n");
+				printf("\n");
+
+				//_CrtMemPrintStatistics(&state);
+				assert(pMailBoxFile);
+				if (pMailBoxFile != nullptr)
+				{
+					fwrite(&appCount, sizeof(int), 1, pMailBoxFile);
+				}
+				if (pMailBoxFile != nullptr)
+				{
+					fclose(pMailBoxFile);
+				}
+				if (pFile != nullptr)
+				{
+					fclose(pFile);
+				}
+			}
+		);
+	};
+
+	static void ProcessBegin() noexcept
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+
+		// This is included so you can have one universal include
+		std::call_once(rTrace.ProcessBeginFlag, [&rTrace]() noexcept
+			{
+				rTrace.privOut("\n");
+				rTrace.privOut("****************************************\n");
+				rTrace.privOut("**      Framework: %s               **\n", FRAMEWORK_VER);
+				rTrace.privOut("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
+				rTrace.privOut("**  Tools Version: %s        **\n", TOOLS_VERSION);
+				rTrace.privOut("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
+				rTrace.privOut("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
+				rTrace.privOut("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
+				rTrace.privOut("****************************************\n");
 #ifdef TEACHING_PC
-						rTrace.privOut("**    TEACHING PC: --> ENABLED <--    **\n");
-						rTrace.privOut("****************************************\n");
+				rTrace.privOut("**    TEACHING PC: --> ENABLED <--    **\n");
+				rTrace.privOut("****************************************\n");
 
 #endif
 #ifdef USE_THREAD_FRAMEWORK
-						rTrace.privOut("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
-						rTrace.privOut("****************************************\n");
+				rTrace.privOut("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
+				rTrace.privOut("****************************************\n");
 #endif
 
 #ifdef SIMD_SUPPORT_PRINTS
-						
-						//	InstructionSet *InstructionSet::poInstance = nullptr;
-						
-						InstructionSet *pInst = new InstructionSet();
-						rTrace.privOut("**  -- SIMD SUPPORT -------------     **\n");
-						rTrace.privSSEMessage("MMX", pInst->MMX());
-						rTrace.privSSEMessage("SSE", pInst->SSE());
-						rTrace.privSSEMessage("SSE2", pInst->SSE2());
-						rTrace.privSSEMessage("SSE3", pInst->SSE3());
-						rTrace.privSSEMessage("SSE4.1", pInst->SSE41());
-						rTrace.privSSEMessage("SSE4.2", pInst->SSE42());
-						rTrace.privSSEMessage("SSSE3", pInst->SSSE3());
-						rTrace.privSSEMessage("AVX", pInst->AVX());
-						rTrace.privSSEMessage("AVX2", pInst->AVX2());
-						rTrace.privSSEMessage("FMA", pInst->FMA());
-						rTrace.privSSEMessage("AVX512CD", pInst->AVX512CD());
-						rTrace.privSSEMessage("AVX512ER", pInst->AVX512ER());
-						rTrace.privSSEMessage("AVX512F", pInst->AVX512F());
-						rTrace.privSSEMessage("AVX512PF", pInst->AVX512PF());
-					
-						delete pInst;
-						rTrace.privOut("****************************************\n");
+
+				//	InstructionSet *InstructionSet::poInstance = nullptr;
+
+				InstructionSet* pInst = new InstructionSet();
+				rTrace.privOut("**  -- SIMD SUPPORT -------------     **\n");
+				rTrace.privSSEMessage("MMX", pInst->MMX());
+				rTrace.privSSEMessage("SSE", pInst->SSE());
+				rTrace.privSSEMessage("SSE2", pInst->SSE2());
+				rTrace.privSSEMessage("SSE3", pInst->SSE3());
+				rTrace.privSSEMessage("SSE4.1", pInst->SSE41());
+				rTrace.privSSEMessage("SSE4.2", pInst->SSE42());
+				rTrace.privSSEMessage("SSSE3", pInst->SSSE3());
+				rTrace.privSSEMessage("AVX", pInst->AVX());
+				rTrace.privSSEMessage("AVX2", pInst->AVX2());
+				rTrace.privSSEMessage("FMA", pInst->FMA());
+				rTrace.privSSEMessage("AVX512CD", pInst->AVX512CD());
+				rTrace.privSSEMessage("AVX512ER", pInst->AVX512ER());
+				rTrace.privSSEMessage("AVX512F", pInst->AVX512F());
+				rTrace.privSSEMessage("AVX512PF", pInst->AVX512PF());
+
+				delete pInst;
+				rTrace.privOut("****************************************\n");
 
 #endif
-						rTrace.privOut("\n");
-						printf("\n");
-						printf("****************************************\n");
-						printf("**      Framework: %s               **\n", FRAMEWORK_VER);
-						printf("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
-						printf("**  Tools Version: %s        **\n", TOOLS_VERSION);
-						printf("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
-						printf("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
-						printf("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
-						printf("****************************************\n");
+				rTrace.privOut("\n");
+				printf("\n");
+				printf("****************************************\n");
+				printf("**      Framework: %s               **\n", FRAMEWORK_VER);
+				printf("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
+				printf("**  Tools Version: %s        **\n", TOOLS_VERSION);
+				printf("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
+				printf("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
+				printf("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
+				printf("****************************************\n");
 #ifdef TEACHING_PC
-						printf("**    TEACHING PC: --> ENABLED <--    **\n");
-						printf("****************************************\n");
+				printf("**    TEACHING PC: --> ENABLED <--    **\n");
+				printf("****************************************\n");
 #endif
 #ifdef USE_THREAD_FRAMEWORK
-						printf("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
-						printf("****************************************\n");
+				printf("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
+				printf("****************************************\n");
 #endif
-						printf("\n");
-						rTrace.privOut("--------------------------------\n");
-						rTrace.privOut("    Memory Tracking: start()    \n");
-						rTrace.privOut("--------------------------------\n");
-						rTrace.privOut("\n");
-						printf("--------------------------------\n");
-						printf("    Memory Tracking: start()    \n");
-						printf("--------------------------------\n");
-						printf("\n");
-					}
-				);
+				printf("\n");
+				rTrace.privOut("--------------------------------\n");
+				rTrace.privOut("    Memory Tracking: start()    \n");
+				rTrace.privOut("--------------------------------\n");
+				rTrace.privOut("\n");
+				printf("--------------------------------\n");
+				printf("    Memory Tracking: start()    \n");
+				printf("--------------------------------\n");
+				printf("\n");
 			}
+		);
+	}
 
-			static void ProcessBegin_Release() 
+	static void ProcessBegin_Release()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+
+		// This is included so you can have one universal include
+		std::call_once(rTrace.ProcessBeginFlag, [&rTrace]() noexcept
 			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-
-				// This is included so you can have one universal include
-				std::call_once(rTrace.ProcessBeginFlag, [&rTrace]() noexcept
-				{
-					rTrace.privOut("\n"); 
-					rTrace.privOut("****************************************\n"); 
-					rTrace.privOut("**      Framework: %s               **\n", FRAMEWORK_VER); 
-					rTrace.privOut("**   C++ Compiler: %d          **\n", _MSC_FULL_VER); 
-					rTrace.privOut("**  Tools Version: %s        **\n", TOOLS_VERSION);
-					rTrace.privOut("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM); 
-					rTrace.privOut("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING); 
-					rTrace.privOut("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
-					rTrace.privOut("****************************************\n"); 
+				rTrace.privOut("\n");
+				rTrace.privOut("****************************************\n");
+				rTrace.privOut("**      Framework: %s               **\n", FRAMEWORK_VER);
+				rTrace.privOut("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
+				rTrace.privOut("**  Tools Version: %s        **\n", TOOLS_VERSION);
+				rTrace.privOut("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
+				rTrace.privOut("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
+				rTrace.privOut("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
+				rTrace.privOut("****************************************\n");
 #ifdef TEACHING_PC
-					rTrace.privOut("**    TEACHING PC: --> ENABLED <--    **\n");
-					rTrace.privOut("****************************************\n");
+				rTrace.privOut("**    TEACHING PC: --> ENABLED <--    **\n");
+				rTrace.privOut("****************************************\n");
 
 #endif
 #ifdef USE_THREAD_FRAMEWORK
-					rTrace.privOut("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
-					rTrace.privOut("****************************************\n");
+				rTrace.privOut("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
+				rTrace.privOut("****************************************\n");
 #endif
-					rTrace.privOut("\n"); 
-					printf("\n"); 
-					printf("****************************************\n"); 
-					printf("**      Framework: %s               **\n", FRAMEWORK_VER); 
-					printf("**   C++ Compiler: %d          **\n", _MSC_FULL_VER); 
-					printf("**  Tools Version: %s        **\n", TOOLS_VERSION);
-					printf("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM); 
-					printf("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING); 
-					printf("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
-					printf("****************************************\n"); 
+				rTrace.privOut("\n");
+				printf("\n");
+				printf("****************************************\n");
+				printf("**      Framework: %s               **\n", FRAMEWORK_VER);
+				printf("**   C++ Compiler: %d          **\n", _MSC_FULL_VER);
+				printf("**  Tools Version: %s        **\n", TOOLS_VERSION);
+				printf("**    Windows SDK: %s       **\n", WINDOWS_TARGET_PLATFORM);
+				printf("**   Mem Tracking: %s   **\n", MEMORY_TRACKING_ENABLE_STRING);
+				printf("**           Mode: %s        **\n", BUILD_CONFIG_MODE);
+				printf("****************************************\n");
 #ifdef TEACHING_PC
-					printf("**    TEACHING PC: --> ENABLED <--    **\n");
-					printf("****************************************\n");
+				printf("**    TEACHING PC: --> ENABLED <--    **\n");
+				printf("****************************************\n");
 #endif
 #ifdef USE_THREAD_FRAMEWORK
-					printf("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
-					printf("****************************************\n");
+				printf("**         Thread: %s               **\n", THREAD_FRAMEWORK_VER);
+				printf("****************************************\n");
 #endif
-					printf("\n");
-				}
-				);
+				printf("\n");
 			}
+		);
+	}
 
+	static int GetPlacementNewCount() noexcept
+	{
+		const MemTrace& rTrace = MemTrace::privGetRefInstance();
+		return rTrace.PlacementNew_Count;
+	}
 
-			static int GetPlacementNewCount() noexcept
-			{
-				const MemTrace &rTrace = MemTrace::privGetRefInstance();
-				return rTrace.PlacementNew_Count;
-			}
+	static void IncrementPlacementNewCount()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> lock(rTrace.PlacementNew_mtx);
+		rTrace.PlacementNew_Count++;
+	}
 
-			static void IncrementPlacementNewCount()
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> lock(rTrace.PlacementNew_mtx);
-				rTrace.PlacementNew_Count++;
-			}
+	static void UnitTest_MemLeakCheck_Disable_Proxy()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
 
-			static void UnitTest_MemLeakCheck_Disable_Proxy()
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
+		rTrace.MemLeakCount_Start = MemoryCheck_Disable_Magic_num;
+	}
 
-					rTrace.MemLeakCount_Start = MemoryCheck_Disable_Magic_num;
-			}
+	static void UnitTest_MemLeakCheck_Enable_Proxy()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
 
-			static void UnitTest_MemLeakCheck_Enable_Proxy()
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
+		rTrace.MemLeakCount_Start = rTrace.privLeakCount();
+	}
 
-					rTrace.MemLeakCount_Start = rTrace.privLeakCount();
-			}
+	static bool UnitTest_MemLeakCheck_End_Proxy()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
 
-			static bool UnitTest_MemLeakCheck_End_Proxy()
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);
+		const int End = rTrace.privLeakCount();
+		const int Start = rTrace.MemLeakCount_Start;
+		//rTrace.privOut("    start:%d  end:%d \n\n", Start,End);
+		bool flag(false);
+		if (rTrace.MemLeakCount_Start != MemoryCheck_Disable_Magic_num)
+		{
+			flag = (Start >= End);
+		}
+		else
+		{
+			// disabled - so the test shouldn't crash, return true
+			flag = true;
+		}
 
-					const int End = rTrace.privLeakCount();
-					const int Start = rTrace.MemLeakCount_Start;
-					//rTrace.privOut("    start:%d  end:%d \n\n", Start,End);
-					bool flag(false);
-					if (rTrace.MemLeakCount_Start != MemoryCheck_Disable_Magic_num)
-					{
-						flag = (Start >= End);
-					}
-					else
-					{
-						// disabled - so the test shouldn't crash, return true
-						flag = true;
-					}
+		return flag;
+	}
 
-				return flag;
-			}
+	static void DecrementPlacementNewCount()
+	{
+		MemTrace& rTrace = MemTrace::privGetRefInstance();
+		std::lock_guard<std::mutex> lock(rTrace.PlacementNew_mtx);
+		rTrace.PlacementNew_Count--;
+	}
 
+	std::once_flag ProcessBeginFlag;
+	std::once_flag ProcessEndFlag;
 
-			static void DecrementPlacementNewCount()
-			{
-				MemTrace &rTrace = MemTrace::privGetRefInstance();
-				std::lock_guard<std::mutex> lock(rTrace.PlacementNew_mtx);
-				rTrace.PlacementNew_Count--;
-			}
+public:
 
-			std::once_flag ProcessBeginFlag;
-			std::once_flag ProcessEndFlag;
+	static MemTrace& privGetRefInstance() noexcept
+	{
+		static MemTrace helper;
+		return helper;
+	}
 
-		public:
+private:
 
-			static MemTrace &privGetRefInstance() noexcept
-			{
-				static MemTrace helper;
-				return helper;
-			}
+	char privBuff[MemTraceBuffSize];
+	std::mutex mtx;
 
-		private:
+public:
+	std::mutex mtxMemLeakCount;
+	int MemLeakCount_Start;
 
-			char privBuff[MemTraceBuffSize];
-			std::mutex mtx;
+	int PlacementNew_Count;
+	std::mutex PlacementNew_mtx;
+};
 
-		public:
-			std::mutex mtxMemLeakCount;
-			int MemLeakCount_Start;
+//============================================
+//			Fixed
+//============================================
+#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
 
-			int PlacementNew_Count;
-			std::mutex PlacementNew_mtx;
-		};
-	
-		//============================================
-		//			Fixed
-		//============================================
-		#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
-
-			#define AZUL_PLACEMENT_NEW_BEGIN	assert(MemTrace::GetPlacementNewCount() == 0); \
+#define AZUL_PLACEMENT_NEW_BEGIN	assert(MemTrace::GetPlacementNewCount() == 0); \
 												__pragma(push_macro("new")) \
 												MemTrace::IncrementPlacementNewCount();
 
-			#define AZUL_PLACEMENT_NEW_END      __pragma(pop_macro("new")) \
+#define AZUL_PLACEMENT_NEW_END      __pragma(pop_macro("new")) \
 												MemTrace::DecrementPlacementNewCount(); \
 												assert(MemTrace::GetPlacementNewCount() == 0);
-		#else
-			#define AZUL_PLACEMENT_NEW_BEGIN	__pragma(push_macro("new"))
+#else
+#define AZUL_PLACEMENT_NEW_BEGIN	__pragma(push_macro("new"))
 
-			#define AZUL_PLACEMENT_NEW_END __pragma(pop_macro("new"))
-		#endif
+#define AZUL_PLACEMENT_NEW_END __pragma(pop_macro("new"))
+#endif
 
+//============================================
+//			Original
+//============================================
 
-		//============================================
-		//			Original
-		//============================================
-
-		//#define AZUL_PLACEMENT_NEW_BEGIN	assert(MemTrace::GetPlacementNewCount() == 0); \
+//#define AZUL_PLACEMENT_NEW_BEGIN	assert(MemTrace::GetPlacementNewCount() == 0); \
 		//									__pragma(push_macro("new")) \
 		//									MemTrace::IncrementPlacementNewCount();
-		//									
+		//
 		//#define AZUL_PLACEMENT_NEW_END      __pragma(pop_macro("new")) \
 		//									MemTrace::DecrementPlacementNewCount(); \
 		//									assert(MemTrace::GetPlacementNewCount() == 0);
 
-		#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
-			#define _CRTDBG_MAP_ALLOC  
-			#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#if defined(_DEBUG) && defined(MEM_TRACKER_ENABLED)
+#define _CRTDBG_MAP_ALLOC
+#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ )
 
-			#define malloc(s)          _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
-			#define free(p)            _free_dbg(p, _NORMAL_BLOCK)
-			#define calloc(c, s)       _calloc_dbg(c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-			#define realloc(p, s)      _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define malloc(s)          _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define free(p)            _free_dbg(p, _NORMAL_BLOCK)
+#define calloc(c, s)       _calloc_dbg(c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define realloc(p, s)      _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
 
+#else
+#pragma warning( push )
+#pragma warning( disable : 4820 )
+#pragma warning( disable : 4577 )
+#pragma warning( disable : 4987 )
+#include <new>
+#pragma warning( pop )
+#endif
 
-		#else
-			#pragma warning( push )
-				#pragma warning( disable : 4820 )
-				#pragma warning( disable : 4577 )
-				#pragma warning( disable : 4987 )
-				#include <new>
-			#pragma warning( pop )
-		#endif
-
-		#ifdef MEM_TRACKER_ENABLED
-			#ifdef _DEBUG
-				#define MEM_TRACKER_PROCESS_BEGIN	\
+#ifdef MEM_TRACKER_ENABLED
+#ifdef _DEBUG
+#define MEM_TRACKER_PROCESS_BEGIN	\
 						MemTrace::ProcessBegin();
 
-				#define MEM_TRACKER_PROCESS_END \
+#define MEM_TRACKER_PROCESS_END \
 						MemTrace::ProcessEnd();
-			#else
-				#define MEM_TRACKER_PROCESS_BEGIN		\
+#else
+#define MEM_TRACKER_PROCESS_BEGIN		\
 						MemTrace::ProcessBegin_Release();
 
-				#define MEM_TRACKER_PROCESS_END
+#define MEM_TRACKER_PROCESS_END
 
-			#endif
-		#else
-			#define MEM_TRACKER_PROCESS_BEGIN		\
+#endif
+#else
+#define MEM_TRACKER_PROCESS_BEGIN		\
 						MemTrace::ProcessBegin_Release();
-		
-			#define MEM_TRACKER_PROCESS_END
 
-		#endif
+#define MEM_TRACKER_PROCESS_END
 
-		// MEM_TRACKER_BEGIN:
-		static struct _StaticMem 
-		{ 
-			_StaticMem() noexcept
-			{ 
-				MEM_TRACKER_PROCESS_BEGIN 
-			} 
-			~_StaticMem() 
-			{ 
-				MEM_TRACKER_PROCESS_END 
-			} 
-			_StaticMem(const _StaticMem &) = delete; 
-			_StaticMem(_StaticMem &&) = delete; 
-			_StaticMem &operator = (const _StaticMem &) = delete; 
-			_StaticMem &operator = (_StaticMem &&) = delete; 
-		} _StaticMemInst; 
+#endif
 
+// MEM_TRACKER_BEGIN:
+static struct _StaticMem
+{
+	_StaticMem() noexcept
+	{
+		MEM_TRACKER_PROCESS_BEGIN
+	}
+	~_StaticMem()
+	{
+		MEM_TRACKER_PROCESS_END
+	}
+	_StaticMem(const _StaticMem&) = delete;
+	_StaticMem(_StaticMem&&) = delete;
+	_StaticMem& operator = (const _StaticMem&) = delete;
+	_StaticMem& operator = (_StaticMem&&) = delete;
+} _StaticMemInst;
 
 #endif  MEM_TRACKER_H
-
 
 // -----------------------------------------------------------------------
 // Copyright 2023, Ed Keenan, all rights reserved.
@@ -1379,15 +1354,14 @@ public:
 #ifndef UNIT_TEST_CPP_H
 #define UNIT_TEST_CPP_H
 
-	
-		#define UNIT_TEST_MEMORYCHECK_BEGIN   
-		#define UNIT_TEST_MEMORYCHECK_DISABLE MemTrace::UnitTest_MemLeakCheck_Disable_Proxy(); 
-		#define UNIT_TEST_MEMORYCHECK_ENABLE  MemTrace::UnitTest_MemLeakCheck_Enable_Proxy();	
-		#define UNIT_TEST_MEMORYCHECK_END     } \
+#define UNIT_TEST_MEMORYCHECK_BEGIN
+#define UNIT_TEST_MEMORYCHECK_DISABLE MemTrace::UnitTest_MemLeakCheck_Disable_Proxy();
+#define UNIT_TEST_MEMORYCHECK_ENABLE  MemTrace::UnitTest_MemLeakCheck_Enable_Proxy();
+#define UNIT_TEST_MEMORYCHECK_END     } \
                                               { \
 											  CHECK(MemTrace::UnitTest_MemLeakCheck_End_Proxy()); \
-											  }										  
-		#define UnitTest_SetName(A,B)		  { \
+											  }
+#define UnitTest_SetName(A,B)		  { \
 												MemTrace &rTrace = MemTrace::privGetRefInstance();\
 												std::lock_guard<std::mutex> loc(rTrace.mtxMemLeakCount);\
 												\
@@ -1396,449 +1370,445 @@ public:
 											  }
 
 #ifdef USE_THREAD_FRAMEWORK
-		#define MULTITHREADED_DELAY           std::this_thread::sleep_for(1s);
+#define MULTITHREADED_DELAY           std::this_thread::sleep_for(1s);
 #else
-		#define MULTITHREADED_DELAY           
+#define MULTITHREADED_DELAY
 #endif
 
-		class UnitTrace
-		{
-		private:
-			static const unsigned int UnitTraceBuffSize = 512;
+class UnitTrace
+{
+private:
+	static const unsigned int UnitTraceBuffSize = 512;
 
-		public:
-			// displays a printf to the output window
-			static void out(const char * const fmt, ...)
-			{
-				UnitTrace *pTrace = UnitTrace::privGetInstance();
-				assert(pTrace);
+public:
+	// displays a printf to the output window
+	static void out(const char* const fmt, ...)
+	{
+		UnitTrace* pTrace = UnitTrace::privGetInstance();
+		assert(pTrace);
 
-				std::lock_guard<std::mutex> lock(pTrace->mtx);
+		std::lock_guard<std::mutex> lock(pTrace->mtx);
 
-				va_list args;
+		va_list args;
 
-				#pragma warning( push )
-					#pragma warning( disable : 26492 )
-					#pragma warning( disable : 26481 )
-					va_start(args, fmt);
-				#pragma warning( pop )
+#pragma warning( push )
+#pragma warning( disable : 26492 )
+#pragma warning( disable : 26481 )
+		va_start(args, fmt);
+#pragma warning( pop )
 
-				vsprintf_s(&pTrace->privBuff[0], UnitTraceBuffSize, fmt, args);
-				OutputDebugString(&pTrace->privBuff[0]);
+		vsprintf_s(&pTrace->privBuff[0], UnitTraceBuffSize, fmt, args);
+		OutputDebugString(&pTrace->privBuff[0]);
 
-				//va_end(args);
-				args = static_cast<va_list> (nullptr);
+		//va_end(args);
+		args = static_cast<va_list> (nullptr);
+	}
 
-			}
+	static void out2(const char* const fmt, ...)
+	{
+		UnitTrace* pTrace = UnitTrace::privGetInstance();
+		assert(pTrace);
 
-			static void out2(const char* const fmt, ...)
-			{
-				UnitTrace* pTrace = UnitTrace::privGetInstance();
-				assert(pTrace);
+		std::lock_guard<std::mutex> lock(pTrace->mtx);
 
-				std::lock_guard<std::mutex> lock(pTrace->mtx);
+		va_list args;
 
-				va_list args;
+#pragma warning( push )
+#pragma warning( disable : 26492 )
+#pragma warning( disable : 26481 )
+		va_start(args, fmt);
+#pragma warning( pop )
 
-				#pragma warning( push )
-					#pragma warning( disable : 26492 )
-					#pragma warning( disable : 26481 )
-				va_start(args, fmt);
-				#pragma warning( pop )
+		vsprintf_s(&pTrace->privBuff[0], UnitTraceBuffSize, fmt, args);
+		vprintf(fmt, args);
+		OutputDebugString(&pTrace->privBuff[0]);
 
-				vsprintf_s(&pTrace->privBuff[0], UnitTraceBuffSize, fmt, args);
-				vprintf(fmt, args);
-				OutputDebugString(&pTrace->privBuff[0]);
+		//va_end(args);
+		args = static_cast<va_list> (nullptr);
+	}
 
-				//va_end(args);
-				args = static_cast<va_list> (nullptr);
+	// Big Six
+	UnitTrace() noexcept
+	{
+		memset(&privBuff[0], 0x0, UnitTraceBuffSize);
+	}
+	UnitTrace(const UnitTrace&) = delete;
+	UnitTrace(UnitTrace&&) = delete;
+	UnitTrace& operator = (const UnitTrace&) = delete;
+	UnitTrace& operator = (UnitTrace&&) = delete;
+	~UnitTrace() = default;
 
-			}
-
-			// Big Six
-			UnitTrace() noexcept
-			{
-				memset(&privBuff[0], 0x0, UnitTraceBuffSize);
-			}
-			UnitTrace(const UnitTrace &) = delete;
-			UnitTrace(UnitTrace &&) = delete;
-			UnitTrace & operator = (const UnitTrace &) = delete;
-			UnitTrace & operator = (UnitTrace &&) = delete;
-			~UnitTrace() = default;
-
-		private:
-			static UnitTrace *privGetInstance() noexcept
-			{
-				// This is where its actually stored (BSS section)
-				static UnitTrace helper;
-				return &helper;
-			}
-			char privBuff[UnitTraceBuffSize];
-			std::mutex mtx;
-		};
+private:
+	static UnitTrace* privGetInstance() noexcept
+	{
+		// This is where its actually stored (BSS section)
+		static UnitTrace helper;
+		return &helper;
+	}
+	char privBuff[UnitTraceBuffSize];
+	std::mutex mtx;
+};
 
 #pragma warning(push)
 #pragma warning( disable : 4738 )
-		class UnitUtility
-		{
-		public:
-			static bool AreEqual(const float a, const float b, const float epsilon = 0.001f) noexcept
-			{
-				return fabs(a - b) < epsilon;
-			}
+class UnitUtility
+{
+public:
+	static bool AreEqual(const float a, const float b, const float epsilon = 0.001f) noexcept
+	{
+		return fabs(a - b) < epsilon;
+	}
 
-			static bool AreEqual(const double a, const double b, const double epsilon = 0.001) noexcept
-			{
-				return (abs(a - b) < epsilon);
-			}
-		};
+	static bool AreEqual(const double a, const double b, const double epsilon = 0.001) noexcept
+	{
+		return (abs(a - b) < epsilon);
+	}
+};
 
 #pragma warning(pop)
 
-		struct UnitStats
+struct UnitStats
+{
+	// Big six
+	UnitStats() noexcept
+		:testCount(0),
+		testPass(0),
+		testFail(0),
+		testDisabled(0),
+		indvAsserts(0)
+	{
+	}
+	UnitStats(const UnitStats&) = default;
+	UnitStats(UnitStats&&) = default;
+	UnitStats& operator = (const UnitStats&) = default;
+	UnitStats& operator = (UnitStats&&) = default;
+	~UnitStats() = default;
+
+	// data: ------------------
+	int testCount;
+	int testPass;
+	int testFail;
+	int testDisabled;
+	int indvAsserts;
+};
+struct UnitData
+{
+	static const unsigned int UnitDataBuffErrorSize = 512;
+
+	// Big six
+	UnitData() noexcept
+		: pMemberName(nullptr),
+		pSourceFilePath(nullptr),
+		sourceLineNumber(0),
+		result(false),
+		pad0(0),
+		pad1(0),
+		pad2(0),
+		pErrorBuffer{ 0 },
+		pErrorBuffer2{ 0 }
+
+	{
+	}
+	UnitData(const UnitData&) = delete;
+	UnitData(UnitData&&) = delete;
+	UnitData& operator = (const UnitData&) = delete;
+	UnitData& operator = (UnitData&&) = delete;
+	~UnitData() = default;
+
+	// data: -----------------
+	const char* pMemberName;
+	const char* pSourceFilePath;
+	int sourceLineNumber;
+	bool result;
+	char pad0;
+	char pad1;
+	char pad2;
+
+	char pErrorBuffer[UnitData::UnitDataBuffErrorSize];
+	char pErrorBuffer2[UnitData::UnitDataBuffErrorSize];
+};
+class UnitSLink
+{
+public:
+	// Big Six
+	UnitSLink() noexcept
+		:_pNext(nullptr)
+	{
+	}
+	UnitSLink(const UnitSLink&) = delete;
+	UnitSLink(UnitSLink&&) = delete;
+	UnitSLink& operator = (const UnitSLink&) = delete;
+	UnitSLink& operator = (UnitSLink&&) = delete;
+	virtual ~UnitSLink() = default;
+
+	static void AddToFront(UnitSLink*& pRoot, UnitSLink& rNode) noexcept
+	{
+		if (pRoot == nullptr)
 		{
-			// Big six
-			UnitStats() noexcept
-				:testCount(0),
-				testPass(0),
-				testFail(0),
-				testDisabled(0),
-				indvAsserts(0)
-			{
-			}
-			UnitStats(const UnitStats &) = default;
-			UnitStats(UnitStats &&) = default;
-			UnitStats & operator = (const UnitStats &) = default;
-			UnitStats & operator = (UnitStats &&) = default;
-			~UnitStats() = default;
-
-			// data: ------------------
-			int testCount;
-			int testPass;
-			int testFail;
-			int testDisabled;
-			int indvAsserts;
-		};
-		struct UnitData
+			pRoot = &rNode;
+			assert(rNode._pNext == nullptr);
+		}
+		else
 		{
-			static const unsigned int UnitDataBuffErrorSize = 512;
-
-			// Big six
-			UnitData() noexcept
-				: pMemberName(nullptr),
-				pSourceFilePath(nullptr),
-				sourceLineNumber(0),
-				result(false),
-				pad0(0),
-				pad1(0),
-				pad2(0),
-				pErrorBuffer{ 0 },
-				pErrorBuffer2{ 0 }
-
-			{
-			}
-			UnitData(const UnitData &) = delete;
-			UnitData(UnitData &&) = delete;
-			UnitData & operator = (const UnitData &) = delete;
-			UnitData & operator = (UnitData &&) = delete;
-			~UnitData() = default;
-
-			// data: -----------------
-			const char *pMemberName;
-			const char *pSourceFilePath;
-			int sourceLineNumber;
-			bool result;
-			char pad0;
-			char pad1;
-			char pad2;
-
-			char pErrorBuffer[UnitData::UnitDataBuffErrorSize];
-			char pErrorBuffer2[UnitData::UnitDataBuffErrorSize];
-		};
-		class UnitSLink
+			UnitSLink* pTmp = pRoot;
+			pRoot = &rNode;
+			rNode._pNext = pTmp;
+		}
+	}
+	static void AddToEnd(UnitSLink*& pRoot, UnitSLink* pNode) noexcept
+	{
+		if (nullptr == pRoot)
 		{
-		public:
-			// Big Six
-			UnitSLink() noexcept
-				:_pNext(nullptr)
-			{
-			}
-			UnitSLink(const UnitSLink &) = delete;
-			UnitSLink(UnitSLink &&) = delete;
-			UnitSLink & operator = (const UnitSLink &) = delete;
-			UnitSLink & operator = (UnitSLink &&) = delete;
-			virtual ~UnitSLink() = default;
+			pRoot = pNode;
 
-			static void AddToFront(UnitSLink *&pRoot, UnitSLink &rNode) noexcept
+			assert(pNode != nullptr);
+			assert(pNode->_pNext == nullptr);
+		}
+		else
+		{
+			UnitSLink* pTmpX = pRoot;
+
+			while (pTmpX != nullptr)
 			{
-				if (pRoot == nullptr)
+				if (pTmpX->_pNext == nullptr)
 				{
-					pRoot = &rNode;
-					assert(rNode._pNext == nullptr);
+					// at the end
+					pTmpX->_pNext = pNode;
+					pNode->_pNext = nullptr;
+				}
+
+				pTmpX = pTmpX->_pNext;
+			}
+		}
+	}
+
+public:
+	// Data
+	UnitSLink* _pNext;
+};
+class TestRegistry
+{
+public:
+	// Big four
+	TestRegistry(const TestRegistry&) = delete;
+	TestRegistry(TestRegistry&&) = delete;
+	TestRegistry& operator = (const TestRegistry&) = delete;
+	TestRegistry& operator = (TestRegistry&&) = delete;
+	~TestRegistry() = default;
+
+	void AddTest(UnitSLink* pTest) noexcept
+	{
+		// add to End
+		UnitSLink::AddToEnd(this->_pRoot, pTest);
+	}
+	UnitStats& GetStats() noexcept
+	{
+		return this->_UnitStats;
+	}
+	UnitData& GetData() noexcept
+	{
+		return this->_UnitData;
+	}
+	UnitSLink* GetRoot() noexcept
+	{
+		return this->_pRoot;
+	}
+	static TestRegistry& GetInstance() noexcept
+	{
+		static TestRegistry tRegistry;
+		return tRegistry;
+	}
+	static UnitStats Stats() noexcept
+	{
+		TestRegistry& reg = TestRegistry::GetInstance();
+		return reg._UnitStats;
+	}
+
+private:
+	TestRegistry() noexcept
+	{
+		this->_pRoot = nullptr;
+	}
+
+	// Data: ------------------------
+	UnitData _UnitData;
+	UnitStats _UnitStats;
+	UnitSLink* _pRoot;
+};
+class Test : public UnitSLink
+{
+public:
+
+	Test(const char* const pTestName, bool _enable) noexcept
+		:UnitSLink(),
+		pName(pTestName),
+		testFunc(nullptr),
+		enabled(_enable)
+	{
+		// functional pointer
+		this->testFunc = this;
+
+		// register it
+		TestRegistry& tR = TestRegistry::GetInstance();
+		tR.AddTest(this);
+	}
+
+	// Big six
+	Test() = delete;
+	Test(const Test&) = delete;
+	Test(Test&&) = delete;
+	Test& operator = (const Test&) = delete;
+	Test& operator = (Test&&) = delete;
+	~Test() = default;
+	virtual void run(UnitData&, UnitStats&) = 0;
+
+	// For Tests with NO Teardowns... do nothing
+	virtual void teardown() noexcept
+	{
+	};
+	// For Tests with NO setup... do nothing
+	virtual void setup() noexcept
+	{
+	};
+	static void RunTests()
+	{
+#ifdef _DEBUG
+
+#ifndef REDUCED_TEST_PRINTS
+		UnitTrace::out2("------ Testing DEBUG ----------\n");
+		UnitTrace::out2("\n");
+#endif
+
+#ifdef _M_X64
+		const char* const mode = "x64 Debug";
+#else
+		const char* const mode = "x86 Debug";
+		AZUL_UNUSED_VAR(mode);
+#endif
+#else
+#ifdef _M_X64
+		const char* const mode = "x64 Release";
+#else
+		const char* const mode = "x86 Release";
+#endif
+
+#ifdef MR_FAST   // Only used in optimized class
+		UnitTrace::out2("------------------- Testing MR_FAST ----------------------\n");
+#else
+		UnitTrace::out2("------------------- Testing RELEASE ----------------------\n");
+		UnitTrace::out2("\n");
+#endif
+#endif
+
+		TestRegistry& rRegistry = TestRegistry::GetInstance();
+		UnitSLink* pTmp = rRegistry.GetRoot();
+
+		UnitStats& unitStats = rRegistry.GetStats();
+		UnitData& unitData = rRegistry.GetData();
+
+		while (pTmp != nullptr)
+		{
+			unitStats.testCount++;
+
+			// downcast to the test
+			Test* pTest = (Test*)(pTmp);
+
+			assert(pTest);
+
+			// Needed to be added - for fencing issues between tests
+			// Release rearranges.. and affects timing
+
+			// Forces a Fence...
+			atomic_thread_fence(std::memory_order_acq_rel);
+
+			// Always call the setup
+			pTest->testFunc->setup();
+
+			// Forces a Fence...
+			atomic_thread_fence(std::memory_order_acq_rel);
+
+			// run the test
+			unitData.result = true;
+
+			assert(pTest->testFunc != nullptr);
+			pTest->testFunc->run(unitData, unitStats);
+
+			// Forces a Fence...
+			atomic_thread_fence(std::memory_order_acq_rel);
+
+			// Always call the teardown
+			pTest->testFunc->teardown();
+
+			// Forces a Fence...
+			atomic_thread_fence(std::memory_order_acq_rel);
+
+			if (pTest->enabled)
+			{
+				if (unitData.result)
+				{
+					unitStats.testPass++;
+					UnitTrace::out2(" PASSED: %s \n", pTest->pName);
 				}
 				else
 				{
-					UnitSLink *pTmp = pRoot;
-					pRoot = &rNode;
-					rNode._pNext = pTmp;
+					unitStats.testFail++;
+					UnitTrace::out2("-FAILED: %s \n", pTest->pName);
+					UnitTrace::out2("%s", unitData.pErrorBuffer);
+					//strcpy_s(unitData.pErrorBuffer2, UnitData::UnitDataBuffErrorSize, &unitData.pErrorBuffer2[strlen(SOLUTION_DIR)+1]);
+					UnitTrace::out2("\t%s", unitData.pErrorBuffer2);
 				}
 			}
-			static void AddToEnd(UnitSLink *&pRoot, UnitSLink *pNode) noexcept
+			else
 			{
-				if (nullptr == pRoot)
-				{
-					pRoot = pNode;
-
-					assert(pNode != nullptr);
-					assert(pNode->_pNext == nullptr);
-				}
-				else
-				{
-					UnitSLink *pTmpX = pRoot;
-
-					while (pTmpX != nullptr)
-					{
-						if (pTmpX->_pNext == nullptr)
-						{
-							// at the end
-							pTmpX->_pNext = pNode;
-							pNode->_pNext = nullptr;
-						}
-
-						pTmpX = pTmpX->_pNext;
-					}
-				}
+				unitStats.testDisabled++;
+				UnitTrace::out2("-IGNORE: %s \n", pTest->pName);
 			}
 
-		public:
-			// Data
-			UnitSLink *_pNext;
-		};
-		class TestRegistry
+			//// Always call the teardown
+			//pTest->testFunc->teardown();
+
+			//// Forces a Fence...
+			//atomic_thread_fence(std::memory_order_acq_rel);
+
+			// next test
+			pTmp = pTmp->_pNext;
+		}
+
+		if (unitStats.testFail)
 		{
-		public:
-			// Big four
-			TestRegistry(const TestRegistry &) = delete;
-			TestRegistry(TestRegistry &&) = delete;
-			TestRegistry & operator = (const TestRegistry &) = delete;
-			TestRegistry & operator = (TestRegistry &&) = delete;
-			~TestRegistry() = default;
+			UnitTrace::out2("\n");
+		}
 
-			void AddTest(UnitSLink *pTest) noexcept
-			{
-				// add to End	
-				UnitSLink::AddToEnd(this->_pRoot, pTest);
-			}
-			UnitStats &GetStats() noexcept
-			{
-				return this->_UnitStats;
-			}
-			UnitData &GetData() noexcept
-			{
-				return this->_UnitData;
-			}
-			UnitSLink *GetRoot() noexcept
-			{
-				return this->_pRoot;
-			}
-			static TestRegistry &GetInstance() noexcept
-			{
-				static TestRegistry tRegistry;
-				return tRegistry;
-			}
-			static UnitStats Stats() noexcept
-			{
-				TestRegistry &reg = TestRegistry::GetInstance();
-				return reg._UnitStats;
-			}
+		UnitTrace::out2("\n");
 
-		private:
-			TestRegistry() noexcept
-			{
-				this->_pRoot = nullptr;
-			}
+#ifndef REDUCED_TEST_PRINTS
+		UnitTrace::out2("  --- Tests Results ---    \n");
+		UnitTrace::out2("\n");
+		UnitTrace::out2("[%s] Ignored: %d\n", mode, unitStats.testDisabled);
+		UnitTrace::out2("[%s]  Passed: %d\n", mode, unitStats.testPass);
+		UnitTrace::out2("[%s]  Failed: %d\n", mode, unitStats.testFail);
+		UnitTrace::out2("\n");
+		UnitTrace::out2("   Test Count: %d\n", unitStats.testCount);
+		UnitTrace::out2(" Indiv Checks: %d\n", unitStats.indvAsserts);
+		UnitTrace::out2("         Mode: %s \n", mode);
+		UnitTrace::out2("\n");
+		UnitTrace::out2("-----------------\n");
+#endif
+	}
 
-			// Data: ------------------------
-			UnitData _UnitData;
-			UnitStats _UnitStats;
-			UnitSLink *_pRoot;
-		};
-		class Test : public UnitSLink
-		{
-		public:
+public:
+	const char* const pName;
+	Test* testFunc;
+	bool enabled;
+};
 
-			Test(const char * const pTestName, bool _enable) noexcept
-				:UnitSLink(),
-				pName(pTestName),
-				testFunc(nullptr),
-				enabled(_enable)
-			{
-				// functional pointer
-				this->testFunc = this;
+// a trick to create a c-string
+#define STRING_ME(s) #s
 
-				// register it
-				TestRegistry &tR = TestRegistry::GetInstance();
-				tR.AddTest(this);
-			}
-
-			// Big six
-			Test() = delete;
-			Test(const Test &) = delete;
-			Test(Test &&) = delete;
-			Test & operator = (const Test &) = delete;
-			Test & operator = (Test &&) = delete;
-			~Test() = default;
-			virtual void run(UnitData &, UnitStats &) = 0;
-
-			// For Tests with NO Teardowns... do nothing
-			virtual void teardown() noexcept
-			{
-			};
-			// For Tests with NO setup... do nothing
-			virtual void setup() noexcept
-			{
-			};
-			static void RunTests()
-			{
-			#ifdef _DEBUG
-
-				#ifndef REDUCED_TEST_PRINTS
-					UnitTrace::out2("------ Testing DEBUG ----------\n");
-					UnitTrace::out2("\n");
-				#endif
-
-				#ifdef _M_X64
-						const char * const mode = "x64 Debug";
-				#else
-						const char * const mode = "x86 Debug";
-						AZUL_UNUSED_VAR(mode);
-				#endif
-			#else
-				#ifdef _M_X64
-						const char * const mode = "x64 Release";
-				#else
-						const char * const mode = "x86 Release";
-				#endif
-
-				#ifdef MR_FAST   // Only used in optimized class
-						UnitTrace::out2("------------------- Testing MR_FAST ----------------------\n");
-				#else
-						UnitTrace::out2("------------------- Testing RELEASE ----------------------\n");
-						UnitTrace::out2("\n");
-				#endif
-			#endif
-
-
-				TestRegistry &rRegistry = TestRegistry::GetInstance();
-				UnitSLink *pTmp = rRegistry.GetRoot();
-
-				UnitStats &unitStats = rRegistry.GetStats();
-				UnitData  &unitData = rRegistry.GetData();
-
-				while (pTmp != nullptr)
-				{
-					unitStats.testCount++;
-
-					// downcast to the test
-					Test *pTest = (Test *)(pTmp);
-
-					assert(pTest);
-
-					// Needed to be added - for fencing issues between tests
-					// Release rearranges.. and affects timing
-
-					// Forces a Fence... 
-					atomic_thread_fence(std::memory_order_acq_rel);
-
-						// Always call the setup
-						pTest->testFunc->setup();
-
-					// Forces a Fence... 
-					atomic_thread_fence(std::memory_order_acq_rel);
-
-						// run the test
-						unitData.result = true;
-
-						assert(pTest->testFunc != nullptr);
-						pTest->testFunc->run(unitData, unitStats);
-
-					// Forces a Fence... 
-					atomic_thread_fence(std::memory_order_acq_rel);
-
-						// Always call the teardown
-						pTest->testFunc->teardown();
-
-					// Forces a Fence... 
-					atomic_thread_fence(std::memory_order_acq_rel);
-
-					if(pTest->enabled)
-					{
-						if(unitData.result)
-						{
-							unitStats.testPass++;
-							UnitTrace::out2(" PASSED: %s \n", pTest->pName);
-						}
-						else
-						{
-							unitStats.testFail++;
-							UnitTrace::out2("-FAILED: %s \n", pTest->pName);
-							UnitTrace::out2("%s", unitData.pErrorBuffer);
-							//strcpy_s(unitData.pErrorBuffer2, UnitData::UnitDataBuffErrorSize, &unitData.pErrorBuffer2[strlen(SOLUTION_DIR)+1]);
-							UnitTrace::out2("\t%s", unitData.pErrorBuffer2);
-						}
-					}
-					else
-					{
-						unitStats.testDisabled++; 
-						UnitTrace::out2("-IGNORE: %s \n", pTest->pName);
-					}
-
-					//// Always call the teardown
-					//pTest->testFunc->teardown();
-
-					//// Forces a Fence... 
-					//atomic_thread_fence(std::memory_order_acq_rel);
-
-					// next test
-					pTmp = pTmp->_pNext;
-				}
-
-				if (unitStats.testFail)
-				{
-					UnitTrace::out2("\n");
-				}
-
-				UnitTrace::out2("\n");
-
-				#ifndef REDUCED_TEST_PRINTS
-					UnitTrace::out2("  --- Tests Results ---    \n");				
-					UnitTrace::out2("\n");
-					UnitTrace::out2("[%s] Ignored: %d\n", mode, unitStats.testDisabled);
-					UnitTrace::out2("[%s]  Passed: %d\n", mode, unitStats.testPass);
-					UnitTrace::out2("[%s]  Failed: %d\n", mode, unitStats.testFail);
-					UnitTrace::out2("\n");
-					UnitTrace::out2("   Test Count: %d\n", unitStats.testCount);
-					UnitTrace::out2(" Indiv Checks: %d\n", unitStats.indvAsserts);
-					UnitTrace::out2("         Mode: %s \n", mode);
-					UnitTrace::out2("\n");
-					UnitTrace::out2("-----------------\n");
-				#endif
-
-			}
-
-		public:
-			const char * const pName;
-			Test *testFunc;
-			bool enabled;
-		};
-
-		// a trick to create a c-string
-		#define STRING_ME(s) #s
-
-		// Increments total check count
-		// Creates a clickable format in the output window for failure
-		// Abort test on first fail
-		#define CHECK( condition ) \
+// Increments total check count
+// Creates a clickable format in the output window for failure
+// Abort test on first fail
+#define CHECK( condition ) \
 		{ \
 					atomic_thread_fence(std::memory_order_acq_rel); \
 			_UnitStats.indvAsserts++;\
@@ -1857,7 +1827,7 @@ public:
 			}\
 		}
 
-		#define CHECK_EQUAL( value1, value2 ) \
+#define CHECK_EQUAL( value1, value2 ) \
 		{ \
 					atomic_thread_fence(std::memory_order_acq_rel); \
 			_UnitStats.indvAsserts++;\
@@ -1878,7 +1848,6 @@ public:
 			}\
 		}
 
-
 		// -----------------------------------------------------------------------------
 		// Here is the unit test magic
 		//
@@ -1890,47 +1859,46 @@ public:
 		//
 		// -----------------------------------------------------------------------------
 
-		class TestConfig
-		{
-		public:
-			enum Flag  // not an enum class since we can bitwise or values in input params
-			{
-				MEMORY_CHECK = 0x1,   // turn on memory check
-				VERSION_CHECK = 0x2,  // turn on version check
-				ALL = (unsigned int)TestConfig::Flag::MEMORY_CHECK | (unsigned int)TestConfig::Flag::VERSION_CHECK,
-				NONE = 0
-			};
+class TestConfig
+{
+public:
+	enum Flag  // not an enum class since we can bitwise or values in input params
+	{
+		MEMORY_CHECK = 0x1,   // turn on memory check
+		VERSION_CHECK = 0x2,  // turn on version check
+		ALL = (unsigned int)TestConfig::Flag::MEMORY_CHECK | (unsigned int)TestConfig::Flag::VERSION_CHECK,
+		NONE = 0
+	};
 
-			TestConfig()
-			{
-				this->_f = TestConfig::Flag::ALL;
-			}
+	TestConfig()
+	{
+		this->_f = TestConfig::Flag::ALL;
+	}
 
-			TestConfig::Flag operator | (const TestConfig::Flag fb)
-			{
-				TestConfig::Flag flag;
-				flag = (TestConfig::Flag) ((int) this->_f | (int) fb);
+	TestConfig::Flag operator | (const TestConfig::Flag fb)
+	{
+		TestConfig::Flag flag;
+		flag = (TestConfig::Flag)((int)this->_f | (int)fb);
 
-				return flag;
-			}
+		return flag;
+	}
 
-			TestConfig::Flag  _f;
-		};
-
+	TestConfig::Flag  _f;
+};
 
 #define TEST_END \
 				 UNIT_TEST_MEMORYCHECK_END \
 				 } \
 				 }
 
-		#define TEST_TEARDOWN( TestEnableFlag ) \
+#define TEST_TEARDOWN( TestEnableFlag ) \
 		void TestEnableFlag##_Test::teardown() noexcept
 
-		#define TEST_SETUP( TestEnableFlag ) \
+#define TEST_SETUP( TestEnableFlag ) \
 		void TestEnableFlag##_Test::setup() noexcept
 
-		// TestEnableFlag is both a string name and a flag
-		#define TEST( TestEnableFlag, TestConfigFlag  ) \
+// TestEnableFlag is both a string name and a flag
+#define TEST( TestEnableFlag, TestConfigFlag  ) \
 		class TestEnableFlag##_Test : public Test \
 		{ \
 			public: \
@@ -1968,9 +1936,7 @@ public:
 					UNIT_TEST_MEMORYCHECK_DISABLE \
 				} \
 				{
-
-
-		#define TEST_WITH_TEARDOWN( TestEnableFlag, TestConfigFlag  ) \
+#define TEST_WITH_TEARDOWN( TestEnableFlag, TestConfigFlag  ) \
 		class TestEnableFlag##_Test : public Test \
 		{ \
 			public: \
@@ -2009,9 +1975,7 @@ public:
 					UNIT_TEST_MEMORYCHECK_DISABLE \
 				} \
 				{
-
-
-		#define TEST_WITH_SETUP_TEARDOWN( TestEnableFlag, TestConfigFlag  ) \
+#define TEST_WITH_SETUP_TEARDOWN( TestEnableFlag, TestConfigFlag  ) \
 		class TestEnableFlag##_Test : public Test \
 		{ \
 			public: \
@@ -2051,8 +2015,6 @@ public:
 					UNIT_TEST_MEMORYCHECK_DISABLE \
 				} \
 				{
-
-
 #endif  UNIT_TEST_CPP_H
 
 // -----------------------------------------------------------------------
@@ -2071,116 +2033,116 @@ public:
 #ifndef PERFORMANCE_TIMER_H
 #define PERFORMANCE_TIMER_H
 
-		class PerformanceTimer
-		{
-		public:
-			// big six
-			PerformanceTimer() noexcept
-				:
-				ticTime(),
-				tocTime(),
-				ticGlobalTime(),
-				tocGlobalTime(),
-				deltaTime(),
-				SecondsPerCycle(0.0f),
-				timeSeconds(0.0f)
-			{
-				this->privInitTimer();
-				this->Reset();
-				this->ticGlobalTime = this->privGetTimer();
-			}
-			PerformanceTimer(const PerformanceTimer &) = delete;
-			PerformanceTimer(PerformanceTimer &&) = delete;
-			PerformanceTimer & operator= (const PerformanceTimer &) = delete;
-			PerformanceTimer & operator= (PerformanceTimer &&) = delete;
-			~PerformanceTimer() = default;
+class PerformanceTimer
+{
+public:
+	// big six
+	PerformanceTimer() noexcept
+		:
+		ticTime(),
+		tocTime(),
+		ticGlobalTime(),
+		tocGlobalTime(),
+		deltaTime(),
+		SecondsPerCycle(0.0f),
+		timeSeconds(0.0f)
+	{
+		this->privInitTimer();
+		this->Reset();
+		this->ticGlobalTime = this->privGetTimer();
+	}
+	PerformanceTimer(const PerformanceTimer&) = delete;
+	PerformanceTimer(PerformanceTimer&&) = delete;
+	PerformanceTimer& operator= (const PerformanceTimer&) = delete;
+	PerformanceTimer& operator= (PerformanceTimer&&) = delete;
+	~PerformanceTimer() = default;
 
-			void Tic() noexcept
-			{
-				// Forces a Fence... 
-				atomic_thread_fence(std::memory_order_acq_rel);
+	void Tic() noexcept
+	{
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
 
-					this->ticTime = this->privGetTimer();
+		this->ticTime = this->privGetTimer();
 
-				// Forces a Fence...
-				atomic_thread_fence(std::memory_order_acq_rel);
-			}
-			void Toc() noexcept
-			{
-				// Forces a Fence... 
-				atomic_thread_fence(std::memory_order_acq_rel);
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
+	}
+	void Toc() noexcept
+	{
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
 
-					this->tocTime = this->privGetTimer();
-					assert(this->tocTime.QuadPart >= this->ticTime.QuadPart);
-					this->deltaTime.QuadPart = this->tocTime.QuadPart - this->ticTime.QuadPart;
+		this->tocTime = this->privGetTimer();
+		assert(this->tocTime.QuadPart >= this->ticTime.QuadPart);
+		this->deltaTime.QuadPart = this->tocTime.QuadPart - this->ticTime.QuadPart;
 
-				// Forces a Fence... 
-				atomic_thread_fence(std::memory_order_acq_rel);
-			}
-			void Reset() noexcept
-			{
-				this->ticTime.QuadPart = 0;
-				this->tocTime.QuadPart = 0;
-				this->deltaTime.QuadPart = 0;
-			}
-			double TimeInSeconds() noexcept
-			{
-				double floatTime;
-				floatTime = static_cast<double>(this->deltaTime.QuadPart);
-				floatTime = floatTime * this->SecondsPerCycle;
-	
-				return floatTime;
-			}
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
+	}
+	void Reset() noexcept
+	{
+		this->ticTime.QuadPart = 0;
+		this->tocTime.QuadPart = 0;
+		this->deltaTime.QuadPart = 0;
+	}
+	double TimeInSeconds() noexcept
+	{
+		double floatTime;
+		floatTime = static_cast<double>(this->deltaTime.QuadPart);
+		floatTime = floatTime * this->SecondsPerCycle;
 
-			float GetGlobalTime() noexcept
-			{
-				// Forces a Fence... 
-				atomic_thread_fence(std::memory_order_acq_rel);
+		return floatTime;
+	}
 
-				LARGE_INTEGER	deltaGlobalTime{ {0} };
-				
-				this->tocGlobalTime = this->privGetTimer();
-				assert(this->tocGlobalTime.QuadPart >= this->ticGlobalTime.QuadPart);
-				
-				deltaGlobalTime.QuadPart = this->tocGlobalTime.QuadPart - this->ticGlobalTime.QuadPart;
+	float GetGlobalTime() noexcept
+	{
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
 
-				float floatTime;
-				floatTime = static_cast<float>(deltaGlobalTime.QuadPart);
-				floatTime *= this->SecondsPerCycle;
-			
-				// Forces a Fence... 
-				atomic_thread_fence(std::memory_order_acq_rel);	
-				
-				return floatTime;
-			}
+		LARGE_INTEGER	deltaGlobalTime{ {0} };
 
-		private:
+		this->tocGlobalTime = this->privGetTimer();
+		assert(this->tocGlobalTime.QuadPart >= this->ticGlobalTime.QuadPart);
 
-			void privInitTimer() noexcept
-			{
-				LARGE_INTEGER Frequency;
-				QueryPerformanceFrequency(&Frequency);
-				this->SecondsPerCycle = 1.0f / (float)Frequency.QuadPart;
-			}
-			LARGE_INTEGER privGetTimer() noexcept
-			{
-				LARGE_INTEGER time;
-				QueryPerformanceCounter(&time);
-				return time;
-			}
+		deltaGlobalTime.QuadPart = this->tocGlobalTime.QuadPart - this->ticGlobalTime.QuadPart;
 
-			// ------------------------------------------
-			// data
-			// ------------------------------------------
+		float floatTime;
+		floatTime = static_cast<float>(deltaGlobalTime.QuadPart);
+		floatTime *= this->SecondsPerCycle;
 
-			LARGE_INTEGER	ticTime;
-			LARGE_INTEGER	tocTime;
-			LARGE_INTEGER	ticGlobalTime;
-			LARGE_INTEGER	tocGlobalTime;
-			LARGE_INTEGER	deltaTime;
-			float			SecondsPerCycle;
-			float			timeSeconds;
-		};
+		// Forces a Fence...
+		atomic_thread_fence(std::memory_order_acq_rel);
+
+		return floatTime;
+	}
+
+private:
+
+	void privInitTimer() noexcept
+	{
+		LARGE_INTEGER Frequency;
+		QueryPerformanceFrequency(&Frequency);
+		this->SecondsPerCycle = 1.0f / (float)Frequency.QuadPart;
+	}
+	LARGE_INTEGER privGetTimer() noexcept
+	{
+		LARGE_INTEGER time;
+		QueryPerformanceCounter(&time);
+		return time;
+	}
+
+	// ------------------------------------------
+	// data
+	// ------------------------------------------
+
+	LARGE_INTEGER	ticTime;
+	LARGE_INTEGER	tocTime;
+	LARGE_INTEGER	ticGlobalTime;
+	LARGE_INTEGER	tocGlobalTime;
+	LARGE_INTEGER	deltaTime;
+	float			SecondsPerCycle;
+	float			timeSeconds;
+};
 
 #endif PERFORMANCE_TIMER_H
 
@@ -2198,81 +2160,79 @@ public:
 #ifndef DEBUG_OUTPUT_H
 #define DEBUG_OUTPUT_H
 
-		class Trace
-		{
-		private:
-			static const unsigned int TraceBuffSize = 1024;
+class Trace
+{
+private:
+	static const unsigned int TraceBuffSize = 1024;
 
-		public:
+public:
 
-			// Big six
-			Trace() noexcept
-			{
-				memset(&privBuff[0], 0x0, TraceBuffSize);
-			}
-			Trace(const Trace &) = delete;
-			Trace(Trace &&) = delete;
-			Trace & operator = (const Trace &) = delete;
-			Trace & operator = (Trace &&) = delete;
-			~Trace() = default;
+	// Big six
+	Trace() noexcept
+	{
+		memset(&privBuff[0], 0x0, TraceBuffSize);
+	}
+	Trace(const Trace&) = delete;
+	Trace(Trace&&) = delete;
+	Trace& operator = (const Trace&) = delete;
+	Trace& operator = (Trace&&) = delete;
+	~Trace() = default;
 
-			// displays a printf to the output window
-			static void out(const char * const fmt, ...) 
-			{
-				Trace *pTrace = Trace::privGetInstance();
-				assert(pTrace);
+	// displays a printf to the output window
+	static void out(const char* const fmt, ...)
+	{
+		Trace* pTrace = Trace::privGetInstance();
+		assert(pTrace);
 
-				std::lock_guard<std::mutex> lock(pTrace->mtx);
+		std::lock_guard<std::mutex> lock(pTrace->mtx);
 
-				va_list args;
+		va_list args;
 
-				#pragma warning( push )
-					#pragma warning( disable : 26492 )
-					#pragma warning( disable : 26481 )
-					va_start(args, fmt);
-				#pragma warning( pop )
+#pragma warning( push )
+#pragma warning( disable : 26492 )
+#pragma warning( disable : 26481 )
+		va_start(args, fmt);
+#pragma warning( pop )
 
-				vsprintf_s(&pTrace->privBuff[0], TraceBuffSize, fmt, args);
-				OutputDebugString(&pTrace->privBuff[0]);
+		vsprintf_s(&pTrace->privBuff[0], TraceBuffSize, fmt, args);
+		OutputDebugString(&pTrace->privBuff[0]);
 
-				//va_end(args);
-				args = static_cast<va_list> (nullptr);
+		//va_end(args);
+		args = static_cast<va_list> (nullptr);
+	}
 
-			}
+	static void out2(const char* const fmt, ...)
+	{
+		Trace* pTrace = Trace::privGetInstance();
+		assert(pTrace);
 
-			static void out2(const char* const fmt, ...)
-			{
-				Trace* pTrace = Trace::privGetInstance();
-				assert(pTrace);
+		std::lock_guard<std::mutex> lock(pTrace->mtx);
 
-				std::lock_guard<std::mutex> lock(pTrace->mtx);
+		va_list args;
 
-				va_list args;
+#pragma warning( push )
+#pragma warning( disable : 26492 )
+#pragma warning( disable : 26481 )
+		va_start(args, fmt);
+#pragma warning( pop )
 
-				#pragma warning( push )
-					#pragma warning( disable : 26492 )
-					#pragma warning( disable : 26481 )
-				va_start(args, fmt);
-				#pragma warning( pop )
+		vsprintf_s(&pTrace->privBuff[0], TraceBuffSize, fmt, args);
+		vprintf(fmt, args);
+		OutputDebugString(&pTrace->privBuff[0]);
 
-				vsprintf_s(&pTrace->privBuff[0], TraceBuffSize, fmt, args);
-				vprintf(fmt, args);
-				OutputDebugString(&pTrace->privBuff[0]);
+		//va_end(args);
+		args = static_cast<va_list> (nullptr);
+	}
 
-				//va_end(args);
-				args = static_cast<va_list> (nullptr);
-
-			}
-
-		private:
-			static Trace *privGetInstance() noexcept
-			{
-				static Trace helper;
-				return &helper;
-			}
-			char privBuff[TraceBuffSize];
-			std::mutex mtx;
-		};
+private:
+	static Trace* privGetInstance() noexcept
+	{
+		static Trace helper;
+		return &helper;
+	}
+	char privBuff[TraceBuffSize];
+	std::mutex mtx;
+};
 
 #endif DEBUG_OUTPUT_H
 
@@ -2290,141 +2250,137 @@ public:
 #ifndef FILE_IO_H
 #define FILE_IO_H
 
+#ifdef _DEBUG
+#ifdef _M_X64
+const char* const pFileio_mode = "x64_Debug";
+#else
+const char* const pFileio_mode = "x86_Debug";
+#endif
+#else
+#ifdef _M_X64
+const char* const pFileio_mode = "x64_Release";
+#else
+const char* const pFileio_mode = "x86_Release";
+#endif
+#endif
 
-		#ifdef _DEBUG
-			#ifdef _M_X64
-					const char* const pFileio_mode = "x64_Debug";
-			#else
-					const char* const pFileio_mode = "x86_Debug";
-			#endif
-		#else
-			#ifdef _M_X64
-					const char* const pFileio_mode = "x64_Release";
-			#else
-					const char* const pFileio_mode = "x86_Release";
-			#endif
-		#endif
+class FileIO
+{
+public:
 
-		class FileIO
+	static void Open(const char* const pFirstName, const char* const pLastName) noexcept
+	{
+		assert(pFirstName);
+		assert(pLastName);
+		FileIO::privGetInstance()->privOpen(pFirstName, pLastName);
+	}
+	static void Close() noexcept
+	{
+		FileIO::privGetInstance()->privClose();
+	}
+	static FILE* GetHandle() noexcept
+	{
+		return FileIO::privGetInstance()->privGetHandle();
+	}
+
+private:
+
+	void privOpen(const char* const pFirstName, const char* const pLastName) noexcept
+	{
+		system("if not exist .\\..\\Logs mkdir .\\..\\Logs");
+
+		const char* const pFile_extension = ".txt";
+		const char* const pFile_io_path = ".\\..\\Logs\\";
+
+		constexpr int length = 256;
+
+		char pFileName[length] = { 0 };
+		assert(pFileName);
+
+		errno_t fileError(0);
+
+		// wash the name to 0
+		memset(&pFileName[0], 0, length);
+
+		// is there enough of space?
+		assert((strlen(pFile_io_path)
+			+ strlen(pFirstName)
+			+ strlen(pLastName)
+			+ strlen("-")
+			+ strlen(pFileio_mode)
+			+ strlen(pFile_extension)
+			+ strlen("/0")) < length);
+
+		strcat_s(&pFileName[0], length, pFile_io_path);
+		strcat_s(&pFileName[0], length, pFirstName);
+		strcat_s(&pFileName[0], length, pLastName);
+		strcat_s(&pFileName[0], length, "_");
+		strcat_s(&pFileName[0], length, pFileio_mode);
+		strcat_s(&pFileName[0], length, pFile_extension);
+
+		fileError = fopen_s(&pFileHandle, &pFileName[0], "wt");
+		assert(pFileHandle);
+		if (pFileHandle != nullptr)
 		{
-		public:
+			fprintf(this->pFileHandle, "-------------------------------------------------\n");
+			fprintf(this->pFileHandle, "\n");
+			fprintf(this->pFileHandle, "Log File \n");
+			fprintf(this->pFileHandle, "\n");
+			fprintf(this->pFileHandle, "Name: %s %s\n", pFirstName, pLastName);
+			fprintf(this->pFileHandle, "Mode: %s\n", pFileio_mode);
+			fprintf(this->pFileHandle, "\n");
+			fprintf(this->pFileHandle, "-------------------------------------------------\n");
+			fprintf(this->pFileHandle, "\n");
+		}
+	}
+	FILE* privGetHandle() noexcept
+	{
+		assert(pFileHandle);
+		return this->pFileHandle;
+	}
+	static FileIO* privGetInstance() noexcept
+	{
+		static FileIO instance;
+		return &instance;
+	}
+	void privClose() noexcept
+	{
+		errno_t fileError(0);
+		assert(pFileHandle);
 
-			static void Open(const char * const pFirstName, const char * const pLastName) noexcept
-			{
-				assert(pFirstName);
-				assert(pLastName);
-				FileIO::privGetInstance()->privOpen(pFirstName, pLastName);
-			}
-			static void Close() noexcept
-			{
-				FileIO::privGetInstance()->privClose();
-			}
-			static FILE *GetHandle() noexcept
-			{
-				return FileIO::privGetInstance()->privGetHandle();
-			}
+		fileError = fflush(this->pFileHandle);
+		assert(!fileError);
 
-		private:
+		fileError = fclose(this->pFileHandle);
+		this->pFileHandle = nullptr;
+		assert(!fileError);
+	}
 
-			void privOpen(const char * const pFirstName, const char * const pLastName) noexcept
-			{
-				system("if not exist .\\..\\Logs mkdir .\\..\\Logs");
+	// big six
+	constexpr FileIO() noexcept
+		:pFileHandle(nullptr)
+	{
+	};
+	FileIO(const FileIO&) = delete;
+	FileIO(FileIO&&) = delete;
+	FileIO& operator=(const FileIO&) = delete;
+	FileIO& operator=(FileIO&&) = delete;
+	~FileIO()
+	{
+		if (nullptr != this->pFileHandle)
+		{
+			this->privClose();
+		}
+	};
 
-				const char * const pFile_extension = ".txt";
-				const char * const pFile_io_path = ".\\..\\Logs\\";
+	// ------------------------------------------
+	// data
+	// ------------------------------------------
 
-				constexpr int length = 256;
-
-				char pFileName[length] = { 0 };
-				assert(pFileName);
-
-				errno_t fileError(0);
-
-				// wash the name to 0
-				memset(&pFileName[0], 0, length);
-
-				// is there enough of space?
-				assert( (strlen(pFile_io_path) 
-						+ strlen(pFirstName) 
-						+ strlen(pLastName) 
-						+ strlen("-") 
-						+ strlen(pFileio_mode) 
-						+ strlen(pFile_extension) 
-						+ strlen("/0") ) < length);
-
-				strcat_s(&pFileName[0], length, pFile_io_path);
-				strcat_s(&pFileName[0], length, pFirstName);
-				strcat_s(&pFileName[0], length, pLastName);
-				strcat_s(&pFileName[0], length, "_");
-				strcat_s(&pFileName[0], length, pFileio_mode);
-				strcat_s(&pFileName[0], length, pFile_extension);
-
-
-				fileError = fopen_s(&pFileHandle, &pFileName[0], "wt");
-				assert(pFileHandle);
-				if(pFileHandle != nullptr)
-				{
-					fprintf(this->pFileHandle, "-------------------------------------------------\n");
-					fprintf(this->pFileHandle, "\n");
-					fprintf(this->pFileHandle, "Log File \n");
-					fprintf(this->pFileHandle, "\n");
-					fprintf(this->pFileHandle, "Name: %s %s\n", pFirstName, pLastName);
-					fprintf(this->pFileHandle, "Mode: %s\n", pFileio_mode);
-					fprintf(this->pFileHandle, "\n");
-					fprintf(this->pFileHandle, "-------------------------------------------------\n");
-					fprintf(this->pFileHandle, "\n");
-				}
-			}
-			FILE *privGetHandle() noexcept
-			{
-				assert(pFileHandle);
-				return this->pFileHandle;
-			}
-			static FileIO *privGetInstance() noexcept
-			{
-				static FileIO instance;
-				return &instance;
-			}
-			void privClose() noexcept
-			{
-				errno_t fileError(0);
-				assert(pFileHandle);
-
-				fileError = fflush(this->pFileHandle);
-				assert(!fileError);
-
-				fileError = fclose(this->pFileHandle);
-				this->pFileHandle = nullptr;
-				assert(!fileError);
-			}
-
-			// big six  
-			constexpr FileIO() noexcept
-				:pFileHandle(nullptr)
-			{
-
-			};
-			FileIO(const FileIO &) = delete;
-			FileIO(FileIO &&) = delete;
-			FileIO & operator=(const FileIO &) = delete;
-			FileIO & operator=(FileIO &&) = delete;
-			~FileIO()
-			{
-				if (nullptr != this->pFileHandle)
-				{
-					this->privClose();
-				}
-			};
-
-			// ------------------------------------------
-			// data
-			// ------------------------------------------
-
-			FILE *pFileHandle;
-		};
+	FILE* pFileHandle;
+};
 
 #endif FILE_IO_H
-
 
 // -----------------------------------------------------------------------
 // Copyright 2023, Ed Keenan, all rights reserved.
@@ -2452,175 +2408,172 @@ public:
 #endif
 
 #define FILE_EXIST(A) 	CRC32::FileExist(A)
-		
+
 #define FILE_GET_CRC32(A) CRC32::GetCRC(A)
 
-		class CRC32
+class CRC32
+{
+public:
+	// Any unsigned integer type with at least 32 bits may be used as
+	// accumulator type for fast crc32-calulation, but unsigned long is
+	// probably the optimal choice for most systems.
+	typedef unsigned long CRC32_accum_t;
+	static const unsigned int CRC32_accum_SIZE = sizeof(CRC32_accum_t);
+
+public:
+	// Standard CRC32 checksum: fast public domain implementation for
+	// little-endian architectures.  Written for compilation with an
+	// optimizer set to perform loop unwinding.  Outputs the checksum for
+	// each file given as a command line argument.  Invalid file names and
+	// files that cause errors are silently skipped.  The program reads
+	// from stdin if it is called with no arguments.
+	static uint32_t GetCRC(const void* pBuff, size_t numBytes)
+	{
+		// Get instance
+		CRC32* pCRC = CRC32::privGetInstance();
+		assert(pCRC);
+
+		uint32_t CRC32_result;
+		pCRC->privFile(pBuff, numBytes, CRC32_result);
+
+		return CRC32_result;
+	}
+	static uint32_t GetCRC(const char* const pFileName)
+	{
+		uint32_t file_crc;
+		bool status;
+		status = CRC32::GetCRC(pFileName, file_crc);
+		assert(status == true);
+
+		return file_crc;
+	}
+	static bool FileExist(const char* const pFileName)
+	{
+		FILE* pFile(nullptr);
+		bool Status(false);
+
+		fopen_s(&pFile, pFileName, "rb");
+		if (pFile == nullptr)
 		{
-		public:
-			// Any unsigned integer type with at least 32 bits may be used as
-			// accumulator type for fast crc32-calulation, but unsigned long is
-			// probably the optimal choice for most systems. 
-			typedef unsigned long CRC32_accum_t;
-			static const unsigned int CRC32_accum_SIZE = sizeof(CRC32_accum_t);
+			Status = false;
+		}
+		else
+		{
+			Status = true;
+			fclose(pFile);
+		}
+		return Status;
+	}
+	static bool GetCRC(const char* const pFileName, uint32_t& crc)
+	{
+		FILE* pFile(nullptr);
+		bool Status(false);
+		constexpr unsigned int CRCBuffSize = 1L << 15; // 32K size
+		char* pBuff = new char[CRCBuffSize]();
+		assert(pBuff);
+		crc = 0;			 // set to 0
 
-		public:
-			// Standard CRC32 checksum: fast public domain implementation for
-			// little-endian architectures.  Written for compilation with an
-			// optimizer set to perform loop unwinding.  Outputs the checksum for
-			// each file given as a command line argument.  Invalid file names and
-			// files that cause errors are silently skipped.  The program reads
-			// from stdin if it is called with no arguments. 
-			static uint32_t GetCRC(const void *pBuff, size_t numBytes)
+		// Get instance
+		CRC32* pCRC = CRC32::privGetInstance();
+		assert(pCRC);
+
+		// Open file
+		fopen_s(&pFile, pFileName, "rb");
+		if (pFile == nullptr)
+		{
+			Status = false;
+		}
+		else
+		{
+			while (!feof(pFile) && !ferror(pFile))
 			{
-				// Get instance
-				CRC32 *pCRC = CRC32::privGetInstance();
-				assert(pCRC);
-
-				uint32_t CRC32_result;
-				pCRC->privFile(pBuff, numBytes, CRC32_result);
-
-				return CRC32_result;
+				pCRC->privFile(pBuff, fread(pBuff, 1, CRCBuffSize, pFile), crc);
 			}
-			static uint32_t GetCRC(const char *const pFileName)
-			{
-				uint32_t file_crc; 
-				bool status;
-				status = CRC32::GetCRC(pFileName, file_crc);
-				assert(status == true);
 
-				return file_crc;
+			if (!ferror(pFile))
+			{
+				Status = true;
 			}
-			static bool FileExist(const char *const pFileName)
+			else
 			{
-				FILE *pFile(nullptr);
-				bool Status(false);
+				Status = false;
+			}
 
-				fopen_s(&pFile, pFileName, "rb");
-				if(pFile == nullptr)
+			fclose(pFile);
+		}
+		delete[] pBuff;
+		pBuff = nullptr;
+
+		return Status;
+	}
+
+private:
+	CRC32(const CRC32&) = delete;
+	CRC32& operator = (const CRC32&) = delete;
+	~CRC32()
+	{
+	}
+	CRC32()
+	{
+		this->privInitTables();
+	}
+	void privFile(const void* const data, const size_t n_bytes, uint32_t& crc)
+	{
+		const size_t n_accum = n_bytes / sizeof(CRC32_accum_t);
+
+		for (size_t i = 0; i < n_accum; ++i)
+		{
+			CRC32_accum_t a = crc ^ ((CRC32_accum_t*)data)[i];
+
+			for (size_t j = crc = 0; j < CRC32_accum_SIZE; ++j)
+			{
+				crc ^= wtable[(j << 8) + (uint8_t)(a >> 8 * j)];
+			}
+		}
+
+		for (size_t i = n_accum * sizeof(CRC32_accum_t); i < n_bytes; ++i)
+		{
+			crc = table[(uint8_t)crc ^ ((uint8_t*)data)[i]] ^ crc >> 8;
+		}
+	}
+	void privInitTables()
+	{
+		for (uint32_t i = 0; i < 0x100; ++i)
+		{
+			this->table[i] = privForByte(i);
+		}
+
+		for (size_t k = 0; k < CRC32_accum_SIZE; ++k)
+		{
+			for (uint32_t w, i = 0; i < 0x100; ++i)
+			{
+				for (size_t j = w = 0; j < CRC32_accum_SIZE; ++j)
 				{
-					Status = false;
-				}
-				else
-				{
-					Status = true;
-					fclose(pFile);
-				}
-				return Status;
-			}
-			static bool GetCRC(const char *const pFileName, uint32_t &crc)
-			{
-				FILE *pFile(nullptr);
-				bool Status(false);
-				constexpr unsigned int CRCBuffSize = 1L << 15; // 32K size
-				char *pBuff = new char[CRCBuffSize]();  
-				assert(pBuff);
-				crc = 0;			 // set to 0
-
-				// Get instance
-				CRC32 *pCRC = CRC32::privGetInstance();
-				assert(pCRC);
-
-				// Open file
-				fopen_s(&pFile, pFileName, "rb");
-				if(pFile == nullptr)
-				{
-					Status = false;
-				}
-				else
-				{
-					while(!feof(pFile) && !ferror(pFile))
-					{
-						pCRC->privFile(pBuff, fread(pBuff, 1, CRCBuffSize, pFile), crc);
-					}
-
-					if(!ferror(pFile))
-					{
-						Status = true;
-					}
-					else
-					{
-						Status = false;
-					}
-
-					fclose(pFile);
-				}
-				delete[] pBuff;
-				pBuff = nullptr;
-
-				return Status;
-			}
-
-		private:
-			CRC32(const CRC32 &) = delete;
-			CRC32 &operator = (const CRC32 &) = delete;
-			~CRC32()
-			{
-
-			}
-			CRC32()
-			{
-				this->privInitTables();
-			}
-			void privFile(const void *const data, const size_t n_bytes, uint32_t &crc)
-			{
-				const size_t n_accum = n_bytes / sizeof(CRC32_accum_t);
-
-				for(size_t i = 0; i < n_accum; ++i)
-				{
-					CRC32_accum_t a = crc ^ ((CRC32_accum_t *)data)[i];
-
-					for(size_t j = crc = 0; j < CRC32_accum_SIZE; ++j)
-					{
-						crc ^= wtable[(j << 8) + (uint8_t)(a >> 8 * j)];
-					}
+					w = this->table[(uint8_t)(j == k ? w ^ i : w)] ^ w >> 8;
 				}
 
-				for(size_t i = n_accum * sizeof(CRC32_accum_t); i < n_bytes; ++i)
-				{
-					crc = table[(uint8_t)crc ^ ((uint8_t *)data)[i]] ^ crc >> 8;
-				}
+				this->wtable[(k << 8) + i] = w ^ (k ? this->wtable[0] : 0);
 			}
-			void privInitTables()
-			{
-				for(uint32_t i = 0; i < 0x100; ++i)
-				{
-					this->table[i] = privForByte(i);
-				}
+		}
+	}
+	uint32_t privForByte(uint32_t r)
+	{
+		for (int j = 0; j < 8; ++j)
+		{
+			r = (r & 1 ? 0 : (uint32_t)0xEDB88320L) ^ r >> 1;
+		}
+		return r ^ (uint32_t)0xFF000000L;
+	}
+	static CRC32* privGetInstance() noexcept
+	{
+		// Singleton - guaratees that tables are only created once
+		static CRC32 instance;
+		return &instance;
+	}
 
-				for(size_t k = 0; k < CRC32_accum_SIZE; ++k)
-				{
-					for(uint32_t w, i = 0; i < 0x100; ++i)
-					{
-						for(size_t j = w = 0; j < CRC32_accum_SIZE; ++j)
-						{
-							w = this->table[(uint8_t)(j == k ? w ^ i : w)] ^ w >> 8;
-						}
-
-						this->wtable[(k << 8) + i] = w ^ (k ? this->wtable[0] : 0);
-					}
-				}
-			}
-			uint32_t privForByte(uint32_t r)
-			{
-				for(int j = 0; j < 8; ++j)
-				{
-					r = (r & 1 ? 0 : (uint32_t)0xEDB88320L) ^ r >> 1;
-				}
-				return r ^ (uint32_t)0xFF000000L;
-			}
-			static CRC32 *privGetInstance() noexcept
-			{
-				// Singleton - guaratees that tables are only created once
-				static CRC32 instance;
-				return &instance;
-			}
-
-			uint32_t table[0x100];
-			uint32_t wtable[0x100 * sizeof(CRC32_accum_t)];
-
-		};
-
+	uint32_t table[0x100];
+	uint32_t wtable[0x100 * sizeof(CRC32_accum_t)];
+};
 
 #endif
 
@@ -2630,71 +2583,70 @@ public:
 // Align16
 //      Needed a clean way to allocate aligned data for Matrix, Quat, and Vector
 //      Data is align by inheriting this class
-//      
+//
 //
 //      Used to be stand alone files... now all one include
 //
 // -----------------------------------------------------------------------
 
-
 #ifndef ALIGN_16_H
 #define ALIGN_16_H
 
-		#define ALIGN_UNUSED_VAR(x) (void(x))
+#define ALIGN_UNUSED_VAR(x) (void(x))
 
-		#pragma push_macro("new")
-		#undef new
+#pragma push_macro("new")
+#undef new
 
-		class Align16
+class Align16
+{
+public:
+
+	// Placement new for align16
+	void* operator new(size_t, void* p) noexcept
+	{
+		ALIGN_UNUSED_VAR(p);
+		return p;
+	}
+
+	void* operator new(size_t size) noexcept
+	{
+		void* p = _aligned_malloc(size, 16);
+		return p;
+	}
+
+	void operator delete(void* p)
+	{
+		_aligned_free(p);
+	}
+
+	void* operator new[](size_t size) noexcept
 		{
-		public:
+			void* p = _aligned_malloc(size, 16);
+			return p;
+		}
 
-			// Placement new for align16
-			void* operator new(size_t, void *p) noexcept
-			{
-				ALIGN_UNUSED_VAR(p);
-				return p;
-			}
-
-			void *operator new(size_t size) noexcept
-			{
-				void *p = _aligned_malloc(size, 16);
-				return p;
-			}
-
-			void operator delete(void *p)
+		void operator delete[](void* p)
 			{
 				_aligned_free(p);
 			}
 
-			void *operator new[](size_t size) noexcept
-			{
-				void *p = _aligned_malloc(size, 16);
-				return p;
-			}
-
-			void operator delete[](void *p)
-			{
-				_aligned_free(p);
-			}
-
-			void *operator new(size_t      size,
-								int         _BlockUse,
-								char const* _FileName,
-								int         _LineNumber) noexcept
+			void* operator new(size_t      size,
+				int         _BlockUse,
+				char const* _FileName,
+				int         _LineNumber) noexcept
 			{
 				ALIGN_UNUSED_VAR(_BlockUse);
 				ALIGN_UNUSED_VAR(_FileName);
 				ALIGN_UNUSED_VAR(_LineNumber);
 
-				void *p = _aligned_malloc_dbg(size, 16, _FileName, _LineNumber);
+				void* p = _aligned_malloc_dbg(size, 16, _FileName, _LineNumber);
 				return p;
 			}
 
-			void operator delete(void        *p,
-									int         _BlockUse,
-									char const* _FileName,
-									int         _LineNumber)
+			void operator delete(void* p,
+				int         _BlockUse,
+				char const* _FileName,
+				int         _LineNumber)
 			{
 				ALIGN_UNUSED_VAR(_BlockUse);
 				ALIGN_UNUSED_VAR(_FileName);
@@ -2702,33 +2654,32 @@ public:
 				_aligned_free_dbg(p);
 			}
 
-			void *operator new[](size_t        size,
-									int         _BlockUse,
-									char const* _FileName,
-									int         _LineNumber)  noexcept
-			{
-				ALIGN_UNUSED_VAR(_BlockUse);
-				ALIGN_UNUSED_VAR(_FileName);
-				ALIGN_UNUSED_VAR(_LineNumber);
+			void* operator new[](size_t        size,
+				int         _BlockUse,
+				char const* _FileName,
+				int         _LineNumber)  noexcept
+				{
+					ALIGN_UNUSED_VAR(_BlockUse);
+					ALIGN_UNUSED_VAR(_FileName);
+					ALIGN_UNUSED_VAR(_LineNumber);
 
-				void *p = _aligned_malloc_dbg(size, 16, _FileName, _LineNumber);
-				return p;
-			}
+					void* p = _aligned_malloc_dbg(size, 16, _FileName, _LineNumber);
+					return p;
+				}
 
-			void operator delete[](void      *p,
-									int         _BlockUse,
-									char const* _FileName,
-									int         _LineNumber)
-			{
-				ALIGN_UNUSED_VAR(_BlockUse);
-				ALIGN_UNUSED_VAR(_FileName);
-				ALIGN_UNUSED_VAR(_LineNumber);
-				_aligned_free_dbg(p);
-			}
+				void operator delete[](void* p,
+					int         _BlockUse,
+					char const* _FileName,
+					int         _LineNumber)
+					{
+						ALIGN_UNUSED_VAR(_BlockUse);
+						ALIGN_UNUSED_VAR(_FileName);
+						ALIGN_UNUSED_VAR(_LineNumber);
+						_aligned_free_dbg(p);
+					}
+};
 
-		};
-
-		#pragma pop_macro("new")
+#pragma pop_macro("new")
 
 #endif //ALIGN_16_H
 
