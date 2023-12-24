@@ -111,6 +111,8 @@ void ConvertAnim(const char* const pFileName)
 		animFrameData* pFrameData = new animFrameData();
 		pFrameData->frameNumber = FrameIndex;
 
+		boneData* pPrev = nullptr;
+
 		for (int nodeIndex = 0; nodeIndex < 12; nodeIndex++)
 		{
 			int transChannel = -1;
@@ -139,6 +141,17 @@ void ConvertAnim(const char* const pFileName)
 
 			boneData* pBone = new boneData();
 			pBone->boneNumber = nodeIndex;
+
+			if (pPrev)
+			{
+				pPrev->pNext = pBone;
+			}
+			else
+			{
+				pFrameData->pBonesHead = pBone;
+			}
+
+			pPrev = pBone;
 
 			if (transChannel >= 0)
 			{
@@ -197,8 +210,6 @@ void ConvertAnim(const char* const pFileName)
 			pBone->scale[0] = 1.f;
 			pBone->scale[1] = 1.f;
 			pBone->scale[2] = 1.f;
-
-			pFrameData->bones.push_back(pBone);
 		}
 
 		animClip.frames.push_back(pFrameData);

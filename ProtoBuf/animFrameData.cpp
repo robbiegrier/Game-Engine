@@ -2,30 +2,47 @@
 
 animFrameData::~animFrameData()
 {
-	while (!bones.empty())
+	boneData* pCurr = pBonesHead;
+
+	while (pCurr)
 	{
-		boneData* pDelete = bones.back();
-		bones.pop_back();
+		boneData* pDelete = pCurr;
+		pCurr = pCurr->pNext;
 		delete pDelete;
 	}
 }
 
 void animFrameData::Serialize(animFrameData_proto& out) const
 {
-	for (boneData* pBone : bones)
+	boneData* pCurr = pBonesHead;
+
+	while (pCurr)
 	{
 		boneData_proto* bdProto = out.add_bones();
-		pBone->Serialize(*bdProto);
+		pCurr->Serialize(*bdProto);
+		pCurr = pCurr->pNext;
 	}
 }
 
 void animFrameData::Deserialize(const animFrameData_proto& in)
 {
+	boneData* pPrev = nullptr;
+
 	for (const boneData_proto& bdProto : in.bones())
 	{
 		boneData* pBone = new boneData();
 		pBone->Deserialize(bdProto);
-		bones.push_back(pBone);
+
+		if (pPrev)
+		{
+			pPrev->pNext = pBone;
+		}
+		else
+		{
+			pBonesHead = pBone;
+		}
+
+		pPrev = pBone;
 	}
 }
 
@@ -33,8 +50,11 @@ void animFrameData::Print(const char* const pName) const
 {
 	Trace::out("%s (%d): \n", pName, frameNumber);
 
-	for (boneData* pBone : bones)
+	boneData* pCurr = pBonesHead;
+
+	while (pCurr)
 	{
-		pBone->Print("bone");
+		pCurr->Print("bone");
+		pCurr = pCurr->pNext;
 	}
 }

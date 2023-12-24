@@ -21,6 +21,8 @@ public:
 	float scale[3];
 
 	int boneNumber = 0;
+
+	boneData* pNext = nullptr;
 };
 
 #endif

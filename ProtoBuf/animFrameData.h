@@ -18,7 +18,7 @@ public:
 
 	void Print(const char* const pName) const;
 
-	std::vector<boneData*> bones;
+	boneData* pBonesHead = nullptr;
 	int frameNumber = 0;
 };
 

@@ -50,12 +50,17 @@ namespace Azul
 
 			pTmp = pTmpX;
 
-			for (int j = 0; j < (int)pFrame->bones.size(); j++)
+			boneData* pBone = pFrame->pBonesHead;
+
+			int j = 0;
+			while (pBone)
 			{
-				boneData* pBone = pFrame->bones[j];
 				pTmp->poBone[j].T = Vec3(pBone->translation[0], pBone->translation[1], pBone->translation[2]);
 				pTmp->poBone[j].Q = Quat(pBone->rotation[0], pBone->rotation[1], pBone->rotation[2], pBone->rotation[3]);
 				pTmp->poBone[j].S = Vec3(pBone->scale[0], pBone->scale[1], pBone->scale[2]);
+
+				pBone = pBone->pNext;
+				j++;
 			}
 		}
 	}
