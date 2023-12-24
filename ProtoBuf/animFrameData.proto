@@ -1,0 +1,9 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+import "boneData.proto";
+
+message animFrameData_proto
+{
+	repeated boneData_proto bones = 1;
+}

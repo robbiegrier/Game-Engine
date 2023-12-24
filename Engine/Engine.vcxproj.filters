@@ -780,6 +780,9 @@
     <ClInclude Include="src\EditorThemes.h">
       <Filter>src\Editor\Gui</Filter>
     </ClInclude>
+    <ClInclude Include="src\ClipProto.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -1008,6 +1011,9 @@
     </ClCompile>
     <ClCompile Include="src\EditorThemes.cpp">
       <Filter>src\Editor\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipProto.cpp">
+      <Filter>src\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

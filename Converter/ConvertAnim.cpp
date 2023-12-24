@@ -6,10 +6,28 @@
 #include "File.h"
 #include "ConvertAnim.h"
 #include "MeshLayout.h"
+#include "animClipData.h"
 
 using namespace Azul;
 using namespace tinygltf;
 using json = nlohmann::json;
+
+void WriteAnimClipDataToFile(const animClipData_proto& source, const char* const filename)
+{
+	File::Handle fh;
+
+	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
+	assert(err == File::Error::SUCCESS);
+
+	std::string strOut;
+	source.SerializeToString(&strOut);
+
+	File::Write(fh, strOut.data(), strOut.length());
+	assert(err == File::Error::SUCCESS);
+
+	err = File::Close(fh);
+	assert(err == File::Error::SUCCESS);
+}
 
 void ConvertAnim(const char* const pFileName)
 {
@@ -74,6 +92,8 @@ void ConvertAnim(const char* const pFileName)
 
 	auto numFrames = gltfModel.accessors[0].count;
 
+	animClipData animClip;
+
 	for (size_t i = 0; i < numFrames; i++)
 	{
 		size_t FrameIndex = i;
@@ -87,6 +107,9 @@ void ConvertAnim(const char* const pFileName)
 		pTmpX->poBone = new Bone[(unsigned int)this->numBones]; \n\
 		pTmp->nextBucket = pTmpX; \n\
 		pTmp = pTmpX; \n", FrameIndex);
+
+		animFrameData* pFrameData = new animFrameData();
+		animClip.frames.push_back(pFrameData);
 
 		for (int nodeIndex = 0; nodeIndex < 12; nodeIndex++)
 		{
@@ -114,6 +137,9 @@ void ConvertAnim(const char* const pFileName)
 			Trace::out("// %s (%d)\n", gltfModel.nodes[nodeIndex].name.c_str(), nodeIndex);
 			auto& node = gltfModel.nodes[nodeIndex];
 
+			boneData* pBone = new boneData();
+			pFrameData->bones.push_back(pBone);
+
 			if (transChannel >= 0)
 			{
 				GLTF::OutputTrans(gltfModel, transChannel + 1, nodeIndex, FrameIndex);
@@ -123,10 +149,19 @@ void ConvertAnim(const char* const pFileName)
 				if (node.translation.size() > 2)
 				{
 					Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);\n", nodeIndex, (float)node.translation[0], (float)node.translation[1], (float)node.translation[2]);
+
+					int bi = 0;
+					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
+					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
+					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
 				}
 				else
 				{
 					Trace::out("pTmp->poBone[%d].T = Vec3(0.f, 0.f, 0.f);\n");
+					int bi = 0;
+					pBone->translation[bi++] = 0.f;
+					pBone->translation[bi++] = 0.f;
+					pBone->translation[bi++] = 0.f;
 				}
 			}
 
@@ -139,18 +174,43 @@ void ConvertAnim(const char* const pFileName)
 				if (node.rotation.size() > 3)
 				{
 					Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", nodeIndex, (float)node.rotation[0], (float)node.rotation[1], (float)node.rotation[2], (float)node.rotation[3]);
+
+					int bi = 0;
+					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
+					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
+					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
+					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
 				}
 				else
 				{
 					Trace::out("pTmp->poBone[%d].Q = Quat(Special::Identity);\n");
+
+					Quat identity = Quat(Special::Identity);
+					int bi = 0;
+					pBone->rotation[bi++] = identity[x];
+					pBone->rotation[bi++] = identity[y];
+					pBone->rotation[bi++] = identity[z];
+					pBone->rotation[bi++] = identity[w];
 				}
 			}
 
 			Trace::out("pTmp->poBone[%d].S = Vec3(1.000000f, 1.000000f, 1.000000f);\n", nodeIndex);
+
+			int bi = 0;
+			pBone->scale[bi++] = 1.f;
+			pBone->scale[bi++] = 1.f;
+			pBone->scale[bi++] = 1.f;
 		}
 
 		Trace::out("// =====================\n");
 	}
+
+	animClipData_proto acProto;
+	animClip.Serialize(acProto);
+
+	std::string animName = std::string(pFileName);
+	const char* filename = animName.replace(animName.end() - 4, animName.end(), ".anim.proto.azul").c_str();
+	WriteAnimClipDataToFile(acProto, filename);
 
 	Trace::out("\n\nSkeleton Data:\n");
 

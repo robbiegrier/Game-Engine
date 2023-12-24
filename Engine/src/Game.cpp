@@ -39,6 +39,7 @@
 #include "GameObjectBasic.h"
 #include "Anim.h"
 #include "ClipManager.h"
+#include "ClipProto.h"
 
 namespace Azul
 {
@@ -215,7 +216,7 @@ namespace Azul
 		CameraManager::Create();
 
 		Camera* pCamera = CameraManager::Add(Camera::Name::Default, new Camera());
-		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 0), Vec3(-30, 30, 30));
+		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), animPos + Vec3(0, 0, 0), animPos + Vec3(-10, 10, 0));
 		pCamera->SetPerspective(65.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::High, new Camera());
@@ -235,11 +236,13 @@ namespace Azul
 		GameObjectManager::Create();
 
 		ClipManager::Create();
+
 		ClipManager::Add(Clip::Name::Walk, new Clip(NUM_BONES, Clip::Name::Walk));
 		ClipManager::Add(Clip::Name::SidestepRight, new Clip(NUM_BONES, Clip::Name::SidestepRight));
 		ClipManager::Add(Clip::Name::HitFront, new Clip(NUM_BONES, Clip::Name::HitFront));
 		ClipManager::Add(Clip::Name::Run, new Clip(NUM_BONES, Clip::Name::Run));
-		ClipManager::Add(Clip::Name::ShotUp, new Clip(NUM_BONES, Clip::Name::ShotUp));
+		//ClipManager::Add(Clip::Name::ShotUp, new Clip(NUM_BONES, Clip::Name::ShotUp));
+		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul", Clip::Name::ShotUp));
 
 		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
 		animDeltaTime = delta;

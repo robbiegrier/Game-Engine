@@ -1,0 +1,9 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+message boneData_proto
+{
+	repeated float translation = 1;
+	repeated float rotation = 2;
+	repeated float scale = 3;
+}

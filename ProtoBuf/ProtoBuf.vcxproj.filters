@@ -47,6 +47,18 @@
     <Filter Include="_JSON">
       <UniqueIdentifier>{feb13dd7-43ac-49b8-bcaf-6a05b2aab6d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{b4b76bc8-2c3a-434c-9191-5afd8ed0da19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Generated">
+      <UniqueIdentifier>{109493bf-ce08-4c7d-86e0-8e148bce3288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Proto">
+      <UniqueIdentifier>{dd3dbfbd-16ca-466e-8c0a-cb9572e47af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Interface">
+      <UniqueIdentifier>{6a219611-88a0-4e44-b07e-94b45ac28c0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -87,6 +99,15 @@
     </None>
     <None Include="azulModel.proto">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="animClipData.proto">
+      <Filter>Source Files\Animation\Proto</Filter>
+    </None>
+    <None Include="animFrameData.proto">
+      <Filter>Source Files\Animation\Proto</Filter>
+    </None>
+    <None Include="boneData.proto">
+      <Filter>Source Files\Animation\Proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -575,6 +596,24 @@
     </ClInclude>
     <ClInclude Include="MeshLayout.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animClipData.pb.h">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="animFrameData.pb.h">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="boneData.pb.h">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="boneData.h">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="animFrameData.h">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="animClipData.h">
+      <Filter>Source Files\Animation\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1131,6 +1170,24 @@
     </ClCompile>
     <ClCompile Include="azulModel.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animClipData.pb.cc">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="animFrameData.pb.cc">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="boneData.pb.cc">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="boneData.cpp">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="animFrameData.cpp">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="animClipData.cpp">
+      <Filter>Source Files\Animation\Interface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

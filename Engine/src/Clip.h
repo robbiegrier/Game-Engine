@@ -40,7 +40,7 @@ namespace Azul
 		Clip() = delete;
 		Clip(const Clip&) = delete;
 		Clip& operator = (const Clip&) = delete;
-		~Clip();
+		virtual ~Clip();
 
 		AnimTime GetTotalTime();
 		void AnimateBones(AnimTime tCurr, Bone* pResult);
@@ -63,7 +63,7 @@ namespace Azul
 		AnimTime privFindMaxTime();
 		int  privFindNumFrames();
 
-	private:
+	protected:
 		int numBones;
 		int numFrames;
 		AnimTime totalTime;

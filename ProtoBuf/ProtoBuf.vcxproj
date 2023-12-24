@@ -278,8 +278,14 @@
     <ClInclude Include="..\Proto\google\protobuf\util\type_resolver_util.h" />
     <ClInclude Include="..\Proto\google\protobuf\wire_format.h" />
     <ClInclude Include="..\Proto\google\protobuf\wire_format_lite.h" />
+    <ClInclude Include="animClipData.h" />
+    <ClInclude Include="animClipData.pb.h" />
+    <ClInclude Include="animFrameData.h" />
+    <ClInclude Include="animFrameData.pb.h" />
     <ClInclude Include="azulModel.h" />
     <ClInclude Include="azulModel.pb.h" />
+    <ClInclude Include="boneData.h" />
+    <ClInclude Include="boneData.pb.h" />
     <ClInclude Include="meshData.h" />
     <ClInclude Include="meshData.pb.h" />
     <ClInclude Include="MeshLayout.h" />
@@ -298,7 +304,10 @@
     <None Include="..\Proto\google\protobuf\proto3_lite_unittest.inc" />
     <None Include="..\Proto\google\protobuf\test_util.inc" />
     <None Include="..\Proto\google\protobuf\wire_format_unittest.inc" />
+    <None Include="animClipData.proto" />
+    <None Include="animFrameData.proto" />
     <None Include="azulModel.proto" />
+    <None Include="boneData.proto" />
     <None Include="meshData.proto" />
     <None Include="textureData.proto" />
     <None Include="vboData.proto" />
@@ -834,8 +843,14 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="animClipData.cpp" />
+    <ClCompile Include="animClipData.pb.cc" />
+    <ClCompile Include="animFrameData.cpp" />
+    <ClCompile Include="animFrameData.pb.cc" />
     <ClCompile Include="azulModel.cpp" />
     <ClCompile Include="azulModel.pb.cc" />
+    <ClCompile Include="boneData.cpp" />
+    <ClCompile Include="boneData.pb.cc" />
     <ClCompile Include="meshData.cpp" />
     <ClCompile Include="meshData.pb.cc" />
     <ClCompile Include="textureData.cpp" />

@@ -11,7 +11,6 @@ option optimize_for = LITE_RUNTIME;
 message azulModel_proto
 {
 	repeated meshData_proto meshes = 1;
-
 	optional uint32 converterVersion = 2;
 }
 

@@ -292,6 +292,7 @@
     <ClInclude Include="src\CameraManager.h" />
     <ClInclude Include="src\Clip.h" />
     <ClInclude Include="src\ClipManager.h" />
+    <ClInclude Include="src\ClipProto.h" />
     <ClInclude Include="src\Colors.h" />
     <ClInclude Include="src\CrossMesh.h" />
     <ClInclude Include="src\CubeMesh.h" />
@@ -534,6 +535,7 @@
     <ClCompile Include="src\CameraManager.cpp" />
     <ClCompile Include="src\Clip.cpp" />
     <ClCompile Include="src\ClipManager.cpp" />
+    <ClCompile Include="src\ClipProto.cpp" />
     <ClCompile Include="src\CrossMesh.cpp" />
     <ClCompile Include="src\CubeMesh.cpp" />
     <ClCompile Include="src\DiamondMesh.cpp" />
