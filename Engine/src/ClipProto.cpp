@@ -4,7 +4,7 @@
 namespace Azul
 {
 	ClipProto::ClipProto(const char* pAnimFilename, Clip::Name inName)
-		: Clip(12, inName)
+		: Clip()
 	{
 		animClipData_proto acdProto;
 		acdProto.ParseFromString(EngineUtils::FileToString(pAnimFilename));
@@ -12,7 +12,15 @@ namespace Azul
 		animClipData clipData;
 		clipData.Deserialize(acdProto);
 
+		numBones = 12;
+		numFrames = 0;
+		totalTime = AnimTime(AnimTime::Duration::ZERO);
+		pHead = nullptr;
+
 		SetFromClipData(clipData);
+
+		totalTime = privFindMaxTime();
+		numFrames = privFindNumFrames();
 
 		Trace::out("Clip %s loaded from converter\n", pAnimFilename);
 	}
@@ -22,28 +30,32 @@ namespace Azul
 		FrameBucket* pTmp = nullptr;
 		FrameBucket* pTmpX = nullptr;
 
-		for (animFrameData* pFrame : clipData.frames)
+		for (int i = 0; i < (int)clipData.frames.size(); i++)
 		{
+			animFrameData* pFrame = clipData.frames[i];
 			pTmpX = new FrameBucket();
 			pTmpX->prevBucket = pTmp;
 			pTmpX->nextBucket = nullptr;
-			pTmpX->KeyTime = 1 * AnimTime(AnimTime::Duration::FILM_24_FRAME);
+			pTmpX->KeyTime = i * AnimTime(AnimTime::Duration::FILM_24_FRAME);
 			pTmpX->poBone = new Bone[(unsigned int)this->numBones];
 
 			if (pTmp)
 			{
 				pTmp->nextBucket = pTmpX;
 			}
+			else
+			{
+				this->pHead = pTmpX;
+			}
 
 			pTmp = pTmpX;
 
-			int i = 0;
-			for (boneData* pBone : pFrame->bones)
+			for (int j = 0; j < (int)pFrame->bones.size(); j++)
 			{
-				pTmp->poBone[i].T = Vec3(pBone->translation[0], pBone->translation[1], pBone->translation[2]);
-				pTmp->poBone[i].Q = Quat(pBone->rotation[0], pBone->rotation[1], pBone->rotation[2], pBone->rotation[3]);
-				pTmp->poBone[i].S = Vec3(pBone->scale[0], pBone->scale[1], pBone->scale[2]);
-				i++;
+				boneData* pBone = pFrame->bones[j];
+				pTmp->poBone[j].T = Vec3(pBone->translation[0], pBone->translation[1], pBone->translation[2]);
+				pTmp->poBone[j].Q = Quat(pBone->rotation[0], pBone->rotation[1], pBone->rotation[2], pBone->rotation[3]);
+				pTmp->poBone[j].S = Vec3(pBone->scale[0], pBone->scale[1], pBone->scale[2]);
 			}
 		}
 	}

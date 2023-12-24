@@ -49,24 +49,26 @@ void boneData::Deserialize(const boneData_proto& in)
 
 void boneData::Print(const char* const pName) const
 {
-	Trace::out("%s: \n", pName);
+	Trace::out("%s (%d):", pName, boneNumber);
 
 	Trace::out("T: ", pName);
 	for (int i = 0; i < 3; i++)
 	{
-		Trace::out("%f, %f, %f", translation[i]);
+		Trace::out("%.4f ", translation[i]);
 	}
-	Trace::out("\n");
+	Trace::out("| ");
 
+	Trace::out("Q: ", pName);
 	for (int i = 0; i < 4; i++)
 	{
-		Trace::out("%f, %f, %f, %f", rotation[i]);
+		Trace::out("%.4f ", rotation[i]);
 	}
-	Trace::out("\n");
+	Trace::out("| ");
 
+	Trace::out("S: ", pName);
 	for (int i = 0; i < 3; i++)
 	{
-		Trace::out("%f, %f, %f", scale[i]);
+		Trace::out("%.1f ", scale[i]);
 	}
 	Trace::out("\n");
 }

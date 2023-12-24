@@ -9,6 +9,7 @@
 #include "MathEngine.h"
 #include "md5.h"
 #include "stb_image.h"
+#include "boneData.h"
 
 using namespace Azul;
 
@@ -670,7 +671,7 @@ bool GLTF::LoadBinary(Model& model, const char* const pFileName)
 	return status;
 }
 
-bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex)
+bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone)
 {
 	//Trace::out("Quat bone:%d Frame:%d \n", NodeIndex, FrameIndex);
 	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
@@ -687,6 +688,11 @@ bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size
 		{
 			Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", NodeIndex,
 				pVect4->x, pVect4->y, pVect4->z, pVect4->w);
+
+			pBone->rotation[0] = pVect4->x;
+			pBone->rotation[1] = pVect4->y;
+			pBone->rotation[2] = pVect4->z;
+			pBone->rotation[3] = pVect4->w;
 		}
 		pVect4++;
 	}
@@ -696,7 +702,7 @@ bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size
 	return true;
 }
 
-bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex)
+bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone)
 {
 	//Trace::out("Trans bone:%d Frame:%d \n", NodeIndex, FrameIndex);
 	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
@@ -713,6 +719,10 @@ bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, siz
 		{
 			Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);  \n", NodeIndex,
 				pVect3->x, pVect3->y, pVect3->z);
+
+			pBone->translation[0] = pVect3->x;
+			pBone->translation[1] = pVect3->y;
+			pBone->translation[2] = pVect3->z;
 		}
 		pVect3++;
 	}

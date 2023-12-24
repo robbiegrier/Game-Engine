@@ -62,6 +62,8 @@ struct BoneMesh
 	std::vector<Vec3ui> index;                 // x
 };
 
+class boneData;
+
 class GLTF
 {
 public:
@@ -94,8 +96,8 @@ public:
 		unsigned int count);
 
 	static bool LoadBinary(Model& model, const char* const pFileName);
-	static bool OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex);
-	static bool OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex);
+	static bool OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
+	static bool OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
 };
 
 #endif

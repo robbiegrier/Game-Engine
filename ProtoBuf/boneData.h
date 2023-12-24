@@ -19,6 +19,8 @@ public:
 	float translation[3];
 	float rotation[4];
 	float scale[3];
+
+	int boneNumber = 0;
 };
 
 #endif

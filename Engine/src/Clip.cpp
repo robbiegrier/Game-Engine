@@ -24,14 +24,18 @@ namespace Azul
 		else if (inName == Name::Run)
 		{
 			privSetAnimationDataRun();
-		}
+		}/*
 		else if (inName == Name::ShotUp)
 		{
 			privSetAnimationDataShotUp();
-		}
+		}*/
 
 		totalTime = privFindMaxTime();
 		numFrames = privFindNumFrames();
+	}
+
+	Clip::Clip()
+	{
 	}
 
 	Clip::~Clip()

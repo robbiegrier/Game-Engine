@@ -109,7 +109,7 @@ void ConvertAnim(const char* const pFileName)
 		pTmp = pTmpX; \n", FrameIndex);
 
 		animFrameData* pFrameData = new animFrameData();
-		animClip.frames.push_back(pFrameData);
+		pFrameData->frameNumber = FrameIndex;
 
 		for (int nodeIndex = 0; nodeIndex < 12; nodeIndex++)
 		{
@@ -138,11 +138,11 @@ void ConvertAnim(const char* const pFileName)
 			auto& node = gltfModel.nodes[nodeIndex];
 
 			boneData* pBone = new boneData();
-			pFrameData->bones.push_back(pBone);
+			pBone->boneNumber = nodeIndex;
 
 			if (transChannel >= 0)
 			{
-				GLTF::OutputTrans(gltfModel, transChannel + 1, nodeIndex, FrameIndex);
+				GLTF::OutputTrans(gltfModel, transChannel + 1, nodeIndex, FrameIndex, pBone);
 			}
 			else
 			{
@@ -150,24 +150,22 @@ void ConvertAnim(const char* const pFileName)
 				{
 					Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);\n", nodeIndex, (float)node.translation[0], (float)node.translation[1], (float)node.translation[2]);
 
-					int bi = 0;
-					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
-					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
-					pBone->translation[bi] = static_cast<float>(node.translation[bi++]);
+					pBone->translation[0] = static_cast<float>(node.translation[0]);
+					pBone->translation[1] = static_cast<float>(node.translation[1]);
+					pBone->translation[2] = static_cast<float>(node.translation[2]);
 				}
 				else
 				{
 					Trace::out("pTmp->poBone[%d].T = Vec3(0.f, 0.f, 0.f);\n");
-					int bi = 0;
-					pBone->translation[bi++] = 0.f;
-					pBone->translation[bi++] = 0.f;
-					pBone->translation[bi++] = 0.f;
+					pBone->translation[0] = 0.f;
+					pBone->translation[1] = 0.f;
+					pBone->translation[2] = 0.f;
 				}
 			}
 
 			if (rotChannel >= 0)
 			{
-				GLTF::OutputQuat(gltfModel, rotChannel + 1, nodeIndex, FrameIndex);
+				GLTF::OutputQuat(gltfModel, rotChannel + 1, nodeIndex, FrameIndex, pBone);
 			}
 			else
 			{
@@ -175,32 +173,35 @@ void ConvertAnim(const char* const pFileName)
 				{
 					Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", nodeIndex, (float)node.rotation[0], (float)node.rotation[1], (float)node.rotation[2], (float)node.rotation[3]);
 
-					int bi = 0;
-					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
-					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
-					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
-					pBone->rotation[bi] = static_cast<float>(node.rotation[bi++]);
+					pBone->rotation[0] = static_cast<float>(node.rotation[0]);
+					pBone->rotation[1] = static_cast<float>(node.rotation[1]);
+					pBone->rotation[2] = static_cast<float>(node.rotation[2]);
+					pBone->rotation[3] = static_cast<float>(node.rotation[3]);
+
+					Trace::out("++ pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", nodeIndex, pBone->rotation[0], pBone->rotation[1], pBone->rotation[2], pBone->rotation[3]);
 				}
 				else
 				{
 					Trace::out("pTmp->poBone[%d].Q = Quat(Special::Identity);\n");
 
 					Quat identity = Quat(Special::Identity);
-					int bi = 0;
-					pBone->rotation[bi++] = identity[x];
-					pBone->rotation[bi++] = identity[y];
-					pBone->rotation[bi++] = identity[z];
-					pBone->rotation[bi++] = identity[w];
+					pBone->rotation[0] = identity[x];
+					pBone->rotation[1] = identity[y];
+					pBone->rotation[2] = identity[z];
+					pBone->rotation[3] = identity[w];
 				}
 			}
 
 			Trace::out("pTmp->poBone[%d].S = Vec3(1.000000f, 1.000000f, 1.000000f);\n", nodeIndex);
 
-			int bi = 0;
-			pBone->scale[bi++] = 1.f;
-			pBone->scale[bi++] = 1.f;
-			pBone->scale[bi++] = 1.f;
+			pBone->scale[0] = 1.f;
+			pBone->scale[1] = 1.f;
+			pBone->scale[2] = 1.f;
+
+			pFrameData->bones.push_back(pBone);
 		}
+
+		animClip.frames.push_back(pFrameData);
 
 		Trace::out("// =====================\n");
 	}
@@ -211,6 +212,8 @@ void ConvertAnim(const char* const pFileName)
 	std::string animName = std::string(pFileName);
 	const char* filename = animName.replace(animName.end() - 4, animName.end(), ".anim.proto.azul").c_str();
 	WriteAnimClipDataToFile(acProto, filename);
+
+	animClip.Print("shot up");
 
 	Trace::out("\n\nSkeleton Data:\n");
 

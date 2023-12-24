@@ -378,7 +378,7 @@ int main(int argc, char* argv[])
 	//}
 
 	ConvertAnim("shot_up.glb");
-	CreateChickenBotModels();
+	//CreateChickenBotModels();
 
 	google::protobuf::ShutdownProtobufLibrary();
 

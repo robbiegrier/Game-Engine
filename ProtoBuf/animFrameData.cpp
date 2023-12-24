@@ -31,7 +31,7 @@ void animFrameData::Deserialize(const animFrameData_proto& in)
 
 void animFrameData::Print(const char* const pName) const
 {
-	Trace::out("%s: \n", pName);
+	Trace::out("%s (%d): \n", pName, frameNumber);
 
 	for (boneData* pBone : bones)
 	{

@@ -16,7 +16,7 @@ namespace Azul
 		static constexpr bool ENABLE_VSYNC = true;
 		static constexpr int WINDOW_WIDTH = 600;
 		static constexpr int WINDOW_HEIGHT = 400;
-		static constexpr int WINDOW_SCALE = 2;
+		static constexpr int WINDOW_SCALE = 3;
 
 		// Engine Queries
 		static int GetWindowWidth();

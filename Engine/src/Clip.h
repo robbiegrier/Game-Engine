@@ -37,7 +37,7 @@ namespace Azul
 
 	public:
 		Clip(int inNumBones, Name inName);
-		Clip() = delete;
+		Clip();
 		Clip(const Clip&) = delete;
 		Clip& operator = (const Clip&) = delete;
 		virtual ~Clip();
@@ -60,10 +60,11 @@ namespace Azul
 		void privSetAnimationDataHitFront();
 		void privSetAnimationDataRun();
 		void privSetAnimationDataShotUp();
+
+	protected:
 		AnimTime privFindMaxTime();
 		int  privFindNumFrames();
 
-	protected:
 		int numBones;
 		int numFrames;
 		AnimTime totalTime;
