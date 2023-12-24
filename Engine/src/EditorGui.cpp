@@ -175,14 +175,18 @@ namespace Azul
 			)->SetRelativeScale(spawnScale);
 		}
 
-		ImGui::Begin("World", &open);
+		ImGui::SetNextWindowScroll(ImVec2(.5f, .5f));
 
+		ImGuiWindowFlags worldWindowFlags{ 0 };
+		worldWindowFlags |= ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollbar;
+		worldWindowFlags |= ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollWithMouse;
+		ImGui::Begin("World", &open, worldWindowFlags);
 		static ImVec2 windowSize = ImVec2{ -1.f, -1.f };
 		ImVec2 windowSizeTmp = ImGui::GetWindowSize();
 
 		if ((fabs(fabs(windowSize.x) - fabs(windowSizeTmp.x)) > MATH_TOLERANCE) || (fabs(fabs(windowSize.y) - fabs(windowSizeTmp.y)) > MATH_TOLERANCE))
 		{
-			self.pWorldViewport->Resize((UINT)ImGui::GetWindowWidth(), (UINT)ImGui::GetWindowHeight());
+			self.pWorldViewport->Resize((UINT)ImGui::GetWindowWidth(), (UINT)ImGui::GetWindowHeight() - 15.f);
 			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.pWorldViewport->GetWidth() / (float)self.pWorldViewport->GetHeight());
 		}
 
@@ -193,7 +197,7 @@ namespace Azul
 
 		ImGui::Image(
 			self.pWorldViewport->GetShaderResourceView(),
-			ImVec2((float)self.pWorldViewport->GetWidth(), (float)self.pWorldViewport->GetHeight()),
+			ImVec2((float)self.pWorldViewport->GetWidth(), (float)self.pWorldViewport->GetHeight() - 15.f),
 			ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
 			ImVec4(1.0f, 1.0f, 1.0f, 1.0f),
 			ImVec4(0.f, 0.f, 0.f, 0.f)
