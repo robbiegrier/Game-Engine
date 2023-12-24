@@ -237,12 +237,11 @@ namespace Azul
 
 		ClipManager::Create();
 
-		ClipManager::Add(Clip::Name::Walk, new Clip(NUM_BONES, Clip::Name::Walk));
-		ClipManager::Add(Clip::Name::SidestepRight, new Clip(NUM_BONES, Clip::Name::SidestepRight));
-		ClipManager::Add(Clip::Name::HitFront, new Clip(NUM_BONES, Clip::Name::HitFront));
-		ClipManager::Add(Clip::Name::Run, new Clip(NUM_BONES, Clip::Name::Run));
-		//ClipManager::Add(Clip::Name::ShotUp, new Clip(NUM_BONES, Clip::Name::ShotUp));
-		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul", Clip::Name::ShotUp));
+		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::Walk, new ClipProto("walk_mesh.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::SidestepRight, new ClipProto("sidestep_right.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::HitFront, new ClipProto("hit_front.anim.proto.azul"));
 
 		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
 		animDeltaTime = delta;

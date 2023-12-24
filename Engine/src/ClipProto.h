@@ -9,7 +9,7 @@ namespace Azul
 	class ClipProto : public Clip
 	{
 	public:
-		ClipProto(const char* pAnimFilename, Clip::Name inName);
+		ClipProto(const char* pAnimFilename);
 		ClipProto() = delete;
 		ClipProto(const ClipProto&) = delete;
 		ClipProto& operator = (const ClipProto&) = delete;

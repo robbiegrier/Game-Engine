@@ -2,30 +2,47 @@
 
 animClipData::~animClipData()
 {
-	while (!frames.empty())
+	animFrameData* pCurr = pFramesHead;
+
+	while (pCurr)
 	{
-		animFrameData* pDelete = frames.back();
-		frames.pop_back();
+		animFrameData* pDelete = pCurr;
+		pCurr = pCurr->pNext;
 		delete pDelete;
 	}
 }
 
 void animClipData::Serialize(animClipData_proto& out) const
 {
-	for (animFrameData* pFrame : frames)
+	animFrameData* pCurr = pFramesHead;
+
+	while (pCurr)
 	{
 		animFrameData_proto* afdProto = out.add_frames();
-		pFrame->Serialize(*afdProto);
+		pCurr->Serialize(*afdProto);
+		pCurr = pCurr->pNext;
 	}
 }
 
 void animClipData::Deserialize(const animClipData_proto& in)
 {
+	animFrameData* pPrev = nullptr;
+
 	for (const animFrameData_proto& afdProto : in.frames())
 	{
 		animFrameData* pFrame = new animFrameData();
 		pFrame->Deserialize(afdProto);
-		frames.push_back(pFrame);
+
+		if (pPrev)
+		{
+			pPrev->pNext = pFrame;
+		}
+		else
+		{
+			pFramesHead = pFrame;
+		}
+
+		pPrev = pFrame;
 	}
 }
 
@@ -33,8 +50,11 @@ void animClipData::Print(const char* const pName) const
 {
 	Trace::out("%s: \n", pName);
 
-	for (animFrameData* pFrame : frames)
+	animFrameData* pCurr = pFramesHead;
+
+	while (pCurr)
 	{
-		pFrame->Print("frame");
+		pCurr->Print("frame");
+		pCurr = pCurr->pNext;
 	}
 }

@@ -340,7 +340,7 @@ namespace Azul
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.Fonts->AddFontFromFileTTF("../Models/Ubuntu-Regular.ttf", 16.f);
+		io.Fonts->AddFontFromFileTTF("../Models/Ubuntu-Regular.ttf", 14.f);
 
 		ImGui::StyleColorsDark();
 

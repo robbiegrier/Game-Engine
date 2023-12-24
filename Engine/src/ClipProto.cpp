@@ -3,7 +3,7 @@
 
 namespace Azul
 {
-	ClipProto::ClipProto(const char* pAnimFilename, Clip::Name inName)
+	ClipProto::ClipProto(const char* pAnimFilename)
 		: Clip()
 	{
 		animClipData_proto acdProto;
@@ -30,9 +30,10 @@ namespace Azul
 		FrameBucket* pTmp = nullptr;
 		FrameBucket* pTmpX = nullptr;
 
-		for (int i = 0; i < (int)clipData.frames.size(); i++)
+		animFrameData* pFrame = clipData.pFramesHead;
+
+		for (int i = 0; pFrame != nullptr; i++)
 		{
-			animFrameData* pFrame = clipData.frames[i];
 			pTmpX = new FrameBucket();
 			pTmpX->prevBucket = pTmp;
 			pTmpX->nextBucket = nullptr;
@@ -52,16 +53,16 @@ namespace Azul
 
 			boneData* pBone = pFrame->pBonesHead;
 
-			int j = 0;
-			while (pBone)
+			for (int j = 0; pBone != nullptr; j++)
 			{
 				pTmp->poBone[j].T = Vec3(pBone->translation[0], pBone->translation[1], pBone->translation[2]);
 				pTmp->poBone[j].Q = Quat(pBone->rotation[0], pBone->rotation[1], pBone->rotation[2], pBone->rotation[3]);
 				pTmp->poBone[j].S = Vec3(pBone->scale[0], pBone->scale[1], pBone->scale[2]);
 
 				pBone = pBone->pNext;
-				j++;
 			}
+
+			pFrame = pFrame->pNext;
 		}
 	}
 }

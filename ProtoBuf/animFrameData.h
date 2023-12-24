@@ -3,7 +3,6 @@
 
 #include "boneData.h"
 #include "animFrameData.pb.h"
-#include <vector>
 
 class animFrameData
 {
@@ -20,6 +19,8 @@ public:
 
 	boneData* pBonesHead = nullptr;
 	int frameNumber = 0;
+
+	animFrameData* pNext = nullptr;
 };
 
 #endif

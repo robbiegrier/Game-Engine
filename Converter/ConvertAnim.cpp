@@ -94,6 +94,8 @@ void ConvertAnim(const char* const pFileName)
 
 	animClipData animClip;
 
+	animFrameData* pPrevFrame = nullptr;
+
 	for (size_t i = 0; i < numFrames; i++)
 	{
 		size_t FrameIndex = i;
@@ -110,6 +112,17 @@ void ConvertAnim(const char* const pFileName)
 
 		animFrameData* pFrameData = new animFrameData();
 		pFrameData->frameNumber = FrameIndex;
+
+		if (pPrevFrame)
+		{
+			pPrevFrame->pNext = pFrameData;
+		}
+		else
+		{
+			animClip.pFramesHead = pFrameData;
+		}
+
+		pPrevFrame = pFrameData;
 
 		boneData* pPrev = nullptr;
 
@@ -211,8 +224,6 @@ void ConvertAnim(const char* const pFileName)
 			pBone->scale[1] = 1.f;
 			pBone->scale[2] = 1.f;
 		}
-
-		animClip.frames.push_back(pFrameData);
 
 		Trace::out("// =====================\n");
 	}

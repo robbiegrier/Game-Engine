@@ -377,7 +377,7 @@ int main(int argc, char* argv[])
 	//	ConvertModel(file.c_str());
 	//}
 
-	ConvertAnim("shot_up.glb");
+	ConvertAnim("hit_front.glb");
 	//CreateChickenBotModels();
 
 	google::protobuf::ShutdownProtobufLibrary();

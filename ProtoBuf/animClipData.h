@@ -3,7 +3,6 @@
 
 #include "animFrameData.h"
 #include "animClipData.pb.h"
-#include <vector>
 
 class animClipData
 {
@@ -18,7 +17,7 @@ public:
 
 	void Print(const char* const pName) const;
 
-	std::vector<animFrameData*> frames;
+	animFrameData* pFramesHead = nullptr;
 };
 
 #endif

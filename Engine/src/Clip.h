@@ -36,7 +36,6 @@ namespace Azul
 		};
 
 	public:
-		Clip(int inNumBones, Name inName);
 		Clip();
 		Clip(const Clip&) = delete;
 		Clip& operator = (const Clip&) = delete;
@@ -52,14 +51,6 @@ namespace Azul
 		void SetName(Clip::Name inName);
 		Clip::Name GetName() const;
 		const char* NameToString();
-
-	private:
-		void privSetAnimationData();
-		void privSetAnimationDataWalk();
-		void privSetAnimationDataSidestepRight();
-		void privSetAnimationDataHitFront();
-		void privSetAnimationDataRun();
-		void privSetAnimationDataShotUp();
 
 	protected:
 		AnimTime privFindMaxTime();
