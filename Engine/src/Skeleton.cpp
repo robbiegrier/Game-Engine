@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-// Copyright 2023, Ed Keenan, all rights reserved.
-//----------------------------------------------------------------------------
-
 #include "Skeleton.h"
 #include "GOLightTexture.h"
 #include "GOFlatTexture.h"
@@ -15,25 +11,42 @@
 #include "TextureObjectManager.h"
 #include "PCSTreeForwardIterator.h"
 #include "GONull.h"
+#include "EngineUtils.h"
+#include "skeletonData.h"
 
 namespace Azul
 {
-	Skeleton::Data skel[]
-	{
-		{ 4, -1, "Bone" },
-		{ 8, 4, "Bone_R" },
-		{ 9, 8, "Bone_R_001" },
-		{ 10, 9, "Bone_R_002" },
-		{ 5, 4, "Bone_L" },
-		{ 6, 5, "Bone_L_001" },
-		{ 7, 6, "Bone_L_002" },
-		{ 11, 4, "Bone_001" },
-	};
+	//Skeleton::Data skel[]
+	//{
+	//	{ 4, -1, "Bone" },
+	//	{ 8, 4, "Bone_R" },
+	//	{ 9, 8, "Bone_R_001" },
+	//	{ 10, 9, "Bone_R_002" },
+	//	{ 5, 4, "Bone_L" },
+	//	{ 6, 5, "Bone_L_001" },
+	//	{ 7, 6, "Bone_L_002" },
+	//	{ 11, 4, "Bone_001" },
+	//};
 
-	Skeleton::Skeleton(Bone* pBone, int _numBones)
+	Skeleton::Skeleton(Bone* pBone, int _numBones, const char* pSkeletonFilename)
 		: pFirstBone(nullptr),
 		numBones(_numBones)
 	{
+		skeletonData_proto proto;
+		proto.ParseFromString(EngineUtils::FileToString(pSkeletonFilename));
+
+		skeletonData skeletonData;
+		skeletonData.Deserialize(proto);
+
+		skeletonData.Print("loaded skelly");
+
+		for (int i = 0; i < numBones - 4; i++)
+		{
+			skeletonBoneData[i].index = skeletonData.jointIndicies[i];
+			skeletonBoneData[i].parentIndex = skeletonData.jointParentIndicies[i];
+			memcpy(skeletonBoneData[i].name, skeletonData.jointNames[i], skeletonData::NAME_SIZE);
+		}
+
 		this->privSetAnimationHierarchy(pBone);
 		assert(pFirstBone);
 	}
@@ -127,21 +140,21 @@ namespace Azul
 
 		pGraphicsObj = new GOLightTexture(MeshArray[0], pShader, pTex);
 		pGameObj = new GameObjectAnimSkin(pGraphicsObj, pBoneResult);
-		pGameObj->SetIndex(skel[0].index);
-		pGameObj->SetName(skel[0].name);
+		pGameObj->SetIndex(skeletonBoneData[0].index);
+		pGameObj->SetName(skeletonBoneData[0].name);
 
-		GameObjectManager::SpawnObject(skel[0].name, pGameObj, spawnPos, pPivot);
+		GameObjectManager::SpawnObject(skeletonBoneData[0].name, pGameObj, spawnPos, pPivot);
 		this->pFirstBone = pGameObj;
 
 		for (int i = 1; i < this->numBones - 4; i++)
 		{
 			pGraphicsObj = new GOLightTexture(MeshArray[i], pShader, pTex);
 			pGameObj = new GameObjectAnimSkin(pGraphicsObj, pBoneResult);
-			pGameObj->SetIndex(skel[i].index);
-			pGameObj->SetName(skel[i].name);
+			pGameObj->SetIndex(skeletonBoneData[i].index);
+			pGameObj->SetName(skeletonBoneData[i].name);
 
-			GameObjectAnim* pParent = this->privFindBoneByIndex(skel[i].parentIndex);
-			GameObjectManager::SpawnObject(skel[i].name, pGameObj, spawnPos, pParent);
+			GameObjectAnim* pParent = this->privFindBoneByIndex(skeletonBoneData[i].parentIndex);
+			GameObjectManager::SpawnObject(skeletonBoneData[i].name, pGameObj, spawnPos, pParent);
 		}
 #else
 		assert(pBoneResult);

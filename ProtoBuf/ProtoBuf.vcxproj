@@ -289,6 +289,8 @@
     <ClInclude Include="meshData.h" />
     <ClInclude Include="meshData.pb.h" />
     <ClInclude Include="MeshLayout.h" />
+    <ClInclude Include="skeletonData.h" />
+    <ClInclude Include="skeletonData.pb.h" />
     <ClInclude Include="textureData.h" />
     <ClInclude Include="textureData.pb.h" />
     <ClInclude Include="vboData.h" />
@@ -309,6 +311,7 @@
     <None Include="azulModel.proto" />
     <None Include="boneData.proto" />
     <None Include="meshData.proto" />
+    <None Include="skeletonData.proto" />
     <None Include="textureData.proto" />
     <None Include="vboData.proto" />
   </ItemGroup>
@@ -853,6 +856,8 @@
     <ClCompile Include="boneData.pb.cc" />
     <ClCompile Include="meshData.cpp" />
     <ClCompile Include="meshData.pb.cc" />
+    <ClCompile Include="skeletonData.cpp" />
+    <ClCompile Include="skeletonData.pb.cc" />
     <ClCompile Include="textureData.cpp" />
     <ClCompile Include="textureData.pb.cc" />
     <ClCompile Include="vboData.cpp" />

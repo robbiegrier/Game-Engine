@@ -15,7 +15,7 @@ namespace Azul
 		: pClip(nullptr), pBoneResult(nullptr), pSkeleton(nullptr), numBones(NUM_BONES)
 	{
 		pBoneResult = new Bone[(unsigned int)numBones]();
-		pSkeleton = new Skeleton(pBoneResult, numBones);
+		pSkeleton = new Skeleton(pBoneResult, numBones, "hit_front.skeleton.proto.azul");
 		pClip = pInClip;
 	}
 

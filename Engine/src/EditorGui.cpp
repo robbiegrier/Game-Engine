@@ -186,7 +186,7 @@ namespace Azul
 
 		if ((fabs(fabs(windowSize.x) - fabs(windowSizeTmp.x)) > MATH_TOLERANCE) || (fabs(fabs(windowSize.y) - fabs(windowSizeTmp.y)) > MATH_TOLERANCE))
 		{
-			self.pWorldViewport->Resize((UINT)ImGui::GetWindowWidth(), (UINT)ImGui::GetWindowHeight() - 15.f);
+			self.pWorldViewport->Resize((UINT)ImGui::GetWindowWidth(), (UINT)ImGui::GetWindowHeight() - 15u);
 			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.pWorldViewport->GetWidth() / (float)self.pWorldViewport->GetHeight());
 		}
 

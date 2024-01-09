@@ -109,6 +109,9 @@
     <None Include="boneData.proto">
       <Filter>Source Files\Animation\Proto</Filter>
     </None>
+    <None Include="skeletonData.proto">
+      <Filter>Source Files\Animation\Proto</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Framework\Framework.h">
@@ -613,6 +616,12 @@
       <Filter>Source Files\Animation\Interface</Filter>
     </ClInclude>
     <ClInclude Include="animClipData.h">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="skeletonData.pb.h">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="skeletonData.h">
       <Filter>Source Files\Animation\Interface</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1187,6 +1196,12 @@
       <Filter>Source Files\Animation\Interface</Filter>
     </ClCompile>
     <ClCompile Include="animClipData.cpp">
+      <Filter>Source Files\Animation\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="skeletonData.pb.cc">
+      <Filter>Source Files\Animation\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="skeletonData.cpp">
       <Filter>Source Files\Animation\Interface</Filter>
     </ClCompile>
   </ItemGroup>

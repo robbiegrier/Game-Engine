@@ -13,7 +13,7 @@ namespace Azul
 	{
 	public:
 		// Settings
-		static constexpr bool ENABLE_VSYNC = true;
+		static constexpr bool ENABLE_VSYNC = false;
 		static constexpr int WINDOW_WIDTH = 600;
 		static constexpr int WINDOW_HEIGHT = 400;
 		static constexpr int WINDOW_SCALE = 3;

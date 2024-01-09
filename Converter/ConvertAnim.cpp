@@ -7,12 +7,30 @@
 #include "ConvertAnim.h"
 #include "MeshLayout.h"
 #include "animClipData.h"
+#include "skeletonData.h"
 
 using namespace Azul;
 using namespace tinygltf;
 using json = nlohmann::json;
 
 void WriteAnimClipDataToFile(const animClipData_proto& source, const char* const filename)
+{
+	File::Handle fh;
+
+	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
+	assert(err == File::Error::SUCCESS);
+
+	std::string strOut;
+	source.SerializeToString(&strOut);
+
+	File::Write(fh, strOut.data(), strOut.length());
+	assert(err == File::Error::SUCCESS);
+
+	err = File::Close(fh);
+	assert(err == File::Error::SUCCESS);
+}
+
+void WriteSkeletonDataToFile(const skeletonData_proto& source, const char* const filename)
 {
 	File::Handle fh;
 
@@ -239,7 +257,11 @@ void ConvertAnim(const char* const pFileName)
 
 	Trace::out("\n\nSkeleton Data:\n");
 
+	skeletonData skData;
+
 	auto& joints = gltfModel.skins[0].joints;
+
+	int storageIndex = 0;
 
 	for (int joint : joints)
 	{
@@ -267,7 +289,18 @@ void ConvertAnim(const char* const pFileName)
 		}
 
 		Trace::out("\t{ %d, %d, \"%s\" },\n", jointIndex, jointParentIndex, jointName.c_str());
+
+		skData.jointIndicies[storageIndex] = jointIndex;
+		skData.jointParentIndicies[storageIndex] = jointParentIndex;
+		skData.SetJointName(storageIndex, jointName.c_str());
+		storageIndex++;
 	}
+
+	skeletonData_proto skData_proto;
+	skData.Serialize(skData_proto);
+	std::string skeletonName = std::string(pFileName);
+	const char* skFileName = skeletonName.replace(skeletonName.end() - 4, skeletonName.end(), ".skeleton.proto.azul").c_str();
+	WriteSkeletonDataToFile(skData_proto, skFileName);
 
 	delete[] poBuff;
 	delete[] poJSON;

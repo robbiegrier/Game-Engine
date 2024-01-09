@@ -15,11 +15,11 @@ namespace Azul
 		{
 			int  index;
 			int  parentIndex;
-			char name[64];
+			char name[32];
 		};
 
 	public:
-		Skeleton(Bone* pBone, int numBones);
+		Skeleton(Bone* pBone, int numBones, const char* skeletonFileName);
 
 		Skeleton() = delete;
 		Skeleton(const Skeleton&) = delete;
@@ -37,6 +37,8 @@ namespace Azul
 		GameObjectAnim* pFirstBone;
 		GameObjectBasic* pPivot;
 		int             numBones;
+
+		Data skeletonBoneData[8];
 	};
 }
 
