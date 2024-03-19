@@ -7,6 +7,10 @@
 
 namespace Azul
 {
+	class EngineState;
+	class EngineStateEditor;
+	class EngineStatePlay;
+
 	// The Engine encapsulates low level interaction with Windows and DirectX
 	// so that the Game derived class can be streamlined around game loop logic.
 	class Engine
@@ -31,13 +35,17 @@ namespace Azul
 		static ID3D11DepthStencilView* GetDepthStencilView();
 		static bool GetEditorMode();
 		static void SetEditorMode(bool enabled);
+		static float GetDeltaTime();
+
+		static void NativeUpdate(float deltaTime);
+		static void NativeRender();
 
 	protected:
 		// Big four
 		Engine();
 		Engine(const Engine&) = delete;
 		Engine& operator = (const Engine&) = delete;
-		virtual ~Engine() = default;
+		virtual ~Engine();
 
 		// Engine/Game Interface
 		virtual bool LoadContent() = 0;
@@ -102,6 +110,13 @@ namespace Azul
 
 		// Derived Singleton
 		static Engine* pEngineInstance;
+
+	private:
+		float storedDeltaTime = 0.f;
+
+		EngineStateEditor* pEditorState;
+		EngineStatePlay* pPlayState;
+		EngineState* pCurrentState;
 	};
 }
 

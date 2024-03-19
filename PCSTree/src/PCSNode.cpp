@@ -226,6 +226,11 @@ namespace Azul
 		return pReverse;
 	}
 
+	char* PCSNode::GetNamePtr() const
+	{
+		return (char*)pName;
+	}
+
 	void PCSNode::PrintNode() const
 	{
 		Trace::out("PCSNode %s\n", pName);

@@ -1,4 +1,5 @@
 #include "TimerController.h"
+#include "Engine.h"
 
 namespace Azul
 {
@@ -9,7 +10,7 @@ namespace Azul
 
 	void TimerController::Update()
 	{
-		tCurr += tDelta;
+		tCurr += tDelta * Engine::GetDeltaTime();
 
 		// protection for time values for looping
 		if (tCurr < tMin)

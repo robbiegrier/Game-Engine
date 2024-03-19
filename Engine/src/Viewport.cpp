@@ -21,7 +21,9 @@ namespace Azul
 		Engine::GetContext()->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
 		Engine::GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 
-		Vec4 col = Vec4{ 0.1f, 0.1f, 0.1f, 1.000000000f };
+		//Vec4 col = Vec4{ 0.1f, 0.1f, 0.1f, 1.000000000f };
+		Vec4 col = Vec4{ 0.500000000f, 0.749019623f, 0.800000000f, 1.000000000f };
+
 		Engine::GetContext()->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&col);
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
@@ -59,6 +61,23 @@ namespace Azul
 		worldWidth = (UINT)(static_cast<float>(worldHeight) * aspectRatio);
 
 		Refresh();
+	}
+
+	void Viewport::ToggleDepthTests(bool toggleDepth)
+	{
+		SafeRelease(pDepthStencilState);
+
+		D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc{ 0 };
+		depthStencilStateDesc.DepthEnable = TRUE;
+		depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		depthStencilStateDesc.DepthFunc = toggleDepth ? D3D11_COMPARISON_LESS : D3D11_COMPARISON_ALWAYS;
+		depthStencilStateDesc.StencilEnable = FALSE;
+
+		HRESULT hr = Engine::GetDevice()->CreateDepthStencilState(&depthStencilStateDesc, &pDepthStencilState);
+		assert(SUCCEEDED(hr));
+		static_cast<void>(hr);
+
+		Engine::GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 	}
 
 	void Viewport::Refresh()

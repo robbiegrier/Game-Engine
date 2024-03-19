@@ -9,56 +9,30 @@ namespace Azul
 	Player::Player()
 		: GameObject(new GONull())
 	{
-		renderShell = false;
+		typeName = Name::Player;
+		alwaysRenderShell = true;
+
+		SetShellColor(Vec4(0.f, .8f, .8f, 1.f));
 	}
 
-	void Player::Tick(AnimTime deltaTime)
+	Player::~Player()
 	{
-		float moveScale = toSeconds(deltaTime);
+	}
 
-		//CheckSwitchCameraInput();
+	void Player::Start()
+	{
+		CameraManager::SetCurrentCamera(Camera::Name::Player);
+		pPlayerCamera = CameraManager::GetCurrentCamera();
+		pPlayerCamera->SetOrientAndPosition(Vec3(0, 1, 0), GetWorldLocation() + Vec3(GetWorld().get(Row4::i2)).getNorm(), GetWorldLocation());
+		Trace::out("\tPlayer: Start!\n");
+	}
+
+	void Player::Tick(float deltaTime)
+	{
+		float moveScale = deltaTime;// toSeconds(deltaTime);
 		CheckMovement(moveScale);
 		CheckLookAt(moveScale);
-		ToggleLookAtMode();
-		ToggleFramerateMode();
-
-		Vec3 loc;
-		CameraManager::GetCurrentCamera()->GetLocation(loc);
-		SetRelativeLocation(loc);
-
-		if (walkMode)
-		{
-			ProcessGravity(moveScale);
-		}
-
-		if (GetKeyState('N') & 0x8000)
-		{
-			globalRenderShell = false;
-		}
-		else if (GetKeyState('M') & 0x8000)
-		{
-			globalRenderShell = true;
-		}
-	}
-
-	void Player::CheckSwitchCameraInput()
-	{
-		if (GetKeyState('Y') & 0x8000)
-		{
-			CameraManager::SetCurrentCamera(Camera::Name::Default);
-		}
-		else if (GetKeyState('U') & 0x8000)
-		{
-			CameraManager::SetCurrentCamera(Camera::Name::High);
-		}
-		else if (GetKeyState('I') & 0x8000)
-		{
-			CameraManager::SetCurrentCamera(Camera::Name::Low);
-		}
-		else if (GetKeyState('O') & 0x8000)
-		{
-			CameraManager::SetCurrentCamera(Camera::Name::Aux);
-		}
+		ProcessGravity(moveScale);
 	}
 
 	void Player::CheckMovement(float deltaTime)
@@ -68,7 +42,7 @@ namespace Azul
 		float sprintSpeed = 1.5f;
 		float jumpStrength = 20.f;
 
-		if (walkMode && GetKeyState(VK_SHIFT) & 0x8000)
+		if (GetKeyState(VK_SHIFT) & 0x8000)
 		{
 			moveSpeed *= sprintSpeed;
 		}
@@ -90,41 +64,28 @@ namespace Azul
 			cameraMove[z] -= moveSpeed;
 		}
 
-		if (!walkMode)
+		Vec3 cameraJump;
+
+		if (GetKeyState(VK_SPACE) & 0x8000)
 		{
-			if (GetKeyState(VK_SPACE) & 0x8000)
+			if (!jumping)
 			{
-				cameraMove[y] += moveSpeed;
+				jumping = true;
+				jumpImpulse = jumpStrength;
 			}
-			if (GetKeyState(VK_SHIFT) & 0x8000)
-			{
-				cameraMove[y] -= moveSpeed;
-			}
-
-			CameraManager::GetCurrentCamera()->AddLocationOffset(cameraMove * deltaTime);
 		}
-		else
+
+		if (jumping)
 		{
-			Vec3 cameraJump;
-
-			if (GetKeyState(VK_SPACE) & 0x8000)
-			{
-				if (!jumping)
-				{
-					jumping = true;
-					jumpImpulse = jumpStrength;
-				}
-			}
-
-			if (jumping)
-			{
-				cameraJump[y] += jumpImpulse;
-				jumpImpulse = (jumpImpulse - (20.0f * deltaTime));
-			}
-
-			CameraManager::GetCurrentCamera()->AddLocationOffset(cameraJump * deltaTime);
-			CameraManager::GetCurrentCamera()->AddHorizontalLocationOffset(cameraMove * deltaTime);
+			cameraJump[y] += jumpImpulse;
+			jumpImpulse = (jumpImpulse - (20.0f * deltaTime));
 		}
+
+		AddRelativeLocationOffset(cameraJump * deltaTime);
+		AddRelativeLocationOffset(cameraMove * deltaTime);
+
+		pPlayerCamera->AddLocationOffset(cameraJump * deltaTime);
+		pPlayerCamera->AddHorizontalLocationOffset(cameraMove * deltaTime);
 	}
 
 	void Player::ProcessGravity(float deltaTime)
@@ -136,7 +97,8 @@ namespace Azul
 		gravityStrength *= earthGravityNormalizer;
 
 		Vec3 cameraPos;
-		CameraManager::GetCurrentCamera()->GetLocation(cameraPos);
+		pPlayerCamera->GetLocation(cameraPos);
+
 		if (cameraPos[y] > 3.5f)
 		{
 			cameraMove[y] -= gravityStrength;
@@ -146,104 +108,33 @@ namespace Azul
 			jumping = false;
 		}
 
-		CameraManager::GetCurrentCamera()->AddLocationOffset(cameraMove * deltaTime);
+		pPlayerCamera->AddLocationOffset(cameraMove * deltaTime);
 	}
 
 	void Player::CheckLookAt(float deltaTime)
 	{
-		if (!useMouseLook)
+		static_cast<void>(deltaTime);
+		Engine::SetMouseVisibility(false);
+
+		POINT p;
+		GetCursorPos(&p);
+		HWND hwnd{ 0 };
+		ScreenToClient(hwnd, &p);
+		float offsetHorizontal = (float)p.x - (float)prevPoint.x;
+		float offsetVertical = (float)p.y - (float)prevPoint.y;
+
+		offsetHorizontal /= 1000.f;
+		offsetVertical /= 1000.f;
+
+		if (fabs(offsetHorizontal) > 0.005f || fabs(offsetVertical) > 0.005f)
 		{
-			Vec3 cameraLookAt;
-			float lookSpeed = 3.5f;
+			constexpr float mouseLookSpeed = 1.25f;
+			pPlayerCamera->AddLookAtOffset(Vec3(offsetHorizontal, -offsetVertical, 0.f) * mouseLookSpeed);
 
-			if (GetKeyState(VK_UP) & 0x8000)
-			{
-				cameraLookAt[y] += lookSpeed;
-			}
-			if (GetKeyState(VK_DOWN) & 0x8000)
-			{
-				cameraLookAt[y] -= lookSpeed;
-			}
-			if (GetKeyState(VK_LEFT) & 0x8000)
-			{
-				cameraLookAt[x] -= lookSpeed;
-			}
-			if (GetKeyState(VK_RIGHT) & 0x8000)
-			{
-				cameraLookAt[x] += lookSpeed;
-			}
-
-			CameraManager::GetCurrentCamera()->AddLookAtOffset(cameraLookAt * deltaTime);
-
-			GetCursorPos(&prevPoint);
-		}
-		else
-		{
-			POINT p;
-			GetCursorPos(&p);
-			HWND hwnd{ 0 };
-			ScreenToClient(hwnd, &p);
-			{
-				float offsetHorizontal = (float)p.x - (float)prevPoint.x;
-				float offsetVertical = (float)p.y - (float)prevPoint.y;
-
-				offsetHorizontal /= 1000.f;
-				offsetVertical /= 1000.f;
-
-				if (fabs(offsetHorizontal) > 0.005f || fabs(offsetVertical) > 0.005f)
-				{
-					constexpr float mouseLookSpeed = 1.25f;
-					CameraManager::GetCurrentCamera()->AddLookAtOffset(Vec3(offsetHorizontal, -offsetVertical, 0.f) * mouseLookSpeed);
-
-					prevPoint = p;
-					SetCursorPos(Engine::GetWindowWidth() / 2, Engine::GetWindowHeight() / 2);
-					prevPoint.x = (LONG)(Engine::GetWindowWidth() / 2) - (LONG)offsetHorizontal;
-					prevPoint.y = (LONG)(Engine::GetWindowHeight() / 2) - (LONG)offsetVertical;
-				}
-			}
-		}
-	}
-
-	void Player::ToggleLookAtMode()
-	{
-		if (GetKeyState('H') & 0x8000)
-		{
-			useMouseLook = true;
-			walkMode = true;
-			Engine::SetMouseVisibility(false);
-		}
-		else if (GetKeyState('G') & 0x8000)
-		{
-			useMouseLook = false;
-			walkMode = false;
-			Engine::SetMouseVisibility(true);
-		}
-
-		if (GetKeyState('P') & 0x8000)
-		{
-			Engine::SetEditorMode(false);
-			useMouseLook = true;
-			walkMode = true;
-			Engine::SetMouseVisibility(false);
-		}
-		else if (GetKeyState('O') & 0x8000)
-		{
-			Engine::SetEditorMode(true);
-			useMouseLook = false;
-			walkMode = false;
-			Engine::SetMouseVisibility(true);
-		}
-	}
-
-	void Player::ToggleFramerateMode()
-	{
-		if (GetKeyState('K') & 0x8000)
-		{
-			Engine::ToggleMaxFramerate(true);
-		}
-		else if (GetKeyState('L') & 0x8000)
-		{
-			Engine::ToggleMaxFramerate(false);
+			prevPoint = p;
+			SetCursorPos(Engine::GetWindowWidth() / 2, Engine::GetWindowHeight() / 2);
+			prevPoint.x = (LONG)(Engine::GetWindowWidth() / 2) - (LONG)offsetHorizontal;
+			prevPoint.y = (LONG)(Engine::GetWindowHeight() / 2) - (LONG)offsetVertical;
 		}
 	}
 }

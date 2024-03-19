@@ -29,40 +29,46 @@ namespace Azul
 
 	void GameObjectAnimSkin::privUpdate(AnimTime currentTime)
 	{
-		static_cast<void>(currentTime);
+		//static_cast<void>(currentTime);
 
-		Trans T;
-		Scale S;
-		Quat  Q;
+		//Trans T;
+		//Scale S;
+		//Quat  Q;
 
-		GameObjectAnimSkin* pParentObject = (GameObjectAnimSkin*)GetParent();
-		Mat4 matParent(Special::Identity);
-		if (pParentObject)
-		{
-			matParent = *pParentObject->pWorld;
+		//GameObjectAnimSkin* pParentObject = (GameObjectAnimSkin*)GetParent();
+		//Mat4 matParent(Special::Identity);
+		//if (pParentObject)
+		//{
+		//	matParent = *pParentObject->pWorld;
 
-			// REMEMBER this is for Animation and hierachy, you need to handle models differently
-			// Get the result bone array, from there make the matrix
-			T.set(pBoneResult[index].T);
-			S.set(pBoneResult[index].S);
-			Q = pBoneResult[index].Q;
-		}
-		else
-		{
-			T.set(0, 0, 0);
-			S.set(1, 1, 1);
-			Q.set(Special::Identity);
-		}
+		//	// REMEMBER this is for Animation and hierachy, you need to handle models differently
+		//	// Get the result bone array, from there make the matrix
+		//	T.set(pBoneResult[index].T);
+		//	S.set(pBoneResult[index].S);
+		//	Q = pBoneResult[index].Q;
+		//}
+		//else
+		//{
+		//	T.set(0, 0, 0);
+		//	S.set(1, 1, 1);
+		//	Q.set(Special::Identity);
+		//}
 
-		// world matrix
-		*poLocal = S * Q * T;
-		*pWorld = *poLocal * matParent;
+		//// world matrix
+		//*poLocal = S * Q * T;
+		//*pWorld = *poLocal * matParent;
 	}
 
 	void GameObjectAnimSkin::Update(AnimTime currentTime)
 	{
-		privUpdate(currentTime);
-		pGraphicsObject->SetWorld(*pWorld);
+		//privUpdate(currentTime);
+		//pGraphicsObject->SetWorld(*pWorld);
+
+		SetRelativeLocation(pBoneResult[index].T);
+		SetRelativeScale(pBoneResult[index].S);
+		SetRelativeRotation(Rot(pBoneResult[index].Q));
+
+		GameObject::Update(currentTime);
 	}
 
 	void GameObjectAnimSkin::SetQuat(float qx, float qy, float qz, float qw)

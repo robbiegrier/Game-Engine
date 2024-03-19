@@ -17,7 +17,7 @@ public:
 
 	void Print(const char* const pName) const;
 
-	meshData      meshes[24];
+	meshData      meshes[48];
 
 	unsigned int converterVersion;
 

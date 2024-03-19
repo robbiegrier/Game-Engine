@@ -10,25 +10,23 @@ namespace Azul
 	{
 	public:
 		Player();
-		~Player() = default;
+		virtual ~Player();
 
-		virtual void Tick(AnimTime deltaTime) override;
+		virtual void Start() override;
+
+		virtual void Tick(float deltaTime) override;
 
 	private:
-		void CheckSwitchCameraInput();
 		void CheckMovement(float deltaTime);
 		void CheckLookAt(float deltaTime);
-		void ToggleLookAtMode();
-		void ToggleFramerateMode();
 		void ProcessGravity(float deltaTime);
 
-		bool useMouseLook = false;
 		POINT prevPoint;
 		bool jumping = false;
 		bool sprinting = false;
 		float jumpImpulse = 0.f;
 
-		bool walkMode = false;
+		Camera* pPlayerCamera;
 	};
 }
 

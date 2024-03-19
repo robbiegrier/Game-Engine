@@ -17,6 +17,13 @@ namespace Azul
 	class GameObject : public PCSNode
 	{
 	public:
+		enum class Name
+		{
+			GameObject,
+			Player,
+			None
+		};
+
 		// Big four
 		GameObject(GraphicsObject* pInGraphicsObject);
 		GameObject(const GameObject&) = delete;
@@ -27,20 +34,36 @@ namespace Azul
 		virtual void Update(AnimTime deltaTime);
 		void Draw();
 
+		virtual void Start() {}
+		virtual void Tick(float deltaTime) { static_cast<void>(deltaTime); }
+
 		// Mutate transform
 		void SetRelativeLocation(const Vec3& v);
 		void SetRelativeScale(const Vec3& v);
 		void SetRelativeScale(float s);
 		void SetRelativeRotation(const Rot& m);
+		void SetRelativeRotation(const Quat& q);
+
+		void AddRelativeLocationOffset(const Vec3& v);
+		void AddRelativeScaleOffset(const Vec3& v);
+		void AddRelativeRotationOffset(const Quat& q);
+
+		void AddWorldLocationOffset(const Vec3& v);
+		void AddWorldRotationOffset(const Quat& q);
+
+		void SetWorldLocation(const Vec3& v);
+		void SetWorldRotation(const Quat& q);
 
 		// Accessors
 		const Mat4& GetWorld() const;
 
 		Vec3 GetWorldLocation() const;
 		Vec3 GetWorldScale() const;
+		Quat GetWorldRotation() const;
 
 		const Vec3& GetRelativeLocation() const;
 		const Vec3& GetRelativeScale() const;
+		const Quat& GetRelativeRotation() const;
 
 		Vec3& RelativeLocation();
 		Quat& RelativeRotation();
@@ -56,16 +79,31 @@ namespace Azul
 		void SetShellColor(const Vec4& inColor);
 
 		void SetRenderShell(bool render);
+		bool GetRenderShell() const;
 		static void SetRenderShellGlobal(bool render);
 
 		static float toSeconds(const AnimTime& abstractTime);
 
-	protected:
-		// Overridable tick method called once per frame
-		virtual void Tick(AnimTime deltaTime) { static_cast<void>(deltaTime); }
+		Vec3 GetShellCenter() const;
+		float GetShellRadius() const;
 
+		void SetIsSelectable(bool inIsSelectable);
+		bool IsSelectable() const;
+
+		virtual GameObject* Clone();
+
+		Name GetTypeName() const;
+
+		bool IsParentOf(GameObject* pOther);
+
+	protected:
+		bool alwaysRenderShell = false;
 		bool renderShell;
 		static bool globalRenderShell;
+
+		bool isSelectable = true;
+
+		Mat4 GetShellWorld() const;
 
 	protected:
 		// Itemized transform
@@ -80,6 +118,8 @@ namespace Azul
 		GraphicsObject* pGraphicsObject;
 
 		GraphicsObject* pShell;
+
+		Name typeName;
 	};
 }
 

@@ -3,7 +3,6 @@
 #include "Skeleton.h"
 #include "GameObjectBasic.h"
 #include "ClipManager.h"
-
 namespace Azul
 {
 	AnimController::AnimController(AnimTime delta, Clip::Name pInClipName)

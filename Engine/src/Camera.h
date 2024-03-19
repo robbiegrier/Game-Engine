@@ -19,6 +19,7 @@ namespace Azul
 			High,
 			Low,
 			Aux,
+			Player,
 			None
 		};
 
@@ -63,6 +64,11 @@ namespace Azul
 		virtual void Wash() override;
 		virtual bool Compare(DLink* pTargetNode) override;
 		virtual void Dump() override;
+
+		Vec3 GetRay(float x, float y);
+
+		float GetAspectRatio() const;
+		float GetFovY() const;
 
 	private:
 		void UpdateProjectionMatrix();

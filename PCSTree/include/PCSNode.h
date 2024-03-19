@@ -81,6 +81,8 @@ namespace Azul
 		PCSNode* GetForward() const;
 		PCSNode* GetReverse() const;
 
+		char* GetNamePtr() const;
+
 	private:
 		PCSNode* pParent;
 		PCSNode* pChild;

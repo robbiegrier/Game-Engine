@@ -14,6 +14,7 @@ namespace Azul
 	{
 		poLightColor = new Vec3(LightColor);
 		assert(poLightColor);
+		name = Name::GraphicsObjectConstColor;
 	}
 
 	GOConstColor::~GOConstColor()
@@ -30,5 +31,15 @@ namespace Azul
 	{
 		Engine::GetContext()->UpdateSubresource(pModel->poConstantBuff_lightColor, 0, nullptr, poLightColor, 0, 0);
 		pModel->RenderIndexBuffer();
+	}
+
+	GraphicsObject* GOConstColor::Clone()
+	{
+		return new GOConstColor(pModel, pShaderObject, *poLightColor);
+	}
+
+	Vec4 GOConstColor::GetColor()
+	{
+		return Vec4(*poLightColor, 1.f);
 	}
 }

@@ -23,6 +23,9 @@ namespace Azul
 		UINT GetWidth() const { return worldWidth; }
 		UINT GetHeight() const { return worldHeight; }
 		ID3D11ShaderResourceView* GetShaderResourceView() const { return pShaderResourceView; }
+		ID3D11DepthStencilState* GetDepthStencilState() const { return pDepthStencilState; }
+
+		void ToggleDepthTests(bool toggleDepth);
 
 	private:
 		void Refresh();

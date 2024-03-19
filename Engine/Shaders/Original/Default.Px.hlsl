@@ -50,6 +50,11 @@ void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms
 
 	// Now we attenuate based on range
     float att = 1 / dot(pointLightInstance.Attenuation.xyz, float3(1, d, d * d));
+    
+    // MOD: Adjusted by approx Scale
+    float approxScale = length(inverse._m00_m01_m02);
+    att *= approxScale;
+    
 	// Ambient not attenuated
     diffuse *= att;
     spec *= att;
@@ -95,6 +100,8 @@ float4 main(VS_OUTPUT input) : SV_TARGET
     }
 
     float4 litColor = ambient + diffuse + spec;
+    
+
     float4 texSample = mainTexture.Sample(aSampler, input.textureCoordinate);
     float4 litTextureSample = litColor * texSample;
     

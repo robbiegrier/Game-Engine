@@ -6,6 +6,9 @@
 #include "ConstColor.Px.h"
 #include "ConstColor.Vx.h"
 
+#include "EditorGui.h"
+#include "Viewport.h"
+
 namespace Azul
 {
 	void SOConstColor::OnOpen(GraphicsObject* pObject)
@@ -34,6 +37,8 @@ namespace Azul
 		Engine::GetContext()->RSSetState(pRasterState);
 
 		SafeRelease(pRasterState);
+
+		//EditorGui::GetWorldViewport()->ToggleDepthTests(false);
 	}
 
 	void SOConstColor::OnClose()
@@ -60,6 +65,8 @@ namespace Azul
 		Engine::GetContext()->RSSetState(pRasterState);
 
 		SafeRelease(pRasterState);
+
+		//EditorGui::GetWorldViewport()->ToggleDepthTests(true);
 	}
 
 	SOConstColor::SOConstColor()

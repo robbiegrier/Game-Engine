@@ -110,6 +110,24 @@ namespace Azul
 		Trace::out("%s\n", NameToString());
 	}
 
+	Vec3 Camera::GetRay(float x, float y)
+	{
+		const Vec4 pointCameraLocalSpace = Vec4(x, y, 0.0f, 1.0f) * projMatrix.getInv();
+		const Vec4 rayCameraLocalSpace(pointCameraLocalSpace.x(), pointCameraLocalSpace.y(), -1.f, 0.f);
+		const Vec4 rayWorldSpace = (rayCameraLocalSpace * viewMatrix.getInv());
+		return Vec3(rayWorldSpace).getNorm();
+	}
+
+	float Camera::GetAspectRatio() const
+	{
+		return aspectRatio;
+	}
+
+	float Camera::GetFovY() const
+	{
+		return fovy;
+	}
+
 	// The projection matrix
 	void Camera::UpdateProjectionMatrix()
 	{

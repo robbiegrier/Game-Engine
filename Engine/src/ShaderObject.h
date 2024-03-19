@@ -21,6 +21,7 @@ namespace Azul
 			FlatTexture,
 			LightTexture,
 			ConstColor,
+			EditorVisual,
 			Null,
 			None
 		};

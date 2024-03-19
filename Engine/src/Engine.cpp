@@ -3,7 +3,11 @@
 #include "Engine.h"
 #include "MathEngine.h"
 #include "EditorGui.h"
+#include "EditorInput.h"
 #include "CameraManager.h"
+#include "Viewport.h"
+#include "EngineStatePlay.h"
+#include "EngineStateEditor.h"
 
 LPCSTR g_WindowClassName = "EngineWindowClass";
 
@@ -29,13 +33,22 @@ namespace Azul
 		{
 			fpsSamples[i] = 60;
 		}
+
+		pEditorState = new EngineStateEditor();
+		pPlayState = new EngineStatePlay();
+		pCurrentState = pEditorState;
+	}
+
+	Engine::~Engine()
+	{
+		delete pEditorState;
+		delete pPlayState;
 	}
 
 	int WINAPI Engine::Main(HINSTANCE pInstanceHandle, int cmdShow)
 	{
 		InitApplication(pInstanceHandle, cmdShow);
 		InitDirectX();
-		EditorGui::Initialize();
 
 		return Run();
 	}
@@ -69,7 +82,6 @@ namespace Azul
 		wndClass.lpszMenuName = nullptr;
 		wndClass.lpszClassName = g_WindowClassName;
 		wndClass.hIconSm = nullptr;
-
 		if (!RegisterClassEx(&wndClass))
 		{
 			return -1;
@@ -80,6 +92,8 @@ namespace Azul
 
 	void Engine::RecreateWindow(HINSTANCE pInstanceHandle, int cmdShow)
 	{
+		static_cast<void>(cmdShow);
+
 		RECT windowRect = { 0, 0, windowWidth, windowHeight };
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 
@@ -87,7 +101,7 @@ namespace Azul
 			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, nullptr, nullptr, pInstanceHandle, nullptr);
 		assert(pWindowHandle);
 
-		ShowWindow(pWindowHandle, cmdShow);
+		ShowWindow(pWindowHandle, SW_SHOWMAXIMIZED);
 		UpdateWindow(pWindowHandle);
 	}
 
@@ -105,6 +119,7 @@ namespace Azul
 		swapChainDesc.SampleDesc.Quality = 0;
 		swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 		swapChainDesc.Windowed = TRUE;
+		swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 		D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_1,D3D_FEATURE_LEVEL_11_0,D3D_FEATURE_LEVEL_10_1,
 			D3D_FEATURE_LEVEL_10_0,D3D_FEATURE_LEVEL_9_3,D3D_FEATURE_LEVEL_9_2,D3D_FEATURE_LEVEL_9_1 };
@@ -208,6 +223,8 @@ namespace Azul
 			return -1;
 		}
 
+		EditorGui::Initialize();
+
 		while (msg.message != WM_QUIT)
 		{
 			engineTime.Tic();
@@ -219,36 +236,20 @@ namespace Azul
 			}
 			else
 			{
-				DWORD currentTime = timeGetTime();
-				float deltaTime = (currentTime - previousTime) / 1000.0f;
+				const DWORD currentTime = timeGetTime();
+				storedDeltaTime = (currentTime - previousTime) / 1000.0f;
 				previousTime = currentTime;
 				SetDefaultTargetMode();
 
-				// Update
-				if (editorMode)
-				{
-					EditorGui::NewFrame();
-				}
+				pCurrentState->Update(GetDeltaTime());
 
-				Update(deltaTime);
-
-				// Draw
 				ClearDepthStencilBuffer({ 0.1f, 0.1f, 0.1f, 1.000000000f });
 
-				if (!editorMode)
-				{
-					CameraManager::GetCurrentCamera()->SetAspectRatio((float)windowWidth / (float)windowHeight);
-					Render();
-				}
-				else
-				{
-					EditorGui::Draw();
-				}
+				pCurrentState->Draw();
 
-				// Present
 				LockFramerate(engineTime);
 				Present();
-				UpdateWindowName(deltaTime);
+				UpdateWindowName(storedDeltaTime);
 			}
 		}
 
@@ -485,7 +486,45 @@ namespace Azul
 
 	void Engine::SetEditorMode(bool enabled)
 	{
+		Engine& self = GetEngineInstance();
+
 		GetEngineInstance().editorMode = enabled;
+
+		if (enabled)
+		{
+			if (self.pCurrentState != self.pEditorState)
+			{
+				self.pCurrentState->Exit();
+				self.pCurrentState->TransitionToEditor();
+				self.pCurrentState = self.pEditorState;
+				self.pCurrentState->Enter();
+			}
+		}
+		else
+		{
+			if (self.pCurrentState != self.pPlayState)
+			{
+				self.pCurrentState->Exit();
+				self.pCurrentState->TransitionToPlay();
+				self.pCurrentState = self.pPlayState;
+				self.pCurrentState->Enter();
+			}
+		}
+	}
+
+	float Engine::GetDeltaTime()
+	{
+		return GetEngineInstance().storedDeltaTime;
+	}
+
+	void Engine::NativeUpdate(float deltaTime)
+	{
+		GetEngineInstance().Update(deltaTime);
+	}
+
+	void Engine::NativeRender()
+	{
+		GetEngineInstance().Render();
 	}
 
 	Engine& Engine::GetEngineInstance()

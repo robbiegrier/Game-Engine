@@ -39,14 +39,21 @@ namespace Azul
 		// big four
 		PCSTree();
 		PCSTree(const PCSTree& in) = delete;
-		PCSTree& operator = (const PCSTree& in) = delete;
+		PCSTree& operator = (const PCSTree& in);
 		~PCSTree();
 
 		// insert
 		void Insert(PCSNode* const pInNode, PCSNode* const pParent);
 
+		// inserts as the last child of the parent
+		void InsertBack(PCSNode* const pInNode, PCSNode* const pParent);
+
 		// remove
 		void Remove(PCSNode* const pInNode);
+
+		void DetachSubtree(PCSNode* const pInNode);
+
+		void RelocateSubtree(PCSNode* const pInNode, PCSNode* const pParent, PCSNode* const pPrev = nullptr);
 
 		// get the root of the tree
 		PCSNode* GetRoot() const;
@@ -56,6 +63,8 @@ namespace Azul
 
 		// print the tree
 		void Print() const;
+
+		PCSNode* GetLastChild(PCSNode* const pInNode);
 
 	private:
 		// Special insert cases for first vs another node

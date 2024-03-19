@@ -17,6 +17,9 @@ namespace Azul
 
 		virtual void ActivateGraphics() override;
 		virtual void Draw() override;
+		virtual GraphicsObject* Clone() override;
+
+		virtual Vec4 GetColor() override;
 
 		Vec3* poLightColor;
 	};

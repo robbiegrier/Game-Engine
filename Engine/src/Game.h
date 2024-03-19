@@ -43,6 +43,10 @@ namespace Azul
 		void UpdateDemo(float deltaTime);
 		void UpdateTimerDemo(float deltaTime);
 
+		void LoadShaders();
+		void LoadCameras();
+		void LoadAssets();
+
 		// Singleton
 		static Game& GetInstance();
 		static Game* pInstance;

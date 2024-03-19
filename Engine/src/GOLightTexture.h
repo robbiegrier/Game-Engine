@@ -17,6 +17,9 @@ namespace Azul
 
 		virtual void ActivateGraphics() override;
 		virtual void Draw() override;
+		virtual GraphicsObject* Clone() override;
+
+		virtual TextureObject* GetTexture() override;
 
 		TextureObject* pTex;
 	};

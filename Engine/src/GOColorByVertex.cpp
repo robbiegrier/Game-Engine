@@ -9,6 +9,7 @@ namespace Azul
 	GOColorByVertex::GOColorByVertex(Mesh* model, ShaderObject* pShaderObj)
 		: GraphicsObject(model, pShaderObj)
 	{
+		name = Name::GraphicsObjectColorByVertex;
 	}
 
 	void GOColorByVertex::ActivateGraphics()
@@ -19,5 +20,10 @@ namespace Azul
 	void GOColorByVertex::Draw()
 	{
 		pModel->RenderIndexBuffer();
+	}
+
+	GraphicsObject* GOColorByVertex::Clone()
+	{
+		return new GOColorByVertex(pModel, pShaderObject);
 	}
 }

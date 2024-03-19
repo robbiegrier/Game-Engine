@@ -20,6 +20,8 @@ namespace Azul
 			return "LightTexture";
 		case Name::ConstColor:
 			return "ConstColor";
+		case Name::EditorVisual:
+			return "EditorVisual";
 		case Name::Null:
 			return "Null";
 		default:

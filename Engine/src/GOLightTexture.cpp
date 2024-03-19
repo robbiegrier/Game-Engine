@@ -11,6 +11,7 @@ namespace Azul
 		: GraphicsObject(mesh, pShaderObj), pTex(_pTex)
 	{
 		assert(pTex);
+		name = Name::GraphicsObjectLightTexture;
 	}
 
 	GOLightTexture::~GOLightTexture()
@@ -25,5 +26,15 @@ namespace Azul
 	void GOLightTexture::Draw()
 	{
 		pModel->RenderIndexBuffer();
+	}
+
+	GraphicsObject* GOLightTexture::Clone()
+	{
+		return new GOLightTexture(pModel, pShaderObject, pTex);
+	}
+
+	TextureObject* GOLightTexture::GetTexture()
+	{
+		return pTex;
 	}
 }

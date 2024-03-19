@@ -4,6 +4,7 @@
 #include "GraphicsObject.h"
 #include "Mesh.h"
 #include "Anim.h"
+#include "Engine.h"
 
 namespace Azul
 {
@@ -36,9 +37,9 @@ namespace Azul
 		Scale S(*poScale);
 		Quat  Q(*poQuat);
 
-		cur_rot_x += delta_x;
-		cur_rot_y += delta_y;
-		cur_rot_z += delta_z;
+		cur_rot_x += delta_x * Engine::GetDeltaTime();
+		cur_rot_y += delta_y * Engine::GetDeltaTime();
+		cur_rot_z += delta_z * Engine::GetDeltaTime();
 
 		Rot Rx(Rot1::X, cur_rot_x);
 		Rot Ry(Rot1::Y, cur_rot_y);
@@ -49,8 +50,22 @@ namespace Azul
 
 	void GameObjectBasic::Update(AnimTime currentTime)
 	{
-		privUpdate(currentTime);
-		pGraphicsObject->SetWorld(*pWorld);
+		//privUpdate(currentTime);
+
+		cur_rot_x += delta_x * Engine::GetDeltaTime();
+		cur_rot_y += delta_y * Engine::GetDeltaTime();
+		cur_rot_z += delta_z * Engine::GetDeltaTime();
+
+		Rot Rx(Rot1::X, cur_rot_x);
+		Rot Ry(Rot1::Y, cur_rot_y);
+		Rot Rz(Rot1::Z, cur_rot_z);
+
+		SetRelativeLocation(*poTrans);
+		SetRelativeScale(*poScale);
+		SetRelativeRotation(*poQuat * Rx * Ry * Rz);
+
+		GameObject::Update(currentTime);
+		//pGraphicsObject->SetWorld(*pWorld);
 	}
 
 	void GameObjectBasic::SetQuat(float qx, float qy, float qz, float qw)

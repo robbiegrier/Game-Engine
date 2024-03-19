@@ -1,6 +1,7 @@
 #include "GameObjectManager.h"
 #include "PCSNode.h"
 #include "PCSTreeForwardIterator.h"
+#include "PCSTreeReverseIterator.h"
 #include "PyramidMesh.h"
 #include "CubeMesh.h"
 #include "GOColorByVertex.h"
@@ -13,6 +14,8 @@
 #include "GOFlatTexture.h"
 #include "GOLightTexture.h"
 #include "TextureObjectManager.h"
+#include "EditorGui.h"
+#include "Player.h"
 
 namespace Azul
 {
@@ -23,11 +26,12 @@ namespace Azul
 		GraphicsObject* pNull = new GONull();
 		GameObject* pRoot = new GameObject(pNull);
 		pRoot->SetRenderShell(false);
+		pRoot->SetIsSelectable(false);
 		pRoot->SetName("Objects");
 
 		self.objects.Insert(pRoot, nullptr);
 
-		Trace::out("Created GameObjectManager.\n");
+		//Trace::out("Created GameObjectManager.\n");
 	}
 
 	void GameObjectManager::Destroy()
@@ -43,7 +47,29 @@ namespace Azul
 			delete pNode;
 		}
 
-		Trace::out("Destroyed GameObjectManager.\n");
+		//Trace::out("Destroyed GameObjectManager.\n");
+	}
+
+	void GameObjectManager::Start()
+	{
+		GameObjectManager& self = GetInstance();
+
+		for (PCSTreeForwardIterator it(self.objects.GetRoot()); !it.IsDone(); it.Next())
+		{
+			GameObject* pObject = (GameObject*)it.Current();
+			pObject->Start();
+		}
+	}
+
+	void GameObjectManager::Tick(float deltaTime)
+	{
+		GameObjectManager& self = GetInstance();
+
+		for (PCSTreeForwardIterator it(self.objects.GetRoot()); !it.IsDone(); it.Next())
+		{
+			GameObject* pObject = (GameObject*)it.Current();
+			pObject->Tick(deltaTime);
+		}
 	}
 
 	void GameObjectManager::Update(AnimTime deltaTime)
@@ -81,6 +107,29 @@ namespace Azul
 			TextureObjectManager::Find(texture), location, pParent);
 	}
 
+	GameObject* GameObjectManager::ReparentObject(GameObject* pObject, GameObject* pParent, GameObject* pPrev, bool preserveWorld)
+	{
+		if (pObject->IsParentOf(pParent) || pObject == pParent || pObject == pPrev || pPrev == pParent)
+		{
+			return nullptr;
+		}
+
+		Quat newRelativeRotation = Quat(Rot(Rot(pObject->GetWorldRotation()) * Rot(pParent->GetWorldRotation().getInv()))).getNorm();
+		Vec3 newRelativeLocation = Vec3(Vec4(pObject->GetWorldLocation(), 1.f) * pParent->GetWorld().getInv());
+		Vec3 newRelativeScale = Vec3(Vec4(pObject->GetWorldScale(), 0.f) * Scale(pParent->GetWorldScale()).getInv());
+
+		GetInstance().objects.RelocateSubtree(pObject, pParent, pPrev);
+
+		if (preserveWorld)
+		{
+			pObject->SetRelativeLocation(newRelativeLocation);
+			pObject->SetRelativeRotation(newRelativeRotation);
+			pObject->SetRelativeScale(newRelativeScale);
+		}
+
+		return pObject;
+	}
+
 	GameObject* GameObjectManager::FindObject(const char* const pName)
 	{
 		GameObjectManager& self = GetInstance();
@@ -104,6 +153,28 @@ namespace Azul
 		delete pCompare;
 
 		return pOutput;
+	}
+
+	void GameObjectManager::DestroyObject(const char* const pName)
+	{
+		GameObjectManager& self = GetInstance();
+		GameObject* pNode = FindObject(pName);
+		self.objects.Remove(pNode);
+		delete pNode;
+	}
+
+	GameObject* GameObjectManager::DespawnObject(const char* const pName)
+	{
+		GameObjectManager& self = GetInstance();
+		GameObject* pNode = FindObject(pName);
+		return DespawnObject(pNode);
+	}
+
+	GameObject* GameObjectManager::DespawnObject(GameObject* pObject)
+	{
+		GameObjectManager& self = GetInstance();
+		self.objects.DetachSubtree(pObject);
+		return pObject;
 	}
 
 	GameObject* GameObjectManager::SpawnObject(const char* const pName, Mesh* pModel, ShaderObject* pShader, const Vec3& location, GameObject* pParent)
@@ -170,7 +241,7 @@ namespace Azul
 
 		pGameObject->SetName(pName);
 		pGameObject->SetRelativeLocation(location);
-		self.objects.Insert(pGameObject, pParent);
+		self.objects.InsertBack(pGameObject, pParent);
 
 		return pGameObject;
 	}
@@ -185,5 +256,30 @@ namespace Azul
 	{
 		static GameObjectManager instance;
 		return instance;
+	}
+
+	void GameObjectManager::ClearObjects()
+	{
+		GameObjectManager& self = GetInstance();
+
+		PCSTreeForwardIterator it(self.objects.GetRoot());
+
+		for (it.First(); !it.IsDone();)
+		{
+			PCSNode* pNode = it.Current();
+			EditorGui::OnGameObjectRemoved((GameObject*)pNode);
+			it.Next();
+			delete pNode;
+		}
+
+		self.objects = PCSTree();
+
+		GraphicsObject* pNull = new GONull();
+		GameObject* pRoot = new GameObject(pNull);
+		pRoot->SetRenderShell(false);
+		pRoot->SetIsSelectable(false);
+		pRoot->SetName("Objects");
+
+		self.objects.Insert(pRoot, nullptr);
 	}
 }

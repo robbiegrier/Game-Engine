@@ -6,6 +6,8 @@
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
 
+#include "EditorInput.h"
+
 namespace Azul
 {
 	// Find Refresh rate: http://www.rastertek.com/dx11tut03.html
@@ -122,6 +124,13 @@ namespace Azul
 			{
 				PostQuitMessage(0);
 			}
+		}
+		break;
+
+		case WM_MOUSEWHEEL:
+		{
+			short wheelDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+			EditorInput::OnMouseWheelEvent((int)wheelDelta);
 		}
 		break;
 

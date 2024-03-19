@@ -13,6 +13,7 @@ namespace Azul
 		pTex(_pTex)
 	{
 		assert(pTex);
+		name = Name::GraphicsObjectFlatTexture;
 	}
 
 	void GOFlatTexture::ActivateGraphics()
@@ -25,5 +26,15 @@ namespace Azul
 	void GOFlatTexture::Draw()
 	{
 		pModel->RenderIndexBuffer();
+	}
+
+	GraphicsObject* GOFlatTexture::Clone()
+	{
+		return new GOFlatTexture(pModel, pShaderObject, pTex);
+	}
+
+	TextureObject* GOFlatTexture::GetTexture()
+	{
+		return pTex;
 	}
 }

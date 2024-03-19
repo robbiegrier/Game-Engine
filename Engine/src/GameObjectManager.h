@@ -21,7 +21,11 @@ namespace Azul
 		static void Destroy();
 		static void Dump();
 
-		// Core update and draw
+		// Scene Events
+		static void Start();
+		static void Tick(float deltaTime);
+
+		// Frame Events
 		static void Update(AnimTime deltaTime);
 		static void Draw();
 
@@ -34,9 +38,19 @@ namespace Azul
 
 		static GameObject* SpawnObject(const char* const pName, Mesh::Name model, TextureObject::Name texture, const Vec3& location, GameObject* pParent = nullptr);
 
+		static GameObject* ReparentObject(GameObject* pObject, GameObject* pParent, GameObject* pPrev, bool preserveWorld = true);
+
 		static PCSTree& GetAllObjects() { return GetInstance().objects; }
 
 		static GameObject* FindObject(const char* const pName);
+
+		// todo: destroy children
+		static void DestroyObject(const char* const pName);
+
+		static GameObject* DespawnObject(const char* const pName);
+		static GameObject* DespawnObject(GameObject* pObject);
+
+		static void ClearObjects();
 
 	private:
 		// Singleton

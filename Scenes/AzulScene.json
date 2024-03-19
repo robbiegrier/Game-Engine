@@ -1,0 +1,2576 @@
+[
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      17.986465454101563,
+      4.037463665008545,
+      -35.64055633544922
+    ],
+    "Mesh": 6,
+    "Object Name": "Crate",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      8.812149047851563,
+      13.190139770507813,
+      19.097366333007813
+    ],
+    "Mesh": 2,
+    "Object Name": "pyramid",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      3.343024492263794,
+      3.631641149520874,
+      29.846961975097656
+    ],
+    "Mesh": 2,
+    "Object Name": "pyramid parent",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -1.437561962802647e-07,
+      -1.013278847494803e-06,
+      -8.288082220531123e-09,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.09674370288848877,
+      0.21114638447761536,
+      5.816842079162598
+    ],
+    "Mesh": 20,
+    "Object Name": "small_rock",
+    "Parent Name": "pyramid parent",
+    "Render Shell": true,
+    "Rotation": [
+      -0.5526876449584961,
+      0.3456169664859772,
+      0.40365177392959595,
+      0.6419894695281982
+    ],
+    "Scale": [
+      1.52107572555542,
+      1.52107572555542,
+      1.52107572555542
+    ],
+    "Shader": 0,
+    "Texture": 19
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.8047511577606201,
+      -0.24687914550304413,
+      -6.181035041809082
+    ],
+    "Mesh": 0,
+    "Object Name": "sphere",
+    "Parent Name": "pyramid parent",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.461172103881836,
+      1.461172103881836,
+      1.461172103881836
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      6.679615020751953,
+      1.1685333447530866e-06,
+      3.147125244140625e-05
+    ],
+    "Mesh": 6,
+    "Object Name": "test_crate",
+    "Parent Name": "pyramid parent",
+    "Render Shell": true,
+    "Rotation": [
+      2.8473427846620325e-06,
+      0.13835792243480682,
+      -1.339868589411708e-07,
+      0.9903823733329773
+    ],
+    "Scale": [
+      1.3981047868728638,
+      1.3981046676635742,
+      1.3981047868728638
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -6.428632736206055,
+      5.364010576158762e-06,
+      3.0279159545898438e-05
+    ],
+    "Mesh": 1,
+    "Object Name": "cube",
+    "Parent Name": "pyramid parent",
+    "Render Shell": true,
+    "Rotation": [
+      1.3358487649384188e-06,
+      6.01752446982573e-07,
+      -3.020795986685698e-07,
+      1.0
+    ],
+    "Scale": [
+      4.459218978881836,
+      4.459218978881836,
+      4.459218978881836
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      81.17526245117188,
+      -1.4032236337661743,
+      -33.95384216308594
+    ],
+    "Mesh": 68,
+    "Object Name": "Big Dome",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.7238793969154358,
+      -0.0,
+      0.6899265646934509
+    ],
+    "Scale": [
+      13.584208488464355,
+      13.584208488464355,
+      13.584208488464355
+    ],
+    "Shader": 0,
+    "Texture": 67
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -3.6767969131469727,
+      1.5850496292114258,
+      0.13473892211914063
+    ],
+    "Mesh": 69,
+    "Object Name": "Tattoine Square Tower2",
+    "Parent Name": "Big Dome",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      0.723879337310791,
+      -0.0,
+      0.6899265646934509
+    ],
+    "Scale": [
+      2.1094727516174316,
+      1.6559572219848633,
+      2.581235647201538
+    ],
+    "Shader": 0,
+    "Texture": 68
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      3.587890148162842,
+      1.640769600868225,
+      -0.31159019470214844
+    ],
+    "Mesh": 69,
+    "Object Name": "Tattoine Square Tower1",
+    "Parent Name": "Big Dome",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      0.723879337310791,
+      -0.0,
+      0.6899265646934509
+    ],
+    "Scale": [
+      2.1094727516174316,
+      1.6559571027755737,
+      2.581235647201538
+    ],
+    "Shader": 0,
+    "Texture": 68
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.5198643207550049,
+      0.20277003943920135,
+      0.13674528896808624
+    ],
+    "Mesh": 2,
+    "Object Name": "Random Pyramid",
+    "Parent Name": "Big Dome",
+    "Render Shell": true,
+    "Rotation": [
+      0.044579699635505676,
+      0.7054105401039124,
+      0.056698013097047806,
+      0.7051199078559875
+    ],
+    "Scale": [
+      0.3689054548740387,
+      0.36458858847618103,
+      0.35862573981285095
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.0020737648010253906,
+      0.7448452711105347,
+      0.7460289001464844
+    ],
+    "Mesh": 43,
+    "Object Name": "Big Door",
+    "Parent Name": "Big Dome",
+    "Render Shell": true,
+    "Rotation": [
+      -0.704274594783783,
+      -0.015734044834971428,
+      -0.013218788430094719,
+      0.7096301913261414
+    ],
+    "Scale": [
+      0.36199653148651123,
+      0.6174382567405701,
+      0.3586214780807495
+    ],
+    "Shader": 0,
+    "Texture": 42
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      49.06647491455078,
+      -1.0334861278533936,
+      -1.8517003059387207
+    ],
+    "Mesh": 66,
+    "Object Name": "Building_1",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.027637630701065063,
+      0.7108151912689209,
+      0.7019272446632385,
+      -0.0357222855091095
+    ],
+    "Scale": [
+      2.8940961360931396,
+      2.8940961360931396,
+      2.8940961360931396
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.031562644988298416,
+      -1.8716808557510376,
+      1.5108689069747925
+    ],
+    "Mesh": 44,
+    "Object Name": "House_Door_1",
+    "Parent Name": "Building_1",
+    "Render Shell": true,
+    "Rotation": [
+      0.004018339794129133,
+      -0.003639314556494355,
+      -0.0002123540180036798,
+      0.9999852776527405
+    ],
+    "Scale": [
+      0.9504762291908264,
+      0.9701921939849854,
+      1.0868611335754395
+    ],
+    "Shader": 0,
+    "Texture": 43
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.2237696349620819,
+      -1.5929765701293945,
+      -39.5135612487793
+    ],
+    "Mesh": 70,
+    "Object Name": "Tattoine Arch",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0025434589479118586,
+      0.613787829875946,
+      0.003578443545848131,
+      0.7894588112831116
+    ],
+    "Scale": [
+      1.769755482673645,
+      1.7699999809265137,
+      1.7699999809265137
+    ],
+    "Shader": 0,
+    "Texture": 69
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -9.287365913391113,
+      3.9373345375061035,
+      -0.29648569226264954
+    ],
+    "Mesh": 67,
+    "Object Name": "Tattoine Round Tower",
+    "Parent Name": "Tattoine Arch",
+    "Render Shell": true,
+    "Rotation": [
+      -0.2987894117832184,
+      -0.6416487097740173,
+      -0.6369378566741943,
+      0.30548644065856934
+    ],
+    "Scale": [
+      1.1233813762664795,
+      1.0128060579299927,
+      1.194157361984253
+    ],
+    "Shader": 0,
+    "Texture": 66
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -84.41352844238281,
+      5.640300750732422,
+      -137.52685546875
+    ],
+    "Mesh": 33,
+    "Object Name": "Background Rocks",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.08120115101337433,
+      0.6876924633979797,
+      0.716469407081604,
+      -0.0845993310213089
+    ],
+    "Scale": [
+      42.15059280395508,
+      42.1510009765625,
+      42.1510009765625
+    ],
+    "Shader": 0,
+    "Texture": 32
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.5285300016403198,
+      1.7031170129776,
+      0.07606805860996246
+    ],
+    "Mesh": 20,
+    "Object Name": "Desert Rock 0 (Clone)",
+    "Parent Name": "Background Rocks",
+    "Render Shell": true,
+    "Rotation": [
+      0.020022330805659294,
+      0.004342358559370041,
+      -0.4336390197277069,
+      0.9008537530899048
+    ],
+    "Scale": [
+      0.18979567289352417,
+      0.18996863067150116,
+      0.3245168626308441
+    ],
+    "Shader": 0,
+    "Texture": 19
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.7870001792907715,
+      1.3725699186325073,
+      0.12626385688781738
+    ],
+    "Mesh": 31,
+    "Object Name": "Desert Rock 11 (Clone)",
+    "Parent Name": "Background Rocks",
+    "Render Shell": true,
+    "Rotation": [
+      -0.010150727815926075,
+      -0.0178022813051939,
+      0.9599834084510803,
+      -0.2793061137199402
+    ],
+    "Scale": [
+      0.1186222955584526,
+      0.11862113326787949,
+      0.15775221586227417
+    ],
+    "Shader": 0,
+    "Texture": 30
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      2.19157075881958,
+      2.0085556507110596,
+      -0.03892139717936516
+    ],
+    "Mesh": 33,
+    "Object Name": "BIGROCKS",
+    "Parent Name": "Background Rocks",
+    "Render Shell": true,
+    "Rotation": [
+      3.0446797609329224e-05,
+      0.00018638372421264648,
+      -0.9954515099525452,
+      -0.09526972472667694
+    ],
+    "Scale": [
+      0.9517055153846741,
+      0.7713634371757507,
+      0.8313075304031372
+    ],
+    "Shader": 0,
+    "Texture": 32
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      0.8784314393997192,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      50.067596435546875,
+      2.000667095184326,
+      -40.016265869140625
+    ],
+    "Mesh": 3,
+    "Object Name": "Light Yellow",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.1000000536441803,
+      0.09999998658895493,
+      0.09999995678663254
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      55.0,
+      2.0,
+      -40.0
+    ],
+    "Mesh": 3,
+    "Object Name": "Light Red",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      45.0,
+      2.0,
+      -40.0
+    ],
+    "Mesh": 3,
+    "Object Name": "Light Blue",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.10000000149011612,
+      0.10000000149011612,
+      0.10000000149011612
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -76.3330078125,
+      -1.575192928314209,
+      -80.7490234375
+    ],
+    "Mesh": 18,
+    "Object Name": "Western Town House",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.6624001264572144,
+      0.24744701385498047,
+      0.24744686484336853,
+      0.6623942255973816
+    ],
+    "Scale": [
+      0.26260900497436523,
+      0.2630000114440918,
+      0.2630000114440918
+    ],
+    "Shader": 0,
+    "Texture": 17
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -46.10530090332031,
+      -56.957122802734375,
+      6.2431135177612305
+    ],
+    "Mesh": 6,
+    "Object Name": "Wooden Crate (Clone)  2",
+    "Parent Name": "Western Town House",
+    "Render Shell": true,
+    "Rotation": [
+      -0.43394893407821655,
+      0.5582911372184753,
+      0.5582939982414246,
+      -0.43394386768341064
+    ],
+    "Scale": [
+      3.8079421520233154,
+      3.8022806644439697,
+      3.802281141281128
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -60.02386474609375,
+      -53.23175048828125,
+      8.073529243469238
+    ],
+    "Mesh": 6,
+    "Object Name": "Wooden Crate (Clone) 1",
+    "Parent Name": "Western Town House",
+    "Render Shell": true,
+    "Rotation": [
+      0.6624001860618591,
+      -0.24744705855846405,
+      -0.24744686484336853,
+      0.6623942255973816
+    ],
+    "Scale": [
+      5.752819061279297,
+      6.498038291931152,
+      5.670003414154053
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      73.24208068847656,
+      -24.18153953552246,
+      0.8543799519538879
+    ],
+    "Mesh": 18,
+    "Object Name": "Western Town House small",
+    "Parent Name": "Western Town House",
+    "Render Shell": true,
+    "Rotation": [
+      -4.785832061315887e-06,
+      1.977429747057613e-06,
+      -0.2932290732860565,
+      0.9560422301292419
+    ],
+    "Scale": [
+      0.6797266006469727,
+      0.6800000071525574,
+      0.6800000071525574
+    ],
+    "Shader": 0,
+    "Texture": 17
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      59.331573486328125,
+      -59.081085205078125,
+      1.8323688507080078
+    ],
+    "Mesh": 14,
+    "Object Name": "Antique Camera Tripod (Clone)",
+    "Parent Name": "Western Town House small",
+    "Render Shell": true,
+    "Rotation": [
+      0.690483570098877,
+      -0.15191017091274261,
+      -0.1523841917514801,
+      0.6906047463417053
+    ],
+    "Scale": [
+      2.7997725009918213,
+      2.7971014976501465,
+      2.79579496383667
+    ],
+    "Shader": 0,
+    "Texture": 14
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.03777313232421875,
+      -0.8242192268371582,
+      -0.048370361328125
+    ],
+    "Mesh": 15,
+    "Object Name": "Antique Camera (Clone)",
+    "Parent Name": "Antique Camera Tripod (Clone)",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      0.22339650988578796,
+      -0.0,
+      0.9747276902198792
+    ],
+    "Scale": [
+      1.126953125,
+      1.146484375,
+      1.162109375
+    ],
+    "Shader": 0,
+    "Texture": 15
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -7.54791259765625,
+      -39.27349853515625,
+      2.0827479362487793
+    ],
+    "Mesh": 11,
+    "Object Name": "Duck",
+    "Parent Name": "Western Town House small",
+    "Render Shell": true,
+    "Rotation": [
+      -0.28023970127105713,
+      0.6490160822868347,
+      0.6491950750350952,
+      -0.28069502115249634
+    ],
+    "Scale": [
+      0.055995453149080276,
+      0.06462889164686203,
+      0.051916446536779404
+    ],
+    "Shader": 0,
+    "Texture": 11
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      32.65614318847656,
+      -56.18426513671875,
+      1.6661460399627686
+    ],
+    "Mesh": 10,
+    "Object Name": "Dog House (Clone)",
+    "Parent Name": "Western Town House small",
+    "Render Shell": true,
+    "Rotation": [
+      0.6979562640190125,
+      -0.11285803467035294,
+      -0.11333811283111572,
+      0.6980506181716919
+    ],
+    "Scale": [
+      28.023975372314453,
+      28.02400016784668,
+      28.02400016784668
+    ],
+    "Shader": 0,
+    "Texture": 10
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.07689166069030762,
+      0.006381896324455738,
+      0.3466566503047943
+    ],
+    "Mesh": 16,
+    "Object Name": "Dog (Clone)",
+    "Parent Name": "Dog House (Clone)",
+    "Render Shell": true,
+    "Rotation": [
+      0.048299916088581085,
+      0.10045503079891205,
+      -0.004540004301816225,
+      0.9937581419944763
+    ],
+    "Scale": [
+      0.1039511039853096,
+      0.09372390061616898,
+      0.09193124622106552
+    ],
+    "Shader": 0,
+    "Texture": 16
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -123.24522399902344,
+      -94.77044677734375,
+      1.4085335731506348
+    ],
+    "Mesh": 10,
+    "Object Name": "Dog House Huge",
+    "Parent Name": "Western Town House",
+    "Render Shell": true,
+    "Rotation": [
+      0.5295606255531311,
+      0.4685770571231842,
+      0.4685823321342468,
+      0.529558002948761
+    ],
+    "Scale": [
+      111.81717681884766,
+      70.5872573852539,
+      114.73391723632813
+    ],
+    "Shader": 0,
+    "Texture": 10
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": false,
+    "Location": [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    "Mesh": 5,
+    "Object Name": "Floor Plane",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 5
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -70.0,
+      4.4541015625,
+      29.931640625
+    ],
+    "Mesh": 2,
+    "Object Name": "BIG Pyramid1",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      7.0,
+      7.0,
+      7.0
+    ],
+    "Shader": 0,
+    "Texture": 5
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      5.280555248260498,
+      -0.11690959334373474,
+      5.714296340942383
+    ],
+    "Mesh": 2,
+    "Object Name": "BIG Pyramid3",
+    "Parent Name": "BIG Pyramid1",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.4310826063156128,
+      1.4307968616485596,
+      1.4310826063156128
+    ],
+    "Shader": 0,
+    "Texture": 5
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      2.5598502159118652,
+      0.602398693561554,
+      2.8571481704711914
+    ],
+    "Mesh": 2,
+    "Object Name": "BIG Pyramid2",
+    "Parent Name": "BIG Pyramid1",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.4832592010498047,
+      1.483687400817871,
+      1.4832592010498047
+    ],
+    "Shader": 0,
+    "Texture": 5
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": false,
+    "Location": [
+      5.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "X Marker",
+    "Parent Name": "Objects",
+    "Render Shell": false,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      20.0,
+      0.0010000000474974513,
+      0.0010000000474974513
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.501960813999176,
+      0.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": false,
+    "Location": [
+      0.0,
+      5.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Y Marker",
+    "Parent Name": "Objects",
+    "Render Shell": false,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.0010000000474974513,
+      20.0,
+      0.0010000000474974513
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": false,
+    "Location": [
+      0.0,
+      0.0,
+      5.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Z Marker",
+    "Parent Name": "Objects",
+    "Render Shell": false,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.0010000000474974513,
+      0.0010000000474974513,
+      20.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      3.612306594848633,
+      30.0,
+      103.0654296875
+    ],
+    "Mesh": 4,
+    "Object Name": "Clock Center",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      4.4703477897201083e-07,
+      1.0
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      6.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 1",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 1",
+    "Parent Name": "Clock Inner Cube 1",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.7071067690849304,
+      0.7071067690849304
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      6.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 2",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      1.6391277313232422e-06,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -3.5762786865234375e-07,
+      0.9999997615814209,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 2",
+    "Parent Name": "Clock Inner Cube 2",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      8.940696716308594e-08,
+      1.0
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      -6.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 3",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 3",
+    "Parent Name": "Clock Inner Cube 3",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      1.0,
+      -4.371138828673793e-08
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -6.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 4",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 4",
+    "Parent Name": "Clock Inner Cube 4",
+    "Render Shell": true,
+    "Rotation": [
+      2.0563516045513097e-06,
+      -3.109697445324855e-06,
+      0.7071117758750916,
+      0.7071017622947693
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 0,
+    "Is Selectable": true,
+    "Location": [
+      48.6123046875,
+      0.947265625,
+      -24.689453125
+    ],
+    "Mesh": 3,
+    "Object Name": "Diamond Main",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 1,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 0,
+    "Is Selectable": true,
+    "Location": [
+      1.2999999523162842,
+      1.2999999523162842,
+      1.2999999523162842
+    ],
+    "Mesh": 2,
+    "Object Name": "Small Pyramid 1",
+    "Parent Name": "Diamond Main",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 1,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 0,
+    "Is Selectable": true,
+    "Location": [
+      -1.2999999523162842,
+      1.2999999523162842,
+      1.2999999523162842
+    ],
+    "Mesh": 2,
+    "Object Name": "Small Pyramid 2",
+    "Parent Name": "Diamond Main",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 1,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 0,
+    "Is Selectable": true,
+    "Location": [
+      -1.2999999523162842,
+      1.2999999523162842,
+      -1.2999999523162842
+    ],
+    "Mesh": 2,
+    "Object Name": "Small Pyramid 3",
+    "Parent Name": "Diamond Main",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 1,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 0,
+    "Is Selectable": true,
+    "Location": [
+      1.2999999523162842,
+      1.2999999523162842,
+      -1.2999999523162842
+    ],
+    "Mesh": 2,
+    "Object Name": "Small Pyramid 4",
+    "Parent Name": "Diamond Main",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 1,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      48.20927429199219,
+      0.5465846061706543,
+      -12.19552230834961
+    ],
+    "Mesh": 12,
+    "Object Name": "R2D2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.9076843857765198,
+      0.0,
+      -0.4196535050868988
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 12
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      24.9117431640625,
+      -1.1039172410964966,
+      -65.57006072998047
+    ],
+    "Mesh": 66,
+    "Object Name": "Big building with arches",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.7023608684539795,
+      0.0629168376326561,
+      0.06325580924749374,
+      0.706207811832428
+    ],
+    "Scale": [
+      3.000000238418579,
+      3.0,
+      3.000000238418579
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -2.586512804031372,
+      -2.51780104637146,
+      -0.5912653207778931
+    ],
+    "Mesh": 46,
+    "Object Name": "test_obj",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      0.022199219092726707,
+      -0.04493236541748047,
+      -0.9842085838317871,
+      -0.16976845264434814
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 45
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -4.26861047744751,
+      0.5755115151405334,
+      0.05904544144868851
+    ],
+    "Mesh": 65,
+    "Object Name": "Tattoine Building Arches 2",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      -0.00063829350983724,
+      -0.002105830004438758,
+      0.9999498128890991,
+      0.009777755476534367
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 64
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.028849244117736816,
+      2.5696825981140137,
+      1.3866143226623535
+    ],
+    "Mesh": 39,
+    "Object Name": "Tattoine Panel 2",
+    "Parent Name": "Tattoine Building Arches 2",
+    "Render Shell": true,
+    "Rotation": [
+      0.9999234676361084,
+      -1.3783574104309082e-07,
+      -6.943941116333008e-06,
+      -0.012373954057693481
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 38
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.006876438856124878,
+      -1.7137157917022705,
+      3.251370429992676
+    ],
+    "Mesh": 41,
+    "Object Name": "Tattoine Building Tarp 2",
+    "Parent Name": "Tattoine Building Arches 2",
+    "Render Shell": true,
+    "Rotation": [
+      0.004493235144764185,
+      0.010753966867923737,
+      0.02627711370587349,
+      0.9995867609977722
+    ],
+    "Scale": [
+      0.991215705871582,
+      0.9791141748428345,
+      1.5253945589065552
+    ],
+    "Shader": 0,
+    "Texture": 40
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.004117012023925781,
+      -1.8311071395874023,
+      1.1780074834823608
+    ],
+    "Mesh": 43,
+    "Object Name": "big building door",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      0.02694595977663994,
+      -0.0021065990440547466,
+      0.015270426869392395,
+      0.9995180368423462
+    ],
+    "Scale": [
+      1.116029977798462,
+      1.0404458045959473,
+      1.804858922958374
+    ],
+    "Shader": 0,
+    "Texture": 42
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.047386646270752,
+      -1.9361212253570557,
+      0.3360387980937958
+    ],
+    "Mesh": 37,
+    "Object Name": "building pipe",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      0.006329291965812445,
+      0.000682151410728693,
+      0.02328825742006302,
+      0.9997085332870483
+    ],
+    "Scale": [
+      1.4274431467056274,
+      1.7003710269927979,
+      1.2223539352416992
+    ],
+    "Shader": 0,
+    "Texture": 36
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      3.140047788619995,
+      -2.3414981365203857,
+      0.7199563980102539
+    ],
+    "Mesh": 54,
+    "Object Name": "Radiator",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      9.83476752480783e-07,
+      0.0,
+      -0.15840713679790497,
+      0.9873738884925842
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 0,
+    "Texture": 53
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -3.703547477722168,
+      -2.753549575805664,
+      0.3669431209564209
+    ],
+    "Mesh": 20,
+    "Object Name": "house rock",
+    "Parent Name": "Big building with arches",
+    "Render Shell": true,
+    "Rotation": [
+      -0.08525342494249344,
+      0.021519852802157402,
+      0.06830905377864838,
+      0.9937819838523865
+    ],
+    "Scale": [
+      0.4742838144302368,
+      0.4994810223579407,
+      0.6464771032333374
+    ],
+    "Shader": 0,
+    "Texture": 19
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      47.348140716552734,
+      -0.9995014667510986,
+      -67.14423370361328
+    ],
+    "Mesh": 66,
+    "Object Name": "Building_2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.7115983366966248,
+      0.014504709281027317,
+      0.014296150766313076,
+      0.7022912502288818
+    ],
+    "Scale": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.02095639705657959,
+      -1.9020737409591675,
+      1.4937682151794434
+    ],
+    "Mesh": 44,
+    "Object Name": "house_door_2",
+    "Parent Name": "Building_2",
+    "Render Shell": true,
+    "Rotation": [
+      0.02901744842529297,
+      -0.002391350455582142,
+      -0.014530373737215996,
+      0.9994704723358154
+    ],
+    "Scale": [
+      1.0539993047714233,
+      0.9701921343803406,
+      1.0537673234939575
+    ],
+    "Shader": 0,
+    "Texture": 43
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 1,
+    "Graphics Object": 4,
+    "Is Selectable": true,
+    "Location": [
+      -89.16149139404297,
+      6.133009910583496,
+      -37.83934783935547
+    ],
+    "Mesh": 88,
+    "Object Name": "Player",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.8753724694252014,
+      0.0,
+      0.48344916105270386
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 6,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -36.131534576416016,
+      2.3774936199188232,
+      -39.28678894042969
+    ],
+    "Mesh": 7,
+    "Object Name": "Space Frigate 2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -3.796486680585076e-07,
+      0.939268171787262,
+      -1.3871446924440534e-07,
+      -0.34318408370018005
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 0,
+    "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      22.852907180786133,
+      -1.2982763051986694,
+      1.6732255220413208
+    ],
+    "Mesh": 66,
+    "Object Name": "Building_4",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.010382399894297123,
+      0.7116554975509644,
+      0.7023773193359375,
+      -0.010243496857583523
+    ],
+    "Scale": [
+      3.1543641090393066,
+      3.1543641090393066,
+      3.1543641090393066
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.024863332509994507,
+      -1.9416815042495728,
+      1.5227434635162354
+    ],
+    "Mesh": 44,
+    "Object Name": "House_Door_4",
+    "Parent Name": "Building_4",
+    "Render Shell": true,
+    "Rotation": [
+      0.004018339794129133,
+      -0.003639314556494355,
+      -0.0002123540180036798,
+      0.9999852776527405
+    ],
+    "Scale": [
+      0.9504762291908264,
+      0.9701921939849854,
+      0.9374391436576843
+    ],
+    "Shader": 0,
+    "Texture": 43
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -12.789787292480469,
+      -1.438637614250183,
+      -5.181466102600098
+    ],
+    "Mesh": 66,
+    "Object Name": "Building_5",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.5740017890930176,
+      0.4208162724971771,
+      0.4153275489807129,
+      0.5665144324302673
+    ],
+    "Scale": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.0032308120280504227,
+      -1.8447903394699097,
+      1.5682367086410522
+    ],
+    "Mesh": 44,
+    "Object Name": "House_Door_5",
+    "Parent Name": "Building_5",
+    "Render Shell": true,
+    "Rotation": [
+      0.004018304403871298,
+      -0.003639315254986286,
+      -0.00021235585154499859,
+      0.9999852776527405
+    ],
+    "Scale": [
+      0.9504762291908264,
+      0.9701921939849854,
+      0.9374391436576843
+    ],
+    "Shader": 0,
+    "Texture": 43
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.7865469455718994,
+      7.635528087615967,
+      60.834903717041016
+    ],
+    "Mesh": 0,
+    "Object Name": "bbbb",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.623326301574707,
+      2.124173641204834,
+      -4.493560791015625
+    ],
+    "Mesh": 1,
+    "Object Name": "aaaa",
+    "Parent Name": "bbbb",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 4
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      58.536376953125,
+      0.1829829216003418,
+      -39.13946533203125
+    ],
+    "Mesh": 6,
+    "Object Name": "Crate Large",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      2.6171875,
+      2.6171875,
+      2.6171875
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.8329849243164063,
+      0.30220574140548706,
+      0.5712661743164063
+    ],
+    "Mesh": 6,
+    "Object Name": "Crate small",
+    "Parent Name": "Crate Large",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.3820895552635193,
+      0.3820895552635193,
+      0.3820895552635193
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.1855487823486328,
+      0.3851027488708496,
+      -0.5100545883178711
+    ],
+    "Mesh": 6,
+    "Object Name": "Crate tiny",
+    "Parent Name": "Crate Large",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      0.15597015619277954,
+      0.15597015619277954,
+      0.15597015619277954
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -52.553916931152344,
+      4.604684829711914,
+      -31.3469181060791
+    ],
+    "Mesh": 7,
+    "Object Name": "Space Frigate 2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -3.796486680585076e-07,
+      0.939268171787262,
+      -1.3871446924440534e-07,
+      -0.34318408370018005
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 0,
+    "Texture": 7
+  }
+]

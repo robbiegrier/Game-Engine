@@ -364,21 +364,25 @@ int main(int argc, char* argv[])
 		PTrace("will convert: %s\n", modelName.c_str());
 	}
 
-	//if (argc == 1)
-	//{
-	//	for (const std::string& file : GetAllSourceFileNames("*.tga"))
-	//	{
-	//		ConvertTexture(file.c_str());
-	//	}
-	//}
+	if (argc == 1)
+	{
+		for (const std::string& file : GetAllSourceFileNames("*.tga"))
+		{
+			ConvertTexture(file.c_str());
+		}
+	}
 
-	//for (const std::string& file : modelsToConvert)
-	//{
-	//	ConvertModel(file.c_str());
-	//}
+	for (const std::string& file : modelsToConvert)
+	{
+		ConvertModel(file.c_str());
+	}
 
 	ConvertAnim("hit_front.glb");
-	//CreateChickenBotModels();
+	ConvertAnim("sidestep_right.glb");
+	ConvertAnim("run.glb");
+	ConvertAnim("walk_mesh.glb");
+	ConvertAnim("shot_up.glb");
+	CreateChickenBotModels();
 
 	google::protobuf::ShutdownProtobufLibrary();
 

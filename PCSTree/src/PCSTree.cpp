@@ -13,6 +13,13 @@ namespace Azul
 		pRoot = nullptr;
 	};
 
+	PCSTree& PCSTree::operator=(const PCSTree& in)
+	{
+		pRoot = in.pRoot;
+		info = in.info;
+		return *this;
+	}
+
 	PCSTree::~PCSTree()
 	{
 		// nothing
@@ -34,11 +41,154 @@ namespace Azul
 		info.OnNodeInserted(pInNode);
 	}
 
+	void PCSTree::InsertBack(PCSNode* const pInNode, PCSNode* const pParent)
+	{
+		assert(pInNode);
+
+		if (IsEmpty())
+		{
+			InsertFirstNode(pInNode);
+		}
+		else if (!pParent->GetChild())
+		{
+			InsertAnotherNode(pParent, pInNode);
+		}
+		else
+		{
+			PCSNode* pPrev = pParent->GetChild();
+
+			while (pPrev->GetNextSibling())
+			{
+				pPrev = pPrev->GetNextSibling();
+			}
+
+			PCSNode* pLastChildPrev = GetLastChild(pPrev);
+
+			pPrev->SetNextSibling(pInNode);
+			pInNode->SetPrevSibling(pPrev);
+			pInNode->SetParent(pParent);
+
+			//Trace::out("InsertBack Rebinding Iterator: %s => %s \n", pInNode->GetNamePtr(), pLastChildPrev->GetForward()->GetNamePtr());
+			PCSNode::IteratorBind(GetLastChild(pInNode), pLastChildPrev->GetForward());
+			//Trace::out("InsertBack Rebinding Iterator: %s => %s \n", pLastChildPrev->GetNamePtr(), pInNode->GetNamePtr());
+			PCSNode::IteratorBind(pLastChildPrev, pInNode);
+		}
+
+		info.OnNodeInserted(pInNode);
+	}
+
 	void PCSTree::Remove(PCSNode* const pInNode)
 	{
 		assert(pInNode);
 		BurnSubtree(pInNode);
 		RecalculateCurrentDepth();
+	}
+
+	void PCSTree::DetachSubtree(PCSNode* const pInNode)
+	{
+		//Trace::out("Rebinding Iterator: %s => %s \n", pInNode->GetReverse()->GetNamePtr(), GetLastChild(pInNode)->GetForward()->GetNamePtr());
+
+		PCSNode::IteratorBind(pInNode->GetReverse(), GetLastChild(pInNode)->GetForward());
+
+		if (pInNode->GetParent())
+		{
+			if (pInNode->GetParent()->GetChild() == pInNode)
+			{
+				pInNode->GetParent()->SetChild(pInNode->GetNextSibling());
+			}
+		}
+
+		if (pInNode->GetNextSibling())
+		{
+			pInNode->GetNextSibling()->SetPrevSibling(pInNode->GetPrevSibling());
+		}
+
+		if (pInNode->GetPrevSibling())
+		{
+			pInNode->GetPrevSibling()->SetNextSibling(pInNode->GetNextSibling());
+		}
+
+		pInNode->SetNextSibling(nullptr);
+		pInNode->SetPrevSibling(nullptr);
+		pInNode->SetParent(nullptr);
+
+		RecalculateCurrentDepth();
+	}
+
+	void PCSTree::RelocateSubtree(PCSNode* const pInNode, PCSNode* const pParent, PCSNode* const pPrev)
+	{
+		assert(pParent);
+
+		DetachSubtree(pInNode);
+		PCSNode* pLastChild = GetLastChild(pInNode);
+
+		if (pPrev)
+		{
+			pInNode->SetParent(pParent);
+			pInNode->SetNextSibling(pPrev->GetNextSibling());
+
+			if (pPrev->GetNextSibling())
+			{
+				pPrev->GetNextSibling()->SetPrevSibling(pInNode);
+			}
+
+			pInNode->SetPrevSibling(pPrev);
+			pPrev->SetNextSibling(pInNode);
+
+			PCSNode* pLastChildPrev = GetLastChild(pPrev);
+
+			//Trace::out("Rebinding Iterator: %s => %s \n", pLastChildPrev->GetNamePtr(), pInNode->GetNamePtr());
+			PCSNode::IteratorBind(pLastChildPrev, pInNode);
+
+			//Trace::out("Rebinding Iterator: %s => %s \n", pLastChild->GetNamePtr(), pInNode->IteratorGetNextHorizontal()->GetNamePtr());
+			PCSNode::IteratorBind(pLastChild, pInNode->IteratorGetNextHorizontal());
+		}
+		else
+		{
+			PCSNode* pExistingChild = pParent->GetChild();
+			pParent->SetChild(pInNode);
+			pInNode->SetParent(pParent);
+			pInNode->SetNextSibling(pExistingChild);
+			pInNode->SetPrevSibling(nullptr);
+
+			//Trace::out("Rebinding Iterator: %s => %s \n", pParent->GetNamePtr(), pInNode->GetNamePtr());
+			PCSNode::IteratorBind(pParent, pInNode);
+
+			//Trace::out("Rebinding Iterator: %s => %s \n", pLastChild->GetNamePtr(), pInNode->IteratorGetNextHorizontal()->GetNamePtr());
+			PCSNode::IteratorBind(pLastChild, pInNode->IteratorGetNextHorizontal());
+
+			if (pExistingChild)
+			{
+				pExistingChild->SetPrevSibling(pInNode);
+			}
+		}
+
+		RecalculateCurrentDepth();
+	}
+
+	PCSNode* PCSTree::GetLastChild(PCSNode* const pInNode)
+	{
+		if (pInNode->GetChild())
+		{
+			PCSNode* pCurr = pInNode->GetChild();
+
+			while (pCurr->GetNextSibling() || pCurr->GetChild())
+			{
+				while (pCurr->GetNextSibling())
+				{
+					pCurr = pCurr->GetNextSibling();
+				}
+
+				if (pCurr->GetChild())
+				{
+					pCurr = pCurr->GetChild();
+				}
+			}
+
+			return pCurr;
+		}
+
+		return pInNode;
 	}
 
 	void PCSTree::BurnSubtree(PCSNode* const pInNode)
@@ -250,7 +400,7 @@ namespace Azul
 		pInNode->SetPrevSibling(nullptr);
 
 		PCSNode::IteratorBind(pParent, pInNode);
-		PCSNode::IteratorBind(pInNode, pInNode->IteratorGetNextHorizontal());
+		PCSNode::IteratorBind(GetLastChild(pInNode), pInNode->IteratorGetNextHorizontal());
 
 		if (pExistingChild)
 		{

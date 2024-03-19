@@ -104,6 +104,27 @@
     <Filter Include="src\Graphics">
       <UniqueIdentifier>{2cbde127-1d67-421f-8b25-03dd26b32769}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Editor\Input">
+      <UniqueIdentifier>{34829d91-1c1b-4cd0-963b-fc2416d34799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Selection">
+      <UniqueIdentifier>{2bd994fc-826b-4d1e-b5d4-282733c466cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Transform">
+      <UniqueIdentifier>{351c853f-2846-42f2-9ca1-ed88a8aad8c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Actions">
+      <UniqueIdentifier>{898449fe-daf2-4b4f-935c-ef288a24df38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Scene">
+      <UniqueIdentifier>{8ac59fa0-3b66-4b89-bc9d-39c28b89c44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor\Gui\Windows">
+      <UniqueIdentifier>{7bb45b3a-624b-4404-8f14-2cfa054ca2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game\State Machine">
+      <UniqueIdentifier>{55a86850-d291-43f6-a145-cab9b160628a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -783,6 +804,105 @@
     <ClInclude Include="src\ClipProto.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorInput.h">
+      <Filter>src\Editor\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorInputObserver.h">
+      <Filter>src\Editor\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorObjectReference.h">
+      <Filter>src\Editor\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Selection.h">
+      <Filter>src\Editor\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOEditorVisual.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorVisual.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScaleHandle.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TranslateHandle.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RotateHandle.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditAction.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionTranslate.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorHistory.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionScale.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionRotate.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionSpawn.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionDelete.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorMath.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneManager.h">
+      <Filter>src\Editor\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorController.h">
+      <Filter>src\Editor\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Clipboard.h">
+      <Filter>src\Editor\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorGuiUtils.h">
+      <Filter>src\Editor\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConsoleWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HierarchyWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SettingsWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InspectorWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetsWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldWindow.h">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineState.h">
+      <Filter>src\Game\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineStatePlay.h">
+      <Filter>src\Game\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngineStateEditor.h">
+      <Filter>src\Game\State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionRename.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionReorder.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScaleHandleUniform.h">
+      <Filter>src\Editor\Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -1014,6 +1134,105 @@
     </ClCompile>
     <ClCompile Include="src\ClipProto.cpp">
       <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorInput.cpp">
+      <Filter>src\Editor\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorInputObserver.cpp">
+      <Filter>src\Editor\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorObjectReference.cpp">
+      <Filter>src\Editor\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Selection.cpp">
+      <Filter>src\Editor\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOEditorVisual.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorVisual.cpp">
+      <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScaleHandle.cpp">
+      <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TranslateHandle.cpp">
+      <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RotateHandle.cpp">
+      <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditAction.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionTranslate.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorHistory.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionScale.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionRotate.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionSpawn.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionDelete.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorMath.cpp">
+      <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <Filter>src\Editor\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorController.cpp">
+      <Filter>src\Editor\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clipboard.cpp">
+      <Filter>src\Editor\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorGuiUtils.cpp">
+      <Filter>src\Editor\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConsoleWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HierarchyWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SettingsWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InspectorWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetsWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldWindow.cpp">
+      <Filter>src\Editor\Gui\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineState.cpp">
+      <Filter>src\Game\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineStatePlay.cpp">
+      <Filter>src\Game\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngineStateEditor.cpp">
+      <Filter>src\Game\State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionRename.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionReorder.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScaleHandleUniform.cpp">
+      <Filter>src\Editor\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
