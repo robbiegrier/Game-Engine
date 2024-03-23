@@ -22,6 +22,8 @@ namespace Azul
 		virtual void Undo() override;
 		virtual void Dump() override;
 
+		static void DeleteObjectAsSubtree(GameObject* pObject);
+
 	private:
 		// If the object remains deleted when the editor is closed, this action owns the object
 		bool ownSpawnedObject = false;

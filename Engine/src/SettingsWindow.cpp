@@ -9,7 +9,7 @@ namespace Azul
 		ImGui::Begin("Settings");
 
 		const char* themeChoices[] = { "Dark", "Light", "Retro", "Azul", "Amber" };
-		static int currentChoice = 4;
+		static int currentChoice = 0;
 		static int previousChoice = -1;
 		ImGui::Combo("Color Themes", &currentChoice, themeChoices, IM_ARRAYSIZE(themeChoices));
 		if (previousChoice != currentChoice)

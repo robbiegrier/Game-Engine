@@ -32,7 +32,11 @@ namespace Azul
 		void Copy(const Selection& selection);
 
 		// Paste clipboard objects at a location
-		void Paste(const Vec3& location) const;
+		void Paste(const Vec3& location);
+
+		void MakeContentUnique();
+
+		std::string GenerateUniqueObjectName(const char* pInName);
 
 	private:
 		json content;

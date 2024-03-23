@@ -17,7 +17,7 @@ struct PixelShaderInput
 //      SV_TARGET - System Value Target
 //                  output stored in a render target 0  (only one target)
 // --------------------------------------------------------
-float4 ConstColor_Main(PixelShaderInput inData ) : SV_TARGET
+float4 ConstColor_Main(PixelShaderInput inData) : SV_TARGET
 {
 	return inData.color;
 }

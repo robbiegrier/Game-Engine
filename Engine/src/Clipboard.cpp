@@ -129,6 +129,7 @@ namespace Azul
 			else if (strcmp(propertyName, "Mesh") == 0)				meshName = (Mesh::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Render Shell") == 0)		renderShell = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Is Selectable") == 0)	isSelectable = prop.value().template get<bool>();
+			else if (strcmp(propertyName, "Copy Relative Location") == 0) {}
 			else
 			{
 				const auto& list = prop.value().template get<std::vector<float>>();
@@ -188,11 +189,36 @@ namespace Azul
 			EditActionSpawn* pSpawnAction = new EditActionSpawn();
 			pSpawnAction->SetSingleObject(pGameObject);
 			pSpawnAction->SetTargetParent(pGameObjectParent);
-			pSpawnAction->SetLocation(inLocation);
+
+			const bool parentIsRoot = pGameObjectParent == GameObjectManager::GetAllObjects().GetRoot();
+			bool copyRelative = false;
+			Vec3 spawnLocation = inLocation;
+
+			for (const auto& prop : objectMapping.value().items())
+			{
+				const char* propertyName = prop.key().c_str();
+				if (strcmp(propertyName, "Copy Relative Location") == 0)
+				{
+					copyRelative = prop.value().template get<bool>();
+				}
+			}
+
+			if (!parentIsRoot)
+			{
+				spawnLocation = pGameObject->GetRelativeLocation();
+			}
+
+			if (copyRelative)
+			{
+				Mat4 posMat = Trans(inLocation) * Trans(pGameObject->GetRelativeLocation());
+				spawnLocation = Vec3(posMat.get(Row4::i3));
+			}
+
+			pSpawnAction->SetLocation(spawnLocation);
 			pSpawnAction->Execute();
 			pSpawnAction->Commit();
 
-			pGameObject->SetWorldLocation(inLocation);
+			pGameObject->SetWorldLocation(spawnLocation);
 		}
 	}
 
@@ -204,16 +230,122 @@ namespace Azul
 		{
 			GameObject* pCurr = (GameObject*)((EditorObjectReference*)it.Curr())->GetGameObject();
 
-			json objectJson = ObjectToJson(pCurr);
+			json subtreeJson = SceneToJson(pCurr);
 
-			content += objectJson;
+			// Preserve relative position to focus object
+			if (pCurr->GetParentGameObject() == GameObjectManager::GetAllObjects().GetRoot() && pCurr != selection.GetFocusObject()->GetGameObject())
+			{
+				GameObject* pFocus = selection.GetFocusObject()->GetGameObject();
+				Vec3 newRelativeLocation = Vec3(Vec4(pCurr->GetWorldLocation(), 1.f) * Trans(pFocus->GetWorldLocation()).getInv());
+
+				json& rootJson = subtreeJson[0];
+				rootJson["Location"] = { newRelativeLocation[x], newRelativeLocation[y], newRelativeLocation[z] };
+				rootJson["Copy Relative Location"] = true;
+			}
+
+			for (const auto& objectJson : subtreeJson)
+			{
+				content += objectJson;
+			}
 		}
 
 		std::string s = content.dump(2);
 	}
 
-	void Clipboard::Paste(const Vec3& location) const
+	void Clipboard::Paste(const Vec3& location)
 	{
+		MakeContentUnique();
 		SpawnObjectsFromJson(content, location);
+	}
+
+	void Clipboard::MakeContentUnique()
+	{
+		for (auto& objectJson : content)
+		{
+			std::string defaultName = objectJson["Object Name"].template get<std::string>();
+			std::string str = GenerateUniqueObjectName(defaultName.c_str());
+
+			if (str != defaultName)
+			{
+				objectJson["Object Name"] = str;
+
+				for (auto& otherObjectJson : content)
+				{
+					std::string defaultParentName = otherObjectJson["Parent Name"].template get<std::string>();
+
+					if (defaultParentName == defaultName)
+					{
+						otherObjectJson["Parent Name"] = str;
+					}
+				}
+			}
+		}
+	}
+
+	std::string Clipboard::GenerateUniqueObjectName(const char* pInName)
+	{
+		std::string output = pInName;
+
+		bool uniqueReached = false;
+		bool renamedOnce = false;
+
+		if (*(output.end() - 3) == '(' && *(output.end() - 1) == ')')
+		{
+			renamedOnce = true;
+		}
+
+		int iterations = 1;
+
+		while (!uniqueReached)
+		{
+			uniqueReached = true;
+
+			for (PCSTreeReverseIterator it(GameObjectManager::GetAllObjects().GetRoot()); !it.IsDone(); it.Next())
+			{
+				GameObject* pCurrObject = (GameObject*)it.Current();
+				const char* pCurrName = pCurrObject->GetNamePtr();
+
+				if (strcmp(pCurrName, output.c_str()) == 0)
+				{
+					uniqueReached = false;
+
+					if (!renamedOnce)
+					{
+						output += std::string(" (" + std::to_string(iterations) + ")");
+						renamedOnce = true;
+					}
+					else
+					{
+						output = output.replace(output.end() - 4, output.end(), std::string(" (" + std::to_string(iterations) + ")"));
+					}
+
+					iterations++;
+				}
+			}
+
+			for (const auto& otherObjectJson : content)
+			{
+				std::string otherObjectJsonName = otherObjectJson["Object Name"].template get<std::string>();
+
+				if (strcmp(otherObjectJsonName.c_str(), output.c_str()) == 0)
+				{
+					uniqueReached = false;
+
+					if (!renamedOnce)
+					{
+						output += std::string(" (" + std::to_string(iterations) + ")");
+						renamedOnce = true;
+					}
+					else
+					{
+						output = output.replace(output.end() - 4, output.end(), std::string(" (" + std::to_string(iterations) + ")"));
+					}
+
+					iterations++;
+				}
+			}
+		}
+
+		return output;
 	}
 }

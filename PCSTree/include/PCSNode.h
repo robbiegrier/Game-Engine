@@ -70,6 +70,8 @@ namespace Azul
 		int GetNumSiblings() const;
 		int GetNumChildren() const;
 
+		PCSNode* GetLastChild() const;
+
 		int GetDepth() const;
 
 		void Nullify();

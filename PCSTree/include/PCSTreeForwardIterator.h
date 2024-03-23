@@ -26,6 +26,7 @@ namespace Azul
 
 	private:
 		PCSNode* pRoot;
+		PCSNode* pLast;
 		PCSNode* pCurr;
 		bool started;
 	};

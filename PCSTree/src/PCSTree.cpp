@@ -111,6 +111,8 @@ namespace Azul
 		pInNode->SetNextSibling(nullptr);
 		pInNode->SetPrevSibling(nullptr);
 		pInNode->SetParent(nullptr);
+		PCSNode::IteratorBind(nullptr, pInNode);
+		PCSNode::IteratorBind(pInNode->GetLastChild(), nullptr);
 
 		RecalculateCurrentDepth();
 	}
@@ -168,27 +170,7 @@ namespace Azul
 
 	PCSNode* PCSTree::GetLastChild(PCSNode* const pInNode)
 	{
-		if (pInNode->GetChild())
-		{
-			PCSNode* pCurr = pInNode->GetChild();
-
-			while (pCurr->GetNextSibling() || pCurr->GetChild())
-			{
-				while (pCurr->GetNextSibling())
-				{
-					pCurr = pCurr->GetNextSibling();
-				}
-
-				if (pCurr->GetChild())
-				{
-					pCurr = pCurr->GetChild();
-				}
-			}
-
-			return pCurr;
-		}
-
-		return pInNode;
+		return pInNode->GetLastChild();
 	}
 
 	void PCSTree::BurnSubtree(PCSNode* const pInNode)

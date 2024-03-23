@@ -2,6 +2,7 @@
 #include "GameObjectManager.h"
 #include "EditorGui.h"
 #include "EditorObjectReference.h"
+#include "EditActionDelete.h"
 
 namespace Azul
 {
@@ -12,7 +13,7 @@ namespace Azul
 			for (Iterator& it = *objects.GetIterator(); !it.IsDone(); it.Next())
 			{
 				EditorObjectReference* pCurr = (EditorObjectReference*)it.Curr();
-				delete pCurr->GetGameObject();
+				EditActionDelete::DeleteObjectAsSubtree(pCurr->GetGameObject());
 			}
 		}
 	}

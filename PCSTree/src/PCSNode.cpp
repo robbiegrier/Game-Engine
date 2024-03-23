@@ -159,6 +159,31 @@ namespace Azul
 		return output;
 	}
 
+	PCSNode* PCSNode::GetLastChild() const
+	{
+		if (GetChild())
+		{
+			PCSNode* pCurr = GetChild();
+
+			while (pCurr->GetNextSibling() || pCurr->GetChild())
+			{
+				while (pCurr->GetNextSibling())
+				{
+					pCurr = pCurr->GetNextSibling();
+				}
+
+				if (pCurr->GetChild())
+				{
+					pCurr = pCurr->GetChild();
+				}
+			}
+
+			return pCurr;
+		}
+
+		return (PCSNode*)this;
+	}
+
 	int PCSNode::GetDepth() const
 	{
 		auto output = 0;

@@ -31,6 +31,7 @@ namespace Azul
 		{
 			EditorVisual* pCurr = (EditorVisual*)it.Curr();
 			pCurr->SetLocationFromObject(pEditorObjectReference->GetGameObject());
+			pCurr->Update();
 		}
 	}
 
@@ -223,6 +224,7 @@ namespace Azul
 			{
 				EditorVisual* pCurr = (EditorVisual*)it.Curr();
 				pCurr->SetLocationFromObject(pRef->GetGameObject());
+				pCurr->Update();
 			}
 		}
 	}

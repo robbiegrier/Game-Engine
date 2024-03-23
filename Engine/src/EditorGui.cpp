@@ -430,7 +430,8 @@ namespace Azul
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.Fonts->AddFontFromFileTTF("../Models/Fredoka-Regular.ttf", 20.f);
+		io.Fonts->AddFontFromFileTTF("../Models/Fredoka-Regular.ttf", 18.f);
+		io.Fonts->AddFontFromFileTTF("../Models/Ubuntu-Regular.ttf", 18.f);
 		io.Fonts->Build();
 		ImGui::StyleColorsDark();
 

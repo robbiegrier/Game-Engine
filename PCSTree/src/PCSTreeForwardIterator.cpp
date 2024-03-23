@@ -7,8 +7,9 @@
 namespace Azul
 {
 	PCSTreeForwardIterator::PCSTreeForwardIterator(PCSNode* pInRoot)
-		: pRoot(pInRoot), pCurr(nullptr), started(false)
+		: pRoot(pInRoot), pLast(nullptr), pCurr(nullptr), started(false)
 	{
+		pLast = pInRoot->GetLastChild();
 		First();
 	}
 
@@ -49,7 +50,8 @@ namespace Azul
 
 	bool PCSTreeForwardIterator::IsDone()
 	{
-		return (started && pCurr == pRoot) || !pCurr || !pRoot;
+		const bool lastReached = started && (pCurr && pCurr->GetReverse() ? pCurr->GetReverse() == pLast : false);
+		return (started && pCurr == pRoot) || !pCurr || !pRoot || lastReached;
 	}
 }
 

@@ -43,42 +43,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      8.812149047851563,
-      13.190139770507813,
-      19.097366333007813
-    ],
-    "Mesh": 2,
-    "Object Name": "pyramid",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Shader": 0,
-    "Texture": 4
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
-      3.343024492263794,
-      3.631641149520874,
-      29.846961975097656
+      0.06863594055175781,
+      3.6316404342651367,
+      17.853797912597656
     ],
     "Mesh": 2,
     "Object Name": "pyramid parent",
@@ -109,24 +76,24 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -0.09674370288848877,
-      0.21114638447761536,
-      5.816842079162598
+      0.37896251678466797,
+      0.36008119583129883,
+      4.844402313232422
     ],
     "Mesh": 20,
     "Object Name": "small_rock",
     "Parent Name": "pyramid parent",
     "Render Shell": true,
     "Rotation": [
-      -0.5526876449584961,
-      0.3456169664859772,
-      0.40365177392959595,
-      0.6419894695281982
+      -0.6801744699478149,
+      -3.069544618483633e-12,
+      1.4628298572461063e-12,
+      0.7330502867698669
     ],
     "Scale": [
-      1.52107572555542,
-      1.52107572555542,
-      1.52107572555542
+      1.7583379745483398,
+      1.7583379745483398,
+      1.7583379745483398
     ],
     "Shader": 0,
     "Texture": 19
@@ -241,9 +208,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      81.17526245117188,
+      80.84882354736328,
       -1.4032236337661743,
-      -33.95384216308594
+      -27.16095733642578
     ],
     "Mesh": 68,
     "Object Name": "Big Dome",
@@ -308,8 +275,8 @@
     "Is Selectable": true,
     "Location": [
       3.587890148162842,
-      1.640769600868225,
-      -0.31159019470214844
+      1.2350964546203613,
+      -0.3115895390510559
     ],
     "Mesh": 69,
     "Object Name": "Tattoine Square Tower1",
@@ -322,9 +289,9 @@
       0.6899265646934509
     ],
     "Scale": [
-      2.1094727516174316,
-      1.6559571027755737,
-      2.581235647201538
+      1.2834374904632568,
+      1.2834374904632568,
+      1.2834374904632568
     ],
     "Shader": 0,
     "Texture": 68
@@ -670,9 +637,9 @@
     "Graphics Object": 1,
     "Is Selectable": true,
     "Location": [
-      50.067596435546875,
-      2.000667095184326,
-      -40.016265869140625
+      50.067718505859375,
+      2.000671863555908,
+      -40.016357421875
     ],
     "Mesh": 3,
     "Object Name": "Light Yellow",
@@ -1330,7 +1297,7 @@
     "Graphics Object": 1,
     "Is Selectable": true,
     "Location": [
-      3.612306594848633,
+      3.612299919128418,
       30.0,
       103.0654296875
     ],
@@ -2551,12 +2518,12 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -52.553916931152344,
-      4.604684829711914,
-      -31.3469181060791
+      -44.288421630859375,
+      12.417491912841797,
+      12.094573974609375
     ],
     "Mesh": 7,
-    "Object Name": "Space Frigate 2",
+    "Object Name": "Space Frigate 2 (1)",
     "Parent Name": "Objects",
     "Render Shell": true,
     "Rotation": [
@@ -2572,5 +2539,698 @@
     ],
     "Shader": 0,
     "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      75.9654769897461,
+      -1.1349525451660156,
+      60.48720932006836
+    ],
+    "Mesh": 66,
+    "Object Name": "Big building with arches (1)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.5123238563537598,
+      -0.48455455899238586,
+      -0.4872128367424011,
+      0.5151261687278748
+    ],
+    "Scale": [
+      3.000000238418579,
+      3.0,
+      3.000000238418579
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -2.586512804031372,
+      -2.51780104637146,
+      -0.5912653207778931
+    ],
+    "Mesh": 46,
+    "Object Name": "test_obj (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      0.022199219092726707,
+      -0.04493236541748047,
+      -0.9842085838317871,
+      -0.16976845264434814
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 45
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -4.26861047744751,
+      0.5755115151405334,
+      0.05904544144868851
+    ],
+    "Mesh": 65,
+    "Object Name": "Tattoine Building Arches 2 (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      -0.00063829350983724,
+      -0.002105830004438758,
+      0.9999498128890991,
+      0.009777755476534367
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 64
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.028849244117736816,
+      2.5696825981140137,
+      1.3866143226623535
+    ],
+    "Mesh": 39,
+    "Object Name": "Tattoine Panel 2 (1)",
+    "Parent Name": "Tattoine Building Arches 2 (1)",
+    "Render Shell": true,
+    "Rotation": [
+      0.9999234676361084,
+      -1.3783574104309082e-07,
+      -6.943941116333008e-06,
+      -0.012373954057693481
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 38
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.006876438856124878,
+      -1.7137157917022705,
+      3.251370429992676
+    ],
+    "Mesh": 41,
+    "Object Name": "Tattoine Building Tarp 2 (1)",
+    "Parent Name": "Tattoine Building Arches 2 (1)",
+    "Render Shell": true,
+    "Rotation": [
+      0.004493235144764185,
+      0.010753966867923737,
+      0.02627711370587349,
+      0.9995867609977722
+    ],
+    "Scale": [
+      0.991215705871582,
+      0.9791141748428345,
+      1.5253945589065552
+    ],
+    "Shader": 0,
+    "Texture": 40
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.007244930136948824,
+      -1.8808958530426025,
+      2.0998432636260986
+    ],
+    "Mesh": 43,
+    "Object Name": "big building door (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      0.02694595977663994,
+      -0.0021065990440547466,
+      0.015270426869392395,
+      0.9995180368423462
+    ],
+    "Scale": [
+      1.116029977798462,
+      1.0404458045959473,
+      1.4216755628585815
+    ],
+    "Shader": 0,
+    "Texture": 42
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.0473864078521729,
+      -1.936119556427002,
+      0.3360397517681122
+    ],
+    "Mesh": 37,
+    "Object Name": "building pipe (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      0.006329291965812445,
+      0.000682151410728693,
+      0.02328825742006302,
+      0.9997085332870483
+    ],
+    "Scale": [
+      1.4274431467056274,
+      1.7003710269927979,
+      1.2223539352416992
+    ],
+    "Shader": 0,
+    "Texture": 36
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      3.140047788619995,
+      -2.3414981365203857,
+      0.7199563980102539
+    ],
+    "Mesh": 54,
+    "Object Name": "Radiator (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      9.83476752480783e-07,
+      0.0,
+      -0.15840713679790497,
+      0.9873738884925842
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 0,
+    "Texture": 53
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -3.703547477722168,
+      -2.753549575805664,
+      0.3669431209564209
+    ],
+    "Mesh": 20,
+    "Object Name": "house rock (1)",
+    "Parent Name": "Big building with arches (1)",
+    "Render Shell": true,
+    "Rotation": [
+      -0.08525342494249344,
+      0.021519852802157402,
+      0.06830905377864838,
+      0.9937819838523865
+    ],
+    "Scale": [
+      0.4742838144302368,
+      0.4994810223579407,
+      0.6464771032333374
+    ],
+    "Shader": 0,
+    "Texture": 19
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -43.41519546508789,
+      8.127248764038086,
+      31.032670974731445
+    ],
+    "Mesh": 7,
+    "Object Name": "Space Frigate 2 (2)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -3.796486680585076e-07,
+      0.939268171787262,
+      -1.3871446924440534e-07,
+      -0.34318408370018005
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 0,
+    "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -8.034164428710938,
+      7.918511867523193,
+      66.2829818725586
+    ],
+    "Mesh": 7,
+    "Object Name": "Space Frigate 2 (3)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -3.796486680585076e-07,
+      0.939268171787262,
+      -1.3871446924440534e-07,
+      -0.34318408370018005
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 0,
+    "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -23.79861068725586,
+      7.9185028076171875,
+      47.58992004394531
+    ],
+    "Mesh": 7,
+    "Object Name": "Space Frigate 2 (4)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -3.796486680585076e-07,
+      0.939268171787262,
+      -1.3871446924440534e-07,
+      -0.34318408370018005
+    ],
+    "Scale": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "Shader": 0,
+    "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      52.591182708740234,
+      -1.1944278478622437,
+      83.80200958251953
+    ],
+    "Mesh": 66,
+    "Object Name": "Big building with arches (2)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.096849225461483,
+      -0.6984901428222656,
+      -0.7023175954818726,
+      0.09737423062324524
+    ],
+    "Scale": [
+      3.000000238418579,
+      3.0,
+      3.000000238418579
+    ],
+    "Shader": 0,
+    "Texture": 65
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -2.586512804031372,
+      -2.51780104637146,
+      -0.5912653207778931
+    ],
+    "Mesh": 46,
+    "Object Name": "test_obj (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      0.022199219092726707,
+      -0.04493236541748047,
+      -0.9842085838317871,
+      -0.16976845264434814
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 45
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -4.26861047744751,
+      0.5755115151405334,
+      0.05904544144868851
+    ],
+    "Mesh": 65,
+    "Object Name": "Tattoine Building Arches 2 (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      -0.00063829350983724,
+      -0.002105830004438758,
+      0.9999498128890991,
+      0.009777755476534367
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 64
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.028849244117736816,
+      2.5696825981140137,
+      1.3866143226623535
+    ],
+    "Mesh": 39,
+    "Object Name": "Tattoine Panel 2 (2)",
+    "Parent Name": "Tattoine Building Arches 2 (2)",
+    "Render Shell": true,
+    "Rotation": [
+      0.9999234676361084,
+      -1.3783574104309082e-07,
+      -6.943941116333008e-06,
+      -0.012373954057693481
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 0,
+    "Texture": 38
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.006876438856124878,
+      -1.7137157917022705,
+      3.251370429992676
+    ],
+    "Mesh": 41,
+    "Object Name": "Tattoine Building Tarp 2 (2)",
+    "Parent Name": "Tattoine Building Arches 2 (2)",
+    "Render Shell": true,
+    "Rotation": [
+      0.004493235144764185,
+      0.010753966867923737,
+      0.02627711370587349,
+      0.9995867609977722
+    ],
+    "Scale": [
+      0.991215705871582,
+      0.9791141748428345,
+      1.5253945589065552
+    ],
+    "Shader": 0,
+    "Texture": 40
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.007244930136948824,
+      -1.8808958530426025,
+      2.0998432636260986
+    ],
+    "Mesh": 43,
+    "Object Name": "big building door (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      0.02694595977663994,
+      -0.0021065990440547466,
+      0.015270426869392395,
+      0.9995180368423462
+    ],
+    "Scale": [
+      1.116029977798462,
+      1.0404458045959473,
+      1.4216755628585815
+    ],
+    "Shader": 0,
+    "Texture": 42
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.0473864078521729,
+      -1.936119556427002,
+      0.3360397517681122
+    ],
+    "Mesh": 37,
+    "Object Name": "building pipe (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      0.006329291965812445,
+      0.000682151410728693,
+      0.02328825742006302,
+      0.9997085332870483
+    ],
+    "Scale": [
+      1.4274431467056274,
+      1.7003710269927979,
+      1.2223539352416992
+    ],
+    "Shader": 0,
+    "Texture": 36
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      3.140047788619995,
+      -2.3414981365203857,
+      0.7199563980102539
+    ],
+    "Mesh": 54,
+    "Object Name": "Radiator (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      9.83476752480783e-07,
+      0.0,
+      -0.15840713679790497,
+      0.9873738884925842
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 0,
+    "Texture": 53
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -3.703547477722168,
+      -2.753549575805664,
+      0.3669431209564209
+    ],
+    "Mesh": 20,
+    "Object Name": "house rock (2)",
+    "Parent Name": "Big building with arches (2)",
+    "Render Shell": true,
+    "Rotation": [
+      -0.08525342494249344,
+      0.021519852802157402,
+      0.06830905377864838,
+      0.9937819838523865
+    ],
+    "Scale": [
+      0.4742838144302368,
+      0.4994810223579407,
+      0.6464771032333374
+    ],
+    "Shader": 0,
+    "Texture": 19
   }
 ]

@@ -165,7 +165,6 @@ namespace Azul
 
 	GameObject* GameObjectManager::DespawnObject(const char* const pName)
 	{
-		GameObjectManager& self = GetInstance();
 		GameObject* pNode = FindObject(pName);
 		return DespawnObject(pNode);
 	}
