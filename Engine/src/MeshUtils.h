@@ -74,8 +74,15 @@ namespace Azul
 		View,
 		World,
 
+		UV_Correction,
+
 		Color,
 		LightPos,
+
+		psSpriteColor,	 //6
+
+		vsInvBind = 7,       //7
+		vsBoneWorld = 8    //8
 	};
 }
 

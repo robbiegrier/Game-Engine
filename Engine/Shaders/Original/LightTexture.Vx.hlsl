@@ -23,12 +23,12 @@ cbuffer AA2 : register(b2) // slot 2 (ConstantBufferSlot::World)
 	matrix worldMatrix;
 }
 
-cbuffer AA3 : register(b3) // slot 3 (ConstantBufferSlot::Color)
+cbuffer AA3 : register(b4) // slot 4 (ConstantBufferSlot::Color)
 {
 	float4 lightColor;
 }
 
-cbuffer AA4 : register(b4) // slot 4 (ConstantBufferSlot::LightPos)
+cbuffer AA4 : register(b5) // slot 5 (ConstantBufferSlot::LightPos)
 {
 	float4 lightPos;
 }

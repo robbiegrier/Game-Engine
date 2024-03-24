@@ -15,8 +15,10 @@ namespace Azul
 		poIndexBuffer{ nullptr },
 		poConstantBuff_lightColor{ nullptr },
 		poConstantBuff_lightPos{ nullptr },
+		poConstantBuff_uvMatrix{ nullptr },
 		pBoundingSphereCenter{ new Vec3() }
 	{
+		poConstantBuff_uvMatrix = CreateConstantBuffer(sizeof(Mat4));
 	}
 
 	const char* Mesh::NameToString()
@@ -90,6 +92,8 @@ namespace Azul
 		case Name::Bone_R_001:
 		case Name::Bone_R_002:
 			return "Bone";
+		case Name::Sprite:
+			return "Sprite (Unit Square)";
 		case Name::Null:
 			return "Null";
 		default:
@@ -134,6 +138,7 @@ namespace Azul
 		SafeRelease(poIndexBuffer);
 		SafeRelease(poConstantBuff_lightColor);
 		SafeRelease(poConstantBuff_lightPos);
+		SafeRelease(poConstantBuff_uvMatrix);
 		delete pBoundingSphereCenter;
 	}
 
@@ -174,6 +179,12 @@ namespace Azul
 		return name;
 	}
 
+	void Mesh::TransferUVCorrection(Mat4* pUVMatrix)
+	{
+		assert(pUVMatrix);
+		Engine::GetContext()->UpdateSubresource(poConstantBuff_uvMatrix, 0, nullptr, pUVMatrix, 0, 0);
+	}
+
 	void Mesh::TransferConstantBuffer(Camera* pCam, const Mat4& pWorld)
 	{
 		assert(pCam);
@@ -208,6 +219,11 @@ namespace Azul
 		{
 			const UINT vertexStride_texCoord = sizeof(VertexTexCoord);
 			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::TexCoord, 1, &poVertexBuffer_texCoord, &vertexStride_texCoord, &offset);
+		}
+
+		if (poConstantBuff_uvMatrix)
+		{
+			Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::UV_Correction, 1, &poConstantBuff_uvMatrix);
 		}
 
 		if (poConstantBuff_lightColor)

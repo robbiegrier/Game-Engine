@@ -903,6 +903,30 @@
     <ClInclude Include="src\ScaleHandleUniform.h">
       <Filter>src\Editor\Transform</Filter>
     </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Sprite.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Sprite.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOSprite.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Image.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rect.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOSprite.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectSprite.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImageManager.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -939,6 +963,12 @@
       <Filter>Shaders\Original</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\Original\Default.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Vx.hlsl">
       <Filter>Shaders\Original</Filter>
     </FxCompile>
   </ItemGroup>
@@ -1233,6 +1263,24 @@
     </ClCompile>
     <ClCompile Include="src\ScaleHandleUniform.cpp">
       <Filter>src\Editor\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOSprite.cpp">
+      <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Image.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rect.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOSprite.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectSprite.cpp">
+      <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImageManager.cpp">
+      <Filter>src\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

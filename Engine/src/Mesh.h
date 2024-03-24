@@ -103,6 +103,7 @@ namespace Azul
 			TranslateHandle,
 			ScaleHandle,
 			RotateHandle,
+			Sprite,
 			Null,
 			None
 		};
@@ -135,6 +136,8 @@ namespace Azul
 		float GetBoundingSphereRadius() const;
 		const Vec3& GetBoundSphereCenter() const;
 
+		void TransferUVCorrection(Mat4* pUVMatrix);
+
 	protected:
 		void HackSetBoundingSphereData(VertexPos* pData);
 
@@ -155,6 +158,8 @@ namespace Azul
 	public:
 		ID3D11Buffer* poConstantBuff_lightColor;
 		ID3D11Buffer* poConstantBuff_lightPos;
+
+		ID3D11Buffer* poConstantBuff_uvMatrix;
 	};
 }
 

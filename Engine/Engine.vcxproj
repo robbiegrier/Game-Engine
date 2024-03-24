@@ -284,6 +284,8 @@
     <ClInclude Include="Shaders\Compiled\LightTexture.Vx.h" />
     <ClInclude Include="Shaders\Compiled\Null.Px.h" />
     <ClInclude Include="Shaders\Compiled\Null.Vx.h" />
+    <ClInclude Include="Shaders\Compiled\Sprite.Px.h" />
+    <ClInclude Include="Shaders\Compiled\Sprite.Vx.h" />
     <ClInclude Include="src\Anim.h" />
     <ClInclude Include="src\AnimController.h" />
     <ClInclude Include="src\AssetsWindow.h" />
@@ -328,17 +330,21 @@
     <ClInclude Include="src\GameObjectBasic.h" />
     <ClInclude Include="src\GameObjectManager.h" />
     <ClInclude Include="src\GameObjectRigid.h" />
+    <ClInclude Include="src\GameObjectSprite.h" />
     <ClInclude Include="src\GOColorByVertex.h" />
     <ClInclude Include="src\GOConstColor.h" />
     <ClInclude Include="src\GOFlatTexture.h" />
     <ClInclude Include="src\GOLightTexture.h" />
     <ClInclude Include="src\GONull.h" />
+    <ClInclude Include="src\GOSprite.h" />
     <ClInclude Include="src\GOWireframe.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\GraphicsObject.h" />
     <ClInclude Include="src\HierarchyWindow.h" />
+    <ClInclude Include="src\Image.h" />
+    <ClInclude Include="src\ImageManager.h" />
     <ClInclude Include="src\InspectorWindow.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshManager.h" />
@@ -349,6 +355,7 @@
     <ClInclude Include="src\Plane.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\PyramidMesh.h" />
+    <ClInclude Include="src\Rect.h" />
     <ClInclude Include="src\Render.h" />
     <ClInclude Include="src\RotateHandle.h" />
     <ClInclude Include="src\ScaleHandle.h" />
@@ -366,6 +373,7 @@
     <ClInclude Include="src\SOFlatTexture.h" />
     <ClInclude Include="src\SOLightTexture.h" />
     <ClInclude Include="src\SONull.h" />
+    <ClInclude Include="src\SOSprite.h" />
     <ClInclude Include="src\TextureObject.h" />
     <ClInclude Include="src\TextureObjectManager.h" />
     <ClInclude Include="src\TextureProto.h" />
@@ -558,6 +566,18 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Px.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_Sprite_PxShader</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\Sprite.Px.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Vx.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_Sprite_VxShader</VariableName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\Sprite.Vx.h</HeaderFileOutput>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Anim.cpp" />
@@ -603,11 +623,13 @@
     <ClCompile Include="src\GameObjectBasic.cpp" />
     <ClCompile Include="src\GameObjectManager.cpp" />
     <ClCompile Include="src\GameObjectRigid.cpp" />
+    <ClCompile Include="src\GameObjectSprite.cpp" />
     <ClCompile Include="src\GOColorByVertex.cpp" />
     <ClCompile Include="src\GOConstColor.cpp" />
     <ClCompile Include="src\GOFlatTexture.cpp" />
     <ClCompile Include="src\GOLightTexture.cpp" />
     <ClCompile Include="src\GONull.cpp" />
+    <ClCompile Include="src\GOSprite.cpp" />
     <ClCompile Include="src\GOWireframe.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -615,6 +637,8 @@
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\GraphicsObject.cpp" />
     <ClCompile Include="src\HierarchyWindow.cpp" />
+    <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\ImageManager.cpp" />
     <ClCompile Include="src\InspectorWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
@@ -625,6 +649,7 @@
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PyramidMesh.cpp" />
+    <ClCompile Include="src\Rect.cpp" />
     <ClCompile Include="src\RotateHandle.cpp" />
     <ClCompile Include="src\ScaleHandle.cpp" />
     <ClCompile Include="src\ScaleHandleUniform.cpp" />
@@ -641,6 +666,7 @@
     <ClCompile Include="src\SOFlatTexture.cpp" />
     <ClCompile Include="src\SOLightTexture.cpp" />
     <ClCompile Include="src\SONull.cpp" />
+    <ClCompile Include="src\SOSprite.cpp" />
     <ClCompile Include="src\TextureObject.cpp" />
     <ClCompile Include="src\TextureObjectManager.cpp" />
     <ClCompile Include="src\TextureProto.cpp" />

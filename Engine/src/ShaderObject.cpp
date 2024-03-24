@@ -22,6 +22,8 @@ namespace Azul
 			return "ConstColor";
 		case Name::EditorVisual:
 			return "EditorVisual";
+		case Name::Sprite:
+			return "Sprite";
 		case Name::Null:
 			return "Null";
 		default:
@@ -53,8 +55,8 @@ namespace Azul
 		Engine::GetContext()->IASetInputLayout(poInputLayout);
 		Engine::GetContext()->PSSetShader(poPixelShader, nullptr, 0u);
 
-		Engine::GetContext()->UpdateSubresource(pConstBuffView, 0u, nullptr, &CameraManager::GetCurrentCamera()->GetViewMatrix(), 0u, 0u);
-		Engine::GetContext()->UpdateSubresource(pConstBuffProjection, 0u, nullptr, &CameraManager::GetCurrentCamera()->GetProjMatrix(), 0u, 0u);
+		Engine::GetContext()->UpdateSubresource(pConstBuffView, 0u, nullptr, &GetCamera()->GetViewMatrix(), 0u, 0u);
+		Engine::GetContext()->UpdateSubresource(pConstBuffProjection, 0u, nullptr, &GetCamera()->GetProjMatrix(), 0u, 0u);
 		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::Projection, 1u, &pConstBuffProjection);
 		Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::View, 1u, &pConstBuffView);
 
@@ -70,6 +72,11 @@ namespace Azul
 	void ShaderObject::Close()
 	{
 		OnClose();
+	}
+
+	Camera* ShaderObject::GetCamera() const
+	{
+		return CameraManager::GetCurrentCamera();
 	}
 
 	void ShaderObject::SetName(ShaderObject::Name inName)

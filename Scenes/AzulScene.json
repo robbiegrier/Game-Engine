@@ -10,6 +10,336 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
+      9.190799713134766,
+      9.505559921264648,
+      12.293664932250977
+    ],
+    "Mesh": 87,
+    "Object Name": "Sprite 2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      3.6123013496398926,
+      30.000017166137695,
+      103.06549072265625
+    ],
+    "Mesh": 4,
+    "Object Name": "Clock Center",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      4.4703477897201083e-07,
+      1.0
+    ],
+    "Scale": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      6.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 1",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 1",
+    "Parent Name": "Clock Inner Cube 1",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.7071067690849304,
+      0.7071067690849304
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      6.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 2",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      1.6391277313232422e-06,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -3.5762786865234375e-07,
+      0.9999997615814209,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 2",
+    "Parent Name": "Clock Inner Cube 2",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      8.940696716308594e-08,
+      1.0
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      -6.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 3",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      0.0,
+      -1.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 3",
+    "Parent Name": "Clock Inner Cube 3",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.0,
+      1.0,
+      -4.371138828673793e-08
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -6.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 1,
+    "Object Name": "Clock Inner Cube 4",
+    "Parent Name": "Clock Center",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": true,
+    "Location": [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    "Mesh": 2,
+    "Object Name": "Clock Outer Pyramid 4",
+    "Parent Name": "Clock Inner Cube 4",
+    "Render Shell": true,
+    "Rotation": [
+      2.0563516045513097e-06,
+      -3.109697445324855e-06,
+      0.7071117758750916,
+      0.7071017622947693
+    ],
+    "Scale": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20000000298023224
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
       17.986465454101563,
       4.037463665008545,
       -35.64055633544922
@@ -43,9 +373,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      0.06863594055175781,
+      -10.212614059448242,
       3.6316404342651367,
-      17.853797912597656
+      17.853776931762695
     ],
     "Mesh": 2,
     "Object Name": "pyramid parent",
@@ -1165,7 +1495,7 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      2.5598502159118652,
+      2.5506434440612793,
       0.602398693561554,
       2.8571481704711914
     ],
@@ -1200,7 +1530,7 @@
     "Location": [
       5.0,
       0.0,
-      0.0
+      1.1920928955078125e-06
     ],
     "Mesh": 1,
     "Object Name": "X Marker",
@@ -1223,6 +1553,39 @@
   {
     "Color": [
       0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 1,
+    "Is Selectable": false,
+    "Location": [
+      -0.25000011920928955,
+      0.0,
+      5000.00146484375
+    ],
+    "Mesh": 1,
+    "Object Name": "Z Marker",
+    "Parent Name": "X Marker",
+    "Render Shell": false,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      5.0000002374872565e-05,
+      1.0,
+      19999.998046875
+    ],
+    "Shader": 4,
+    "Texture": 89
+  },
+  {
+    "Color": [
+      0.0,
       0.501960813999176,
       0.0,
       1.0
@@ -1231,57 +1594,24 @@
     "Graphics Object": 1,
     "Is Selectable": false,
     "Location": [
-      0.0,
-      5.0,
+      -0.25000011920928955,
+      5000.00244140625,
       0.0
     ],
     "Mesh": 1,
     "Object Name": "Y Marker",
-    "Parent Name": "Objects",
+    "Parent Name": "X Marker",
     "Render Shell": false,
     "Rotation": [
-      0.0,
       -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      0.0010000000474974513,
-      20.0,
-      0.0010000000474974513
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      0.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": false,
-    "Location": [
-      0.0,
-      0.0,
-      5.0
-    ],
-    "Mesh": 1,
-    "Object Name": "Z Marker",
-    "Parent Name": "Objects",
-    "Render Shell": false,
-    "Rotation": [
-      0.0,
       -0.0,
       -0.0,
       1.0
     ],
     "Scale": [
-      0.0010000000474974513,
-      0.0010000000474974513,
-      20.0
+      5.0000002374872565e-05,
+      19999.998046875,
+      1.0
     ],
     "Shader": 4,
     "Texture": 89
@@ -1289,299 +1619,35 @@
   {
     "Color": [
       1.0,
-      0.0,
-      0.0,
+      1.0,
+      1.0,
       1.0
     ],
     "Game Object": 0,
-    "Graphics Object": 1,
+    "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      3.612299919128418,
-      30.0,
-      103.0654296875
+      10.172155380249023,
+      12.517712593078613,
+      22.633569717407227
     ],
-    "Mesh": 4,
-    "Object Name": "Clock Center",
+    "Mesh": 6,
+    "Object Name": "Spawned Object 1",
     "Parent Name": "Objects",
     "Render Shell": true,
     "Rotation": [
-      0.0,
-      0.0,
-      4.4703477897201083e-07,
-      1.0
-    ],
-    "Scale": [
-      2.0,
-      2.0,
-      2.0
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      1.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      6.0,
-      0.0,
-      0.0
-    ],
-    "Mesh": 1,
-    "Object Name": "Clock Inner Cube 1",
-    "Parent Name": "Clock Center",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      4.0,
-      4.0,
-      4.0
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      0.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      1.0,
-      0.0,
-      0.0
-    ],
-    "Mesh": 2,
-    "Object Name": "Clock Outer Pyramid 1",
-    "Parent Name": "Clock Inner Cube 1",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.7071067690849304,
-      0.7071067690849304
-    ],
-    "Scale": [
-      0.20000000298023224,
-      0.20000000298023224,
-      0.20000000298023224
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      1.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      0.0,
-      6.0,
-      0.0
-    ],
-    "Mesh": 1,
-    "Object Name": "Clock Inner Cube 2",
-    "Parent Name": "Clock Center",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      0.0,
-      1.6391277313232422e-06,
-      1.0
-    ],
-    "Scale": [
-      4.0,
-      4.0,
-      4.0
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      0.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      -3.5762786865234375e-07,
-      0.9999997615814209,
-      0.0
-    ],
-    "Mesh": 2,
-    "Object Name": "Clock Outer Pyramid 2",
-    "Parent Name": "Clock Inner Cube 2",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      0.0,
-      8.940696716308594e-08,
-      1.0
-    ],
-    "Scale": [
-      0.20000000298023224,
-      0.20000000298023224,
-      0.20000000298023224
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      1.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      0.0,
-      -6.0,
-      0.0
-    ],
-    "Mesh": 1,
-    "Object Name": "Clock Inner Cube 3",
-    "Parent Name": "Clock Center",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      4.0,
-      4.0,
-      4.0
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      0.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      0.0,
-      -1.0,
-      0.0
-    ],
-    "Mesh": 2,
-    "Object Name": "Clock Outer Pyramid 3",
-    "Parent Name": "Clock Inner Cube 3",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      0.0,
-      1.0,
-      -4.371138828673793e-08
-    ],
-    "Scale": [
-      0.20000000298023224,
-      0.20000000298023224,
-      0.20000000298023224
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      1.0,
-      0.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      -6.0,
-      0.0,
-      0.0
-    ],
-    "Mesh": 1,
-    "Object Name": "Clock Inner Cube 4",
-    "Parent Name": "Clock Center",
-    "Render Shell": true,
-    "Rotation": [
       -0.0,
       -0.0,
       -0.0,
       1.0
     ],
     "Scale": [
-      4.0,
-      4.0,
-      4.0
-    ],
-    "Shader": 4,
-    "Texture": 89
-  },
-  {
-    "Color": [
-      0.0,
-      0.0,
+      1.0,
       1.0,
       1.0
     ],
-    "Game Object": 0,
-    "Graphics Object": 1,
-    "Is Selectable": true,
-    "Location": [
-      -1.0,
-      0.0,
-      0.0
-    ],
-    "Mesh": 2,
-    "Object Name": "Clock Outer Pyramid 4",
-    "Parent Name": "Clock Inner Cube 4",
-    "Render Shell": true,
-    "Rotation": [
-      2.0563516045513097e-06,
-      -3.109697445324855e-06,
-      0.7071117758750916,
-      0.7071017622947693
-    ],
-    "Scale": [
-      0.20000000298023224,
-      0.20000000298023224,
-      0.20000000298023224
-    ],
-    "Shader": 4,
-    "Texture": 89
+    "Shader": 0,
+    "Texture": 6
   },
   {
     "Color": [
@@ -1594,7 +1660,7 @@
     "Graphics Object": 0,
     "Is Selectable": true,
     "Location": [
-      48.6123046875,
+      48.7216796875,
       0.947265625,
       -24.689453125
     ],
@@ -1604,8 +1670,8 @@
     "Render Shell": true,
     "Rotation": [
       0.0,
-      -0.0,
-      -0.0,
+      0.0,
+      3.725290298461914e-08,
       1.0
     ],
     "Scale": [
@@ -1726,8 +1792,8 @@
     "Graphics Object": 0,
     "Is Selectable": true,
     "Location": [
-      1.2999999523162842,
-      1.2999999523162842,
+      1.300002932548523,
+      1.300000786781311,
       -1.2999999523162842
     ],
     "Mesh": 2,
@@ -1736,8 +1802,8 @@
     "Render Shell": true,
     "Rotation": [
       0.0,
-      -0.0,
-      -0.0,
+      0.0,
+      -2.8312206268310547e-07,
       1.0
     ],
     "Scale": [
@@ -2159,7 +2225,7 @@
       6.133009910583496,
       -2.085883617401123
     ],
-    "Mesh": 88,
+    "Mesh": 89,
     "Object Name": "Player",
     "Parent Name": "Objects",
     "Render Shell": true,
@@ -2353,72 +2419,6 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      4.81989860534668,
-      7.635528087615967,
-      58.67669677734375
-    ],
-    "Mesh": 0,
-    "Object Name": "bbbb",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Shader": 0,
-    "Texture": 4
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
-      -0.623326301574707,
-      2.124173641204834,
-      -4.493560791015625
-    ],
-    "Mesh": 1,
-    "Object Name": "aaaa",
-    "Parent Name": "bbbb",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Shader": 0,
-    "Texture": 4
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
       58.536376953125,
       0.1829829216003418,
       -39.13946533203125
@@ -2518,42 +2518,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -44.288421630859375,
-      12.417491912841797,
-      12.094573974609375
-    ],
-    "Mesh": 7,
-    "Object Name": "Space Frigate 2 (1)",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -3.796486680585076e-07,
-      0.939268171787262,
-      -1.3871446924440534e-07,
-      -0.34318408370018005
-    ],
-    "Scale": [
-      0.25,
-      0.25,
-      0.25
-    ],
-    "Shader": 0,
-    "Texture": 7
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
-      75.9654769897461,
-      -1.1349525451660156,
-      60.48720932006836
+      76.06376647949219,
+      -1.1445870399475098,
+      62.25087356567383
     ],
     "Mesh": 66,
     "Object Name": "Big building with arches (1)",
@@ -2848,39 +2815,6 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -43.41519546508789,
-      8.127248764038086,
-      31.032670974731445
-    ],
-    "Mesh": 7,
-    "Object Name": "Space Frigate 2 (2)",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -3.796486680585076e-07,
-      0.939268171787262,
-      -1.3871446924440534e-07,
-      -0.34318408370018005
-    ],
-    "Scale": [
-      0.25,
-      0.25,
-      0.25
-    ],
-    "Shader": 0,
-    "Texture": 7
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
       -8.034164428710938,
       7.918511867523193,
       66.2829818725586
@@ -3046,9 +2980,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      52.591182708740234,
-      -1.1944278478622437,
-      83.80200958251953
+      45.623046875,
+      -1.205136775970459,
+      85.77210235595703
     ],
     "Mesh": 66,
     "Object Name": "Big building with arches (2)",
@@ -3211,8 +3145,8 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -0.007244930136948824,
-      -1.8808958530426025,
+      -0.007244586944580078,
+      -1.8808945417404175,
       2.0998432636260986
     ],
     "Mesh": 43,
@@ -3331,5 +3265,38 @@
     ],
     "Shader": 0,
     "Texture": 19
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      6.933753490447998,
+      10.090822219848633,
+      14.546696662902832
+    ],
+    "Mesh": 87,
+    "Object Name": "Sprite 1",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 88
   }
 ]

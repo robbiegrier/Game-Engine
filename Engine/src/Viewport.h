@@ -29,6 +29,7 @@ namespace Azul
 		ID3D11RenderTargetView* GetRenderTargetView() const { return pRenderTargetView; }
 
 		void ToggleDepthTests(bool toggleDepth);
+		void ToggleBlending(bool blendOn);
 
 	private:
 		void Refresh();

@@ -42,6 +42,7 @@ namespace Azul
 
 		static void SetDefaultTargetMode();
 		static void ClearDepthStencil(const Vec4& color);
+		static void ToggleBlending(bool blendOn);
 
 	protected:
 		// Big four
@@ -69,6 +70,7 @@ namespace Azul
 		void InitDepthStencilState();
 		void InitRasterizerState();
 		void InitViewport();
+		void InitBlendState();
 
 		// Runtime
 		int Run();
@@ -92,6 +94,8 @@ namespace Azul
 		ID3D11Texture2D* pDepthStencilBuffer;
 		ID3D11DepthStencilState* pDepthStencilState;
 		ID3D11RasterizerState* pRasterizerState;
+		ID3D11BlendState* pBlendStateAlpha;
+		ID3D11BlendState* pBlendStateOff;
 		D3D11_VIEWPORT viewport;
 
 		// Display Parameters

@@ -79,6 +79,22 @@ namespace Azul
 		return self.pCurrentCamera;
 	}
 
+	void CameraManager::SetCurrentCamera2D(Camera::Name name)
+	{
+		CameraManager& self = GetInstance();
+		Camera* pItem = Find(name);
+		assert(pItem);
+
+		self.pCurrentCamera2D = pItem;
+	}
+
+	Camera* CameraManager::GetCurrentCamera2D()
+	{
+		CameraManager& self = GetInstance();
+		assert(self.pCurrentCamera2D);
+		return self.pCurrentCamera2D;
+	}
+
 	void CameraManager::Update(float deltaTime)
 	{
 		static_cast<void>(deltaTime);
@@ -88,6 +104,11 @@ namespace Azul
 		if (self.pCurrentCamera)
 		{
 			self.pCurrentCamera->UpdateCamera();
+		}
+
+		if (self.pCurrentCamera2D)
+		{
+			self.pCurrentCamera2D->UpdateCamera();
 		}
 	}
 

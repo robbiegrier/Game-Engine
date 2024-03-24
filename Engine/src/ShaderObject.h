@@ -8,6 +8,7 @@
 namespace Azul
 {
 	class GraphicsObject;
+	class Camera;
 
 	// A Shader Object encapsulates a particular type of Gpu shader such that
 	// instanced Graphics objects can reference a shared copy of the shader.
@@ -22,6 +23,7 @@ namespace Azul
 			LightTexture,
 			ConstColor,
 			EditorVisual,
+			Sprite,
 			Null,
 			None
 		};
@@ -41,6 +43,8 @@ namespace Azul
 		virtual void Open(GraphicsObject* pObject);
 		virtual void Close();
 
+		virtual Camera* GetCamera() const;
+
 		// As a DLink node
 		virtual void Wash() override;
 		virtual bool Compare(DLink* pTargetNode) override;
@@ -54,7 +58,6 @@ namespace Azul
 		virtual void OnOpen(GraphicsObject* pObject) { static_cast<void>(pObject); }
 		virtual void OnClose() {}
 
-	private:
 		// Initialization helpers
 		const char* GetLatestProfile_PixelShader() const;
 		const char* GetLatestProfile_VertexShader() const;

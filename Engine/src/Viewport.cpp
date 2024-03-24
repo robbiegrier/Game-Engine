@@ -90,6 +90,21 @@ namespace Azul
 		GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 	}
 
+	void Viewport::ToggleBlending(bool blendOn)
+	{
+		static const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		static const UINT sampleMask = 0xffffffff;
+
+		if (blendOn)
+		{
+			Engine::GetContext()->OMSetBlendState(pBlendStateAlpha, blendFactor, sampleMask);
+		}
+		else
+		{
+			Engine::GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
+		}
+	}
+
 	void Viewport::Refresh()
 	{
 		Clean();

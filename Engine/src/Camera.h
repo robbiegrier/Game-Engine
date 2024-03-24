@@ -13,6 +13,12 @@ namespace Azul
 	class Camera final : public Align16, public DLink
 	{
 	public:
+		enum class Type
+		{
+			Perspective3D,
+			Orthographic2D
+		};
+
 		enum class Name
 		{
 			Default,
@@ -20,6 +26,7 @@ namespace Azul
 			Low,
 			Aux,
 			Player,
+			Sprite,
 			None
 		};
 
@@ -31,8 +38,9 @@ namespace Azul
 
 		// Initialize camera params
 		void SetPerspective(const float FieldOfView_Degs, const float AspectRatio, const float NearDist, const float FarDist);
+		void SetOrthographic(const float xMin, const float xMax, const float yMin, const float yMax, const float zMin, const float zMax);
 		void SetOrientAndPosition(const Vec3& Up_vect, const Vec3& inLookAt_pt, const Vec3& pos_pt);
-
+		void SetViewport(const int inX, const int inY, const int width, const int height);
 		void SetAspectRatio(float inAspectRatio);
 
 		// Mutate camera state
@@ -44,6 +52,7 @@ namespace Azul
 		void UpdateCamera();
 
 		// Accessors
+		Type GetType() const;
 		Mat4& GetViewMatrix();
 		Mat4& GetProjMatrix();
 		void GetLocation(Vec3& outPos) const;
@@ -69,10 +78,16 @@ namespace Azul
 
 		float GetAspectRatio() const;
 		float GetFovY() const;
+		int GetScreenWidth() const;
+		int GetScreenHeight() const;
 
 	private:
 		void UpdateProjectionMatrix();
 		void UpdateViewMatrix();
+		void privSetViewState(void);
+		void privCalcPlaneHeightWidth(void);
+		void privCalcFrustumVerts(void);
+		void privCalcFrustumCollisionNormals(void);
 
 	private:
 		Mat4 projMatrix;
@@ -90,6 +105,49 @@ namespace Azul
 		float aspectRatio;
 
 		Name name;
+
+		// world space coords for viewing frustum
+		Vec3	nearTopLeft;
+		Vec3	nearTopRight;
+		Vec3	nearBottomLeft;
+
+		Vec3	nearBottomRight;
+		Vec3	farTopLeft;
+		Vec3	farTopRight;
+		Vec3	farBottomLeft;
+
+		Vec3	farBottomRight;
+
+		// Normals of the frustum
+		Vec3	frontNorm;
+		Vec3	backNorm;
+		Vec3	rightNorm;
+
+		Vec3	leftNorm;
+		Vec3	topNorm;
+		Vec3	bottomNorm;
+
+		// w1(7)
+		Camera::Type camType;
+
+		// Screen size in world space
+		float	near_height;
+		float	near_width;
+		float	far_height;
+		float	far_width;
+
+		float	right;
+		float	left;
+		float	n;
+		float	f;
+		float	top;
+		float	bot;
+
+		// viewports
+		int		viewport_x;
+		int		viewport_y;
+		int		viewport_width;
+		int		viewport_height;
 	};
 }
 

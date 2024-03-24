@@ -100,7 +100,7 @@ namespace Azul
 		lightscape.numPointLights = MaxLights;
 		memcpy(lightscape.pointLights, pointLights, sizeof(PointLight) * MaxLights);
 		lightscape.directionalLight = directionalLight;
-		lightscape.eyePositionWorld = Vec4(CameraManager::GetCurrentCamera()->GetLocation(), 1.0f);
+		lightscape.eyePositionWorld = Vec4(GetCamera()->GetLocation(), 1.0f);
 		Engine::GetContext()->UpdateSubresource(pConstBuffLightscape, 0, nullptr, &lightscape, 0, 0);
 		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Lightscape, 1, &pConstBuffLightscape);
 		Engine::GetContext()->PSSetConstantBuffers((UINT)ConstBuffSlot::Lightscape, 1, &pConstBuffLightscape);

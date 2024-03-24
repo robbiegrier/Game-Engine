@@ -29,6 +29,7 @@ namespace Azul
 				new Player(), spawnPos
 			)->SetRelativeScale(spawnScale);
 		}
+		if (ImGui::Button("World Sprite")) { meshToSpawn = Mesh::Name::Sprite; textureToSpawn = TextureObject::Name::Birds; }
 		if (ImGui::Button("Unit Cube")) { meshToSpawn = Mesh::Name::Cube; textureToSpawn = TextureObject::Name::Birds; }
 		if (ImGui::Button("Unit Sphere")) meshToSpawn = Mesh::Name::Sphere;
 		if (ImGui::Button("Unit Pyramid")) meshToSpawn = Mesh::Name::Pyramid;

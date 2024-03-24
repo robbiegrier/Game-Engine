@@ -23,6 +23,7 @@
 #include "TextureObjectManager.h"
 #include "GOLightTexture.h"
 #include "SOLightTexture.h"
+#include "SOSprite.h"
 #include "GOConstColor.h"
 #include "SOConstColor.h"
 #include "GOFlatTexture.h"
@@ -42,6 +43,9 @@
 #include "ClipProto.h"
 #include "SOEditorVisual.h"
 #include "SceneManager.h"
+#include "GameObjectSprite.h"
+#include "GOSprite.h"
+#include "ImageManager.h"
 
 namespace Azul
 {
@@ -120,6 +124,13 @@ namespace Azul
 		LoadCameras();
 		LoadAssets();
 
+		ImageManager::Create();
+		ImageManager::Add(Image::Name::ALLBirds, new Image(Image::Name::ALLBirds, TextureObjectManager::Find(TextureObject::Name::Birds), Rect(0.0f, 0.0f, 377.0f, 234.0f)));
+		ImageManager::Add(Image::Name::WhiteBird, new Image(Image::Name::WhiteBird, TextureObject::Name::Birds, Rect(139.0f, 131.0f, 84.0f, 97.0f)));
+		ImageManager::Add(Image::Name::GreenBird, new Image(Image::Name::GreenBird, TextureObject::Name::Birds, Rect(244.0f, 134.0f, 102.0f, 75.0f)));
+		//ImageManager::Add(Image::Name::Stitch, new Image(Image::Name::Stitch, TextureObject::Name::Stitch, Rect(0.0f, 0.0f, 300.0f, 410.0f)));
+		//ImageManager::Add(Image::Name::Text, new Image(Image::Name::Text, TextureObject::Name::CenturyFont, Rect(0.0f, 0.0f, 100.0f, 100.0f)));
+
 		// Scene Directional Light
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
@@ -129,6 +140,16 @@ namespace Azul
 
 		SceneManager::ChangeScene("AzulScene");
 		//GameObjectManager::Dump();
+
+		GameObjectManager::SpawnObject("pBirdsTmp 2",
+			new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::ALLBirds), Rect(400, 300, 100, 100))),
+			Vec3(100.f, 100.f, 0.f)
+		);
+
+		//GameObjectManager::SpawnObject("Stitch",
+		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::Stitch), Rect(400, 300, 100, 150))),
+		//	Vec3(1075.f, 250.f, 0.f)
+		//)->SetRelativeRotation(Rot(Rot1::Z, MATH_PI4));
 
 		return true;
 	}
@@ -153,6 +174,7 @@ namespace Azul
 		MeshManager::Destroy();
 		CameraManager::Destroy();
 		ClipManager::Destroy();
+		ImageManager::Destroy();
 
 		delete pAnimController;
 		delete pAnimController1;
@@ -532,6 +554,7 @@ namespace Azul
 		ShaderObjectManager::Add(ShaderObject::Name::ConstColor, new SOConstColor());
 		ShaderObjectManager::Add(ShaderObject::Name::Default, new SODefault());
 		ShaderObjectManager::Add(ShaderObject::Name::EditorVisual, new SOEditorVisual());
+		ShaderObjectManager::Add(ShaderObject::Name::Sprite, new SOSprite());
 	}
 
 	void Game::LoadCameras()
@@ -543,6 +566,15 @@ namespace Azul
 		pCamera = CameraManager::Add(Camera::Name::Player, new Camera());
 		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 10), Vec3(0, 0, 0));
 		pCamera->SetPerspective(85.0f, GetAspectRatio(), 0.1f, 1000.0f);
+
+		pCamera = CameraManager::Add(Camera::Name::Sprite, new Camera());
+		pCamera->SetViewport(0, 0, Engine::GetWindowWidth(), Engine::GetWindowHeight());
+		pCamera->SetOrientAndPosition(Vec3(0.0f, 1.0f, 0.0f), Vec3(0.0f, 0.0f, -1.0f), Vec3(0.0f, 0.0f, 2.0f));
+		pCamera->SetOrthographic(
+			(float)-pCamera->GetScreenWidth() / 2.0f, (float)pCamera->GetScreenWidth() / 2.0f,
+			(float)-pCamera->GetScreenHeight() / 2.0f, (float)pCamera->GetScreenHeight() / 2.0f,
+			1.0f, 1000.0f
+		);
 
 		pCamera = CameraManager::Add(Camera::Name::High, new Camera());
 		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(), Vec3(2.f, 6.f, 7.f));
@@ -557,6 +589,7 @@ namespace Azul
 		pCamera->SetPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		CameraManager::SetCurrentCamera(Camera::Name::Default);
+		CameraManager::SetCurrentCamera2D(Camera::Name::Sprite);
 	}
 
 	void Game::LoadAssets()
@@ -660,6 +693,7 @@ namespace Azul
 		//TextureObjectManager::Add(TextureObject::Name::Bone_R_001, new TextureProto("Bone_R_001.proto.azul", 0));
 		//TextureObjectManager::Add(TextureObject::Name::Bone_R_002, new TextureProto("Bone_R_002.proto.azul", 0));
 
+		MeshManager::Add(Mesh::Name::Sprite, new MeshProto("UnitSquare.proto.azul"));
 		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
 		MeshManager::Add(Mesh::Name::Pyramid, new PyramidMesh());

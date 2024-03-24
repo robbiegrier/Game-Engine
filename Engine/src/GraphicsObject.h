@@ -22,6 +22,7 @@ namespace Azul
 			GraphicsObjectFlatTexture,
 			GraphicsObjectLightTexture,
 			GraphicsObjectNull,
+			GraphicsObjectSprite,
 			None
 		};
 

@@ -20,6 +20,9 @@ namespace Azul
 		static void SetCurrentCamera(Camera::Name name);
 		static Camera* GetCurrentCamera();
 
+		static void SetCurrentCamera2D(Camera::Name name);
+		static Camera* GetCurrentCamera2D();
+
 		// Update called by the core loop
 		static void Update(float deltaTime);
 
@@ -39,6 +42,7 @@ namespace Azul
 
 		// Track the current camera
 		Camera* pCurrentCamera = nullptr;
+		Camera* pCurrentCamera2D = nullptr;
 	};
 }
 
