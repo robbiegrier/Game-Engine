@@ -10,6 +10,39 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
+      3.229562997817993,
+      12.572391510009766,
+      14.799331665039063
+    ],
+    "Mesh": 1,
+    "Object Name": "Spawned Object 1",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
       17.986465454101563,
       4.037463665008545,
       -35.64055633544922
@@ -657,7 +690,7 @@
       0.09999995678663254
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -690,7 +723,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -723,7 +756,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1218,7 +1251,7 @@
       0.0010000000474974513
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1251,7 +1284,7 @@
       0.0010000000474974513
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1284,7 +1317,7 @@
       20.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1317,7 +1350,7 @@
       2.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1350,7 +1383,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1383,7 +1416,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1416,7 +1449,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1449,7 +1482,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1482,7 +1515,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1515,7 +1548,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1548,7 +1581,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1581,7 +1614,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1614,7 +1647,7 @@
       1.0
     ],
     "Shader": 1,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1647,7 +1680,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1680,7 +1713,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1713,7 +1746,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -1746,7 +1779,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [
@@ -2175,7 +2208,7 @@
       1.0
     ],
     "Shader": 6,
-    "Texture": 88
+    "Texture": 89
   },
   {
     "Color": [

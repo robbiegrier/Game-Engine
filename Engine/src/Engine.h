@@ -40,6 +40,9 @@ namespace Azul
 		static void NativeUpdate(float deltaTime);
 		static void NativeRender();
 
+		static void SetDefaultTargetMode();
+		static void ClearDepthStencil(const Vec4& color);
+
 	protected:
 		// Big four
 		Engine();
@@ -73,7 +76,6 @@ namespace Azul
 		void LockFramerate(const Azul::AnimTimer& engineTime);
 		void UpdateWindowName(float deltaTime);
 		void Cleanup();
-		void SetDefaultTargetMode();
 		void CreateRenderTarget();
 		void CleanupRenderTarget();
 

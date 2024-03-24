@@ -239,12 +239,11 @@ namespace Azul
 				const DWORD currentTime = timeGetTime();
 				storedDeltaTime = (currentTime - previousTime) / 1000.0f;
 				previousTime = currentTime;
-				SetDefaultTargetMode();
 
 				pCurrentState->Update(GetDeltaTime());
 
+				SetDefaultTargetMode();
 				ClearDepthStencilBuffer({ 0.1f, 0.1f, 0.1f, 1.000000000f });
-
 				pCurrentState->Draw();
 
 				LockFramerate(engineTime);
@@ -357,20 +356,20 @@ namespace Azul
 
 	void Engine::SetDefaultTargetMode()
 	{
-		assert(pDevice);
-		assert(pContext);
+		Engine& self = GetEngineInstance();
 
-		// Set (point to ) the Rasterizers functions to be used
-		pContext->RSSetState(pRasterizerState);
+		assert(self.pDevice);
+		assert(self.pContext);
 
-		// Set (point to ) the Viewport to be used
-		pContext->RSSetViewports(1, &viewport);
+		self.pContext->RSSetState(self.pRasterizerState);
+		self.pContext->RSSetViewports(1, &self.viewport);
+		self.pContext->OMSetRenderTargets(1, &self.pRenderTargetView, self.pDepthStencilView);
+		self.pContext->OMSetDepthStencilState(self.pDepthStencilState, 1);
+	}
 
-		// Set (point to ) render target: Only one Target, this maps to Pixel shader
-		pContext->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
-
-		// Set (point to ) the Depth functions to be used
-		pContext->OMSetDepthStencilState(pDepthStencilState, 1);
+	void Engine::ClearDepthStencil(const Vec4& color)
+	{
+		GetEngineInstance().ClearDepthStencilBuffer(color);
 	}
 
 	void Engine::SetMouseVisibility(bool visible)

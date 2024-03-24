@@ -594,6 +594,7 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Green, new TextureProto("Green.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Hovered, new TextureProto("Hovered.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Disabled, new TextureProto("Disabled.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Birds, new TextureProto("Birds.proto.azul"));
 
 		int textI = 0;
 		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
@@ -650,14 +651,14 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Tattoine35, new TextureProto(tattoineData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::Tattoine36, new TextureProto(tattoineData.meshes[textI++]));
 
-		TextureObjectManager::Add(TextureObject::Name::Bone, new TextureProto("Bone.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_001, new TextureProto("Bone_001.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_L, new TextureProto("Bone_L.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_L_001, new TextureProto("Bone_L_001.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_L_002, new TextureProto("Bone_L_002.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_R, new TextureProto("Bone_R.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_R_001, new TextureProto("Bone_R_001.proto.azul", 0));
-		TextureObjectManager::Add(TextureObject::Name::Bone_R_002, new TextureProto("Bone_R_002.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone, new TextureProto("Bone.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_001, new TextureProto("Bone_001.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_L, new TextureProto("Bone_L.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_L_001, new TextureProto("Bone_L_001.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_L_002, new TextureProto("Bone_L_002.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_R, new TextureProto("Bone_R.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_R_001, new TextureProto("Bone_R_001.proto.azul", 0));
+		//TextureObjectManager::Add(TextureObject::Name::Bone_R_002, new TextureProto("Bone_R_002.proto.azul", 0));
 
 		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
@@ -738,20 +739,20 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::Tattoine35, new MeshProto(tattoineData.meshes[meshI++]));
 		MeshManager::Add(Mesh::Name::Tattoine36, new MeshProto(tattoineData.meshes[meshI++]));
 
-		MeshManager::Add(Mesh::Name::Bone, new MeshProto("Bone.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_001, new MeshProto("Bone_001.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_L, new MeshProto("Bone_L.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_L_001, new MeshProto("Bone_L_001.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_L_002, new MeshProto("Bone_L_002.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_R, new MeshProto("Bone_R.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_R_001, new MeshProto("Bone_R_001.proto.azul", 0));
-		MeshManager::Add(Mesh::Name::Bone_R_002, new MeshProto("Bone_R_002.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone, new MeshProto("Bone.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_001, new MeshProto("Bone_001.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_L, new MeshProto("Bone_L.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_L_001, new MeshProto("Bone_L_001.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_L_002, new MeshProto("Bone_L_002.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_R, new MeshProto("Bone_R.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_R_001, new MeshProto("Bone_R_001.proto.azul", 0));
+		//MeshManager::Add(Mesh::Name::Bone_R_002, new MeshProto("Bone_R_002.proto.azul", 0));
 
-		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
-		ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));
-		ClipManager::Add(Clip::Name::Walk, new ClipProto("walk_mesh.anim.proto.azul"));
-		ClipManager::Add(Clip::Name::SidestepRight, new ClipProto("sidestep_right.anim.proto.azul"));
-		ClipManager::Add(Clip::Name::HitFront, new ClipProto("hit_front.anim.proto.azul"));
+		//ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
+		//ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));
+		//ClipManager::Add(Clip::Name::Walk, new ClipProto("walk_mesh.anim.proto.azul"));
+		//ClipManager::Add(Clip::Name::SidestepRight, new ClipProto("sidestep_right.anim.proto.azul"));
+		//ClipManager::Add(Clip::Name::HitFront, new ClipProto("hit_front.anim.proto.azul"));
 	}
 
 	Game& Game::GetInstance()
