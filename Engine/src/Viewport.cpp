@@ -36,9 +36,9 @@ namespace Azul
 
 	void Viewport::Close()
 	{
-		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		UINT sampleMask = 0xffffffff;
-		GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
+		//float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		//UINT sampleMask = 0xffffffff;
+		//GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
 	}
 
 	void Viewport::Resize(UINT inWidth, UINT inHeight)
@@ -100,6 +100,8 @@ namespace Azul
 		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
 
 		ZeroMemory(&textureDesc, sizeof(textureDesc));
+		ZeroMemory(&renderTargetViewDesc, sizeof(renderTargetViewDesc));
+		ZeroMemory(&shaderResourceViewDesc, sizeof(shaderResourceViewDesc));
 
 		textureDesc.Width = worldWidth;
 		textureDesc.Height = worldHeight;
@@ -183,9 +185,9 @@ namespace Azul
 		BlendState2.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		BlendState2.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		BlendState2.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-		BlendState2.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_INV_DEST_ALPHA;
-		BlendState2.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-		BlendState2.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
+		BlendState2.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		BlendState2.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+		BlendState2.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		BlendState2.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 		hr = GetDevice()->CreateBlendState(&BlendState2, &pBlendStateAlpha);

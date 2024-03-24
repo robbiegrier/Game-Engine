@@ -10,39 +10,6 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      3.229562997817993,
-      12.572391510009766,
-      14.799331665039063
-    ],
-    "Mesh": 1,
-    "Object Name": "Spawned Object 1",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Shader": 0,
-    "Texture": 88
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Is Selectable": true,
-    "Location": [
       17.986465454101563,
       4.037463665008545,
       -35.64055633544922
@@ -1066,9 +1033,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -123.24522399902344,
-      -94.77044677734375,
-      1.4085335731506348
+      -261.875,
+      -189.36972045898438,
+      1.4073683023452759
     ],
     "Mesh": 10,
     "Object Name": "Dog House Huge",
@@ -2188,9 +2155,9 @@
     "Graphics Object": 4,
     "Is Selectable": true,
     "Location": [
-      -89.16149139404297,
+      -0.04740360006690025,
       6.133009910583496,
-      -37.83934783935547
+      -2.085883617401123
     ],
     "Mesh": 88,
     "Object Name": "Player",
@@ -2198,9 +2165,9 @@
     "Render Shell": true,
     "Rotation": [
       0.0,
-      0.8753724694252014,
+      0.014414066448807716,
       0.0,
-      0.48344916105270386
+      0.9998961091041565
     ],
     "Scale": [
       1.0,
@@ -2386,9 +2353,9 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -0.7865469455718994,
+      4.81989860534668,
       7.635528087615967,
-      60.834903717041016
+      58.67669677734375
     ],
     "Mesh": 0,
     "Object Name": "bbbb",
@@ -2947,27 +2914,126 @@
     "Graphics Object": 3,
     "Is Selectable": true,
     "Location": [
-      -23.79861068725586,
-      7.9185028076171875,
-      47.58992004394531
+      -16.421621322631836,
+      10.350141525268555,
+      46.18318176269531
     ],
     "Mesh": 7,
     "Object Name": "Space Frigate 2 (4)",
     "Parent Name": "Objects",
     "Render Shell": true,
     "Rotation": [
-      -3.796486680585076e-07,
-      0.939268171787262,
-      -1.3871446924440534e-07,
-      -0.34318408370018005
+      -0.18183347582817078,
+      0.9310886859893799,
+      -0.018460765480995178,
+      -0.3157050907611847
     ],
     "Scale": [
-      0.25,
-      0.25,
-      0.25
+      0.2499999850988388,
+      0.2499999850988388,
+      0.2499999850988388
     ],
     "Shader": 0,
     "Texture": 7
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -1.009882926940918,
+      1.8821353912353516,
+      4.319947242736816
+    ],
+    "Mesh": 1,
+    "Object Name": "BLEND2",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      2.3828125,
+      4.056640625,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 88
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      -0.4546109437942505,
+      2.074486255645752,
+      7.138330936431885
+    ],
+    "Mesh": 6,
+    "Object Name": "background crate",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      3.9228515625,
+      2.7412109375,
+      1.0
+    ],
+    "Shader": 0,
+    "Texture": 6
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Game Object": 0,
+    "Graphics Object": 3,
+    "Is Selectable": true,
+    "Location": [
+      0.951244592666626,
+      1.5030632019042969,
+      4.81496524810791
+    ],
+    "Mesh": 1,
+    "Object Name": "Blend_TEST",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      3.7421875,
+      3.7421875,
+      3.7421875
+    ],
+    "Shader": 0,
+    "Texture": 88
   },
   {
     "Color": [

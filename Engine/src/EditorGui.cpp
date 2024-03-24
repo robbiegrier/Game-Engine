@@ -487,8 +487,6 @@ namespace Azul
 				switchf = true;
 				DirectX::ScratchImage scratchImage;
 				ID3D11Resource* resource;
-				//HRESULT hr = DirectX::CaptureTexture(Engine::GetDevice(), Engine::GetContext(), self.pWorldViewport->GetRenderTargetTexture(), scratchImage);
-				//self.pWorldViewport->GetShaderResourceView()->GetResource(&resource);
 				self.pWorldViewport->GetRenderTargetView()->GetResource(&resource);
 				HRESULT hr = DirectX::CaptureTexture(Engine::GetDevice(), Engine::GetContext(), resource, scratchImage);
 
