@@ -8,6 +8,8 @@ namespace Azul
 	{
 		assert(pGraphicsObject);
 
+		typeName = Name::GameObjectSprite;
+
 		GOSprite* pGraphicsObjectSprite = (GOSprite*)pGraphicsObject;
 
 		SetRelativeScale(Vec3(pGraphicsObjectSprite->origWidth, pGraphicsObjectSprite->origHeight, 1.f));

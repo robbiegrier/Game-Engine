@@ -141,10 +141,10 @@ namespace Azul
 		SceneManager::ChangeScene("AzulScene");
 		//GameObjectManager::Dump();
 
-		GameObjectManager::SpawnObject("pBirdsTmp 2",
-			new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::ALLBirds), Rect(400, 300, 100, 100))),
-			Vec3(100.f, 100.f, 0.f)
-		);
+		//GameObjectManager::SpawnObject("pBirdsTmp 2",
+		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::GreenBird), Rect(400, 300, 200, 200))),
+		//	Vec3(200.f, 200.f, 0.f)
+		//);
 
 		//GameObjectManager::SpawnObject("Stitch",
 		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::Stitch), Rect(400, 300, 100, 150))),

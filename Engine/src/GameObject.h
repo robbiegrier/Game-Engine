@@ -21,6 +21,7 @@ namespace Azul
 		{
 			GameObject,
 			Player,
+			GameObjectSprite,
 			None
 		};
 

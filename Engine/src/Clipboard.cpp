@@ -12,13 +12,17 @@
 #include "GOFlatTexture.h"
 #include "GOLightTexture.h"
 #include "GONull.h"
+#include "GOSprite.h"
 #include "Player.h"
+#include "GameObjectSprite.h"
 #include "EditorGui.h"
 #include "EditorObjectReference.h"
 #include "CameraManager.h"
 #include "EditActionSpawn.h"
 #include "EditActionDelete.h"
 #include "PCSTreeReverseIterator.h"
+#include "Image.h"
+#include "ImageManager.h"
 
 using json = nlohmann::json;
 
@@ -59,6 +63,7 @@ namespace Azul
 			ShaderObject::Name shaderEnum = ShaderObject::Name::None;
 			Mesh::Name meshEnum = Mesh::Name::None;
 			TextureObject::Name textureEnum = TextureObject::Name::None;
+			Image::Name imageEnum = Image::Name::Null;
 
 			if (pObject->GetGraphicsObject()->GetShader())	shaderEnum = pObject->GetGraphicsObject()->GetShader()->GetName();
 			if (pObject->GetGraphicsObject()->GetModel())	meshEnum = pObject->GetGraphicsObject()->GetModel()->GetName();
@@ -66,6 +71,11 @@ namespace Azul
 			Vec4 color = pObject->GetGraphicsObject()->GetColor();
 			GraphicsObject::Name graphicObjectEnum = pObject->GetGraphicsObject()->GetName();
 			GameObject::Name gameObjectEnum = pObject->GetTypeName();
+
+			if (pObject->GetTypeName() == GameObject::Name::GameObjectSprite)
+			{
+				imageEnum = ((GOSprite*)pObject->GetGraphicsObject())->pImage->GetName();
+			}
 
 			return json({
 					{"Object Name", pName},
@@ -76,6 +86,7 @@ namespace Azul
 					{"Shader", shaderEnum},
 					{"Mesh", meshEnum},
 					{"Texture", textureEnum},
+					{"Image", imageEnum},
 					{"Graphics Object", graphicObjectEnum},
 					{"Game Object", gameObjectEnum},
 					{"Color", {color[x], color[y], color[z], color[w]}},
@@ -109,6 +120,7 @@ namespace Azul
 		Mesh::Name meshName = Mesh::Name::None;
 		TextureObject::Name textureName = TextureObject::Name::None;
 		ShaderObject::Name shaderName = ShaderObject::Name::None;
+		Image::Name imageName = Image::Name::Null;
 		Vec4 color;
 		Vec3 location;
 		Vec3 scale;
@@ -127,6 +139,7 @@ namespace Azul
 			else if (strcmp(propertyName, "Shader") == 0)			shaderName = (ShaderObject::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Texture") == 0)			textureName = (TextureObject::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Mesh") == 0)				meshName = (Mesh::Name)prop.value().template get<unsigned int>();
+			else if (strcmp(propertyName, "Image") == 0)			imageName = (Image::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Render Shell") == 0)		renderShell = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Is Selectable") == 0)	isSelectable = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Copy Relative Location") == 0) {}
@@ -153,6 +166,8 @@ namespace Azul
 			pGo = new GOFlatTexture(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), TextureObjectManager::Find(textureName)); break;
 		case GraphicsObject::Name::GraphicsObjectLightTexture:
 			pGo = new GOLightTexture(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), TextureObjectManager::Find(textureName)); break;
+		case GraphicsObject::Name::GraphicsObjectSprite:
+			pGo = new GOSprite(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), ImageManager::Find(imageName), Rect()); break;
 		case GraphicsObject::Name::GraphicsObjectNull:
 			pGo = new GONull(); break;
 		}
@@ -167,6 +182,10 @@ namespace Azul
 		case GameObject::Name::Player:
 			delete pGo;
 			pGameObject = new Player();
+			break;
+		case GameObject::Name::GameObjectSprite:
+			pGameObject = new GameObjectSprite(pGo);
+			break;
 		}
 
 		pGameObject->SetRelativeScale(scale);

@@ -8,7 +8,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       9.190799713134766,
@@ -42,7 +41,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       3.6123013496398926,
@@ -76,7 +74,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       6.0,
@@ -110,7 +107,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       1.0,
@@ -144,7 +140,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.0,
@@ -178,7 +173,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -3.5762786865234375e-07,
@@ -212,7 +206,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.0,
@@ -246,7 +239,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.0,
@@ -280,7 +272,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -6.0,
@@ -314,7 +305,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.0,
@@ -348,7 +338,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       17.986465454101563,
@@ -382,7 +371,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -10.212614059448242,
@@ -416,7 +404,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.37896251678466797,
@@ -450,7 +437,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.8047511577606201,
@@ -484,7 +470,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       6.679615020751953,
@@ -518,7 +503,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -6.428632736206055,
@@ -552,7 +536,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       80.84882354736328,
@@ -586,7 +569,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -3.6767969131469727,
@@ -620,7 +602,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       3.587890148162842,
@@ -654,7 +635,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.5198643207550049,
@@ -688,7 +668,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.0020737648010253906,
@@ -722,7 +701,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       49.06647491455078,
@@ -756,7 +734,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.031562644988298416,
@@ -790,7 +767,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.2237696349620819,
@@ -824,7 +800,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -9.287365913391113,
@@ -858,7 +833,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -84.41352844238281,
@@ -892,7 +866,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.5285300016403198,
@@ -926,7 +899,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.7870001792907715,
@@ -960,7 +932,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       2.19157075881958,
@@ -994,7 +965,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       50.067718505859375,
@@ -1028,7 +998,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       55.0,
@@ -1062,7 +1031,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       45.0,
@@ -1096,7 +1064,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -76.3330078125,
@@ -1130,7 +1097,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -46.10530090332031,
@@ -1164,7 +1130,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -60.02386474609375,
@@ -1198,7 +1163,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       73.24208068847656,
@@ -1232,7 +1196,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       59.331573486328125,
@@ -1266,7 +1229,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.03777313232421875,
@@ -1300,7 +1262,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -7.54791259765625,
@@ -1334,7 +1295,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       32.65614318847656,
@@ -1368,7 +1328,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.07689166069030762,
@@ -1402,7 +1361,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -261.875,
@@ -1436,7 +1394,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": false,
     "Location": [
       0.0,
@@ -1470,7 +1427,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -70.0,
@@ -1504,7 +1460,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       5.280555248260498,
@@ -1538,7 +1493,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       2.5506434440612793,
@@ -1572,7 +1526,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": false,
     "Location": [
       5.0,
@@ -1606,7 +1559,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": false,
     "Location": [
       -0.25000011920928955,
@@ -1640,7 +1592,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 1,
-    "Image": 6,
     "Is Selectable": false,
     "Location": [
       -0.25000011920928955,
@@ -1674,7 +1625,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       10.172155380249023,
@@ -1708,7 +1658,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 0,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       48.7216796875,
@@ -1742,7 +1691,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 0,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       1.2999999523162842,
@@ -1776,7 +1724,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 0,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.2999999523162842,
@@ -1810,7 +1757,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 0,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.2999999523162842,
@@ -1844,7 +1790,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 0,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       1.300002932548523,
@@ -1878,7 +1823,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       48.20927429199219,
@@ -1912,7 +1856,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       24.9117431640625,
@@ -1946,7 +1889,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -2.586512804031372,
@@ -1980,7 +1922,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -4.26861047744751,
@@ -2014,7 +1955,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.028849244117736816,
@@ -2048,7 +1988,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.006876438856124878,
@@ -2082,7 +2021,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.004117012023925781,
@@ -2116,7 +2054,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.047386646270752,
@@ -2150,7 +2087,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       3.140047788619995,
@@ -2184,7 +2120,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -3.703547477722168,
@@ -2218,7 +2153,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       47.348140716552734,
@@ -2252,7 +2186,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.02095639705657959,
@@ -2286,7 +2219,6 @@
     ],
     "Game Object": 1,
     "Graphics Object": 4,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.04740360006690025,
@@ -2308,7 +2240,7 @@
       1.0,
       1.0
     ],
-    "Shader": 7,
+    "Shader": 6,
     "Texture": 89
   },
   {
@@ -2320,7 +2252,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -36.131534576416016,
@@ -2354,7 +2285,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       22.852907180786133,
@@ -2388,7 +2318,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.024863332509994507,
@@ -2422,7 +2351,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -12.789787292480469,
@@ -2456,7 +2384,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.0032308120280504227,
@@ -2490,7 +2417,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       58.536376953125,
@@ -2524,7 +2450,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.8329849243164063,
@@ -2558,7 +2483,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.1855487823486328,
@@ -2592,7 +2516,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       76.06376647949219,
@@ -2626,7 +2549,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -2.586512804031372,
@@ -2660,7 +2582,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -4.26861047744751,
@@ -2694,7 +2615,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.028849244117736816,
@@ -2728,7 +2648,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.006876438856124878,
@@ -2762,7 +2681,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.007244930136948824,
@@ -2796,7 +2714,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.0473864078521729,
@@ -2830,7 +2747,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       3.140047788619995,
@@ -2864,7 +2780,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -3.703547477722168,
@@ -2898,7 +2813,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -8.034164428710938,
@@ -2932,7 +2846,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -16.421621322631836,
@@ -2966,7 +2879,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.009882926940918,
@@ -3000,7 +2912,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.4546109437942505,
@@ -3034,7 +2945,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.951244592666626,
@@ -3068,7 +2978,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       45.623046875,
@@ -3102,7 +3011,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -2.586512804031372,
@@ -3136,7 +3044,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -4.26861047744751,
@@ -3170,7 +3077,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       0.028849244117736816,
@@ -3204,7 +3110,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.006876438856124878,
@@ -3238,7 +3143,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -0.007244586944580078,
@@ -3272,7 +3176,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -1.0473864078521729,
@@ -3306,7 +3209,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       3.140047788619995,
@@ -3340,7 +3242,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       -3.703547477722168,
@@ -3374,7 +3275,6 @@
     ],
     "Game Object": 0,
     "Graphics Object": 3,
-    "Image": 6,
     "Is Selectable": true,
     "Location": [
       6.933753490447998,
@@ -3398,39 +3298,5 @@
     ],
     "Shader": 0,
     "Texture": 88
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 2,
-    "Graphics Object": 5,
-    "Image": 2,
-    "Is Selectable": true,
-    "Location": [
-      523.0,
-      339.0,
-      0.0
-    ],
-    "Mesh": 87,
-    "Object Name": "pBirdsTmp 2",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      200.0,
-      200.0,
-      1.0
-    ],
-    "Shader": 6,
-    "Texture": 89
   }
 ]
