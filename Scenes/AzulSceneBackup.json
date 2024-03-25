@@ -3398,39 +3398,5 @@
     ],
     "Shader": 0,
     "Texture": 88
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Game Object": 2,
-    "Graphics Object": 5,
-    "Image": 2,
-    "Is Selectable": true,
-    "Location": [
-      523.0,
-      339.0,
-      0.0
-    ],
-    "Mesh": 87,
-    "Object Name": "pBirdsTmp 2",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      200.0,
-      200.0,
-      1.0
-    ],
-    "Shader": 6,
-    "Texture": 89
   }
 ]

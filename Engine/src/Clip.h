@@ -3,10 +3,20 @@
 
 #include "DLink.h"
 #include "AnimTime.h"
-#include "Bone.h"
+#include "BoneTransform.h"
+
+#define BONE_COUNT_MAX 128
+#define HIERARCHY_DEPTH_MAX 20
 
 namespace Azul
 {
+	struct BlendInput
+	{
+		BoneTransform* pA;
+		BoneTransform* pB;
+		float tS;
+	};
+
 	class Clip : public DLink
 	{
 	public:
@@ -17,6 +27,12 @@ namespace Azul
 			SidestepRight,
 			HitFront,
 			ShotUp,
+			JoyfulJump,
+			HipHopDancing,
+			GangnamStyle,
+			HumanoidRun,
+			GettingHitBackwards,
+			RunJump,
 			Null,
 			None
 		};
@@ -31,7 +47,7 @@ namespace Azul
 			FrameBucket* nextBucket;
 			FrameBucket* prevBucket;
 			AnimTime KeyTime;
-			Bone* poBone;
+			BoneTransform* poBone;
 			char pad[4];
 		};
 
@@ -42,7 +58,8 @@ namespace Azul
 		virtual ~Clip();
 
 		AnimTime GetTotalTime();
-		void AnimateBones(AnimTime tCurr, Bone* pResult);
+
+		BlendInput GetBlendInput(AnimTime tCurr) const;
 
 		// As a DLink node
 		virtual void Wash() override;

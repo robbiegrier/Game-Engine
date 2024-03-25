@@ -6,4 +6,5 @@ message boneData_proto
 	repeated float translation = 1;
 	repeated float rotation = 2;
 	repeated float scale = 3;
+	optional int32 boneNumber = 4;
 }

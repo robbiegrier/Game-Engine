@@ -39,6 +39,70 @@ namespace Azul
 		float z;
 	};
 
+	struct Vec4f
+	{
+		Vec4f()
+			: x(0.0f), y(0.0f), z(0.0f), w(1.0f) {}
+		Vec4f(const Vec4f&) = default;
+		Vec4f& operator = (const Vec4f&) = default;
+		~Vec4f() = default;
+
+		Vec4f(const float a, const float b, const float c, const float d)
+			: x(a), y(b), z(c), w(d) {}
+
+		float x;
+		float y;
+		float z;
+		float w;
+	};
+
+	struct Vec4ui
+	{
+		Vec4ui() = default;
+		Vec4ui(const Vec4ui&) = default;
+		Vec4ui& operator = (const Vec4ui&) = default;
+		~Vec4ui() = default;
+
+		Vec4ui(const unsigned int a, const unsigned int b, const unsigned int c, const unsigned int d)
+			: x(a), y(b), z(c), w(d) {}
+
+		unsigned int x;
+		unsigned int y;
+		unsigned int z;
+		unsigned int w;
+	};
+
+	struct Vec4si
+	{
+		Vec4si() = default;
+		Vec4si(const Vec4si&) = default;
+		Vec4si& operator = (const Vec4si&) = default;
+		~Vec4si() = default;
+
+		Vec4si(const unsigned short a, const unsigned short b, const unsigned short c, const unsigned short d)
+			: x(a), y(b), z(c), w(d) {}
+
+		unsigned short x;
+		unsigned short y;
+		unsigned short z;
+		unsigned short w;
+	};
+
+	struct Vec3si
+	{
+		Vec3si() = default;
+		Vec3si(const Vec3si&) = default;
+		Vec3si& operator = (const Vec3si&) = default;
+		~Vec3si() = default;
+
+		Vec3si(const unsigned short a, const unsigned short b, const unsigned short c)
+			: x(a), y(b), z(c) {}
+
+		unsigned short x;
+		unsigned short y;
+		unsigned short z;
+	};
+
 	// Vertex data for a colored cube.
 	struct VertexColor
 	{
@@ -60,12 +124,24 @@ namespace Azul
 		Vec2f TexCoord;
 	};
 
+	struct VertexWeights
+	{
+		Vec4f Weight;
+	};
+
+	struct VertexJoints
+	{
+		Vec4si Joint;
+	};
+
 	enum class VertexSlot : uint32_t
 	{
 		Position,  //0
 		Color,     //1
 		Norm,      //2
-		TexCoord   //3
+		TexCoord,  //3
+		Weights,   //4
+		Joints     //5
 	};
 
 	enum class ConstantBufferSlot : uint32_t

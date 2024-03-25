@@ -52,6 +52,11 @@ public:
 	vboData          vbo_uv;
 	vboData          vbo_index;
 
+	// Skinned data
+	vboData          vbo_weights;
+	vboData          vbo_joints;
+	vboData          vbo_invBind;
+
 	textureData      text_color;
 	float boundingSphereRadius;
 	float boundingSphereCenter[3];

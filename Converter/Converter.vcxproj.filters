@@ -600,6 +600,9 @@
     <ClInclude Include="..\RapidXML\rapidxml_utils.hpp">
       <Filter>_RapidXML</Filter>
     </ClInclude>
+    <ClInclude Include="ConvertSkin.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Proto\libs\debug\absl_bad_any_cast_impl.lib">
@@ -1169,6 +1172,9 @@
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ConvertFont.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertSkin.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>

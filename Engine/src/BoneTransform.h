@@ -1,11 +1,11 @@
-#ifndef _Bone
-#define _Bone
+#ifndef _BoneTransform
+#define _BoneTransform
 
 #include "MathEngine.h"
 
 namespace Azul
 {
-	struct Bone : public Align16
+	struct BoneTransform : public Align16
 	{
 		Vec3  T;
 		Quat  Q;

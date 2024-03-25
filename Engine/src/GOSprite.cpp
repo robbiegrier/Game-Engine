@@ -43,9 +43,6 @@ namespace Azul
 	void GOSprite::ActivateGraphics()
 	{
 		pImage->pText->ActivateTexture();
-
-		Engine::ToggleBlending(true);
-
 		pModel->TransferUVCorrection(this->poMatrix_uv);
 	}
 

@@ -8,45 +8,32 @@
 #include "GraphicsObject.h"
 #include "PCSNode.h"
 #include "AnimTime.h"
-#include "Bone.h"
+#include "BoneTransform.h"
 
 namespace Azul
 {
+	class AnimatedObjectHierarchy;
+
 	class GameObjectAnimSkin : public GameObjectAnim
 	{
 	public:
 		// Big four
-		GameObjectAnimSkin(GraphicsObject* graphicsObject, Bone* pBoneResult);
+		GameObjectAnimSkin(GraphicsObject* pGraphicsObject, AnimatedObjectHierarchy* _pAnimatedObjectHierarchy, BoneTransform* pInBoneResult);
 		GameObjectAnimSkin() = delete;
 		GameObjectAnimSkin(const GameObjectAnimSkin&) = delete;
 		GameObjectAnimSkin& operator=(GameObjectAnimSkin&) = delete;
 		virtual ~GameObjectAnimSkin();
 
 		virtual void Update(AnimTime currTime);
-
-		void SetScale(float sx, float sy, float sz);
-		void SetQuat(float qx, float qy, float qz, float qw);
-		void SetTrans(float x, float y, float z);
-
-		void SetScale(const Vec3& r);
-		void SetQuat(const Quat& r);
-		void SetTrans(const Vec3& r);
-
 		virtual void SetIndex(int i) override;
 
-		Mat4 GetBoneOrientation(void) const;
-		void SetBoneOrientation(const Mat4&);
+	public:
+		BoneTransform* pBoneResult;
+		Mat4* poBoneWorld;
+		AnimatedObjectHierarchy* pAnimationHierarchy;
 
 	private:
-		void privUpdate(AnimTime currTime);
-
-	public:
-		Vec3* poScale;
-		Quat* poQuat;
-		Vec3* poTrans;
-		Mat4* poLocal;
-		Bone* pBoneResult;
-		Mat4* poBoneOrientation;
+		void UpdateSkinGPU();
 	};
 }
 

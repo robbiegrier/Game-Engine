@@ -32,6 +32,7 @@ namespace Azul
 	void SOSprite::OnOpen(GraphicsObject* pObject)
 	{
 		static_cast<void>(pObject);
+		Engine::ToggleBlending(true);
 
 		GOSprite* pGOSprite = (GOSprite*)pObject;
 

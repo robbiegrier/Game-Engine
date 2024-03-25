@@ -62,6 +62,13 @@ struct BoneMesh
 	std::vector<Vec3ui> index;                 // x
 };
 
+struct SkinMesh
+{
+	std::vector< Mat4 > invBone;
+	std::vector< Vec4ui > joints;  // orig unsigned short--> unsigned int
+	std::vector< Vec4f > weights;
+};
+
 class boneData;
 
 class GLTF
@@ -82,24 +89,16 @@ public:
 	static bool SetTexture(Model& gltfModel, unsigned int index, textureData& text, char* pBinaryBuff);
 	static bool SetExternalTexture(const char* const filename, unsigned int index, textureData& text);
 
-	static bool SetVBO_BONE(Model& gltfModel,
-		const char* pKey,
-		vboData& vbo,
-		char* pBuffStart,
-		unsigned int byteLength,
-		unsigned int count);
+	// In Chicken Bot Rigid Skeleton Converter
+	static bool SetVBO_BONE(Model& gltfModel, const char* pKey, vboData& vbo, char* pBuffStart, unsigned int byteLength, unsigned int count);
+	static bool SetVBO_BONE_index(Model& gltfModel, vboData& vbo, char* pBuffStart, unsigned int byteLength, unsigned int count);
 
-	static bool SetVBO_BONE_index(Model& gltfModel,
-		vboData& vbo,
-		char* pBuffStart,
-		unsigned int byteLength,
-		unsigned int count);
+	static bool SetCustomVBO(vboData& vbo, void* data, unsigned int sizeInBytes, unsigned int count, vboData::VBO_COMPONENT componentType, vboData::VBO_TYPE type, vboData::VBO_TARGET target);
 
 	static bool LoadBinary(Model& model, const char* const pFileName);
 	static bool OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
 	static bool OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
+	static void InsertBoundingSphereData(meshData& runModel);
 };
 
 #endif
-
-// --- End of File ---

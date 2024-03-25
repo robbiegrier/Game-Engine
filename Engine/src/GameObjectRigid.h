@@ -20,8 +20,6 @@ namespace Azul
 		GameObjectRigid(const GameObjectRigid&) = delete;
 		GameObjectRigid& operator=(GameObjectRigid&) = delete;
 		virtual ~GameObjectRigid() = default;
-
-		virtual void Update(AnimTime currTime);
 	};
 }
 

@@ -10,6 +10,7 @@
 #include "md5.h"
 #include "stb_image.h"
 #include "boneData.h"
+#include "BoundingSphere.h"
 
 using namespace Azul;
 
@@ -274,10 +275,10 @@ bool GLTF::SetVBO_pos(Model& gltfModel, unsigned int index, vboData& vbo, char* 
 		*pSource = pSourceVec[x]; pSource++;
 		*pSource = pSourceVec[y]; pSource++;
 		*pSource = pSourceVec[z]; pSource++;
+
+		//Trace::out("%f %f %f\n", pSourceVec[x], pSourceVec[y], pSourceVec[z]);
 	}
 
-	//float *p = (float *)vbo.poData;
-	//Trace::out("%f %f %f\n", p[0], p[1], p[2]);
 	return true;
 }
 
@@ -602,6 +603,24 @@ bool GLTF::SetVBO_BONE_index(Model& gltfModel, vboData& vbo, char* pBuffStart, u
 	return true;
 }
 
+bool GLTF::SetCustomVBO(vboData& vbo, void* pData, unsigned int sizeInBytes, unsigned int count, vboData::VBO_COMPONENT componentType, vboData::VBO_TYPE type, vboData::VBO_TARGET target)
+{
+	vbo.enabled = true;
+
+	vbo.targetType = target;
+	vbo.componentType = componentType;
+	vbo.vboType = type;
+
+	vbo.count = count;
+	vbo.dataSize = sizeInBytes;
+
+	vbo.poData = new unsigned char[vbo.dataSize]();
+	assert(vbo.poData);
+	memcpy_s(vbo.poData, vbo.dataSize, pData, vbo.dataSize);
+
+	return true;
+}
+
 bool GLTF::SetVBO_BONE(Model& gltfModel, const char* pKey, vboData& vbo, char* pBuffStart, unsigned int byteLength, unsigned int count)
 {
 	// Get the accessor, buffer view
@@ -673,6 +692,7 @@ bool GLTF::LoadBinary(Model& model, const char* const pFileName)
 
 bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone)
 {
+	static_cast<void>(NodeIndex);
 	//Trace::out("Quat bone:%d Frame:%d \n", NodeIndex, FrameIndex);
 	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
 	auto QuatAAccessor = model.accessors[AccessorIndex];
@@ -686,8 +706,8 @@ bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size
 	{
 		if (FrameIndex == i)
 		{
-			Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", NodeIndex,
-				pVect4->x, pVect4->y, pVect4->z, pVect4->w);
+			//Trace::out("pTmp->poBone[%d].Q = Quat(%ff,%ff,%ff,%ff);\n", NodeIndex,
+			//	pVect4->x, pVect4->y, pVect4->z, pVect4->w);
 
 			pBone->rotation[0] = pVect4->x;
 			pBone->rotation[1] = pVect4->y;
@@ -702,8 +722,30 @@ bool GLTF::OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size
 	return true;
 }
 
+void GLTF::InsertBoundingSphereData(meshData& runModel)
+{
+	Sphere sphere;
+	Vec3* pVerts = new Vec3[runModel.vertCount];
+
+	for (unsigned int j = 0; j < runModel.vertCount; j++)
+	{
+		Vec3f* pVec3f = (Vec3f*)runModel.vbo_vert.poData;
+		pVerts[j].set(pVec3f[j].x, pVec3f[j].y, pVec3f[j].z);
+	}
+
+	RitterSphere(sphere, pVerts, runModel.vertCount);
+
+	runModel.boundingSphereRadius = sphere.rad;
+	runModel.boundingSphereCenter[0] = sphere.cntr[x];
+	runModel.boundingSphereCenter[1] = sphere.cntr[y];
+	runModel.boundingSphereCenter[2] = sphere.cntr[z];
+
+	delete[] pVerts;
+}
+
 bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone)
 {
+	static_cast<void>(NodeIndex);
 	//Trace::out("Trans bone:%d Frame:%d \n", NodeIndex, FrameIndex);
 	unsigned char* pBuff = (unsigned char*)&model.buffers[0].data[0];
 	auto TransAccessor = model.accessors[AccessorIndex];
@@ -717,8 +759,8 @@ bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, siz
 	{
 		if (FrameIndex == i)
 		{
-			Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);  \n", NodeIndex,
-				pVect3->x, pVect3->y, pVect3->z);
+			//Trace::out("pTmp->poBone[%d].T = Vec3(%ff,%ff,%ff);  \n", NodeIndex,
+			//	pVect3->x, pVect3->y, pVect3->z);
 
 			pBone->translation[0] = pVect3->x;
 			pBone->translation[1] = pVect3->y;

@@ -36,11 +36,7 @@
 #include "TextureProto.h"
 #include "MeshSphere.h"
 #include "Clip.h"
-#include "AnimController.h"
 #include "GameObjectBasic.h"
-#include "Anim.h"
-#include "ClipManager.h"
-#include "ClipProto.h"
 #include "SOEditorVisual.h"
 #include "SceneManager.h"
 #include "GameObjectSprite.h"
@@ -49,6 +45,13 @@
 #include "Font.h"
 #include "GameObjectText.h"
 #include "FontLibrary.h"
+#include "Skeleton.h"
+#include "AnimationSystem.h"
+#include "SkeletonManager.h"
+#include "SOSkinLightTexture.h"
+#include "ClipManager.h"
+#include "ClipProto.h"
+#include "AnimController.h"
 
 namespace Azul
 {
@@ -60,9 +63,9 @@ namespace Azul
 
 	AnimController* pAnimController;
 	AnimController* pAnimController1;
-	AnimController* pAnimController2;
-	AnimController* pAnimController3;
-	AnimController* pAnimController4;
+	//AnimController* pAnimController2;
+	//AnimController* pAnimController3;
+	//AnimController* pAnimController4;
 
 	AnimTime animDeltaTime;
 
@@ -88,6 +91,9 @@ namespace Azul
 	GameObject* LightSource2;
 	GameObject* pPlayer;
 	GameObject* pAntiqueCamera;
+
+	GameObject* pChickenBot;
+	GameObject* pMannequin;
 
 	Vec3 lightColor = Vec3(Azul::Colors::LightYellow);
 	Vec3 lightPos = Vec3(50, 2, -40);
@@ -122,26 +128,56 @@ namespace Azul
 		CameraManager::Create();
 		GameObjectManager::Create();
 		ClipManager::Create();
+		SkeletonManager::Create();
+		ImageManager::Create();
+		FontLibrary::Create();
+		AnimationSystem::Create();
 
 		LoadShaders();
 		LoadCameras();
 		LoadAssets();
 
-		ImageManager::Create();
-		ImageManager::Add(Image::Name::ALLBirds, new Image(Image::Name::ALLBirds, TextureObjectManager::Find(TextureObject::Name::Birds), Rect(0.0f, 0.0f, 377.0f, 234.0f)));
-		ImageManager::Add(Image::Name::WhiteBird, new Image(Image::Name::WhiteBird, TextureObject::Name::Birds, Rect(139.0f, 131.0f, 84.0f, 97.0f)));
 		ImageManager::Add(Image::Name::GreenBird, new Image(Image::Name::GreenBird, TextureObject::Name::Birds, Rect(244.0f, 134.0f, 102.0f, 75.0f)));
-		//ImageManager::Add(Image::Name::Stitch, new Image(Image::Name::Stitch, TextureObject::Name::Stitch, Rect(0.0f, 0.0f, 300.0f, 410.0f)));
 		ImageManager::Add(Image::Name::Text, new Image(Image::Name::Text, TextureObject::Name::CenturyFont, Rect(0.0f, 0.0f, 100.0f, 100.0f)));
+		FontLibrary::Add(Font::Name::Century, new Font("Century.font.proto.azul", TextureObjectManager::Find(TextureObject::Name::CenturyFont)));
+
+		SkeletonManager::Add(Skeleton::Name::ChickenBot, new Skeleton("walk_mesh.skeleton.proto.azul"));
+		SkeletonManager::Add(Skeleton::Name::MixamoRig1, new Skeleton("mannequin.skeleton.proto.azul"));
+
+		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::Walk, new ClipProto("walk_mesh.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::SidestepRight, new ClipProto("sidestep_right.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::HitFront, new ClipProto("hit_front.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::HumanoidRun, new ClipProto("mannequin.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::RunJump, new ClipProto("RunJump.anim.proto.azul"));
 
 		// Scene Directional Light
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
+		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShaderSkin->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
 
 		GameObject::SetRenderShellGlobal(false);
 		Engine::ToggleMaxFramerate(false);
 
 		SceneManager::ChangeScene("AzulScene");
+
+		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
+		animDeltaTime = delta;
+
+		pAnimController = new AnimController(animDeltaTime, Clip::Name::Walk, Skeleton::Name::ChickenBot, Mesh::Name::ChickenBotSkin, TextureObject::Name::ChickenBot, AnimMode::Skinned);
+		AnimationSystem::Add(pAnimController);
+		pChickenBot = pAnimController->GetObjectPivot();
+		pChickenBot->SetRelativeLocation(Vec3(30, -1, -50));
+		pChickenBot->SetRelativeScale(30.f);
+		pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
+
+		pAnimController1 = new AnimController(delta, Clip::Name::HumanoidRun, Skeleton::Name::MixamoRig1, Mesh::Name::MannequinSkin, TextureObject::Name::Mannequin, AnimMode::Skinned);
+		AnimationSystem::Add(pAnimController1);
+		pMannequin = pAnimController1->GetObjectPivot();
+		pMannequin->SetRelativeLocation(Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
+
 		//GameObjectManager::Dump();
 
 		//GameObjectManager::SpawnObject("Text Object", new GameObjectText(FontLibrary::Find(Font::Name::Century), "Robbie is Awesome"), Vec3(850.f, 850.f, 0.f));
@@ -162,6 +198,7 @@ namespace Azul
 	void Game::Update(float deltaTime)
 	{
 		UpdateDemo(deltaTime);
+		AnimationSystem::Update();
 		GameObjectManager::Update(intervalTimer.Toc());
 		EndFrame();
 	}
@@ -178,15 +215,17 @@ namespace Azul
 		TextureObjectManager::Destroy();
 		MeshManager::Destroy();
 		CameraManager::Destroy();
+		SkeletonManager::Destroy();
 		ClipManager::Destroy();
 		ImageManager::Destroy();
 		FontLibrary::Destroy();
+		AnimationSystem::Destroy();
 
-		delete pAnimController;
-		delete pAnimController1;
-		delete pAnimController2;
-		delete pAnimController3;
-		delete pAnimController4;
+		//delete pAnimController;
+		//delete pAnimController1;
+		//delete pAnimController2;
+		//delete pAnimController3;
+		//delete pAnimController4;
 	}
 
 	void Game::EndFrame()
@@ -411,9 +450,6 @@ namespace Azul
 
 	void Game::UpdateDemo(float deltaTime)
 	{
-		//static int count = 0;
-		//pCountText->SetMessage((std::string("Count ") + std::to_string(count++)).c_str());
-
 		static float rot1 = 0.f;
 		static float scale1 = 0.2f;
 		static float scaleSign = 1.f;
@@ -421,27 +457,6 @@ namespace Azul
 		static float transSign = 1.f;
 		static float texTrans1 = 1.05f;
 		static float texTransSign = 1.f;
-
-		//GOLightTexture* pLightTexture = (GOLightTexture*)pLightDiamond->GetGraphicsObject();
-
-		//if (GetKeyState('V') & 0x8000)
-		//{
-		//	pLightTexture->pTex = TextureObjectManager::Find(TextureObject::Name::Brick);
-		//}
-		//else if (GetKeyState('B') & 0x8000)
-		//{
-		//	pLightTexture->pTex = TextureObjectManager::Find(TextureObject::Name::Stone);
-		//}
-		//else if (GetKeyState('N') & 0x8000)
-		//{
-		//	pLightTexture->pTex = TextureObjectManager::Find(TextureObject::Name::Duckweed);
-		//}
-		//else if (GetKeyState('M') & 0x8000)
-		//{
-		//	pLightTexture->pTex = TextureObjectManager::Find(TextureObject::Name::Rocks);
-		//}
-
-		//pCube->SetScale(Vec3(scale1, scale1, scale1));
 		scale1 += 0.003f * scaleSign;
 
 		if (scale1 > 0.5f)
@@ -524,20 +539,10 @@ namespace Azul
 		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
 		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
 
-		//static float cameraTheta = 0.f;
-
-		//if (GetKeyState('Z') & 0x8000)
-		//{
-		//	cameraTheta += 2 * deltaTime;
-		//}
-		//else if (GetKeyState('C') & 0x8000)
-		//{
-		//	cameraTheta -= 2 * deltaTime;
-		//}
-
-		//pAntiqueCamera->SetRelativeRotation(Rot(Rot1::Y, cameraTheta));
-
-		//UpdateTimerDemo(deltaTime);
+		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShaderSkin->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
+		pShaderSkin->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
+		pShaderSkin->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
 	}
 
 	void Game::UpdateTimerDemo(float deltaTime)
@@ -564,6 +569,7 @@ namespace Azul
 		ShaderObjectManager::Add(ShaderObject::Name::Default, new SODefault());
 		ShaderObjectManager::Add(ShaderObject::Name::EditorVisual, new SOEditorVisual());
 		ShaderObjectManager::Add(ShaderObject::Name::Sprite, new SOSprite());
+		ShaderObjectManager::Add(ShaderObject::Name::SkinLightTexture, new SOSkinLightTexture());
 	}
 
 	void Game::LoadCameras()
@@ -638,6 +644,8 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Disabled, new TextureProto("Disabled.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Birds, new TextureProto("Birds.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::CenturyFont, new TextureProto("CenturyFontTexture.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::ChickenBot, new TextureProto("walk_mesh.skin.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Mannequin, new TextureProto("mannequin.skin.proto.azul"));
 
 		int textI = 0;
 		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
@@ -694,9 +702,6 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Tattoine35, new TextureProto(tattoineData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::Tattoine36, new TextureProto(tattoineData.meshes[textI++]));
 
-		FontLibrary::Create();
-		FontLibrary::Add(Font::Name::Century, new Font("Century.font.proto.azul", TextureObjectManager::Find(TextureObject::Name::CenturyFont)));
-
 		//TextureObjectManager::Add(TextureObject::Name::Bone, new TextureProto("Bone.proto.azul", 0));
 		//TextureObjectManager::Add(TextureObject::Name::Bone_001, new TextureProto("Bone_001.proto.azul", 0));
 		//TextureObjectManager::Add(TextureObject::Name::Bone_L, new TextureProto("Bone_L.proto.azul", 0));
@@ -730,6 +735,8 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::TranslateHandle, new MeshProto("TranslateHandle.proto.azul"));
 		MeshManager::Add(Mesh::Name::ScaleHandle, new MeshProto("ScaleHandle.proto.azul"));
 		MeshManager::Add(Mesh::Name::RotateHandle, new MeshProto("RotateHandle.proto.azul"));
+		MeshManager::Add(Mesh::Name::ChickenBotSkin, new MeshProto("walk_mesh.skin.proto.azul"));
+		MeshManager::Add(Mesh::Name::MannequinSkin, new MeshProto("mannequin.skin.proto.azul"));
 
 		int meshI = 0;
 		MeshManager::Add(Mesh::Name::DesertRock0, new MeshProto(desertRocksData.meshes[meshI++]));
@@ -785,15 +792,6 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::Tattoine34, new MeshProto(tattoineData.meshes[meshI++]));
 		MeshManager::Add(Mesh::Name::Tattoine35, new MeshProto(tattoineData.meshes[meshI++]));
 		MeshManager::Add(Mesh::Name::Tattoine36, new MeshProto(tattoineData.meshes[meshI++]));
-
-		//MeshManager::Add(Mesh::Name::Bone, new MeshProto("Bone.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_001, new MeshProto("Bone_001.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_L, new MeshProto("Bone_L.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_L_001, new MeshProto("Bone_L_001.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_L_002, new MeshProto("Bone_L_002.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_R, new MeshProto("Bone_R.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_R_001, new MeshProto("Bone_R_001.proto.azul", 0));
-		//MeshManager::Add(Mesh::Name::Bone_R_002, new MeshProto("Bone_R_002.proto.azul", 0));
 
 		//ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
 		//ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));

@@ -1,7 +1,8 @@
 #include "Clip.h"
 #include "AnimTime.h"
-#include "Bone.h"
+#include "BoneTransform.h"
 #include "Mixer.h"
+#include "AnimationSystem.h"
 
 namespace Azul
 {
@@ -14,7 +15,7 @@ namespace Azul
 		Wash();
 	}
 
-	void Clip::AnimateBones(AnimTime tCurr, Bone* pResult)
+	BlendInput Clip::GetBlendInput(AnimTime tCurr) const
 	{
 		FrameBucket* pNextBucket = pHead;
 
@@ -23,12 +24,12 @@ namespace Azul
 			pNextBucket = pNextBucket->nextBucket;
 		}
 
-		FrameBucket* pA = pNextBucket->prevBucket;
-		FrameBucket* pB = pNextBucket;
+		BlendInput bi;
+		bi.pA = pNextBucket->prevBucket->poBone;
+		bi.pB = pNextBucket->poBone;
+		bi.tS = (tCurr - pNextBucket->prevBucket->KeyTime) / (pNextBucket->KeyTime - pNextBucket->prevBucket->KeyTime);
 
-		float tS = (tCurr - pA->KeyTime) / (pB->KeyTime - pA->KeyTime);
-
-		Mixer::Blend(pResult, pA->poBone, pB->poBone, tS, this->numBones);
+		return bi;
 	}
 
 	void Clip::Wash()
@@ -97,7 +98,7 @@ namespace Azul
 	int Clip::privFindNumFrames()
 	{
 		int count = 0;
-		FrameBucket* pTmp = this->pHead;
+		FrameBucket* pTmp = pHead;
 
 		while (pTmp->nextBucket != nullptr)
 		{
@@ -110,7 +111,7 @@ namespace Azul
 	AnimTime Clip::privFindMaxTime()
 	{
 		AnimTime tMax;
-		FrameBucket* pTmp = this->pHead;
+		FrameBucket* pTmp = pHead;
 
 		while (pTmp->nextBucket != nullptr)
 		{
@@ -124,6 +125,6 @@ namespace Azul
 
 	AnimTime Clip::GetTotalTime()
 	{
-		return this->totalTime;
+		return totalTime;
 	}
 }

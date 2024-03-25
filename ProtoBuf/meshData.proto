@@ -32,6 +32,9 @@ message meshData_proto
 	optional textureData_proto text_color  = 9;
 	optional float boundingSphereRadius = 10;
 	repeated float boundingSphereCenter = 11;
+	optional vboData_proto     vbo_weights   = 12;
+	optional vboData_proto     vbo_joints    = 13;
+	optional vboData_proto     vbo_invBind   = 14;
 }
 
 // -- End of File ---

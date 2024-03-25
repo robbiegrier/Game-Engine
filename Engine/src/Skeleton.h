@@ -1,44 +1,52 @@
 #ifndef _Skeleton
 #define _Skeleton
 
-#include "GameObjectAnim.h"
-#include "Bone.h"
+#include "BoneHierarchyNode.h"
+#include "DLink.h"
+#include "Clip.h"
 
 namespace Azul
 {
-	class GameObjectBasic;
-
-	class Skeleton
+	class Skeleton : public DLink
 	{
 	public:
-		struct Data
+		enum class Name
 		{
-			int  index;
-			int  parentIndex;
-			char name[32];
+			ChickenBot,
+			MixamoRig,
+			MixamoRig1,
+			Null,
+			None
 		};
 
-	public:
-		Skeleton(Bone* pBone, int numBones, const char* skeletonFileName);
-
+		explicit Skeleton(const char* skeletonFileName);
 		Skeleton() = delete;
 		Skeleton(const Skeleton&) = delete;
-		Skeleton& operator = (const Skeleton&) = delete;
+		Skeleton& operator=(const Skeleton&) = delete;
 		~Skeleton();
 
-		GameObjectAnim* GetFirstBone();
-		GameObjectBasic* GetPivot();
+		const BoneHierarchyNode& GetBoneHierarchyNode(int index) const;
+		int GetNumBones() const;
+
+		virtual void Wash() override;
+		virtual bool Compare(DLink* pTargetNode) override;
+		virtual void Dump() override;
+		void SetName(Skeleton::Name inName);
+		Skeleton::Name GetName() const;
+		const char* NameToString();
+
+		static constexpr unsigned int HIERARCHY_TABLE_SIZE = BONE_COUNT_MAX * HIERARCHY_DEPTH_MAX;
+		int* GetHierarchyTable() const;
+
+		int GetHierarchyDepth() const;
 
 	private:
-		void privSetAnimationHierarchy(Bone* pBoneResult);
-		GameObjectAnim* privFindBoneByIndex(int index);
+		int numBones;
+		int hierarchyDepth;
+		BoneHierarchyNode hierarchyData[BONE_COUNT_MAX];
+		int hierarchyTable[HIERARCHY_TABLE_SIZE];
 
-	private:
-		GameObjectAnim* pFirstBone;
-		GameObjectBasic* pPivot;
-		int             numBones;
-
-		Data skeletonBoneData[8];
+		Name name;
 	};
 }
 

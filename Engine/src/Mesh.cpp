@@ -16,9 +16,18 @@ namespace Azul
 		poConstantBuff_lightColor{ nullptr },
 		poConstantBuff_lightPos{ nullptr },
 		poConstantBuff_uvMatrix{ nullptr },
-		pBoundingSphereCenter{ new Vec3() }
+		poVertexBuffer_joints{ nullptr },
+		poVertexBuffer_weights{ nullptr },
+		poConstantBuff_boneWorld{ nullptr },
+		pBoundingSphereCenter{ new Vec3() },
+		poInvBindArray{ new Mat4[BoneCountMax]() }
 	{
 		poConstantBuff_uvMatrix = CreateConstantBuffer(sizeof(Mat4));
+
+		for (size_t i = 0; i < BoneCountMax; i++)
+		{
+			poInvBindArray[i].set(Special::Identity);
+		}
 	}
 
 	const char* Mesh::NameToString()
@@ -83,7 +92,7 @@ namespace Azul
 			return "UnitSphere";
 		case Name::UnitIcoSphere:
 			return "UnitIcoSphere";
-		case Name::Bone:
+		case Name::BoneTransform:
 		case Name::Bone_001:
 		case Name::Bone_L:
 		case Name::Bone_L_001:
@@ -139,7 +148,11 @@ namespace Azul
 		SafeRelease(poConstantBuff_lightColor);
 		SafeRelease(poConstantBuff_lightPos);
 		SafeRelease(poConstantBuff_uvMatrix);
+		SafeRelease(poVertexBuffer_joints);
+		SafeRelease(poVertexBuffer_weights);
+		SafeRelease(poConstantBuff_boneWorld);
 		delete pBoundingSphereCenter;
+		delete[] poInvBindArray;
 	}
 
 	void Mesh::RenderIndexBuffer()
@@ -177,6 +190,12 @@ namespace Azul
 	Mesh::Name Mesh::GetName() const
 	{
 		return name;
+	}
+
+	void Mesh::TransferConstantBufferBoneWorldArray(Mat4* pBoneWorldArray)
+	{
+		assert(pBoneWorldArray);
+		Engine::GetContext()->UpdateSubresource(poConstantBuff_boneWorld, 0, nullptr, pBoneWorldArray, 8, 0);
 	}
 
 	void Mesh::TransferUVCorrection(Mat4* pUVMatrix)
@@ -221,6 +240,18 @@ namespace Azul
 			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::TexCoord, 1, &poVertexBuffer_texCoord, &vertexStride_texCoord, &offset);
 		}
 
+		if (poVertexBuffer_weights)
+		{
+			const UINT vertexStride_weights = sizeof(VertexWeights);
+			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::Weights, 1, &poVertexBuffer_weights, &vertexStride_weights, &offset);
+		}
+
+		if (poVertexBuffer_joints)
+		{
+			const UINT vertexStride_joints = sizeof(VertexJoints);
+			Engine::GetContext()->IASetVertexBuffers((uint32_t)VertexSlot::Joints, 1, &poVertexBuffer_joints, &vertexStride_joints, &offset);
+		}
+
 		if (poConstantBuff_uvMatrix)
 		{
 			Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::UV_Correction, 1, &poConstantBuff_uvMatrix);
@@ -234,6 +265,11 @@ namespace Azul
 		if (poConstantBuff_lightPos)
 		{
 			Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::LightPos, 1, &poConstantBuff_lightPos);
+		}
+
+		if (poConstantBuff_boneWorld)
+		{
+			Engine::GetContext()->VSSetConstantBuffers((uint32_t)ConstantBufferSlot::vsBoneWorld, 1, &poConstantBuff_boneWorld);
 		}
 	}
 

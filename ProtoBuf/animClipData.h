@@ -18,6 +18,7 @@ public:
 	void Print(const char* const pName) const;
 
 	animFrameData* pFramesHead = nullptr;
+	int numBones = 0;
 };
 
 #endif

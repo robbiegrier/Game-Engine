@@ -135,7 +135,7 @@ namespace Azul
 		TextureObject::Name textureName = TextureObject::Name::None;
 		ShaderObject::Name shaderName = ShaderObject::Name::None;
 		Image::Name imageName = Image::Name::Null;
-		Font::Name fontName;
+		Font::Name fontName = Font::Name::Null;
 		char message[GameObjectText::MaxMessageSize];
 		Vec4 color;
 		Vec3 location;

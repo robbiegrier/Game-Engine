@@ -241,6 +241,7 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClInclude Include="ChickenBot.h" />
     <ClInclude Include="ConvertAnim.h" />
     <ClInclude Include="ConvertFont.h" />
+    <ClInclude Include="ConvertSkin.h" />
     <ClInclude Include="GLTF.h" />
     <ClInclude Include="GLTF_Helper.h" />
     <ClInclude Include="md5.h" />
@@ -621,6 +622,7 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClCompile Include="ChickenBot.cpp" />
     <ClCompile Include="ConvertAnim.cpp" />
     <ClCompile Include="ConvertFont.cpp" />
+    <ClCompile Include="ConvertSkin.cpp" />
     <ClCompile Include="GLTF.cpp" />
     <ClCompile Include="GLTF_Helper.cpp" />
     <ClCompile Include="main.cpp" />

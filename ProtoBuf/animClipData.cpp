@@ -22,6 +22,8 @@ void animClipData::Serialize(animClipData_proto& out) const
 		pCurr->Serialize(*afdProto);
 		pCurr = pCurr->pNext;
 	}
+
+	out.set_numbones(numBones);
 }
 
 void animClipData::Deserialize(const animClipData_proto& in)
@@ -44,11 +46,15 @@ void animClipData::Deserialize(const animClipData_proto& in)
 
 		pPrev = pFrame;
 	}
+
+	numBones = in.numbones();
 }
 
 void animClipData::Print(const char* const pName) const
 {
 	Trace::out("%s: \n", pName);
+
+	Trace::out("num bones: %d\n", numBones);
 
 	animFrameData* pCurr = pFramesHead;
 

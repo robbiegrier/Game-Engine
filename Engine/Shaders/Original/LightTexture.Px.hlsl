@@ -31,7 +31,7 @@ struct PixelShaderInput
 // --------------------------------------------------------
 float4 LightTexture_Main( PixelShaderInput inData ) : SV_TARGET
 {
-	return  inData.color * mainTexture.Sample(aSampler, inData.tex);
+    return inData.color * mainTexture.Sample(aSampler, inData.tex);
 }
 
 

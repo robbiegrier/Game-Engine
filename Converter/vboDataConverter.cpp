@@ -7,7 +7,7 @@ vboData::VBO_TARGET vboDataConverter::GetTarget(int GLTF_TINY_VAL)
 {
 	vboData::VBO_TARGET vboTarget;
 
-	switch(GLTF_TINY_VAL)
+	switch (GLTF_TINY_VAL)
 	{
 	case TINYGLTF_TARGET_ARRAY_BUFFER:
 		vboTarget = vboData::VBO_TARGET::ARRAY_BUFFER;
@@ -18,23 +18,19 @@ vboData::VBO_TARGET vboDataConverter::GetTarget(int GLTF_TINY_VAL)
 		break;
 
 	default:
-		assert(false);
 		vboTarget = vboData::VBO_TARGET::DEFAULT;
 		break;
-
 	}
 
 	return vboTarget;
 }
 
-
 vboData::VBO_COMPONENT vboDataConverter::GetComponent(int GLTF_TINY_VAL)
 {
 	vboData::VBO_COMPONENT vboComponent;
 
-	switch(GLTF_TINY_VAL)
+	switch (GLTF_TINY_VAL)
 	{
-
 	case TINYGLTF_COMPONENT_TYPE_BYTE:
 		vboComponent = vboData::VBO_COMPONENT::BYTE;
 		break;
@@ -71,7 +67,6 @@ vboData::VBO_COMPONENT vboDataConverter::GetComponent(int GLTF_TINY_VAL)
 		assert(false);
 		vboComponent = vboData::VBO_COMPONENT::DEFAULT;
 		break;
-
 	}
 
 	return vboComponent;
@@ -81,7 +76,7 @@ vboData::VBO_TYPE vboDataConverter::GetType(int GLTF_TINY_VAL)
 {
 	vboData::VBO_TYPE vboType;
 
-	switch(GLTF_TINY_VAL)
+	switch (GLTF_TINY_VAL)
 	{
 	case TINYGLTF_TYPE_VEC2:
 		vboType = vboData::VBO_TYPE::VEC2;
@@ -126,9 +121,6 @@ vboData::VBO_TYPE vboDataConverter::GetType(int GLTF_TINY_VAL)
 	}
 
 	return vboType;
-
 }
 
 // --- End of File ---
-
-

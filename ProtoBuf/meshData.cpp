@@ -1,6 +1,3 @@
-//----------------------------------------------------------------------------
-// Copyright 2023, Ed Keenan, all rights reserved.
-//----------------------------------------------------------------------------
 #include "meshData.h"
 
 meshData::~meshData()
@@ -16,6 +13,9 @@ meshData::meshData()
 	vbo_norm(),
 	vbo_uv(),
 	vbo_index(),
+	vbo_weights(),
+	vbo_joints(),
+	vbo_invBind(),
 	text_color(),
 	boundingSphereRadius(0u)
 {
@@ -55,6 +55,18 @@ void meshData::Serialize(meshData_proto& out) const
 	this->text_color.Serialize(*pText_proto);
 	out.set_allocated_text_color(pText_proto);
 
+	pVBO_proto = new vboData_proto();
+	this->vbo_weights.Serialize(*pVBO_proto);
+	out.set_allocated_vbo_weights(pVBO_proto);
+
+	pVBO_proto = new vboData_proto();
+	this->vbo_joints.Serialize(*pVBO_proto);
+	out.set_allocated_vbo_joints(pVBO_proto);
+
+	pVBO_proto = new vboData_proto();
+	this->vbo_invBind.Serialize(*pVBO_proto);
+	out.set_allocated_vbo_invbind(pVBO_proto);
+
 	out.set_boundingsphereradius(boundingSphereRadius);
 
 	out.add_boundingspherecenter(boundingSphereCenter[0]);
@@ -79,6 +91,10 @@ void meshData::Deserialize(const meshData_proto& in)
 	boundingSphereCenter[0] = in.boundingspherecenter().at(0);
 	boundingSphereCenter[1] = in.boundingspherecenter().at(1);
 	boundingSphereCenter[2] = in.boundingspherecenter().at(2);
+
+	this->vbo_weights.Deserialize(in.vbo_weights());
+	this->vbo_joints.Deserialize(in.vbo_joints());
+	this->vbo_invBind.Deserialize(in.vbo_invbind());
 }
 
 void meshData::Print(const char* const pName) const
@@ -94,10 +110,21 @@ void meshData::Print(const char* const pName) const
 	Trace::out("\n");
 	this->vbo_index.Print("vbo_index");
 	Trace::out("\n");
-	this->text_color.Print("text_color");
+	if (this->text_color.poData) this->text_color.Print("text_color");
 	Trace::out("\n");
+	Trace::out(" mesh name: %s \n", this->pMeshName);
+	Trace::out("      mode: %d \n", mode);
+	Trace::out(" tri count: %d \n", triCount);
+	Trace::out("vert count: %d \n", vertCount);
 	Trace::out("radius: %f\n", boundingSphereRadius);
 	Trace::out("center: %f %f %f\n", boundingSphereCenter[0], boundingSphereCenter[1], boundingSphereCenter[2]);
+	Trace::out("\n");
+	if (this->vbo_joints.poData) vbo_joints.Print("vbo_joints");
+	Trace::out("\n");
+	if (this->vbo_weights.poData) vbo_weights.Print("vbo_weights");
+	Trace::out("\n");
+	if (this->vbo_invBind.poData) vbo_invBind.Print("vbo_invBind");
+	Trace::out("\n");
 }
 
 bool meshData::IsEmpty() const

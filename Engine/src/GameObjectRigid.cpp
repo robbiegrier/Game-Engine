@@ -9,8 +9,4 @@ namespace Azul
 		: GameObject(pGraphicsObject)
 	{
 	}
-
-	void GameObjectRigid::Update(AnimTime currentTime)
-	{
-	}
 }

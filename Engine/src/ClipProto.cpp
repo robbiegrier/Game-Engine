@@ -12,7 +12,7 @@ namespace Azul
 		animClipData clipData;
 		clipData.Deserialize(acdProto);
 
-		numBones = 12;
+		numBones = 0;
 		numFrames = 0;
 		totalTime = AnimTime(AnimTime::Duration::ZERO);
 		pHead = nullptr;
@@ -22,11 +22,13 @@ namespace Azul
 		totalTime = privFindMaxTime();
 		numFrames = privFindNumFrames();
 
-		Trace::out("Clip %s loaded from converter\n", pAnimFilename);
+		//Trace::out("Clip %s loaded from converter\n", pAnimFilename);
 	}
 
 	void ClipProto::SetFromClipData(const animClipData& clipData)
 	{
+		numBones = clipData.numBones;
+
 		FrameBucket* pTmp = nullptr;
 		FrameBucket* pTmpX = nullptr;
 
@@ -38,7 +40,8 @@ namespace Azul
 			pTmpX->prevBucket = pTmp;
 			pTmpX->nextBucket = nullptr;
 			pTmpX->KeyTime = i * AnimTime(AnimTime::Duration::FILM_24_FRAME);
-			pTmpX->poBone = new Bone[(unsigned int)this->numBones];
+			pTmpX->poBone = new BoneTransform[BONE_COUNT_MAX];
+			memset(pTmpX->poBone, 0, BONE_COUNT_MAX * sizeof(BoneTransform));
 
 			if (pTmp)
 			{

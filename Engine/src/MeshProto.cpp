@@ -47,6 +47,19 @@ namespace Azul
 		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
 
+		if (mB.vbo_joints.dataSize != 0)
+		{
+			poVertexBuffer_joints = CreateVertexBuffer(mB.vbo_joints.dataSize, mB.vbo_joints.poData);
+			poVertexBuffer_weights = CreateVertexBuffer(mB.vbo_weights.dataSize, mB.vbo_weights.poData);
+			poConstantBuff_boneWorld = CreateConstantBuffer(sizeof(Mat4) * Mesh::BoneCountMax);
+
+			Mat4* pMat = (Mat4*)mB.vbo_invBind.poData;
+			for (size_t i = 0; i < mB.vbo_invBind.count; i++)
+			{
+				poInvBindArray[i].set(pMat[i]);
+			}
+		}
+
 		boundingSphereRadius = mB.boundingSphereRadius;
 		pBoundingSphereCenter->set(mB.boundingSphereCenter[0], mB.boundingSphereCenter[1], mB.boundingSphereCenter[2]);
 	}

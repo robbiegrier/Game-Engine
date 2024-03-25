@@ -274,6 +274,8 @@
     <ClInclude Include="..\Proto\google\protobuf\wire_format_lite.h" />
     <ClInclude Include="..\Proto\google\protobuf\wrappers.pb.h" />
     <ClInclude Include="DXTex\include\DirectXTex.h" />
+    <ClInclude Include="Shaders\Compiled\AnimationMixer.h" />
+    <ClInclude Include="Shaders\Compiled\AnimationWorld.h" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Px.h" />
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Vx.h" />
     <ClInclude Include="Shaders\Compiled\ConstColor.Px.h" />
@@ -284,12 +286,16 @@
     <ClInclude Include="Shaders\Compiled\LightTexture.Vx.h" />
     <ClInclude Include="Shaders\Compiled\Null.Px.h" />
     <ClInclude Include="Shaders\Compiled\Null.Vx.h" />
+    <ClInclude Include="Shaders\Compiled\SkinLightTexture.Px.h" />
+    <ClInclude Include="Shaders\Compiled\SkinLightTexture.Vx.h" />
     <ClInclude Include="Shaders\Compiled\Sprite.Px.h" />
     <ClInclude Include="Shaders\Compiled\Sprite.Vx.h" />
-    <ClInclude Include="src\Anim.h" />
+    <ClInclude Include="src\AnimatedObjectHierarchy.h" />
+    <ClInclude Include="src\AnimationSystem.h" />
     <ClInclude Include="src\AnimController.h" />
     <ClInclude Include="src\AssetsWindow.h" />
-    <ClInclude Include="src\Bone.h" />
+    <ClInclude Include="src\BoneHierarchyNode.h" />
+    <ClInclude Include="src\BoneTransform.h" />
     <ClInclude Include="src\BoundingSphere.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CameraManager.h" />
@@ -298,8 +304,12 @@
     <ClInclude Include="src\ClipManager.h" />
     <ClInclude Include="src\ClipProto.h" />
     <ClInclude Include="src\Colors.h" />
+    <ClInclude Include="src\ComputeRSVBuffer.h" />
+    <ClInclude Include="src\ComputeUAVBuffer.h" />
     <ClInclude Include="src\ConsoleWindow.h" />
     <ClInclude Include="src\CrossMesh.h" />
+    <ClInclude Include="src\CSAnimationMixer.h" />
+    <ClInclude Include="src\CSAnimationWorld.h" />
     <ClInclude Include="src\CubeMesh.h" />
     <ClInclude Include="src\DiamondMesh.h" />
     <ClInclude Include="src\EditAction.h" />
@@ -340,6 +350,7 @@
     <ClInclude Include="src\GOFlatTexture.h" />
     <ClInclude Include="src\GOLightTexture.h" />
     <ClInclude Include="src\GONull.h" />
+    <ClInclude Include="src\GOSkinLightTexture.h" />
     <ClInclude Include="src\GOSprite.h" />
     <ClInclude Include="src\GOWireframe.h" />
     <ClInclude Include="src\Engine.h" />
@@ -370,6 +381,7 @@
     <ClInclude Include="src\ShaderObject.h" />
     <ClInclude Include="src\ShaderObjectManager.h" />
     <ClInclude Include="src\Skeleton.h" />
+    <ClInclude Include="src\SkeletonManager.h" />
     <ClInclude Include="src\SOColorByVertex.h" />
     <ClInclude Include="src\SOConstColor.h" />
     <ClInclude Include="src\SODefault.h" />
@@ -377,6 +389,7 @@
     <ClInclude Include="src\SOFlatTexture.h" />
     <ClInclude Include="src\SOLightTexture.h" />
     <ClInclude Include="src\SONull.h" />
+    <ClInclude Include="src\SOSkinLightTexture.h" />
     <ClInclude Include="src\SOSprite.h" />
     <ClInclude Include="src\TextureObject.h" />
     <ClInclude Include="src\TextureObjectManager.h" />
@@ -402,6 +415,8 @@
     <None Include="..\Proto\google\protobuf\wire_format_unittest.inc" />
     <None Include="DXTex\include\DirectXTex.inl" />
     <None Include="Shaders\Original\Default.hlsli" />
+    <None Include="Shaders\Original\Phong.hlsli" />
+    <None Include="Shaders\Original\SkinLightTexture.hlsli" />
     <None Include="_Mesh_Diagram.cd" />
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +443,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Shaders\Original\AnimationMixer.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_AnimationMixer_ComputeShader</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\AnimationMixer.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\AnimationWorld.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_AnimationWorld_ComputeShader</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\AnimationWorld.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+    </FxCompile>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ColorByVertex_Main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -570,6 +599,18 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Shaders\Original\SkinLightTexture.Px.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_SkinLightTexture_PxShader</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\SkinLightTexture.Px.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SkinLightTexture.Vx.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_SkinLightTexture_VxShader</VariableName>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Shaders\Compiled\SkinLightTexture.Vx.h</HeaderFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)%(Filename)_d.cso</ObjectFileOutput>
+    </FxCompile>
     <FxCompile Include="Shaders\Original\Sprite.Px.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <VariableName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">g_Sprite_PxShader</VariableName>
@@ -584,10 +625,12 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Anim.cpp" />
+    <ClCompile Include="src\AnimatedObjectHierarchy.cpp" />
+    <ClCompile Include="src\AnimationSystem.cpp" />
     <ClCompile Include="src\AnimController.cpp" />
     <ClCompile Include="src\AssetsWindow.cpp" />
-    <ClCompile Include="src\Bone.cpp" />
+    <ClCompile Include="src\BoneHierarchyNode.cpp" />
+    <ClCompile Include="src\BoneTransform.cpp" />
     <ClCompile Include="src\BoundingSphere.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CameraManager.cpp" />
@@ -595,8 +638,12 @@
     <ClCompile Include="src\Clipboard.cpp" />
     <ClCompile Include="src\ClipManager.cpp" />
     <ClCompile Include="src\ClipProto.cpp" />
+    <ClCompile Include="src\ComputeRSVBuffer.cpp" />
+    <ClCompile Include="src\ComputeUAVBuffer.cpp" />
     <ClCompile Include="src\ConsoleWindow.cpp" />
     <ClCompile Include="src\CrossMesh.cpp" />
+    <ClCompile Include="src\CSAnimationMixer.cpp" />
+    <ClCompile Include="src\CSAnimationWorld.cpp" />
     <ClCompile Include="src\CubeMesh.cpp" />
     <ClCompile Include="src\DiamondMesh.cpp" />
     <ClCompile Include="src\EditAction.cpp" />
@@ -637,6 +684,7 @@
     <ClCompile Include="src\GOFlatTexture.cpp" />
     <ClCompile Include="src\GOLightTexture.cpp" />
     <ClCompile Include="src\GONull.cpp" />
+    <ClCompile Include="src\GOSkinLightTexture.cpp" />
     <ClCompile Include="src\GOSprite.cpp" />
     <ClCompile Include="src\GOWireframe.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -667,6 +715,7 @@
     <ClCompile Include="src\ShaderObject.cpp" />
     <ClCompile Include="src\ShaderObjectManager.cpp" />
     <ClCompile Include="src\Skeleton.cpp" />
+    <ClCompile Include="src\SkeletonManager.cpp" />
     <ClCompile Include="src\SOColorByVertex.cpp" />
     <ClCompile Include="src\SOConstColor.cpp" />
     <ClCompile Include="src\SODefault.cpp" />
@@ -674,6 +723,7 @@
     <ClCompile Include="src\SOFlatTexture.cpp" />
     <ClCompile Include="src\SOLightTexture.cpp" />
     <ClCompile Include="src\SONull.cpp" />
+    <ClCompile Include="src\SOSkinLightTexture.cpp" />
     <ClCompile Include="src\SOSprite.cpp" />
     <ClCompile Include="src\TextureObject.cpp" />
     <ClCompile Include="src\TextureObjectManager.cpp" />

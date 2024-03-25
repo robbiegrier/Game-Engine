@@ -29,8 +29,8 @@ namespace Azul
 				new Player(), spawnPos
 			)->SetRelativeScale(spawnScale);
 		}
-		if (ImGui::Button("World Sprite")) { meshToSpawn = Mesh::Name::Sprite; textureToSpawn = TextureObject::Name::Birds; }
-		if (ImGui::Button("Unit Cube")) { meshToSpawn = Mesh::Name::Cube; textureToSpawn = TextureObject::Name::Birds; }
+		if (ImGui::Button("World Sprite")) { meshToSpawn = Mesh::Name::Sprite; textureToSpawn = TextureObject::Name::ChickenBot; }
+		if (ImGui::Button("Unit Cube")) { meshToSpawn = Mesh::Name::Cube; textureToSpawn = TextureObject::Name::Mannequin; }
 		if (ImGui::Button("Unit Sphere")) meshToSpawn = Mesh::Name::Sphere;
 		if (ImGui::Button("Unit Pyramid")) meshToSpawn = Mesh::Name::Pyramid;
 		if (ImGui::Button("Wooden Crate"))
@@ -40,7 +40,7 @@ namespace Azul
 		}
 		if (ImGui::Button("Chicken Bot"))
 		{
-			meshToSpawn = Mesh::Name::Bone;
+			meshToSpawn = Mesh::Name::BoneTransform;
 			textureToSpawn = TextureObject::Name::ChickenBot;
 			spawnScale = Vec3(300, 300, 300);
 		}

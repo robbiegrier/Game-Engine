@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "DLink.h"
 #include "DLinkedList.h"
+#include "Clip.h"
 
 namespace Azul
 {
@@ -92,7 +93,7 @@ namespace Azul
 			Tattoine39,
 			UnitSphere,
 			UnitIcoSphere,
-			Bone,
+			BoneTransform,
 			Bone_001,
 			Bone_L,
 			Bone_L_001,
@@ -104,9 +105,12 @@ namespace Azul
 			ScaleHandle,
 			RotateHandle,
 			Sprite,
+			ChickenBotSkin,
+			MannequinSkin,
 			Null,
 			None
 		};
+		static constexpr int BoneCountMax = BONE_COUNT_MAX;
 
 		// Big four
 		Mesh(unsigned int numVerts, unsigned int numTriangles);
@@ -137,6 +141,7 @@ namespace Azul
 		const Vec3& GetBoundSphereCenter() const;
 
 		void TransferUVCorrection(Mat4* pUVMatrix);
+		void TransferConstantBufferBoneWorldArray(Mat4* pWorldBoneArray);
 
 	protected:
 		void HackSetBoundingSphereData(VertexPos* pData);
@@ -151,6 +156,8 @@ namespace Azul
 		ID3D11Buffer* poVertexBuffer_norm;
 		ID3D11Buffer* poVertexBuffer_texCoord;
 		ID3D11Buffer* poIndexBuffer;
+		ID3D11Buffer* poVertexBuffer_joints;
+		ID3D11Buffer* poVertexBuffer_weights;
 
 		float boundingSphereRadius;
 		Vec3* pBoundingSphereCenter;
@@ -158,8 +165,9 @@ namespace Azul
 	public:
 		ID3D11Buffer* poConstantBuff_lightColor;
 		ID3D11Buffer* poConstantBuff_lightPos;
-
 		ID3D11Buffer* poConstantBuff_uvMatrix;
+		ID3D11Buffer* poConstantBuff_boneWorld;
+		Mat4* poInvBindArray;
 	};
 }
 

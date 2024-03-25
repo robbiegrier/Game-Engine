@@ -86,7 +86,7 @@ namespace Azul
 			Tattoine37,
 			Tattoine38,
 			Tattoine39,
-			Bone,
+			BoneTransform,
 			Bone_001,
 			Bone_L,
 			Bone_L_001,
@@ -103,6 +103,7 @@ namespace Azul
 			Disabled,
 			Birds,
 			CenturyFont,
+			Mannequin,
 			None
 		};
 

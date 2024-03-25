@@ -128,6 +128,12 @@
     <Filter Include="src\Font">
       <UniqueIdentifier>{93e92a35-efe6-45a9-a8ee-8a817523317f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Animation\Library">
+      <UniqueIdentifier>{bb9fe61f-0d17-4f27-8376-976edae4d659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ComputeShaders">
+      <UniqueIdentifier>{2c7011fd-c4a8-43d4-beae-1d565807d265}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -164,6 +170,12 @@
       <Filter>_Proto\include\google\protobuf</Filter>
     </None>
     <None Include="Shaders\Original\Default.hlsli">
+      <Filter>Shaders\Original</Filter>
+    </None>
+    <None Include="Shaders\Original\Phong.hlsli">
+      <Filter>Shaders\Original</Filter>
+    </None>
+    <None Include="Shaders\Original\SkinLightTexture.hlsli">
       <Filter>Shaders\Original</Filter>
     </None>
   </ItemGroup>
@@ -756,16 +768,7 @@
     <ClInclude Include="src\MeshSphere.h">
       <Filter>src\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="src\Anim.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="src\AnimController.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bone.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Clip.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\Mixer.h">
@@ -789,12 +792,6 @@
     <ClInclude Include="src\GameObjectRigid.h">
       <Filter>src\GameObject\Special</Filter>
     </ClInclude>
-    <ClInclude Include="src\Skeleton.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ClipManager.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="src\EditorGui.h">
       <Filter>src\Editor\Gui</Filter>
     </ClInclude>
@@ -803,9 +800,6 @@
     </ClInclude>
     <ClInclude Include="src\EditorThemes.h">
       <Filter>src\Editor\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ClipProto.h">
-      <Filter>src\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorInput.h">
       <Filter>src\Editor\Input</Filter>
@@ -942,6 +936,63 @@
     <ClInclude Include="src\GameObjectText.h">
       <Filter>src\GameObject\Special</Filter>
     </ClInclude>
+    <ClInclude Include="Shaders\Compiled\AnimationMixer.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\AnimationWorld.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\SkinLightTexture.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\SkinLightTexture.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Clip.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipManager.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipProto.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoneTransform.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skeleton.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoneHierarchyNode.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkeletonManager.h">
+      <Filter>src\Animation\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimatedObjectHierarchy.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationSystem.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComputeRSVBuffer.h">
+      <Filter>src\ComputeShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComputeUAVBuffer.h">
+      <Filter>src\ComputeShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSAnimationMixer.h">
+      <Filter>src\ComputeShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSAnimationWorld.h">
+      <Filter>src\ComputeShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOSkinLightTexture.h">
+      <Filter>src\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOSkinLightTexture.h">
+      <Filter>src\ShaderObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -984,6 +1035,18 @@
       <Filter>Shaders\Original</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\Original\Sprite.Vx.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\AnimationMixer.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\AnimationWorld.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SkinLightTexture.Px.hlsl">
+      <Filter>Shaders\Original</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SkinLightTexture.Vx.hlsl">
       <Filter>Shaders\Original</Filter>
     </FxCompile>
   </ItemGroup>
@@ -1129,16 +1192,7 @@
     <ClCompile Include="src\MeshSphere.cpp">
       <Filter>src\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="src\Anim.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="src\AnimController.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Bone.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Clip.cpp">
       <Filter>src\Animation</Filter>
     </ClCompile>
     <ClCompile Include="src\Mixer.cpp">
@@ -1162,12 +1216,6 @@
     <ClCompile Include="src\GameObjectRigid.cpp">
       <Filter>src\GameObject\Special</Filter>
     </ClCompile>
-    <ClCompile Include="src\Skeleton.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ClipManager.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="src\EditorGui.cpp">
       <Filter>src\Editor\Gui</Filter>
     </ClCompile>
@@ -1176,9 +1224,6 @@
     </ClCompile>
     <ClCompile Include="src\EditorThemes.cpp">
       <Filter>src\Editor\Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ClipProto.cpp">
-      <Filter>src\Animation</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorInput.cpp">
       <Filter>src\Editor\Input</Filter>
@@ -1308,6 +1353,51 @@
     </ClCompile>
     <ClCompile Include="src\GameObjectText.cpp">
       <Filter>src\GameObject\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clip.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipManager.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipProto.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoneTransform.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skeleton.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoneHierarchyNode.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SkeletonManager.cpp">
+      <Filter>src\Animation\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimatedObjectHierarchy.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationSystem.cpp">
+      <Filter>src\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ComputeRSVBuffer.cpp">
+      <Filter>src\ComputeShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ComputeUAVBuffer.cpp">
+      <Filter>src\ComputeShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSAnimationMixer.cpp">
+      <Filter>src\ComputeShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSAnimationWorld.cpp">
+      <Filter>src\ComputeShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOSkinLightTexture.cpp">
+      <Filter>src\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOSkinLightTexture.cpp">
+      <Filter>src\ShaderObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

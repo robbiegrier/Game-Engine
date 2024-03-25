@@ -24,6 +24,7 @@ namespace Azul
 			ConstColor,
 			EditorVisual,
 			Sprite,
+			SkinLightTexture,
 			Null,
 			None
 		};

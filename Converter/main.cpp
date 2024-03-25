@@ -12,6 +12,7 @@
 #include "ChickenBot.h"
 #include "ConvertAnim.h"
 #include "ConvertFont.h"
+#include "ConvertSkin.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -391,10 +392,16 @@ int main(int argc, char* argv[])
 
 	ConvertAnim("hit_front.glb");
 	ConvertAnim("sidestep_right.glb");
-	ConvertAnim("run.glb");
 	ConvertAnim("walk_mesh.glb");
+	ConvertAnim("run.glb");
 	ConvertAnim("shot_up.glb");
-	CreateChickenBotModels();
+	ConvertSkin("walk_mesh.glb");
+	ConvertSkeleton("walk_mesh.glb");
+
+	ConvertAnim("mannequin.glb");
+	ConvertAnim("RunJump.glb");
+	ConvertSkeleton("mannequin.glb");
+	ConvertSkin("mannequin.glb");
 
 	google::protobuf::ShutdownProtobufLibrary();
 

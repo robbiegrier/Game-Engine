@@ -1,9 +1,10 @@
 #include "Mixer.h"
 #include "MathApp.h"
+#include "AnimationSystem.h"
 
 namespace Azul
 {
-	void Mixer::Blend(Bone* pResult, const Bone* pA, const Bone* pB, const float tS, int numBones)
+	void Mixer::BlendCPU_Deprecated(BoneTransform* pResult, BoneTransform* pA, BoneTransform* pB, const float tS, const int numBones)
 	{
 		for (int i = 0; i < numBones; i++)
 		{
