@@ -23,6 +23,9 @@
 #include "PCSTreeReverseIterator.h"
 #include "Image.h"
 #include "ImageManager.h"
+#include "GameObjectText.h"
+#include "Font.h"
+#include "FontLibrary.h"
 
 using json = nlohmann::json;
 
@@ -77,7 +80,7 @@ namespace Azul
 				imageEnum = ((GOSprite*)pObject->GetGraphicsObject())->pImage->GetName();
 			}
 
-			return json({
+			json output = json({
 					{"Object Name", pName},
 					{"Parent Name", pParentName},
 					{"Location", {location[x], location[y], location[z]}},
@@ -93,6 +96,17 @@ namespace Azul
 					{"Render Shell", pObject->GetRenderShell()},
 					{"Is Selectable", pObject->IsSelectable()},
 				});
+
+			if (pObject->GetTypeName() == GameObject::Name::GameObjectText)
+			{
+				GameObjectText* pText = (GameObjectText*)pObject;
+				Font::Name fontEnum = pText->GetFont()->GetName();
+				output["Font"] = fontEnum;
+				output["Message"] = pText->GetMessagePtr();
+				output["Image"] = ((GOSprite*)pObject->GetGraphicsObject())->pImage->GetName();
+			}
+
+			return output;
 		}
 
 		return json();
@@ -121,6 +135,8 @@ namespace Azul
 		TextureObject::Name textureName = TextureObject::Name::None;
 		ShaderObject::Name shaderName = ShaderObject::Name::None;
 		Image::Name imageName = Image::Name::Null;
+		Font::Name fontName;
+		char message[GameObjectText::MaxMessageSize];
 		Vec4 color;
 		Vec3 location;
 		Vec3 scale;
@@ -140,6 +156,8 @@ namespace Azul
 			else if (strcmp(propertyName, "Texture") == 0)			textureName = (TextureObject::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Mesh") == 0)				meshName = (Mesh::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Image") == 0)			imageName = (Image::Name)prop.value().template get<unsigned int>();
+			else if (strcmp(propertyName, "Font") == 0)				fontName = (Font::Name)prop.value().template get<unsigned int>();
+			else if (strcmp(propertyName, "Message") == 0)			memcpy_s(message, GameObjectText::MaxMessageSize, prop.value().template get<std::string>().c_str(), GameObjectText::MaxMessageSize);
 			else if (strcmp(propertyName, "Render Shell") == 0)		renderShell = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Is Selectable") == 0)	isSelectable = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Copy Relative Location") == 0) {}
@@ -185,6 +203,10 @@ namespace Azul
 			break;
 		case GameObject::Name::GameObjectSprite:
 			pGameObject = new GameObjectSprite(pGo);
+			break;
+		case GameObject::Name::GameObjectText:
+			delete pGo;
+			pGameObject = new GameObjectText(FontLibrary::Find(fontName), message);
 			break;
 		}
 

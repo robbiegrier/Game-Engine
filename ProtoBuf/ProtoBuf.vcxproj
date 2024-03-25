@@ -286,6 +286,10 @@
     <ClInclude Include="azulModel.pb.h" />
     <ClInclude Include="boneData.h" />
     <ClInclude Include="boneData.pb.h" />
+    <ClInclude Include="fontData.h" />
+    <ClInclude Include="fontData.pb.h" />
+    <ClInclude Include="glyphData.h" />
+    <ClInclude Include="glyphData.pb.h" />
     <ClInclude Include="meshData.h" />
     <ClInclude Include="meshData.pb.h" />
     <ClInclude Include="MeshLayout.h" />
@@ -310,6 +314,8 @@
     <None Include="animFrameData.proto" />
     <None Include="azulModel.proto" />
     <None Include="boneData.proto" />
+    <None Include="fontData.proto" />
+    <None Include="glyphData.proto" />
     <None Include="meshData.proto" />
     <None Include="skeletonData.proto" />
     <None Include="textureData.proto" />
@@ -854,6 +860,10 @@
     <ClCompile Include="azulModel.pb.cc" />
     <ClCompile Include="boneData.cpp" />
     <ClCompile Include="boneData.pb.cc" />
+    <ClCompile Include="fontData.cpp" />
+    <ClCompile Include="fontData.pb.cc" />
+    <ClCompile Include="glyphData.cpp" />
+    <ClCompile Include="glyphData.pb.cc" />
     <ClCompile Include="meshData.cpp" />
     <ClCompile Include="meshData.pb.cc" />
     <ClCompile Include="skeletonData.cpp" />

@@ -59,6 +59,18 @@
     <Filter Include="Source Files\Animation\Interface">
       <UniqueIdentifier>{6a219611-88a0-4e44-b07e-94b45ac28c0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Font">
+      <UniqueIdentifier>{a4f7e4e9-59b6-471e-8b2d-c16034b8dec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Font\Generated">
+      <UniqueIdentifier>{0ff22394-f377-4bd8-b454-8b9459784068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Font\Interface">
+      <UniqueIdentifier>{f2e6d73d-75f8-4e37-8d79-f2a67cc81a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Font\Proto">
+      <UniqueIdentifier>{e18582a6-30a4-4985-a431-7f62b5f7c764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -111,6 +123,12 @@
     </None>
     <None Include="skeletonData.proto">
       <Filter>Source Files\Animation\Proto</Filter>
+    </None>
+    <None Include="fontData.proto">
+      <Filter>Source Files\Font\Proto</Filter>
+    </None>
+    <None Include="glyphData.proto">
+      <Filter>Source Files\Font\Proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -623,6 +641,18 @@
     </ClInclude>
     <ClInclude Include="skeletonData.h">
       <Filter>Source Files\Animation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="glyphData.h">
+      <Filter>Source Files\Font\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="fontData.h">
+      <Filter>Source Files\Font\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="glyphData.pb.h">
+      <Filter>Source Files\Font\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="fontData.pb.h">
+      <Filter>Source Files\Font\Generated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1203,6 +1233,18 @@
     </ClCompile>
     <ClCompile Include="skeletonData.cpp">
       <Filter>Source Files\Animation\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="glyphData.cpp">
+      <Filter>Source Files\Font\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="fontData.cpp">
+      <Filter>Source Files\Font\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="fontData.pb.cc">
+      <Filter>Source Files\Font\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="glyphData.pb.cc">
+      <Filter>Source Files\Font\Generated</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

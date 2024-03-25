@@ -27,6 +27,14 @@ namespace Azul
 
 		GetContext()->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, (FLOAT)1.f, (UINT8)0u);
 		CameraManager::GetCurrentCamera()->SetAspectRatio((float)worldWidth / (float)worldHeight);
+		CameraManager::GetCurrentCamera2D()->SetAspectRatio((float)worldWidth / (float)worldHeight);
+
+		CameraManager::GetCurrentCamera2D()->SetViewport(0, 0, worldWidth, worldHeight);
+		CameraManager::GetCurrentCamera2D()->SetOrthographic(
+			(float)-CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f,
+			(float)-CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f,
+			1.0f, 1000.0f
+		);
 
 		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		UINT sampleMask = 0xffffffff;

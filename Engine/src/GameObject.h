@@ -22,6 +22,7 @@ namespace Azul
 			GameObject,
 			Player,
 			GameObjectSprite,
+			GameObjectText,
 			None
 		};
 
@@ -33,7 +34,7 @@ namespace Azul
 
 		// Core update and draw
 		virtual void Update(AnimTime deltaTime);
-		void Draw();
+		virtual void Draw();
 
 		virtual void Start() {}
 		virtual void Tick(float deltaTime) { static_cast<void>(deltaTime); }

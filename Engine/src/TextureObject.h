@@ -102,6 +102,7 @@ namespace Azul
 			Hovered,
 			Disabled,
 			Birds,
+			CenturyFont,
 			None
 		};
 

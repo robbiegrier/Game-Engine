@@ -125,6 +125,9 @@
     <Filter Include="src\Game\State Machine">
       <UniqueIdentifier>{55a86850-d291-43f6-a145-cab9b160628a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Font">
+      <UniqueIdentifier>{93e92a35-efe6-45a9-a8ee-8a817523317f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -927,6 +930,18 @@
     <ClInclude Include="src\ImageManager.h">
       <Filter>src\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\Font.h">
+      <Filter>src\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FontLibrary.h">
+      <Filter>src\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Glyph.h">
+      <Filter>src\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectText.h">
+      <Filter>src\GameObject\Special</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -1281,6 +1296,18 @@
     </ClCompile>
     <ClCompile Include="src\ImageManager.cpp">
       <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Font.cpp">
+      <Filter>src\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FontLibrary.cpp">
+      <Filter>src\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Glyph.cpp">
+      <Filter>src\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectText.cpp">
+      <Filter>src\GameObject\Special</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

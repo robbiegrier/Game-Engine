@@ -53,6 +53,9 @@
     <Filter Include="Source Files\Helpers">
       <UniqueIdentifier>{b4b5a002-f3c4-43db-a157-57b460307d41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_RapidXML">
+      <UniqueIdentifier>{18bbc3cd-520b-457d-8402-2f59e149b881}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -581,6 +584,21 @@
     </ClInclude>
     <ClInclude Include="ConvertAnim.h">
       <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertFont.h">
+      <Filter>Source Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RapidXML\rapidxml.hpp">
+      <Filter>_RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RapidXML\rapidxml_iterators.hpp">
+      <Filter>_RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RapidXML\rapidxml_print.hpp">
+      <Filter>_RapidXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RapidXML\rapidxml_utils.hpp">
+      <Filter>_RapidXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1148,6 +1166,9 @@
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ConvertAnim.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertFont.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>

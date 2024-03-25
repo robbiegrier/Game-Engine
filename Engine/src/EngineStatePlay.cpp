@@ -21,6 +21,12 @@ namespace Azul
 	void EngineStatePlay::Draw()
 	{
 		CameraManager::GetCurrentCamera()->SetAspectRatio((float)Engine::GetWindowWidth() / (float)Engine::GetWindowHeight());
+		CameraManager::GetCurrentCamera2D()->SetViewport(0, 0, (float)Engine::GetWindowWidth(), (float)Engine::GetWindowHeight());
+		CameraManager::GetCurrentCamera2D()->SetOrthographic(
+			(float)-CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f,
+			(float)-CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f,
+			1.0f, 1000.0f
+		);
 		Engine::NativeRender();
 	}
 

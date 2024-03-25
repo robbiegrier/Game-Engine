@@ -65,7 +65,7 @@
       2.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -99,7 +99,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -133,7 +133,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -167,7 +167,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -201,7 +201,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -235,7 +235,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -269,7 +269,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -303,7 +303,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -337,7 +337,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1017,7 +1017,7 @@
       0.09999995678663254
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1051,7 +1051,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1085,7 +1085,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1595,7 +1595,7 @@
       0.0010000000474974513
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1629,7 +1629,7 @@
       19999.998046875
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1663,7 +1663,7 @@
       1.0
     ],
     "Shader": 4,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1731,7 +1731,7 @@
       1.0
     ],
     "Shader": 1,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1765,7 +1765,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1799,7 +1799,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1833,7 +1833,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -1867,7 +1867,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -2309,7 +2309,7 @@
       1.0
     ],
     "Shader": 7,
-    "Texture": 89
+    "Texture": 90
   },
   {
     "Color": [
@@ -3411,8 +3411,8 @@
     "Image": 2,
     "Is Selectable": true,
     "Location": [
-      523.0,
-      339.0,
+      78.0,
+      100.5,
       0.0
     ],
     "Mesh": 87,
@@ -3420,17 +3420,53 @@
     "Parent Name": "Objects",
     "Render Shell": true,
     "Rotation": [
-      -0.0,
+      0.0,
+      0.0,
+      0.13485100865364075,
+      0.99086594581604
+    ],
+    "Scale": [
+      100.0,
+      100.0,
+      1.0
+    ],
+    "Shader": 6,
+    "Texture": 90
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Font": 0,
+    "Game Object": 3,
+    "Graphics Object": 5,
+    "Image": 5,
+    "Is Selectable": true,
+    "Location": [
+      15.0,
+      20.0,
+      0.0
+    ],
+    "Mesh": 87,
+    "Message": "Robbie is Awesome",
+    "Object Name": "Text Object",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
       -0.0,
       -0.0,
       1.0
     ],
     "Scale": [
-      200.0,
-      200.0,
+      0.0,
+      0.0,
       1.0
     ],
     "Shader": 6,
-    "Texture": 89
+    "Texture": 90
   }
 ]

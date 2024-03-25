@@ -11,6 +11,7 @@
 #include "BoundingSphere.h"
 #include "ChickenBot.h"
 #include "ConvertAnim.h"
+#include "ConvertFont.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -342,6 +343,7 @@ int main(int argc, char* argv[])
 	system("copy ..\\Models\\*.glb .");
 	system("copy ..\\Models\\*.png .");
 	system("copy ..\\Models\\*.tga .");
+	system("copy ..\\Models\\*.xml .");
 
 	std::vector<std::string> modelsToConvert;
 
@@ -377,6 +379,16 @@ int main(int argc, char* argv[])
 		ConvertModel(file.c_str());
 	}
 
+	for (const std::string& file : GetAllSourceFileNames("*.png"))
+	{
+		ConvertTexture(file.c_str());
+	}
+
+	for (const std::string& file : GetAllSourceFileNames("*.font.xml"))
+	{
+		ConvertFont(file.c_str());
+	}
+
 	ConvertAnim("hit_front.glb");
 	ConvertAnim("sidestep_right.glb");
 	ConvertAnim("run.glb");
@@ -389,6 +401,7 @@ int main(int argc, char* argv[])
 	system("del *.glb");
 	system("del *.png");
 	system("del *.tga");
+	system("del *.xml");
 
 	return 0;
 }

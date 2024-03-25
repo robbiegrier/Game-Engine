@@ -1,0 +1,11 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+message glyphData_proto
+{
+	optional uint32 key = 1;
+	optional uint32 x = 2;
+	optional uint32 y = 3;
+	optional uint32 width = 4;
+	optional uint32 height = 5;
+}

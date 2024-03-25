@@ -519,6 +519,12 @@ namespace Azul
 			GetContext()->RSSetViewports(1, &self.viewport);
 
 			CameraManager::GetCurrentCamera()->SetAspectRatio((float)self.windowWidth / (float)self.windowHeight);
+			CameraManager::GetCurrentCamera2D()->SetViewport(0, 0, (float)self.windowWidth, (float)self.windowHeight);
+			CameraManager::GetCurrentCamera2D()->SetOrthographic(
+				(float)-CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenWidth() / 2.0f,
+				(float)-CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f, (float)CameraManager::GetCurrentCamera2D()->GetScreenHeight() / 2.0f,
+				1.0f, 1000.0f
+			);
 		}
 	}
 

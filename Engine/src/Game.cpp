@@ -46,6 +46,9 @@
 #include "GameObjectSprite.h"
 #include "GOSprite.h"
 #include "ImageManager.h"
+#include "Font.h"
+#include "GameObjectText.h"
+#include "FontLibrary.h"
 
 namespace Azul
 {
@@ -129,7 +132,7 @@ namespace Azul
 		ImageManager::Add(Image::Name::WhiteBird, new Image(Image::Name::WhiteBird, TextureObject::Name::Birds, Rect(139.0f, 131.0f, 84.0f, 97.0f)));
 		ImageManager::Add(Image::Name::GreenBird, new Image(Image::Name::GreenBird, TextureObject::Name::Birds, Rect(244.0f, 134.0f, 102.0f, 75.0f)));
 		//ImageManager::Add(Image::Name::Stitch, new Image(Image::Name::Stitch, TextureObject::Name::Stitch, Rect(0.0f, 0.0f, 300.0f, 410.0f)));
-		//ImageManager::Add(Image::Name::Text, new Image(Image::Name::Text, TextureObject::Name::CenturyFont, Rect(0.0f, 0.0f, 100.0f, 100.0f)));
+		ImageManager::Add(Image::Name::Text, new Image(Image::Name::Text, TextureObject::Name::CenturyFont, Rect(0.0f, 0.0f, 100.0f, 100.0f)));
 
 		// Scene Directional Light
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
@@ -140,6 +143,8 @@ namespace Azul
 
 		SceneManager::ChangeScene("AzulScene");
 		//GameObjectManager::Dump();
+
+		//GameObjectManager::SpawnObject("Text Object", new GameObjectText(FontLibrary::Find(Font::Name::Century), "Robbie is Awesome"), Vec3(850.f, 850.f, 0.f));
 
 		//GameObjectManager::SpawnObject("pBirdsTmp 2",
 		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::GreenBird), Rect(400, 300, 200, 200))),
@@ -175,6 +180,7 @@ namespace Azul
 		CameraManager::Destroy();
 		ClipManager::Destroy();
 		ImageManager::Destroy();
+		FontLibrary::Destroy();
 
 		delete pAnimController;
 		delete pAnimController1;
@@ -405,6 +411,9 @@ namespace Azul
 
 	void Game::UpdateDemo(float deltaTime)
 	{
+		//static int count = 0;
+		//pCountText->SetMessage((std::string("Count ") + std::to_string(count++)).c_str());
+
 		static float rot1 = 0.f;
 		static float scale1 = 0.2f;
 		static float scaleSign = 1.f;
@@ -628,6 +637,7 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Hovered, new TextureProto("Hovered.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Disabled, new TextureProto("Disabled.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Birds, new TextureProto("Birds.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::CenturyFont, new TextureProto("CenturyFontTexture.proto.azul", 0));
 
 		int textI = 0;
 		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
@@ -683,6 +693,9 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Tattoine34, new TextureProto(tattoineData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::Tattoine35, new TextureProto(tattoineData.meshes[textI++]));
 		TextureObjectManager::Add(TextureObject::Name::Tattoine36, new TextureProto(tattoineData.meshes[textI++]));
+
+		FontLibrary::Create();
+		FontLibrary::Add(Font::Name::Century, new Font("Century.font.proto.azul", TextureObjectManager::Find(TextureObject::Name::CenturyFont)));
 
 		//TextureObjectManager::Add(TextureObject::Name::Bone, new TextureProto("Bone.proto.azul", 0));
 		//TextureObjectManager::Add(TextureObject::Name::Bone_001, new TextureProto("Bone_001.proto.azul", 0));

@@ -126,7 +126,10 @@ namespace Azul
 
 	void Camera::SetAspectRatio(float inAspectRatio)
 	{
-		aspectRatio = inAspectRatio;
+		if (camType == Type::Perspective3D)
+		{
+			aspectRatio = inAspectRatio;
+		}
 	}
 
 	void Camera::AddLocationOffset(const Vec3& offset)
@@ -322,6 +325,11 @@ namespace Azul
 	{
 		UpdateProjectionMatrix();
 		UpdateViewMatrix();
+	}
+
+	Camera::Type Camera::GetType() const
+	{
+		return camType;
 	}
 
 	Mat4& Camera::GetViewMatrix()
