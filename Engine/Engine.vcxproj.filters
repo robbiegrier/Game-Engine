@@ -134,6 +134,15 @@
     <Filter Include="src\ComputeShaders">
       <UniqueIdentifier>{2c7011fd-c4a8-43d4-beae-1d565807d265}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Animation\Library\Skeleton">
+      <UniqueIdentifier>{3d1fa6b6-bae1-4ef2-bb01-8d1609f17550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Animation\Library\Clip">
+      <UniqueIdentifier>{3d09b476-48f6-4645-80cc-132a7ec83e41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Animation\Runtime">
+      <UniqueIdentifier>{28740aaf-59f8-4bde-83e9-6c58d04ffaac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -768,28 +777,7 @@
     <ClInclude Include="src\MeshSphere.h">
       <Filter>src\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="src\AnimController.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mixer.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TimerController.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectAnim.h">
-      <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectAnimSkeleton.h">
-      <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObjectAnimSkin.h">
-      <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectBasic.h">
-      <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObjectRigid.h">
       <Filter>src\GameObject\Special</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorGui.h">
@@ -948,33 +936,6 @@
     <ClInclude Include="Shaders\Compiled\SkinLightTexture.Vx.h">
       <Filter>Shaders\Compiled</Filter>
     </ClInclude>
-    <ClInclude Include="src\Clip.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ClipManager.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ClipProto.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BoneTransform.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Skeleton.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BoneHierarchyNode.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SkeletonManager.h">
-      <Filter>src\Animation\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimatedObjectHierarchy.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationSystem.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="src\ComputeRSVBuffer.h">
       <Filter>src\ComputeShaders</Filter>
     </ClInclude>
@@ -992,6 +953,39 @@
     </ClInclude>
     <ClInclude Include="src\SOSkinLightTexture.h">
       <Filter>src\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoneHierarchyNode.h">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skeleton.h">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkeletonManager.h">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoneTransform.h">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Clip.h">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipManager.h">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipProto.h">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationSystem.h">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimController.h">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mixer.h">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimerController.h">
+      <Filter>src\Animation\Runtime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1192,28 +1186,7 @@
     <ClCompile Include="src\MeshSphere.cpp">
       <Filter>src\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="src\AnimController.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mixer.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TimerController.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjectAnim.cpp">
-      <Filter>src\GameObject\Special</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjectAnimSkeleton.cpp">
-      <Filter>src\GameObject\Special</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObjectAnimSkin.cpp">
-      <Filter>src\GameObject\Special</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjectBasic.cpp">
-      <Filter>src\GameObject\Special</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjectRigid.cpp">
       <Filter>src\GameObject\Special</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorGui.cpp">
@@ -1354,33 +1327,6 @@
     <ClCompile Include="src\GameObjectText.cpp">
       <Filter>src\GameObject\Special</Filter>
     </ClCompile>
-    <ClCompile Include="src\Clip.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ClipManager.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ClipProto.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BoneTransform.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Skeleton.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BoneHierarchyNode.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SkeletonManager.cpp">
-      <Filter>src\Animation\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AnimatedObjectHierarchy.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AnimationSystem.cpp">
-      <Filter>src\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="src\ComputeRSVBuffer.cpp">
       <Filter>src\ComputeShaders</Filter>
     </ClCompile>
@@ -1398,6 +1344,39 @@
     </ClCompile>
     <ClCompile Include="src\SOSkinLightTexture.cpp">
       <Filter>src\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoneHierarchyNode.cpp">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skeleton.cpp">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SkeletonManager.cpp">
+      <Filter>src\Animation\Library\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoneTransform.cpp">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clip.cpp">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipManager.cpp">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClipProto.cpp">
+      <Filter>src\Animation\Library\Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationSystem.cpp">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimController.cpp">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mixer.cpp">
+      <Filter>src\Animation\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TimerController.cpp">
+      <Filter>src\Animation\Runtime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

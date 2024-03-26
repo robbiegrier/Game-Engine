@@ -36,7 +36,6 @@
 #include "TextureProto.h"
 #include "MeshSphere.h"
 #include "Clip.h"
-#include "GameObjectBasic.h"
 #include "SOEditorVisual.h"
 #include "SceneManager.h"
 #include "GameObjectSprite.h"
@@ -63,29 +62,9 @@ namespace Azul
 
 	AnimController* pAnimController;
 	AnimController* pAnimController1;
-	//AnimController* pAnimController2;
-	//AnimController* pAnimController3;
-	//AnimController* pAnimController4;
 
 	AnimTime animDeltaTime;
 
-	GameObject* pPyramid;
-	GameObject* pPyramid1;
-	GameObject* pPyramid2;
-	GameObject* pPyramid3;
-	GameObject* pPyramid4;
-	GameObject* pCube;
-	GameObject* pLightBlock;
-	GameObject* pLightPyramid;
-	GameObject* pLightDiamond;
-	GameObject* pTexture1;
-	GameObject* pTexture2;
-	GameObject* pTexture3;
-	GameObject* pCube1;
-	GameObject* pCube2;
-	GameObject* pCube3;
-	GameObject* pCenter;
-	GameObject* pTexObject;
 	GameObject* LightSource;
 	GameObject* LightSource1;
 	GameObject* LightSource2;
@@ -166,16 +145,16 @@ namespace Azul
 		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
 		animDeltaTime = delta;
 
-		pAnimController = new AnimController(animDeltaTime, Clip::Name::Walk, Skeleton::Name::ChickenBot, Mesh::Name::ChickenBotSkin, TextureObject::Name::ChickenBot, AnimMode::Skinned);
+		pAnimController = new AnimController(animDeltaTime, Clip::Name::Walk, Skeleton::Name::ChickenBot, Mesh::Name::ChickenBotSkin, TextureObject::Name::ChickenBot);
 		AnimationSystem::Add(pAnimController);
-		pChickenBot = pAnimController->GetObjectPivot();
+		pChickenBot = pAnimController->GetGameObject();
 		pChickenBot->SetRelativeLocation(Vec3(30, -1, -50));
 		pChickenBot->SetRelativeScale(30.f);
 		pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
 
-		pAnimController1 = new AnimController(delta, Clip::Name::HumanoidRun, Skeleton::Name::MixamoRig1, Mesh::Name::MannequinSkin, TextureObject::Name::Mannequin, AnimMode::Skinned);
+		pAnimController1 = new AnimController(delta, Clip::Name::HumanoidRun, Skeleton::Name::MixamoRig1, Mesh::Name::MannequinSkin, TextureObject::Name::Mannequin);
 		AnimationSystem::Add(pAnimController1);
-		pMannequin = pAnimController1->GetObjectPivot();
+		pMannequin = pAnimController1->GetGameObject();
 		pMannequin->SetRelativeLocation(Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
 
 		//GameObjectManager::Dump();
@@ -220,12 +199,6 @@ namespace Azul
 		ImageManager::Destroy();
 		FontLibrary::Destroy();
 		AnimationSystem::Destroy();
-
-		//delete pAnimController;
-		//delete pAnimController1;
-		//delete pAnimController2;
-		//delete pAnimController3;
-		//delete pAnimController4;
 	}
 
 	void Game::EndFrame()
@@ -233,223 +206,19 @@ namespace Azul
 		intervalTimer.Tic();
 	}
 
-	void Game::LoadFloor(int size)
-	{
-		float gridSize = (float)size;
-		float floorScale = 1.f;
-		float step = floorScale / 2.f;
-
-		for (float xf = -gridSize; xf < gridSize; xf += step)
-		{
-			for (float yf = -gridSize; yf < gridSize; yf += step)
-			{
-				TextureObject* pTex = TextureObjectManager::Find(TextureObject::Name::Rocks);
-
-				if (((xf <= 0 && xf >= -5) || (xf >= 0 && xf < 5)) && ((yf <= 0 && yf >= -5) || (yf >= 0 && yf <= 5)))
-				{
-					pTex = TextureObjectManager::Find(TextureObject::Name::Stone);
-				}
-
-				float zCoord = -floorScale;
-
-				if (fabs(fabs(xf) - gridSize) < 0.01f)
-					zCoord += step;
-				if (fabs(fabs(xf + 1) - gridSize) < 0.01f)
-					zCoord += step;
-				if (fabs(fabs(yf) - gridSize) < 0.01f)
-					zCoord += step;
-				if (fabs(fabs(yf + 1) - gridSize) < 0.01f)
-					zCoord += step;
-
-				GameObject* pFloor = GameObjectManager::SpawnObject("Floor",
-					new GOLightTexture(
-						MeshManager::Find(Mesh::Name::Cube),
-						ShaderObjectManager::Find(ShaderObject::Name::Default),
-						pTex
-					),
-					Vec3((float)xf, zCoord, (float)yf)
-				);
-				pFloor->SetRelativeScale(Vec3(floorScale, floorScale, floorScale));
-			}
-		}
-	}
-
-	void Game::LoadClock(float size, const Vec3& pos)
-	{
-		static_cast<void>(lightPos);
-		static_cast<void>(lightColor);
-
-		Vec3 scale = Vec3(size, size, size);
-
-		pCenter = GameObjectManager::SpawnObject("Clock Center",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Cross),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(1, 0, 0)), pos);
-		pCenter->SetRelativeScale(scale);
-
-		GameObject* pC1 = GameObjectManager::SpawnObject("Clock Inner Cube 1",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Cube),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(1, 0, 1)), Vec3(3.f, 0.f, 0.f) * size, pCenter);
-		pC1->SetRelativeScale(scale * 2);
-
-		GameObject* pC2 = GameObjectManager::SpawnObject("Clock Inner Cube 2",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Cube),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(1, 0, 1)), Vec3(0.f, 3.f, 0.f) * size, pCenter);
-		pC2->SetRelativeScale(scale * 2);
-
-		GameObject* pC3 = GameObjectManager::SpawnObject("Clock Inner Cube 3",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Cube),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(1, 0, 1)), Vec3(0.f, -3.f, 0.f) * size, pCenter);
-		pC3->SetRelativeScale(scale * 2);
-
-		GameObject* pC4 = GameObjectManager::SpawnObject("Clock Inner Cube 4",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Cube),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(1, 0, 1)), Vec3(-3.f, 0.f, 0.f) * size, pCenter);
-		pC4->SetRelativeScale(scale * 2);
-
-		GameObject* pPyr1 = GameObjectManager::SpawnObject("Clock Outer Pyramid 1",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Pyramid),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(0, 0, 1)), Vec3(.5f, 0.f, 0.f) * size, pC1);
-		pPyr1->SetRelativeScale(scale * .1f);
-		pPyr1->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.5f));
-
-		GameObject* pPyr2 = GameObjectManager::SpawnObject("Clock Outer Pyramid 2",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Pyramid),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(0, 0, 1)), Vec3(0.f, .5f, 0.f) * size, pC2);
-		pPyr2->SetRelativeScale(scale * .1f);
-		pPyr2->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 2.f));
-
-		GameObject* pPyr3 = GameObjectManager::SpawnObject("Clock Outer Pyramid 3",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Pyramid),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(0, 0, 1)), Vec3(0.f, -.5f, 0.f) * size, pC3);
-		pPyr3->SetRelativeScale(scale * .1f);
-		pPyr3->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 1.f));
-
-		GameObject* pPyr4 = GameObjectManager::SpawnObject("Clock Outer Pyramid 4",
-			new GOConstColor(
-				MeshManager::Find(Mesh::Name::Pyramid),
-				ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
-				Vec3(0, 0, 1)), Vec3(-.5f, 0.f, 0.f) * size, pC4);
-		pPyr4->SetRelativeScale(scale * .1f);
-		pPyr4->SetRelativeRotation(Rot(Rot1::Z, MATH_PI * 2.5f));
-	}
-
-	void Game::LoadPylon(float size, const Vec3& pos)
-	{
-		static_cast<void>(lightPos);
-		static_cast<void>(lightColor);
-
-		Vec3 scale = Vec3(size, size, size);
-
-		pPyramid = GameObjectManager::SpawnObject("Diamond Main", Mesh::Name::Diamond, ShaderObject::Name::ColorByVertex, pos);
-		pPyramid1 = GameObjectManager::SpawnObject("Small Pyramid 1", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(1.3f, 1.3f, 1.3f), pPyramid);
-		pPyramid2 = GameObjectManager::SpawnObject("Small Pyramid 2", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(-1.3f, 1.3f, 1.3f), pPyramid);
-		pPyramid3 = GameObjectManager::SpawnObject("Small Pyramid 3", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(-1.3f, 1.3f, -1.3f), pPyramid);
-		pPyramid4 = GameObjectManager::SpawnObject("Small Pyramid 4", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(1.3f, 1.3f, -1.3f), pPyramid);
-
-		pPyramid->SetRelativeScale(scale);
-		pPyramid1->SetRelativeScale(scale * .25f);
-		pPyramid2->SetRelativeScale(scale * .25f);
-		pPyramid3->SetRelativeScale(scale * .25f);
-		pPyramid4->SetRelativeScale(scale * .25f);
-	}
-
-	void Game::LoadColorObjects()
-	{
-		GameObjectManager::SpawnObject("Color Cross", Mesh::Name::Cross, ShaderObject::Name::ColorByVertex, Vec3(10.f, 0.f, 10.f))->SetRelativeScale(Vec3(.5f, .5f, .5f));
-		GameObjectManager::SpawnObject("Color Cube", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(14.f, -1.f, 10.f))->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
-		GameObjectManager::SpawnObject("Color Diamond", Mesh::Name::Diamond, ShaderObject::Name::ColorByVertex, Vec3(14.f, -0.0f, 14.f))->SetRelativeScale(Vec3(1.0f, 1.0f, 1.0f));
-		GameObjectManager::SpawnObject("Color Pyramid", Mesh::Name::Pyramid, ShaderObject::Name::ColorByVertex, Vec3(10.f, -1.f, 14.f))->SetRelativeScale(Vec3(1.f, 1.f, 1.f));
-	}
-
-	void Game::LoadLightObjects()
-	{
-		pLightBlock = GameObjectManager::SpawnObject("Light Block",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Cube), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Brick)),
-			Vec3(-10.f, 0.f, 14.f)
-		);
-		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
-
-		pLightPyramid = GameObjectManager::SpawnObject("Light Pyramid",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Pyramid), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Duckweed)),
-			Vec3(-10.f, 0.f, 10.f)
-		);
-		pLightPyramid->SetRelativeScale(Vec3(1, 1, 1));
-
-		pLightDiamond = GameObjectManager::SpawnObject("Light Diamond",
-			new GOLightTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Stone)),
-			Vec3(-14.f, 0.f, 12.f)
-		);
-		pLightDiamond->SetRelativeScale(Vec3(1, 1, 1));
-	}
-
-	void Game::LoadMovingObjects()
-	{
-		pCube1 = GameObjectManager::SpawnObject("Small Cube 1", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(3.f, 10.f, -30.f));
-		pCube2 = GameObjectManager::SpawnObject("Small Cube 2", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(0.f, 10.f, -30.f));
-		pCube3 = GameObjectManager::SpawnObject("Small Cube 3", Mesh::Name::Cube, ShaderObject::Name::ColorByVertex, Vec3(-3.f, 10.f, -30.f));
-
-		pCube1->SetRelativeScale(Vec3(.8f, .8f, .8f));
-		pCube2->SetRelativeScale(Vec3(.8f, .8f, .8f));
-		pCube3->SetRelativeScale(Vec3(.8f, .8f, .8f));
-
-		pTexture1 = GameObjectManager::SpawnObject("Texture Block 1",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Rocks)),
-			Vec3(-10.f, 0.f, -14.f)
-		);
-		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
-
-		pTexture2 = GameObjectManager::SpawnObject("Texture Block 2",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Stone)),
-			Vec3(-8.f, 0.f, -16.f)
-		);
-		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
-
-		pTexture3 = GameObjectManager::SpawnObject("Texture Block 3",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Diamond), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Brick)),
-			Vec3(-12.f, 0.f, -12.f)
-		);
-		pLightBlock->SetRelativeScale(Vec3(2.f, 2.f, 2.f));
-	}
-
-	void Game::LoadInstancedObjects()
-	{
-		GameObject* pInst1 = GameObjectManager::SpawnObject("Instance Cross 1",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Rocks)),
-			Vec3(-15.f, 0.f, 0.f)
-		);
-		pInst1->SetRelativeScale(Vec3(0.5f, 0.5f, 0.1f));
-
-		GameObject* pInst2 = GameObjectManager::SpawnObject("Instance Cross 2",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::LightTexture), TextureObjectManager::Find(TextureObject::Name::Duckweed)),
-			Vec3(-15.f, 0.f, 3.f)
-		);
-		pInst2->SetRelativeScale(Vec3(0.5f, 0.5f, 0.1f));
-
-		GameObject* pInst3 = GameObjectManager::SpawnObject("Instance Cross 3",
-			new GOFlatTexture(MeshManager::Find(Mesh::Name::Cross), ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Brick)),
-			Vec3(-15.f, 0.f, -3.f)
-		);
-		pInst3->SetRelativeScale(Vec3(0.5f, 0.25f, 0.1f));
-	}
-
 	void Game::UpdateDemo(float deltaTime)
 	{
+		if (GetKeyState('5') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::Walk);
+			pAnimController1->SetClip(Clip::Name::HumanoidRun);
+		}
+		else if (GetKeyState('6') & 0x8000)
+		{
+			pAnimController->SetClip(Clip::Name::ShotUp);
+			pAnimController1->SetClip(Clip::Name::RunJump);
+		}
+
 		static float rot1 = 0.f;
 		static float scale1 = 0.2f;
 		static float scaleSign = 1.f;
@@ -468,31 +237,7 @@ namespace Azul
 			scaleSign = 1.f;
 		}
 
-		//pPyramid->SetRelativeRotation(Rot(Rot3::XYZ, rot1, rot1, rot1));
-		//pPyramid1->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
-		//pPyramid2->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
-		//pPyramid3->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
-		//pPyramid4->SetRelativeRotation(Rot(Rot3::XYZ, rot1, 0.f, 0.f));
 		rot1 += 1.f * deltaTime;
-
-		//pCenter->SetRelativeRotation(Rot(Rot1::Z, rot1));
-
-		//pCube1->SetRelativeLocation(pCube1->GetRelativeLocation() + Vec3(-trans1 * transSign * deltaTime, 0, 0));
-		//pCube2->SetRelativeLocation(pCube2->GetRelativeLocation() + Vec3(0, trans1 * transSign * deltaTime, 0));
-		//pCube3->SetRelativeLocation(pCube3->GetRelativeLocation() + Vec3(trans1 * transSign * deltaTime, 0, 0));
-
-		//if (pCube2->GetWorldLocation()[y] < 0.f)
-		//{
-		//	transSign = 1.f;
-		//}
-		//else if (pCube2->GetWorldLocation()[y] > 10.f)
-		//{
-		//	transSign = -1.f;
-		//}
-
-		//pTexture1->SetRelativeLocation(pTexture1->GetRelativeLocation() + Vec3(texTrans1 * texTransSign * deltaTime, 0, 0));
-		//pTexture2->SetRelativeLocation(pTexture2->GetRelativeLocation() + Vec3(texTrans1 * texTransSign * deltaTime, 0, 0));
-		//pTexture3->SetRelativeLocation(pTexture3->GetRelativeLocation() + Vec3(texTrans1 * texTransSign * deltaTime, 0, 0));
 
 		//if (pTexture1->GetWorldLocation()[x] < -15.f)
 		//{

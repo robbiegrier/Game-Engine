@@ -290,7 +290,6 @@
     <ClInclude Include="Shaders\Compiled\SkinLightTexture.Vx.h" />
     <ClInclude Include="Shaders\Compiled\Sprite.Px.h" />
     <ClInclude Include="Shaders\Compiled\Sprite.Vx.h" />
-    <ClInclude Include="src\AnimatedObjectHierarchy.h" />
     <ClInclude Include="src\AnimationSystem.h" />
     <ClInclude Include="src\AnimController.h" />
     <ClInclude Include="src\AssetsWindow.h" />
@@ -336,12 +335,8 @@
     <ClInclude Include="src\EngineUtils.h" />
     <ClInclude Include="src\Font.h" />
     <ClInclude Include="src\FontLibrary.h" />
-    <ClInclude Include="src\GameObjectAnim.h" />
-    <ClInclude Include="src\GameObjectAnimSkeleton.h" />
     <ClInclude Include="src\GameObjectAnimSkin.h" />
-    <ClInclude Include="src\GameObjectBasic.h" />
     <ClInclude Include="src\GameObjectManager.h" />
-    <ClInclude Include="src\GameObjectRigid.h" />
     <ClInclude Include="src\GameObjectSprite.h" />
     <ClInclude Include="src\GameObjectText.h" />
     <ClInclude Include="src\Glyph.h" />
@@ -625,7 +620,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AnimatedObjectHierarchy.cpp" />
     <ClCompile Include="src\AnimationSystem.cpp" />
     <ClCompile Include="src\AnimController.cpp" />
     <ClCompile Include="src\AssetsWindow.cpp" />
@@ -670,12 +664,8 @@
     <ClCompile Include="src\EngineUtils.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\FontLibrary.cpp" />
-    <ClCompile Include="src\GameObjectAnim.cpp" />
-    <ClCompile Include="src\GameObjectAnimSkeleton.cpp" />
     <ClCompile Include="src\GameObjectAnimSkin.cpp" />
-    <ClCompile Include="src\GameObjectBasic.cpp" />
     <ClCompile Include="src\GameObjectManager.cpp" />
-    <ClCompile Include="src\GameObjectRigid.cpp" />
     <ClCompile Include="src\GameObjectSprite.cpp" />
     <ClCompile Include="src\GameObjectText.cpp" />
     <ClCompile Include="src\Glyph.cpp" />

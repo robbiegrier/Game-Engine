@@ -1,36 +1,28 @@
 #ifndef _GameObjectAnimSkin
 #define _GameObjectAnimSkin
 
-#include "GameObjectAnim.h"
+#include "GameObject.h"
 #include "MathEngine.h"
-#include "ShaderObject.h"
-#include "Mesh.h"
-#include "GraphicsObject.h"
-#include "PCSNode.h"
-#include "AnimTime.h"
-#include "BoneTransform.h"
 
 namespace Azul
 {
-	class AnimatedObjectHierarchy;
+	class AnimController;
 
-	class GameObjectAnimSkin : public GameObjectAnim
+	class GameObjectAnimSkin : public GameObject
 	{
 	public:
 		// Big four
-		GameObjectAnimSkin(GraphicsObject* pGraphicsObject, AnimatedObjectHierarchy* _pAnimatedObjectHierarchy, BoneTransform* pInBoneResult);
+		GameObjectAnimSkin(GraphicsObject* pGraphicsObject, AnimController* pInController);
 		GameObjectAnimSkin() = delete;
 		GameObjectAnimSkin(const GameObjectAnimSkin&) = delete;
 		GameObjectAnimSkin& operator=(GameObjectAnimSkin&) = delete;
 		virtual ~GameObjectAnimSkin();
 
 		virtual void Update(AnimTime currTime);
-		virtual void SetIndex(int i) override;
 
 	public:
-		BoneTransform* pBoneResult;
 		Mat4* poBoneWorld;
-		AnimatedObjectHierarchy* pAnimationHierarchy;
+		AnimController* pController;
 
 	private:
 		void UpdateSkinGPU();

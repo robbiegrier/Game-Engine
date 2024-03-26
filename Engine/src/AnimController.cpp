@@ -1,29 +1,36 @@
 #include "AnimController.h"
-#include "AnimatedObjectHierarchy.h"
-#include "GameObjectBasic.h"
 #include "ClipManager.h"
 #include "SkeletonManager.h"
 #include "Skeleton.h"
 #include "MeshManager.h"
 #include "TextureObjectManager.h"
+#include "ShaderObjectManager.h"
+#include "MeshManager.h"
+#include "GameObjectAnimSkin.h"
+#include "Skeleton.h"
+#include "GOSkinLightTexture.h"
+#include "GameObjectManager.h"
 
 namespace Azul
 {
-	AnimController::AnimController(AnimTime delta, Clip::Name pInClipName, Skeleton::Name pInSkeletonName, Mesh::Name inMeshName, TextureObject::Name inTextureName, AnimMode inMode)
-		: pClip(nullptr), pBoneResult(nullptr), pAnimatedObjectHierarchy(nullptr)
+	AnimController::AnimController(AnimTime delta, Clip::Name pInClipName, Skeleton::Name pInSkeletonName, Mesh::Name inMeshName, TextureObject::Name inTextureName)
+		: pClip(nullptr)
 	{
 		pClip = ClipManager::Find(pInClipName);
 		pTimerControl = new TimerController(delta, AnimTime(AnimTime::Duration::ZERO), pClip->GetTotalTime());
-		Skeleton* pSkeleton = SkeletonManager::Find(pInSkeletonName);
-		pBoneResult = new BoneTransform[BONE_COUNT_MAX]();
-		pAnimatedObjectHierarchy = new AnimatedObjectHierarchy(pBoneResult, pSkeleton, MeshManager::Find(inMeshName), TextureObjectManager::Find(inTextureName), this, inMode);
+		pSkeleton = SkeletonManager::Find(pInSkeletonName);
+
+		Vec3 spawnPos(0, 0, 0);
+
+		GOSkinLightTexture* pGraphicsSkin = new GOSkinLightTexture(MeshManager::Find(inMeshName), ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture), TextureObjectManager::Find(inTextureName));
+		GameObjectAnimSkin* pGameObjectSkin = new GameObjectAnimSkin(pGraphicsSkin, this);
+		pGraphicsSkin->pBoneWorld = pGameObjectSkin->poBoneWorld;
+		pGameObject = GameObjectManager::SpawnObject("Skinned Game Object", pGameObjectSkin, spawnPos);
 	}
 
 	AnimController::~AnimController()
 	{
 		delete pTimerControl;
-		delete[] pBoneResult;
-		delete pAnimatedObjectHierarchy;
 	}
 
 	void AnimController::Update()
@@ -31,9 +38,9 @@ namespace Azul
 		pTimerControl->Update();
 	}
 
-	GameObjectBasic* AnimController::GetObjectPivot() const
+	GameObject* AnimController::GetGameObject() const
 	{
-		return pAnimatedObjectHierarchy->GetPivotGameObject();
+		return pGameObject;
 	}
 
 	void AnimController::SetClip(Clip::Name inClipName)

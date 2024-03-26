@@ -1,27 +1,4 @@
-#pragma pack_matrix( row_major )
-
-static const int MaxLights = 15;
-
-struct Material
-{
-    float4 Ambient;
-    float4 Diffuse;
-    float4 Specular; // Hack: w holds the specular power
-};
-
-struct PointLight
-{
-    Material LightInt;
-    float4 Position;
-    float4 Attenuation;
-    float Range;
-};
-
-struct DirectionalLight
-{
-    Material LightInt;
-    float4 Direction;
-};
+#include "Phong.hlsli"
 
 cbuffer AA0 : register(b0) // slot 0  (ConstantBufferSlot::Projection)
 {
@@ -47,20 +24,6 @@ cbuffer AA4 : register(b4) // slot 4 (ConstantBufferSlot::LightPos)
 {
     float4 lightPos;
 }
-
-cbuffer LightParameters : register(b5)
-{
-    int numPointLights;
-    PointLight pointlights[MaxLights];
-    DirectionalLight directionalLight;
-    float4 eyePositionWorld;
-};
-
-cbuffer InstanceData : register(b6)
-{
-    float4x4 inverse;
-    Material material;
-};
 
 struct VS_OUTPUT
 {

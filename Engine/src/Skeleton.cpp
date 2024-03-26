@@ -78,25 +78,25 @@ namespace Azul
 			}
 		}
 
-		Trace::out("Hierarchy data for %s:\n", skeletonFileName);
-		for (int i = 0; i < numBones; i++)
-		{
-			Trace::out("%d: %d (parent %d) (%s)\n", i, hierarchyData[i].index, hierarchyData[i].parentIndex, hierarchyData[i].name);
-		}
+		//Trace::out("Hierarchy data for %s:\n", skeletonFileName);
+		//for (int i = 0; i < numBones; i++)
+		//{
+		//	Trace::out("%d: %d (parent %d) (%s)\n", i, hierarchyData[i].index, hierarchyData[i].parentIndex, hierarchyData[i].name);
+		//}
 
-		Trace::out("Hierarchy Table for %s:\n", skeletonFileName);
-		Trace::out("[Bones: %d] [Depth: %d]\n", numBones, hierarchyDepth);
-		for (int i = 0; i < numBones; i++)
-		{
-			BoneHierarchyNode& iNode = hierarchyData[i];
-			for (int j = 0; j < hierarchyDepth; j++)
-			{
-				int index = (iNode.index * HIERARCHY_DEPTH_MAX) + j;
-				if (hierarchyTable[index] >= 0 && hierarchyTable[index] < 10) Trace::out(" ");
-				Trace::out("%d ", hierarchyTable[index]);
-			}
-			Trace::out("  (node %d)\n", hierarchyData[i].index);
-		}
+		//Trace::out("Hierarchy Table for %s:\n", skeletonFileName);
+		//Trace::out("[Bones: %d] [Depth: %d]\n", numBones, hierarchyDepth);
+		//for (int i = 0; i < numBones; i++)
+		//{
+		//	BoneHierarchyNode& iNode = hierarchyData[i];
+		//	for (int j = 0; j < hierarchyDepth; j++)
+		//	{
+		//		int index = (iNode.index * HIERARCHY_DEPTH_MAX) + j;
+		//		if (hierarchyTable[index] >= 0 && hierarchyTable[index] < 10) Trace::out(" ");
+		//		Trace::out("%d ", hierarchyTable[index]);
+		//	}
+		//	Trace::out("  (node %d)\n", hierarchyData[i].index);
+		//}
 	}
 
 	Skeleton::~Skeleton()
