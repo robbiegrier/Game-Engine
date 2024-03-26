@@ -143,30 +143,30 @@ namespace Azul
 
 		SceneManager::ChangeScene("AzulScene");
 
-		pChickenBot = GameObjectManager::SpawnObject("ChickenBot", new GameObject(
-			new GOSkinLightTexture(
-				MeshManager::Find(Mesh::Name::ChickenBotSkin),
-				ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
-				TextureObjectManager::Find(TextureObject::Name::ChickenBot))), Vec3(30, -1, -50));
-		pChickenBot->SetRelativeScale(30.f);
-		pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
+		//pChickenBot = GameObjectManager::SpawnObject("ChickenBot", new GameObject(
+		//	new GOSkinLightTexture(
+		//		MeshManager::Find(Mesh::Name::ChickenBotSkin),
+		//		ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
+		//		TextureObjectManager::Find(TextureObject::Name::ChickenBot))), Vec3(30, -1, -50));
+		//pChickenBot->SetRelativeScale(30.f);
+		//pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
 
-		pMannequin = GameObjectManager::SpawnObject("Mannequin", new GameObject(
-			new GOSkinLightTexture(
-				MeshManager::Find(Mesh::Name::MannequinSkin),
-				ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
-				TextureObjectManager::Find(TextureObject::Name::Mannequin))), Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
-		pMannequin->SetRelativeScale(3.f);
+		//pMannequin = GameObjectManager::SpawnObject("Mannequin", new GameObject(
+		//	new GOSkinLightTexture(
+		//		MeshManager::Find(Mesh::Name::MannequinSkin),
+		//		ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
+		//		TextureObjectManager::Find(TextureObject::Name::Mannequin))), Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
+		//pMannequin->SetRelativeScale(3.f);
 
-		pChickenAnimator = new Animator();
-		pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
-		pChickenAnimator->SetActiveClip(Clip::Name::Walk);
-		pChickenBot->AttachComponent(pChickenAnimator);
+		//pChickenAnimator = new Animator();
+		//pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
+		//pChickenAnimator->SetActiveClip(Clip::Name::Walk);
+		//pChickenBot->AttachComponent(pChickenAnimator);
 
-		pMannequinAnimator = new Animator();
-		pMannequinAnimator->SetSkeleton(Skeleton::Name::MixamoRig1);
-		pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
-		pMannequin->AttachComponent(pMannequinAnimator);
+		//pMannequinAnimator = new Animator();
+		//pMannequinAnimator->SetSkeleton(Skeleton::Name::MixamoRig1);
+		//pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
+		//pMannequin->AttachComponent(pMannequinAnimator);
 
 		//GameObjectManager::Dump();
 
@@ -219,16 +219,16 @@ namespace Azul
 
 	void Game::UpdateDemo(float deltaTime)
 	{
-		if (GetKeyState('5') & 0x8000)
-		{
-			pChickenAnimator->SetActiveClip(Clip::Name::Walk);
-			pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
-		}
-		else if (GetKeyState('6') & 0x8000)
-		{
-			pChickenAnimator->SetActiveClip(Clip::Name::ShotUp);
-			pMannequinAnimator->SetActiveClip(Clip::Name::RunJump);
-		}
+		//if (GetKeyState('5') & 0x8000)
+		//{
+		//	pChickenAnimator->SetActiveClip(Clip::Name::Walk);
+		//	pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
+		//}
+		//else if (GetKeyState('6') & 0x8000)
+		//{
+		//	pChickenAnimator->SetActiveClip(Clip::Name::ShotUp);
+		//	pMannequinAnimator->SetActiveClip(Clip::Name::RunJump);
+		//}
 
 		static float rot1 = 0.f;
 		static float scale1 = 0.2f;

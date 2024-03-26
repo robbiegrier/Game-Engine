@@ -104,6 +104,8 @@ namespace Azul
 
 		void AttachComponent(Component* pInComponent);
 
+		DLinkedList& GetComponents() { return components; }
+
 	protected:
 		bool alwaysRenderShell = false;
 		bool renderShell;

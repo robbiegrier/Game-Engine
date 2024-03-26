@@ -47,4 +47,19 @@ namespace Azul
 	{
 		pSkeleton = SkeletonManager::Find(inSkeletonName);
 	}
+
+	void Animator::Serialize(json& out)
+	{
+		out["Type"] = "Animator";
+		out["Active Clip"] = GetActiveClip()->GetName();
+		out["Skeleton"] = GetSkeleton()->GetName();
+		out["Animation Speed"] = animationSpeed;
+	}
+
+	void Animator::Deserialize(const json& in)
+	{
+		SetActiveClip(in["Active Clip"]);
+		SetSkeleton(in["Skeleton"]);
+		SetAnimationSpeed(in["Animation Speed"]);
+	}
 }

@@ -3,6 +3,9 @@
 
 #include "DLink.h"
 #include "GameObject.h"
+#include <json.hpp>
+
+using json = nlohmann::json;
 
 namespace Azul
 {
@@ -24,7 +27,10 @@ namespace Azul
 		void SetGameObject(GameObject* pInObject) { pObject = pInObject; }
 		GameObject* GetGameObject() const { return pObject; }
 
-	private:
+		virtual void Serialize(json& out) = 0;
+		virtual void Deserialize(const json& in) = 0;
+
+	protected:
 		GameObject* pObject;
 	};
 }

@@ -26,6 +26,8 @@
 #include "GameObjectText.h"
 #include "Font.h"
 #include "FontLibrary.h"
+#include "GOSkinLightTexture.h"
+#include "Animator.h"
 
 using json = nlohmann::json;
 
@@ -106,6 +108,17 @@ namespace Azul
 				output["Image"] = ((GOSprite*)pObject->GetGraphicsObject())->pImage->GetName();
 			}
 
+			output["Components"] = {};
+
+			for (Iterator& it = *pObject->GetComponents().GetIterator(); !it.IsDone(); it.Next())
+			{
+				json componentJson;
+				Component* pComponent = (Component*)it.Curr();
+				pComponent->Serialize(componentJson);
+
+				output["Components"].push_back(componentJson);
+			}
+
 			return output;
 		}
 
@@ -161,6 +174,7 @@ namespace Azul
 			else if (strcmp(propertyName, "Render Shell") == 0)		renderShell = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Is Selectable") == 0)	isSelectable = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Copy Relative Location") == 0) {}
+			else if (strcmp(propertyName, "Components") == 0) {}
 			else
 			{
 				const auto& list = prop.value().template get<std::vector<float>>();
@@ -186,6 +200,8 @@ namespace Azul
 			pGo = new GOLightTexture(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), TextureObjectManager::Find(textureName)); break;
 		case GraphicsObject::Name::GraphicsObjectSprite:
 			pGo = new GOSprite(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), ImageManager::Find(imageName), Rect()); break;
+		case GraphicsObject::Name::GraphicsObjectSkinLightTexture:
+			pGo = new GOSkinLightTexture(MeshManager::Find(meshName), ShaderObjectManager::Find(shaderName), TextureObjectManager::Find(textureName)); break;
 		case GraphicsObject::Name::GraphicsObjectNull:
 			pGo = new GONull(); break;
 		}
@@ -216,6 +232,19 @@ namespace Azul
 		pGameObject->SetRenderShell(renderShell);
 		pGameObject->SetIsSelectable(isSelectable);
 		pGameObject->SetName(objectName);
+
+		if (item["Components"] != nullptr)
+		{
+			for (const auto& componentJson : item["Components"])
+			{
+				if (strcmp(componentJson["Type"].template get<std::string>().c_str(), "Animator") == 0)
+				{
+					Animator* pAnimator = new Animator();
+					pAnimator->Deserialize(componentJson);
+					pGameObject->AttachComponent(pAnimator);
+				}
+			}
+		}
 
 		return pGameObject;
 	}

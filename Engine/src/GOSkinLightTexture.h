@@ -20,6 +20,8 @@ namespace Azul
 
 		virtual GraphicsObject* Clone() override;
 
+		virtual TextureObject* GetTexture() override { return pTex; }
+
 		TextureObject* pTex;
 
 		Mat4* pBoneWorld;

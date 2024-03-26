@@ -477,32 +477,32 @@ namespace Azul
 		self.selection.Draw();
 		self.pWorldViewport->Close();
 
-		const bool fDown = (GetKeyState('F') & 0x8000);
-		static bool switchf = false;
+		//const bool fDown = (GetKeyState('F') & 0x8000);
+		//static bool switchf = false;
 
-		if (fDown)
-		{
-			if (!switchf)
-			{
-				switchf = true;
-				DirectX::ScratchImage scratchImage;
-				ID3D11Resource* resource;
-				self.pWorldViewport->GetRenderTargetView()->GetResource(&resource);
-				HRESULT hr = DirectX::CaptureTexture(Engine::GetDevice(), Engine::GetContext(), resource, scratchImage);
+		//if (fDown)
+		//{
+		//	if (!switchf)
+		//	{
+		//		switchf = true;
+		//		DirectX::ScratchImage scratchImage;
+		//		ID3D11Resource* resource;
+		//		self.pWorldViewport->GetRenderTargetView()->GetResource(&resource);
+		//		HRESULT hr = DirectX::CaptureTexture(Engine::GetDevice(), Engine::GetContext(), resource, scratchImage);
 
-				assert(SUCCEEDED(hr));
+		//		assert(SUCCEEDED(hr));
 
-				const wchar_t* file = L"VIEWPORT_RENDER.hdr";
-				const DirectX::Image& image = scratchImage.GetImages()[0];
-				hr = DirectX::SaveToHDRFile(image, file);
-				assert(SUCCEEDED(hr));
-				Trace::out("Save to %ls\n", file);
-			}
-		}
-		else
-		{
-			switchf = false;
-		}
+		//		const wchar_t* file = L"VIEWPORT_RENDER.hdr";
+		//		const DirectX::Image& image = scratchImage.GetImages()[0];
+		//		hr = DirectX::SaveToHDRFile(image, file);
+		//		assert(SUCCEEDED(hr));
+		//		Trace::out("Save to %ls\n", file);
+		//	}
+		//}
+		//else
+		//{
+		//	switchf = false;
+		//}
 
 		Engine::SetDefaultTargetMode();
 		Engine::ClearDepthStencil({ 0.1f, 0.1f, 0.1f, 1.000000000f });

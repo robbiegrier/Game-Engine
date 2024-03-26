@@ -27,6 +27,9 @@ namespace Azul
 
 		void SetAnimationSpeed(float inSpeed) { animationSpeed = inSpeed; }
 
+		virtual void Serialize(json& out) override;
+		virtual void Deserialize(const json& in) override;
+
 	private:
 		TimerController* pTimerController;
 		Clip* pActiveClip;

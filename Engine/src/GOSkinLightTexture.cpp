@@ -13,6 +13,7 @@ namespace Azul
 		pTex(_pTex)
 	{
 		assert(pTex);
+		name = GraphicsObject::Name::GraphicsObjectSkinLightTexture;
 	}
 
 	GOSkinLightTexture::~GOSkinLightTexture()
