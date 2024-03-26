@@ -1,7 +1,6 @@
 #include "MeshSphere.h"
 #include "MathEngine.h"
 #include "Engine.h"
-#include "DirectXDeviceMan.h"
 
 using namespace Azul;
 

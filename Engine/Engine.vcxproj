@@ -391,12 +391,9 @@
     <ClInclude Include="src\TextureProto.h" />
     <ClInclude Include="src\TimerController.h" />
     <ClInclude Include="src\TranslateHandle.h" />
-    <ClInclude Include="src\Verify.h" />
     <ClInclude Include="src\Viewport.h" />
     <ClInclude Include="src\WICTextureLoader.h" />
     <ClInclude Include="src\WorldWindow.h" />
-    <ClInclude Include="Test\md5.h" />
-    <ClInclude Include="Test\_UnitTestConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__" />
@@ -720,17 +717,9 @@
     <ClCompile Include="src\TextureProto.cpp" />
     <ClCompile Include="src\TimerController.cpp" />
     <ClCompile Include="src\TranslateHandle.cpp" />
-    <ClCompile Include="src\Verify.cpp" />
     <ClCompile Include="src\Viewport.cpp" />
     <ClCompile Include="src\WICTextureLoader.cpp" />
     <ClCompile Include="src\WorldWindow.cpp" />
-    <ClCompile Include="Test\Index_Test.cpp" />
-    <ClCompile Include="Test\md5.cpp" />
-    <ClCompile Include="Test\Model_Test.cpp" />
-    <ClCompile Include="Test\Norm_Test.cpp" />
-    <ClCompile Include="Test\Texture_Test.cpp" />
-    <ClCompile Include="Test\UV_Test.cpp" />
-    <ClCompile Include="Test\Vert_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Proto\libs\debug\absl_bad_any_cast_impl.lib">

@@ -4,9 +4,6 @@
     <Filter Include="_Framework">
       <UniqueIdentifier>{f04c9286-e219-4fb7-b306-f9717e9aba86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_Test">
-      <UniqueIdentifier>{75066020-d788-4b2b-bc41-ace12119e0d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{018c6f9a-3b75-4b64-9e16-5ef5fc18a3c8}</UniqueIdentifier>
     </Filter>
@@ -20,29 +17,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="src\src">
-      <UniqueIdentifier>{e92ca29b-4937-4528-bd5c-8e9a35ac565c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Camera">
       <UniqueIdentifier>{6522eaa0-32dc-4903-b416-40e63802de1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\ShaderObject">
-      <UniqueIdentifier>{3ded6dfe-9cc7-4a62-8420-6ad034060f8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Game">
       <UniqueIdentifier>{4cda4876-0d19-4d22-80d6-255299a04507}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameObject">
       <UniqueIdentifier>{51ba3269-d895-41bf-a4cd-db5691d988b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GraphicsObject">
-      <UniqueIdentifier>{45324200-2da6-416c-9e59-00972da44b7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Mesh">
-      <UniqueIdentifier>{8a894f74-093c-43c4-9200-37d30accd0fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Texture">
-      <UniqueIdentifier>{20091628-2f1c-4501-8206-823ffa82926d}</UniqueIdentifier>
     </Filter>
     <Filter Include="DxTex">
       <UniqueIdentifier>{1100882f-54da-4bad-8b3a-c03c805e48a5}</UniqueIdentifier>
@@ -143,13 +125,28 @@
     <Filter Include="src\Animation\Runtime">
       <UniqueIdentifier>{28740aaf-59f8-4bde-83e9-6c58d04ffaac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Graphics\GraphicsObject">
+      <UniqueIdentifier>{45324200-2da6-416c-9e59-00972da44b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics\Mesh">
+      <UniqueIdentifier>{8a894f74-093c-43c4-9200-37d30accd0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics\ShaderObject">
+      <UniqueIdentifier>{3ded6dfe-9cc7-4a62-8420-6ad034060f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics\Texture">
+      <UniqueIdentifier>{20091628-2f1c-4501-8206-823ffa82926d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics\Image">
+      <UniqueIdentifier>{9ef95bcf-624f-4887-84a5-bfe9aea9b7bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
       <Filter>_Framework</Filter>
     </None>
     <None Include="_Mesh_Diagram.cd">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </None>
     <None Include="DXTex\include\DirectXTex.inl">
       <Filter>DxTex\include</Filter>
@@ -192,9 +189,6 @@
     <ClInclude Include="..\Framework\Framework.h">
       <Filter>_Framework</Filter>
     </ClInclude>
-    <ClInclude Include="src\Colors.h">
-      <Filter>src\src</Filter>
-    </ClInclude>
     <ClInclude Include="Shaders\Compiled\ColorByVertex.Px.h">
       <Filter>Shaders\Compiled</Filter>
     </ClInclude>
@@ -202,10 +196,10 @@
       <Filter>Shaders\Compiled</Filter>
     </ClInclude>
     <ClInclude Include="src\ShaderObject.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\Mesh.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>src\Camera</Filter>
@@ -219,11 +213,8 @@
     <ClInclude Include="src\GameObject.h">
       <Filter>src\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render.h">
-      <Filter>src\src</Filter>
-    </ClInclude>
     <ClInclude Include="src\GraphicsObject.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="Shaders\Compiled\Null.Px.h">
       <Filter>Shaders\Compiled</Filter>
@@ -238,7 +229,7 @@
       <Filter>Shaders\Compiled</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureObject.h">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="DXTex\include\DirectXTex.h">
       <Filter>DxTex\include</Filter>
@@ -678,26 +669,17 @@
     <ClInclude Include="..\Proto\google\protobuf\wrappers.pb.h">
       <Filter>_Proto\include\google\protobuf</Filter>
     </ClInclude>
-    <ClInclude Include="Test\_UnitTestConfiguration.h">
-      <Filter>_Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Test\md5.h">
-      <Filter>_Test</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Verify.h">
-      <Filter>src\src</Filter>
-    </ClInclude>
     <ClInclude Include="src\CameraManager.h">
       <Filter>src\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\CrossMesh.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\CubeMesh.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\DiamondMesh.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\EngineUtils.h">
       <Filter>src\Game</Filter>
@@ -706,76 +688,76 @@
       <Filter>src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOColorByVertex.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOConstColor.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOFlatTexture.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOLightTexture.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GONull.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOWireframe.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshManager.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshUtils.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Plane.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.h">
       <Filter>src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\PyramidMesh.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\ShaderObjectManager.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SOColorByVertex.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SOConstColor.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SODefault.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SOFlatTexture.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SOLightTexture.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SONull.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureObjectManager.h">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshProto.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureProto.h">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\WICTextureLoader.h">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\BoundingSphere.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshSphere.h">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjectAnimSkin.h">
       <Filter>src\GameObject\Special</Filter>
@@ -802,7 +784,7 @@
       <Filter>src\Editor\Selection</Filter>
     </ClInclude>
     <ClInclude Include="src\SOEditorVisual.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorVisual.h">
       <Filter>src\Editor\Transform</Filter>
@@ -895,22 +877,13 @@
       <Filter>Shaders\Compiled</Filter>
     </ClInclude>
     <ClInclude Include="src\SOSprite.h">
-      <Filter>src\ShaderObject</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Image.h">
-      <Filter>src\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rect.h">
-      <Filter>src\Graphics</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GOSprite.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObjectSprite.h">
       <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ImageManager.h">
-      <Filter>src\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Font.h">
       <Filter>src\Font</Filter>
@@ -949,10 +922,10 @@
       <Filter>src\ComputeShaders</Filter>
     </ClInclude>
     <ClInclude Include="src\GOSkinLightTexture.h">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="src\SOSkinLightTexture.h">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="src\BoneHierarchyNode.h">
       <Filter>src\Animation\Library\Skeleton</Filter>
@@ -986,6 +959,21 @@
     </ClInclude>
     <ClInclude Include="src\TimerController.h">
       <Filter>src\Animation\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render.h">
+      <Filter>src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Colors.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Image.h">
+      <Filter>src\Graphics\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImageManager.h">
+      <Filter>src\Graphics\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rect.h">
+      <Filter>src\Graphics\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1046,10 +1034,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ShaderObject.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>src\Camera</Filter>
@@ -1067,46 +1055,22 @@
       <Filter>src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicsObject.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureObject.cpp">
-      <Filter>src\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Index_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\md5.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Model_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Norm_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Texture_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\UV_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\Vert_Test.cpp">
-      <Filter>_Test</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Verify.cpp">
-      <Filter>src\src</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\CameraManager.cpp">
       <Filter>src\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\CrossMesh.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\CubeMesh.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\DiamondMesh.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\EngineUtils.cpp">
       <Filter>src\Game</Filter>
@@ -1118,73 +1082,73 @@
       <Filter>src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOColorByVertex.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOConstColor.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOFlatTexture.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOLightTexture.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GONull.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOWireframe.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshManager.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Plane.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\Player.cpp">
       <Filter>src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="src\PyramidMesh.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\ShaderObjectManager.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SOColorByVertex.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SOConstColor.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SODefault.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SOFlatTexture.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SOLightTexture.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SONull.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureObjectManager.cpp">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshProto.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureProto.cpp">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\WICTextureLoader.cpp">
-      <Filter>src\Texture</Filter>
+      <Filter>src\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\BoundingSphere.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshSphere.cpp">
-      <Filter>src\Mesh</Filter>
+      <Filter>src\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjectAnimSkin.cpp">
       <Filter>src\GameObject\Special</Filter>
@@ -1211,7 +1175,7 @@
       <Filter>src\Editor\Selection</Filter>
     </ClCompile>
     <ClCompile Include="src\SOEditorVisual.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorVisual.cpp">
       <Filter>src\Editor\Transform</Filter>
@@ -1298,22 +1262,13 @@
       <Filter>src\Editor\Transform</Filter>
     </ClCompile>
     <ClCompile Include="src\SOSprite.cpp">
-      <Filter>src\ShaderObject</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Image.cpp">
-      <Filter>src\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rect.cpp">
-      <Filter>src\Graphics</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GOSprite.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GameObjectSprite.cpp">
       <Filter>src\GameObject\Special</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImageManager.cpp">
-      <Filter>src\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Font.cpp">
       <Filter>src\Font</Filter>
@@ -1340,10 +1295,10 @@
       <Filter>src\ComputeShaders</Filter>
     </ClCompile>
     <ClCompile Include="src\GOSkinLightTexture.cpp">
-      <Filter>src\GraphicsObject</Filter>
+      <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="src\SOSkinLightTexture.cpp">
-      <Filter>src\ShaderObject</Filter>
+      <Filter>src\Graphics\ShaderObject</Filter>
     </ClCompile>
     <ClCompile Include="src\BoneHierarchyNode.cpp">
       <Filter>src\Animation\Library\Skeleton</Filter>
@@ -1377,6 +1332,15 @@
     </ClCompile>
     <ClCompile Include="src\TimerController.cpp">
       <Filter>src\Animation\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Image.cpp">
+      <Filter>src\Graphics\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImageManager.cpp">
+      <Filter>src\Graphics\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rect.cpp">
+      <Filter>src\Graphics\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
