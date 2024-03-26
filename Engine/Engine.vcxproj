@@ -292,7 +292,6 @@
     <ClInclude Include="Shaders\Compiled\Sprite.Vx.h" />
     <ClInclude Include="src\AnimationSystem.h" />
     <ClInclude Include="src\Animator.h" />
-    <ClInclude Include="src\AnimController.h" />
     <ClInclude Include="src\AssetsWindow.h" />
     <ClInclude Include="src\BoneHierarchyNode.h" />
     <ClInclude Include="src\BoneTransform.h" />
@@ -621,7 +620,6 @@
   <ItemGroup>
     <ClCompile Include="src\AnimationSystem.cpp" />
     <ClCompile Include="src\Animator.cpp" />
-    <ClCompile Include="src\AnimController.cpp" />
     <ClCompile Include="src\AssetsWindow.cpp" />
     <ClCompile Include="src\BoneHierarchyNode.cpp" />
     <ClCompile Include="src\BoneTransform.cpp" />

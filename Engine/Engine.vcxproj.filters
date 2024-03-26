@@ -954,9 +954,6 @@
     <ClInclude Include="src\AnimationSystem.h">
       <Filter>src\Animation\Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="src\AnimController.h">
-      <Filter>src\Animation\Runtime</Filter>
-    </ClInclude>
     <ClInclude Include="src\Mixer.h">
       <Filter>src\Animation\Runtime</Filter>
     </ClInclude>
@@ -1331,9 +1328,6 @@
       <Filter>src\Animation\Library\Clip</Filter>
     </ClCompile>
     <ClCompile Include="src\AnimationSystem.cpp">
-      <Filter>src\Animation\Runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AnimController.cpp">
       <Filter>src\Animation\Runtime</Filter>
     </ClCompile>
     <ClCompile Include="src\Mixer.cpp">

@@ -233,7 +233,7 @@ namespace Azul
 
 		static const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		static const UINT sampleMask = 0xffffffff;
-		Engine::GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
+		Engine::GetContext()->OMSetBlendState(pBlendStateAlpha, blendFactor, sampleMask);
 	}
 
 	void Engine::ToggleBlending(bool blendOn)

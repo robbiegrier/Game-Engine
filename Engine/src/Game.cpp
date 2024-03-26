@@ -50,7 +50,6 @@
 #include "SOSkinLightTexture.h"
 #include "ClipManager.h"
 #include "ClipProto.h"
-#include "AnimController.h"
 #include "Animator.h"
 #include "GOSkinLightTexture.h"
 

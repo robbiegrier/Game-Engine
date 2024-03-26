@@ -6,7 +6,6 @@
 #include "Skeleton.h"
 #include "AnimationSystem.h"
 #include "Clip.h"
-#include "AnimController.h"
 
 namespace Azul
 {

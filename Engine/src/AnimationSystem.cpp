@@ -1,13 +1,14 @@
 #include "AnimationSystem.h"
 #include "ListNode.h"
 #include "DLinkedList.h"
+#include "MathApp.h"
+#include "BoneTransform.h"
 
 namespace Azul
 {
 	AnimationSystem* AnimationSystem::pInstance = nullptr;
 
-	AnimationSystem::AnimationSystem(int initialReserved, int reserveGrow)
-		: ManagerBase(new DLinkedList(), new DLinkedList(), initialReserved, reserveGrow)
+	AnimationSystem::AnimationSystem()
 	{
 		computeShaderWorld.AttachTo(computeShaderMixer);
 	}
@@ -16,21 +17,16 @@ namespace Azul
 	{
 	}
 
-	DLink* AnimationSystem::CreateNode()
-	{
-		return new OwningListNode();
-	}
-
 	AnimationSystem& AnimationSystem::GetInstance()
 	{
 		assert(pInstance);
 		return *pInstance;
 	}
 
-	void AnimationSystem::Create(int initialReserved, int reserveGrow)
+	void AnimationSystem::Create()
 	{
 		assert(!pInstance);
-		pInstance = new AnimationSystem(initialReserved, reserveGrow);
+		pInstance = new AnimationSystem();
 	}
 
 	void AnimationSystem::Destroy()
@@ -40,30 +36,9 @@ namespace Azul
 		pInstance = nullptr;
 	}
 
-	AnimController* AnimationSystem::Add(AnimController* pItem)
-	{
-		AnimationSystem& self = GetInstance();
-		ListNode* pNode = (ListNode*)self.Push();
-		pNode->Set(pItem);
-		return pItem;
-	}
-
 	void AnimationSystem::Dump()
 	{
-		AnimationSystem& self = GetInstance();
 		Trace::out("%s\n", STRING_ME(AnimationSystem));
-		self.ManagerBase::Dump();
-	}
-
-	void AnimationSystem::Update()
-	{
-		AnimationSystem& self = GetInstance();
-
-		for (Iterator& it = *self.GetActiveIterator(); !it.IsDone(); it.Next())
-		{
-			AnimController* pCurr = (AnimController*)((ListNode*)it.Curr())->Get();
-			pCurr->Update();
-		}
 	}
 
 	CSAnimationMixer& AnimationSystem::GetComputeShaderMixer()
