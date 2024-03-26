@@ -51,6 +51,8 @@
 #include "ClipManager.h"
 #include "ClipProto.h"
 #include "AnimController.h"
+#include "Animator.h"
+#include "GOSkinLightTexture.h"
 
 namespace Azul
 {
@@ -60,8 +62,8 @@ namespace Azul
 	Mesh* pModelPyramid;
 	Mesh* pModelCube;
 
-	AnimController* pAnimController;
-	AnimController* pAnimController1;
+	Animator* pChickenAnimator;
+	Animator* pMannequinAnimator;
 
 	AnimTime animDeltaTime;
 
@@ -142,20 +144,30 @@ namespace Azul
 
 		SceneManager::ChangeScene("AzulScene");
 
-		AnimTime delta = 0.4f * AnimTime(AnimTime::Duration::FILM_24_FRAME);
-		animDeltaTime = delta;
-
-		pAnimController = new AnimController(animDeltaTime, Clip::Name::Walk, Skeleton::Name::ChickenBot, Mesh::Name::ChickenBotSkin, TextureObject::Name::ChickenBot);
-		AnimationSystem::Add(pAnimController);
-		pChickenBot = pAnimController->GetGameObject();
-		pChickenBot->SetRelativeLocation(Vec3(30, -1, -50));
+		pChickenBot = GameObjectManager::SpawnObject("ChickenBot", new GameObject(
+			new GOSkinLightTexture(
+				MeshManager::Find(Mesh::Name::ChickenBotSkin),
+				ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
+				TextureObjectManager::Find(TextureObject::Name::ChickenBot))), Vec3(30, -1, -50));
 		pChickenBot->SetRelativeScale(30.f);
 		pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
 
-		pAnimController1 = new AnimController(delta, Clip::Name::HumanoidRun, Skeleton::Name::MixamoRig1, Mesh::Name::MannequinSkin, TextureObject::Name::Mannequin);
-		AnimationSystem::Add(pAnimController1);
-		pMannequin = pAnimController1->GetGameObject();
-		pMannequin->SetRelativeLocation(Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
+		pMannequin = GameObjectManager::SpawnObject("Mannequin", new GameObject(
+			new GOSkinLightTexture(
+				MeshManager::Find(Mesh::Name::MannequinSkin),
+				ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
+				TextureObjectManager::Find(TextureObject::Name::Mannequin))), Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
+		pMannequin->SetRelativeScale(3.f);
+
+		pChickenAnimator = new Animator();
+		pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
+		pChickenAnimator->SetActiveClip(Clip::Name::Walk);
+		pChickenBot->AttachComponent(pChickenAnimator);
+
+		pMannequinAnimator = new Animator();
+		pMannequinAnimator->SetSkeleton(Skeleton::Name::MixamoRig1);
+		pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
+		pMannequin->AttachComponent(pMannequinAnimator);
 
 		//GameObjectManager::Dump();
 
@@ -177,8 +189,8 @@ namespace Azul
 	void Game::Update(float deltaTime)
 	{
 		UpdateDemo(deltaTime);
-		AnimationSystem::Update();
-		GameObjectManager::Update(intervalTimer.Toc());
+		//AnimationSystem::Update();
+		GameObjectManager::Update(deltaTime);
 		EndFrame();
 	}
 
@@ -210,13 +222,13 @@ namespace Azul
 	{
 		if (GetKeyState('5') & 0x8000)
 		{
-			pAnimController->SetClip(Clip::Name::Walk);
-			pAnimController1->SetClip(Clip::Name::HumanoidRun);
+			pChickenAnimator->SetActiveClip(Clip::Name::Walk);
+			pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
 		}
 		else if (GetKeyState('6') & 0x8000)
 		{
-			pAnimController->SetClip(Clip::Name::ShotUp);
-			pAnimController1->SetClip(Clip::Name::RunJump);
+			pChickenAnimator->SetActiveClip(Clip::Name::ShotUp);
+			pMannequinAnimator->SetActiveClip(Clip::Name::RunJump);
 		}
 
 		static float rot1 = 0.f;
@@ -288,20 +300,6 @@ namespace Azul
 		pShaderSkin->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
 		pShaderSkin->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
 		pShaderSkin->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
-	}
-
-	void Game::UpdateTimerDemo(float deltaTime)
-	{
-		static int i = 0;
-		Trace::out("%d: %f\n", i++, deltaTime);
-
-		AnimTime elapsedTime = intervalTimer.Toc();
-		int timeInSeconds_ms = AnimTime::Quotient(elapsedTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
-		AnimTime timeInMs_remainder = AnimTime::Remainder(elapsedTime, AnimTime(AnimTime::Duration::ONE_MILLISECOND));
-		int timeInSeconds_us_remainder = AnimTime::Quotient(timeInMs_remainder, AnimTime(AnimTime::Duration::ONE_MICROSECOND));
-
-		Trace::out(" time in     ms : %d \n", timeInSeconds_ms);
-		Trace::out(" remainder   us : %d \n", timeInSeconds_us_remainder);
 	}
 
 	void Game::LoadShaders()

@@ -13,7 +13,7 @@ namespace Azul
 		GOSkinLightTexture() = delete;
 		GOSkinLightTexture(const GOSkinLightTexture&) = delete;
 		GOSkinLightTexture& operator = (const GOSkinLightTexture&) = delete;
-		virtual ~GOSkinLightTexture() = default;
+		virtual ~GOSkinLightTexture();
 
 		virtual void ActivateGraphics() override;
 		virtual void Draw() override;

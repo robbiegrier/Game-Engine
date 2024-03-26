@@ -3,6 +3,7 @@
 #include "EditorGui.h"
 #include "CameraManager.h"
 #include "GameObjectManager.h"
+#include "AnimationSystem.h"
 
 namespace Azul
 {

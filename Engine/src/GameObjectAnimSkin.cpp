@@ -21,10 +21,10 @@ namespace Azul
 
 	GameObjectAnimSkin::~GameObjectAnimSkin()
 	{
-		delete[] poBoneWorld;
+		delete poBoneWorld;
 	}
 
-	void GameObjectAnimSkin::Update(AnimTime currentTime)
+	void GameObjectAnimSkin::Update(float currentTime)
 	{
 		GameObject::Update(currentTime);
 
@@ -33,16 +33,16 @@ namespace Azul
 
 	void GameObjectAnimSkin::UpdateSkinGPU()
 	{
-		CSAnimationMixer& computeShader = AnimationSystem::GetComputeShaderMixer();
-		BlendInput bi = pController->GetClip()->GetBlendInput(pController->GetTimerController()->GetCurrTime());
-		computeShader.Open(bi.pA, bi.pB, bi.tS);
-		computeShader.Run();
+		//CSAnimationMixer& computeShader = AnimationSystem::GetComputeShaderMixer();
+		//BlendInput bi = pController->GetClip()->GetBlendInput(pController->GetTimerController()->GetCurrTime());
+		//computeShader.Open(bi.pA, bi.pB, bi.tS);
+		//computeShader.Run();
 
-		CSAnimationWorld& computeShaderWorld = AnimationSystem::GetComputeShaderWorld();
-		Skeleton* pSkeleton = pController->GetSkeleton();
-		computeShaderWorld.Open(pSkeleton->GetHierarchyTable(), pSkeleton->GetHierarchyDepth(), GetWorld(), pGraphicsObject->GetModel()->poInvBindArray);
-		computeShaderWorld.Run();
-		computeShaderWorld.AwaitResults(poBoneWorld);
-		computeShaderWorld.Close();
+		//CSAnimationWorld& computeShaderWorld = AnimationSystem::GetComputeShaderWorld();
+		//Skeleton* pSkeleton = pController->GetSkeleton();
+		//computeShaderWorld.Open(pSkeleton->GetHierarchyTable(), pSkeleton->GetHierarchyDepth(), GetWorld(), pGraphicsObject->GetModel()->poInvBindArray);
+		//computeShaderWorld.Run();
+		//computeShaderWorld.AwaitResults(poBoneWorld);
+		//computeShaderWorld.Close();
 	}
 }

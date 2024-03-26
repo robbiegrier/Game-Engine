@@ -251,6 +251,12 @@ namespace Azul
 		return false;
 	}
 
+	void GameObject::AttachComponent(Component* pInComponent)
+	{
+		pInComponent->SetGameObject(this);
+		components.Add(pInComponent);
+	}
+
 	Mat4 GameObject::GetShellWorld() const
 	{
 		Trans shellTrans = Trans();
@@ -279,9 +285,15 @@ namespace Azul
 		return shellWorld;
 	}
 
-	void GameObject::Update(AnimTime deltaTime)
+	void GameObject::Update(float deltaTime)
 	{
 		static_cast<void>(deltaTime);
+
+		for (Iterator& it = *components.GetIterator(); !it.IsDone(); it.Next())
+		{
+			Component* pComponent = (Component*)it.Curr();
+			pComponent->Update(deltaTime);
+		}
 
 		Trans t(pPos->x(), pPos->y(), pPos->z());
 		Scale s(*pScale);

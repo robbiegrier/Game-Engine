@@ -26,7 +26,7 @@ namespace Azul
 		static void Tick(float deltaTime);
 
 		// Frame Events
-		static void Update(AnimTime deltaTime);
+		static void Update(float deltaTime);
 		static void Draw();
 
 		// Spawn factory methods

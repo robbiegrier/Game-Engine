@@ -72,7 +72,7 @@ namespace Azul
 		}
 	}
 
-	void GameObjectManager::Update(AnimTime deltaTime)
+	void GameObjectManager::Update(float deltaTime)
 	{
 		GameObjectManager& self = GetInstance();
 		PCSTreeForwardIterator it(self.objects.GetRoot());

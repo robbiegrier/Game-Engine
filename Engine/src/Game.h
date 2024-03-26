@@ -32,16 +32,7 @@ namespace Azul
 	private:
 		void EndFrame();
 
-		// Demo methods
-		void LoadFloor(int size);
-		void LoadClock(float size, const Vec3& pos);
-		void LoadPylon(float size, const Vec3& pos);
-		void LoadColorObjects();
-		void LoadLightObjects();
-		void LoadMovingObjects();
-		void LoadInstancedObjects();
 		void UpdateDemo(float deltaTime);
-		void UpdateTimerDemo(float deltaTime);
 
 		void LoadShaders();
 		void LoadCameras();

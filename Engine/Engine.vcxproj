@@ -291,6 +291,7 @@
     <ClInclude Include="Shaders\Compiled\Sprite.Px.h" />
     <ClInclude Include="Shaders\Compiled\Sprite.Vx.h" />
     <ClInclude Include="src\AnimationSystem.h" />
+    <ClInclude Include="src\Animator.h" />
     <ClInclude Include="src\AnimController.h" />
     <ClInclude Include="src\AssetsWindow.h" />
     <ClInclude Include="src\BoneHierarchyNode.h" />
@@ -303,6 +304,7 @@
     <ClInclude Include="src\ClipManager.h" />
     <ClInclude Include="src\ClipProto.h" />
     <ClInclude Include="src\Colors.h" />
+    <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComputeRSVBuffer.h" />
     <ClInclude Include="src\ComputeUAVBuffer.h" />
     <ClInclude Include="src\ConsoleWindow.h" />
@@ -618,6 +620,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AnimationSystem.cpp" />
+    <ClCompile Include="src\Animator.cpp" />
     <ClCompile Include="src\AnimController.cpp" />
     <ClCompile Include="src\AssetsWindow.cpp" />
     <ClCompile Include="src\BoneHierarchyNode.cpp" />
@@ -629,6 +632,7 @@
     <ClCompile Include="src\Clipboard.cpp" />
     <ClCompile Include="src\ClipManager.cpp" />
     <ClCompile Include="src\ClipProto.cpp" />
+    <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\ComputeRSVBuffer.cpp" />
     <ClCompile Include="src\ComputeUAVBuffer.cpp" />
     <ClCompile Include="src\ConsoleWindow.cpp" />

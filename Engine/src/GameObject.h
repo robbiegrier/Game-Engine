@@ -9,9 +9,13 @@
 #include "GraphicsObject.h"
 #include "PCSNode.h"
 #include "AnimTime.h"
+#include "DLinkedList.h"
+#include "Component.h"
 
 namespace Azul
 {
+	class Component;
+
 	// A Game Object is an object with a transform in the game world
 	// and a Graphics Object rendered at that transform.
 	class GameObject : public PCSNode
@@ -33,7 +37,7 @@ namespace Azul
 		virtual ~GameObject();
 
 		// Core update and draw
-		virtual void Update(AnimTime deltaTime);
+		virtual void Update(float deltaTime);
 		virtual void Draw();
 
 		virtual void Start() {}
@@ -98,6 +102,8 @@ namespace Azul
 
 		bool IsParentOf(GameObject* pOther);
 
+		void AttachComponent(Component* pInComponent);
+
 	protected:
 		bool alwaysRenderShell = false;
 		bool renderShell;
@@ -122,6 +128,8 @@ namespace Azul
 		GraphicsObject* pShell;
 
 		Name typeName;
+
+		DLinkedList components;
 	};
 }
 

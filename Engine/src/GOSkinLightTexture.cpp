@@ -9,9 +9,15 @@ namespace Azul
 {
 	GOSkinLightTexture::GOSkinLightTexture(Mesh* mesh, ShaderObject* pShaderObj, TextureObject* _pTex)
 		: GraphicsObject(mesh, pShaderObj),
+		pBoneWorld{ new Mat4[BONE_COUNT_MAX] },
 		pTex(_pTex)
 	{
 		assert(pTex);
+	}
+
+	GOSkinLightTexture::~GOSkinLightTexture()
+	{
+		delete[] pBoneWorld;
 	}
 
 	void GOSkinLightTexture::ActivateGraphics()

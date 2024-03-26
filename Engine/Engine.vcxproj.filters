@@ -140,6 +140,9 @@
     <Filter Include="src\Graphics\Image">
       <UniqueIdentifier>{9ef95bcf-624f-4887-84a5-bfe9aea9b7bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Components">
+      <UniqueIdentifier>{c9e0c1ef-e4c2-45ef-bad0-cc91934eed70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -975,6 +978,12 @@
     <ClInclude Include="src\Rect.h">
       <Filter>src\Graphics\Image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animator.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
@@ -1341,6 +1350,12 @@
     </ClCompile>
     <ClCompile Include="src\Rect.cpp">
       <Filter>src\Graphics\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animator.cpp">
+      <Filter>src\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

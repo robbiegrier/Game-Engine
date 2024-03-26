@@ -18,7 +18,7 @@ namespace Azul
 		GameObjectAnimSkin& operator=(GameObjectAnimSkin&) = delete;
 		virtual ~GameObjectAnimSkin();
 
-		virtual void Update(AnimTime currTime);
+		virtual void Update(float currTime);
 
 	public:
 		Mat4* poBoneWorld;
