@@ -762,9 +762,6 @@
     <ClInclude Include="src\MeshSphere.h">
       <Filter>src\Graphics\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjectAnimSkin.h">
-      <Filter>src\GameObject\Special</Filter>
-    </ClInclude>
     <ClInclude Include="src\EditorGui.h">
       <Filter>src\Editor\Gui</Filter>
     </ClInclude>
@@ -1155,9 +1152,6 @@
     </ClCompile>
     <ClCompile Include="src\MeshSphere.cpp">
       <Filter>src\Graphics\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObjectAnimSkin.cpp">
-      <Filter>src\GameObject\Special</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorGui.cpp">
       <Filter>src\Editor\Gui</Filter>

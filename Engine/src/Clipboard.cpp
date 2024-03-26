@@ -187,7 +187,6 @@ namespace Azul
 		}
 
 		GraphicsObject* pGo = nullptr;
-
 		switch (goName)
 		{
 		case GraphicsObject::Name::GraphicsObjectColorByVertex:
@@ -207,7 +206,6 @@ namespace Azul
 		}
 
 		GameObject* pGameObject = nullptr;
-
 		switch (typeName)
 		{
 		case GameObject::Name::GameObject:

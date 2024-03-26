@@ -336,7 +336,6 @@
     <ClInclude Include="src\EngineUtils.h" />
     <ClInclude Include="src\Font.h" />
     <ClInclude Include="src\FontLibrary.h" />
-    <ClInclude Include="src\GameObjectAnimSkin.h" />
     <ClInclude Include="src\GameObjectManager.h" />
     <ClInclude Include="src\GameObjectSprite.h" />
     <ClInclude Include="src\GameObjectText.h" />
@@ -663,7 +662,6 @@
     <ClCompile Include="src\EngineUtils.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\FontLibrary.cpp" />
-    <ClCompile Include="src\GameObjectAnimSkin.cpp" />
     <ClCompile Include="src\GameObjectManager.cpp" />
     <ClCompile Include="src\GameObjectSprite.cpp" />
     <ClCompile Include="src\GameObjectText.cpp" />
