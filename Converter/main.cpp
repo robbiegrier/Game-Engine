@@ -3,7 +3,6 @@
 #include "meshData.h"
 #include "meshDataConverter.h"
 #include "json.hpp"
-#include "File.h"
 #include "vboDataConverter.h"
 #include "MathEngine.h"
 #include "azulModel.h"
@@ -13,6 +12,8 @@
 #include "ConvertAnim.h"
 #include "ConvertFont.h"
 #include "ConvertSkin.h"
+#include "ConverterUtils.h"
+#include "ProtoAzul.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -26,86 +27,6 @@ using json = nlohmann::json;
 
 constexpr unsigned int CONVERTER_VERSION = 2;
 char NPath[MAX_PATH];
-
-bool StringReplace(std::string& str, const std::string& from, const std::string& to)
-{
-	size_t start_pos = str.find(from);
-	if (start_pos == std::string::npos)
-		return false;
-	str.replace(start_pos, from.length(), to);
-	return true;
-}
-
-bool FileExists(const std::string& filename)
-{
-	WIN32_FIND_DATAA fd = { 0 };
-	HANDLE hFound = FindFirstFileA(filename.c_str(), &fd);
-	bool retval = hFound != INVALID_HANDLE_VALUE;
-	FindClose(hFound);
-
-	return retval;
-}
-
-void WriteMeshDataProtoToFile(const azulModel_proto& source, const char* const filename)
-{
-	File::Handle fh;
-
-	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
-	assert(err == File::Error::SUCCESS);
-
-	std::string strOut;
-	source.SerializeToString(&strOut);
-
-	File::Write(fh, strOut.data(), strOut.length());
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Close(fh);
-	assert(err == File::Error::SUCCESS);
-}
-
-void ReadMeshDataProtoFromFile(azulModel_proto& output, const char* const filename)
-{
-	File::Handle fh;
-
-	File::Error err = File::Open(fh, filename, File::Mode::READ);
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Seek(fh, File::Position::END, 0);
-	assert(err == File::Error::SUCCESS);
-
-	DWORD FileLength;
-	err = File::Tell(fh, FileLength);
-	assert(err == File::Error::SUCCESS);
-
-	char* poNewBuff = new char[FileLength]();
-	assert(poNewBuff);
-
-	err = File::Seek(fh, File::Position::BEGIN, 0);
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Read(fh, poNewBuff, FileLength);
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Close(fh);
-	assert(err == File::Error::SUCCESS);
-
-	std::string strIn(poNewBuff, FileLength);
-	delete[] poNewBuff;
-
-	output.ParseFromString(strIn);
-}
-
-void DumpGLBHeader(const char* poBuff, unsigned int BuffSize)
-{
-	GLB_header glbHeader;
-	bool status = GLTF::GetGLBHeader(glbHeader, poBuff, BuffSize);
-	assert(status);
-
-	Trace::out("GLB Header:\n");
-	Trace::out("\tmagic: 0x%x\n", glbHeader.magic);
-	Trace::out("\tversion: 0x%x\n", glbHeader.version);
-	Trace::out("\tlength: 0x%08x %d\n", glbHeader.length, glbHeader.length);
-}
 
 void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, char* pBinaryBuff, const char* const pFileName)
 {
@@ -153,9 +74,9 @@ void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, c
 		}
 
 		std::string fs = std::string(pFileName);
-		StringReplace(fs, ".glb", "_BaseColor.png");
+		ConverterUtils::StringReplace(fs, ".glb", "_BaseColor.png");
 
-		if (FileExists(fs))
+		if (ConverterUtils::DoesFileExist(fs))
 		{
 			PTrace("\tUsing external texture: %s\n", fs.c_str());
 			GLTF::SetExternalTexture(fs.c_str(), colorIndex, runModel.text_color);
@@ -198,20 +119,16 @@ void WriteAndVerifyRuntimeModel(azulModel& azulRunModel, const char* const filen
 	azulModel_proto mA_proto;
 	azulRunModel.Serialize(mA_proto);
 
-	//runModel.Print("mA");
-	//meshData_proto mA_proto;
-	//runModel.Serialize(mA_proto);
-
 	Trace::out("message size: %d \n", mA_proto.ByteSizeLong());
 	Trace::out("\n");
 
 	std::string meshName = std::string(filenameIn);
 	const char* filename = meshName.replace(meshName.end() - 4, meshName.end(), ".proto.azul").c_str();
 
-	WriteMeshDataProtoToFile(mA_proto, filename);
+	ProtoAzul::WriteProtoFile(mA_proto, filename);
 
 	azulModel_proto mB_proto;
-	ReadMeshDataProtoFromFile(mB_proto, filename);
+	ProtoAzul::ReadProtoFile(mB_proto, filename);
 
 	azulModel mB;
 	mB.Deserialize(mB_proto);
@@ -237,7 +154,7 @@ void ConvertModel(const char* const pFileName)
 	assert(status);
 
 	// First is the GLB header
-	DumpGLBHeader(poBuff, BuffSize);
+	GLTF::DumpGLBHeader(poBuff, BuffSize);
 
 	// Then the JSON description
 	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize);
@@ -279,7 +196,7 @@ void ConvertTexture(const char* const pFileName)
 	assert(status);
 
 	// First is the GLB header
-	DumpGLBHeader(poBuff, BuffSize);
+	GLTF::DumpGLBHeader(poBuff, BuffSize);
 
 	// Then the JSON description
 	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize);
@@ -357,7 +274,7 @@ int main(int argc, char* argv[])
 		for (int i = 1; i < argc; i++)
 		{
 			std::string name = argv[i];
-			StringReplace(name, "%20", " ");
+			ConverterUtils::StringReplace(name, "%20", " ");
 			modelsToConvert.push_back(name);
 		}
 	}

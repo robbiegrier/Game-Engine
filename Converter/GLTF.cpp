@@ -14,6 +14,18 @@
 
 using namespace Azul;
 
+void GLTF::DumpGLBHeader(const char* poBuff, unsigned int BuffSize)
+{
+	GLB_header glbHeader;
+	bool status = GLTF::GetGLBHeader(glbHeader, poBuff, BuffSize);
+	assert(status);
+
+	Trace::out("GLB Header:\n");
+	Trace::out("\tmagic: 0x%x\n", glbHeader.magic);
+	Trace::out("\tversion: 0x%x\n", glbHeader.version);
+	Trace::out("\tlength: 0x%08x %d\n", glbHeader.length, glbHeader.length);
+}
+
 bool GLTF::Load(Model& model, const char* const pFileName)
 {
 	TinyGLTF loader;

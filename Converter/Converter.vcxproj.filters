@@ -50,11 +50,23 @@
     <Filter Include="_TinyGLTF">
       <UniqueIdentifier>{49be8b1f-58e8-4153-a914-5f754f25d3dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Helpers">
-      <UniqueIdentifier>{b4b5a002-f3c4-43db-a157-57b460307d41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="_RapidXML">
       <UniqueIdentifier>{18bbc3cd-520b-457d-8402-2f59e149b881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{bd287d92-06c5-408c-b7a8-0e2456739a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLTF">
+      <UniqueIdentifier>{bc53b7de-2631-441d-9152-751131ea9faa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Asset Types">
+      <UniqueIdentifier>{e8646985-eb2f-4b7b-94a7-a0e336f591a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Third Party">
+      <UniqueIdentifier>{94b12e6b-848b-473a-8232-a5b8661020f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Defunct">
+      <UniqueIdentifier>{b4b5a002-f3c4-43db-a157-57b460307d41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -558,35 +570,8 @@
     <ClInclude Include="..\JSON\json.hpp">
       <Filter>_JSON</Filter>
     </ClInclude>
-    <ClInclude Include="GLTF.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="GLTF_Helper.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="meshDataConverter.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="textureDataConverter.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="vboDataConverter.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="md5.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="BoundingSphere.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="ChickenBot.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConvertAnim.h">
-      <Filter>Source Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConvertFont.h">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Defunct</Filter>
     </ClInclude>
     <ClInclude Include="..\RapidXML\rapidxml.hpp">
       <Filter>_RapidXML</Filter>
@@ -600,8 +585,41 @@
     <ClInclude Include="..\RapidXML\rapidxml_utils.hpp">
       <Filter>_RapidXML</Filter>
     </ClInclude>
+    <ClInclude Include="ConverterUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingSphere.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF_Helper.h">
+      <Filter>Source Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTF.h">
+      <Filter>Source Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertAnim.h">
+      <Filter>Source Files\Asset Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertFont.h">
+      <Filter>Source Files\Asset Types</Filter>
+    </ClInclude>
     <ClInclude Include="ConvertSkin.h">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Asset Types</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Source Files\Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="meshDataConverter.h">
+      <Filter>Source Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="textureDataConverter.h">
+      <Filter>Source Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="vboDataConverter.h">
+      <Filter>Source Files\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtoAzul.h">
+      <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1144,38 +1162,44 @@
     <ClCompile Include="..\TinyGLTF\tiny_gltf.cc">
       <Filter>_TinyGLTF</Filter>
     </ClCompile>
-    <ClCompile Include="GLTF.cpp">
-      <Filter>Source Files\Helpers</Filter>
+    <ClCompile Include="ChickenBot.cpp">
+      <Filter>Source Files\Defunct</Filter>
     </ClCompile>
-    <ClCompile Include="GLTF_Helper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="meshDataConverter.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="textureDataConverter.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="vboDataConverter.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="md5.cpp">
-      <Filter>Source Files\Helpers</Filter>
+    <ClCompile Include="ConverterUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="BoundingSphere.cpp">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="ChickenBot.cpp">
-      <Filter>Source Files\Helpers</Filter>
+    <ClCompile Include="GLTF_Helper.cpp">
+      <Filter>Source Files\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTF.cpp">
+      <Filter>Source Files\GLTF</Filter>
     </ClCompile>
     <ClCompile Include="ConvertAnim.cpp">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Asset Types</Filter>
     </ClCompile>
     <ClCompile Include="ConvertFont.cpp">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Asset Types</Filter>
     </ClCompile>
     <ClCompile Include="ConvertSkin.cpp">
-      <Filter>Source Files\Helpers</Filter>
+      <Filter>Source Files\Asset Types</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.cpp">
+      <Filter>Source Files\Third Party</Filter>
+    </ClCompile>
+    <ClCompile Include="meshDataConverter.cpp">
+      <Filter>Source Files\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="textureDataConverter.cpp">
+      <Filter>Source Files\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="vboDataConverter.cpp">
+      <Filter>Source Files\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtoAzul.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,85 +8,21 @@
 #include "ConvertSkin.h"
 #include "azulModel.h"
 #include "BoundingSphere.h"
+#include "ProtoAzul.h"
 
 using namespace tinygltf;
 using json = nlohmann::json;
 
 namespace Azul
 {
-	void WriteMeshDataProtoToFile(const azulModel_proto& source, const char* const filename)
-	{
-		File::Handle fh;
-
-		File::Error err = File::Open(fh, filename, File::Mode::WRITE);
-		assert(err == File::Error::SUCCESS);
-
-		std::string strOut;
-		source.SerializeToString(&strOut);
-
-		File::Write(fh, strOut.data(), strOut.length());
-		assert(err == File::Error::SUCCESS);
-
-		err = File::Close(fh);
-		assert(err == File::Error::SUCCESS);
-	}
-
-	void ReadMeshDataProtoFromFile(azulModel_proto& output, const char* const filename)
-	{
-		File::Handle fh;
-
-		File::Error err = File::Open(fh, filename, File::Mode::READ);
-		assert(err == File::Error::SUCCESS);
-
-		err = File::Seek(fh, File::Position::END, 0);
-		assert(err == File::Error::SUCCESS);
-
-		DWORD FileLength;
-		err = File::Tell(fh, FileLength);
-		assert(err == File::Error::SUCCESS);
-
-		char* poNewBuff = new char[FileLength]();
-		assert(poNewBuff);
-
-		err = File::Seek(fh, File::Position::BEGIN, 0);
-		assert(err == File::Error::SUCCESS);
-
-		err = File::Read(fh, poNewBuff, FileLength);
-		assert(err == File::Error::SUCCESS);
-
-		err = File::Close(fh);
-		assert(err == File::Error::SUCCESS);
-
-		std::string strIn(poNewBuff, FileLength);
-		delete[] poNewBuff;
-
-		output.ParseFromString(strIn);
-	}
-
 	void WriteAndVerifyRuntimeModel(azulModel& azulRunModel, const char* const filenameIn)
 	{
 		std::string meshName = std::string(filenameIn);
 		const char* filename = meshName.replace(meshName.end() - 4, meshName.end(), ".skin.proto.azul").c_str();
 
-		//azulRunModel.Print("azul_mA");
 		azulModel_proto mA_proto;
 		azulRunModel.Serialize(mA_proto);
-
-		//runModel.Print("mA");
-		//meshData_proto mA_proto;
-		//runModel.Serialize(mA_proto);
-
-		//Trace::out("message size: %d \n", mA_proto.ByteSizeLong());
-		//Trace::out("\n");
-
-		WriteMeshDataProtoToFile(mA_proto, filename);
-
-		//azulModel_proto mB_proto;
-		//ReadMeshDataProtoFromFile(mB_proto, filename);
-
-		//azulModel mB;
-		//mB.Deserialize(mB_proto);
-		//mB.Print("azul_mB");
+		ProtoAzul::WriteProtoFile(mA_proto, filename);
 
 		Trace::out("  => Created %s\n", filename);
 	}

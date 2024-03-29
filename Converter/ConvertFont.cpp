@@ -3,58 +3,10 @@
 #include "File.h"
 #include "glyphData.h"
 #include "fontData.h"
+#include "ProtoAzul.h"
+#include "ConverterUtils.h"
 
 using namespace Azul;
-
-std::string FileToString(const char* const pMeshFileName)
-{
-	File::Handle fh;
-	File::Error ferror;
-	DWORD length;
-
-	ferror = File::Open(fh, pMeshFileName, File::Mode::READ);
-	assert(ferror == File::Error::SUCCESS);
-
-	ferror = File::Seek(fh, File::Position::END, 0);
-	assert(ferror == File::Error::SUCCESS);
-
-	ferror = File::Tell(fh, length);
-	assert(ferror == File::Error::SUCCESS);
-
-	ferror = File::Seek(fh, File::Position::BEGIN, 0);
-	assert(ferror == File::Error::SUCCESS);
-
-	char* poBuff = new char[length];
-	assert(poBuff);
-
-	ferror = File::Read(fh, poBuff, length);
-	assert(ferror == File::Error::SUCCESS);
-
-	ferror = File::Close(fh);
-	assert(ferror == File::Error::SUCCESS);
-
-	std::string output = std::string(poBuff, length);
-	delete[] poBuff;
-
-	return output;
-}
-
-void WriteFontDataToFile(const fontData_proto& source, const char* const filename)
-{
-	File::Handle fh;
-
-	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
-	assert(err == File::Error::SUCCESS);
-
-	std::string strOut;
-	source.SerializeToString(&strOut);
-
-	File::Write(fh, strOut.data(), strOut.length());
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Close(fh);
-	assert(err == File::Error::SUCCESS);
-}
 
 void ConvertFont(const char* const pFileName)
 {
@@ -63,7 +15,7 @@ void ConvertFont(const char* const pFileName)
 
 	Trace::out("Converting font:\n\txml: %s\n\tpng: %s\n\n", pFileName, textureName);
 
-	std::string str = FileToString(pFileName);
+	std::string str = ConverterUtils::FileToString(pFileName);
 
 	char* pBuff = new char[str.size() + 1];
 	memset(pBuff, 0, str.size() + 1);
@@ -141,5 +93,5 @@ void ConvertFont(const char* const pFileName)
 	fontData_proto proto;
 	font.Serialize(proto);
 	const char* outFile = pFileString.replace(pFileString.end() - 4, pFileString.end(), ".proto.azul").c_str();
-	WriteFontDataToFile(proto, outFile);
+	ProtoAzul::WriteProtoFile(proto, outFile);
 }

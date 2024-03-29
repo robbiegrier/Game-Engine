@@ -8,44 +8,11 @@
 #include "MeshLayout.h"
 #include "animClipData.h"
 #include "skeletonData.h"
+#include "ProtoAzul.h"
 
 using namespace Azul;
 using namespace tinygltf;
 using json = nlohmann::json;
-
-void WriteAnimClipDataToFile(const animClipData_proto& source, const char* const filename)
-{
-	File::Handle fh;
-
-	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
-	assert(err == File::Error::SUCCESS);
-
-	std::string strOut;
-	source.SerializeToString(&strOut);
-
-	File::Write(fh, strOut.data(), strOut.length());
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Close(fh);
-	assert(err == File::Error::SUCCESS);
-}
-
-void WriteSkeletonDataToFile(const skeletonData_proto& source, const char* const filename)
-{
-	File::Handle fh;
-
-	File::Error err = File::Open(fh, filename, File::Mode::WRITE);
-	assert(err == File::Error::SUCCESS);
-
-	std::string strOut;
-	source.SerializeToString(&strOut);
-
-	File::Write(fh, strOut.data(), strOut.length());
-	assert(err == File::Error::SUCCESS);
-
-	err = File::Close(fh);
-	assert(err == File::Error::SUCCESS);
-}
 
 void ConvertAnim(const char* const pFileName)
 {
@@ -255,7 +222,7 @@ void ConvertAnim(const char* const pFileName)
 
 	std::string animName = std::string(pFileName);
 	const char* filename = animName.replace(animName.end() - 4, animName.end(), ".anim.proto.azul").c_str();
-	WriteAnimClipDataToFile(acProto, filename);
+	ProtoAzul::WriteProtoFile(acProto, filename);
 	//animClip.Print("ANIM CLIP");
 
 	Trace::out("  => Created %s\n", filename);
@@ -352,7 +319,7 @@ void ConvertSkeleton(const char* const pFileName)
 	//skData.Print("SKELETON");
 	std::string skeletonName = std::string(pFileName);
 	const char* skFileName = skeletonName.replace(skeletonName.end() - 4, skeletonName.end(), ".skeleton.proto.azul").c_str();
-	WriteSkeletonDataToFile(skData_proto, skFileName);
+	ProtoAzul::WriteProtoFile(skData_proto, skFileName);
 
 	Trace::out("  => Created %s\n", skFileName);
 

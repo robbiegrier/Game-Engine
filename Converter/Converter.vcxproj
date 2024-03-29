@@ -240,12 +240,14 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClInclude Include="BoundingSphere.h" />
     <ClInclude Include="ChickenBot.h" />
     <ClInclude Include="ConvertAnim.h" />
+    <ClInclude Include="ConverterUtils.h" />
     <ClInclude Include="ConvertFont.h" />
     <ClInclude Include="ConvertSkin.h" />
     <ClInclude Include="GLTF.h" />
     <ClInclude Include="GLTF_Helper.h" />
     <ClInclude Include="md5.h" />
     <ClInclude Include="meshDataConverter.h" />
+    <ClInclude Include="ProtoAzul.h" />
     <ClInclude Include="textureDataConverter.h" />
     <ClInclude Include="vboDataConverter.h" />
   </ItemGroup>
@@ -621,6 +623,7 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClCompile Include="BoundingSphere.cpp" />
     <ClCompile Include="ChickenBot.cpp" />
     <ClCompile Include="ConvertAnim.cpp" />
+    <ClCompile Include="ConverterUtils.cpp" />
     <ClCompile Include="ConvertFont.cpp" />
     <ClCompile Include="ConvertSkin.cpp" />
     <ClCompile Include="GLTF.cpp" />
@@ -628,6 +631,7 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md5.cpp" />
     <ClCompile Include="meshDataConverter.cpp" />
+    <ClCompile Include="ProtoAzul.cpp" />
     <ClCompile Include="textureDataConverter.cpp" />
     <ClCompile Include="vboDataConverter.cpp" />
   </ItemGroup>

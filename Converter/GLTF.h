@@ -75,6 +75,8 @@ class GLTF
 {
 public:
 
+	static void DumpGLBHeader(const char* poBuff, unsigned int BuffSize);
+
 	static bool Load(Model& model, const char* const pFileName);
 
 	static bool GetGLBRawBuffer(char*& pBuff, unsigned int& BuffSize, const char* const pFileName);
