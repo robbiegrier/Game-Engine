@@ -621,6 +621,8 @@
     <ClInclude Include="ProtoAzul.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="InputShelf.h" />
+    <ClInclude Include="Job.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Proto\libs\debug\absl_bad_any_cast_impl.lib">
@@ -1201,5 +1203,7 @@
     <ClCompile Include="ProtoAzul.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="InputShelf.cpp" />
+    <ClCompile Include="Job.cpp" />
   </ItemGroup>
 </Project>

@@ -15,6 +15,8 @@ namespace Azul
 			ChickenBot,
 			MixamoRig,
 			MixamoRig1,
+			Paladin,
+			Knight,
 			Null,
 			None
 		};

@@ -123,6 +123,8 @@ namespace Azul
 
 		SkeletonManager::Add(Skeleton::Name::ChickenBot, new Skeleton("walk_mesh.skeleton.proto.azul"));
 		SkeletonManager::Add(Skeleton::Name::MixamoRig1, new Skeleton("mannequin.skeleton.proto.azul"));
+		SkeletonManager::Add(Skeleton::Name::Paladin, new Skeleton("Paladin.skeleton.proto.azul"));
+		SkeletonManager::Add(Skeleton::Name::Knight, new Skeleton("Knight.skeleton.proto.azul"));
 
 		ClipManager::Add(Clip::Name::ShotUp, new ClipProto("shot_up.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::Run, new ClipProto("run.anim.proto.azul"));
@@ -131,12 +133,16 @@ namespace Azul
 		ClipManager::Add(Clip::Name::HitFront, new ClipProto("hit_front.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::HumanoidRun, new ClipProto("mannequin.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::RunJump, new ClipProto("RunJump.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::PaladinWalk, new ClipProto("Paladin.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::KnightWalk, new ClipProto("Knight.anim.proto.azul"));
 
 		// Scene Directional Light
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
 		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
 		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
-		pShaderSkin->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
+
+		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, .5f), .5f * Vec3(1, 1, .8f), Vec3(0.5f, 0.5f, 0.5f));
+		pShaderSkin->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, .5f), .5f * Vec3(1, 1, .8f), Vec3(0.5f, 0.5f, 0.5f));
 
 		GameObject::SetRenderShellGlobal(false);
 		Engine::ToggleMaxFramerate(false);
@@ -151,22 +157,21 @@ namespace Azul
 		//pChickenBot->SetRelativeScale(30.f);
 		//pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
 
-		//pMannequin = GameObjectManager::SpawnObject("Mannequin", new GameObject(
+		//GameObject* pPaladin = GameObjectManager::SpawnObject("Knight", new GameObject(
 		//	new GOSkinLightTexture(
-		//		MeshManager::Find(Mesh::Name::MannequinSkin),
+		//		MeshManager::Find(Mesh::Name::KnightSkin),
 		//		ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
-		//		TextureObjectManager::Find(TextureObject::Name::Mannequin))), Vec3(30, -1, -50) + Vec3(0, 0, -1.5f));
-		//pMannequin->SetRelativeScale(3.f);
+		//		TextureObjectManager::Find(TextureObject::Name::Knight))), Vec3(35, -1, -50) + Vec3(0, 0, -1.5f));
+		//pPaladin->SetRelativeScale(3.f);
+		//Animator* pAnim = new Animator();
+		//pAnim->SetSkeleton(Skeleton::Name::Knight);
+		//pAnim->SetActiveClip(Clip::Name::KnightWalk);
+		//pPaladin->AttachComponent(pAnim);
 
-		//pChickenAnimator = new Animator();
-		//pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
-		//pChickenAnimator->SetActiveClip(Clip::Name::Walk);
-		//pChickenBot->AttachComponent(pChickenAnimator);
-
-		//pMannequinAnimator = new Animator();
-		//pMannequinAnimator->SetSkeleton(Skeleton::Name::MixamoRig1);
-		//pMannequinAnimator->SetActiveClip(Clip::Name::HumanoidRun);
-		//pMannequin->AttachComponent(pMannequinAnimator);
+		////pChickenAnimator = new Animator();
+		////pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
+		////pChickenAnimator->SetActiveClip(Clip::Name::Walk);
+		////pChickenBot->AttachComponent(pChickenAnimator);
 
 		//GameObjectManager::Dump();
 
@@ -388,6 +393,8 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::CenturyFont, new TextureProto("CenturyFontTexture.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::ChickenBot, new TextureProto("walk_mesh.skin.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::Mannequin, new TextureProto("mannequin.skin.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Paladin, new TextureProto("Paladin.skin.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Knight, new TextureProto("Knight.skin.proto.azul"));
 
 		int textI = 0;
 		TextureObjectManager::Add(TextureObject::Name::DesertRock0, new TextureProto(desertRocksData.meshes[textI++]));
@@ -479,6 +486,8 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::RotateHandle, new MeshProto("RotateHandle.proto.azul"));
 		MeshManager::Add(Mesh::Name::ChickenBotSkin, new MeshProto("walk_mesh.skin.proto.azul"));
 		MeshManager::Add(Mesh::Name::MannequinSkin, new MeshProto("mannequin.skin.proto.azul"));
+		MeshManager::Add(Mesh::Name::PaladinSkin, new MeshProto("Paladin.skin.proto.azul"));
+		MeshManager::Add(Mesh::Name::KnightSkin, new MeshProto("Knight.skin.proto.azul"));
 
 		int meshI = 0;
 		MeshManager::Add(Mesh::Name::DesertRock0, new MeshProto(desertRocksData.meshes[meshI++]));

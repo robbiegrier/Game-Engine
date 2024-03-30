@@ -33,6 +33,8 @@ namespace Azul
 			HumanoidRun,
 			GettingHitBackwards,
 			RunJump,
+			PaladinWalk,
+			KnightWalk,
 			Null,
 			None
 		};

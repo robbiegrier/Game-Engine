@@ -6,6 +6,39 @@
 
 namespace Azul
 {
+	MeshProto::MeshProto()
+		: Mesh(0, 0)
+	{}
+
+	MeshProto::MeshProto(const char* const pMeshFileName)
+		: Mesh(0, 0)
+	{
+		azulModel_proto aB_proto;
+		aB_proto.ParseFromString(EngineUtils::FileToString(pMeshFileName));
+
+		azulModel aB;
+		aB.Deserialize(aB_proto);
+
+		meshData& mB = aB.meshes[0];
+
+		SetFromMeshData(mB);
+
+		for (unsigned int i = 1; i < 48; i++)
+		{
+			if (!aB.meshes[i].IsEmpty())
+			{
+				MeshProto* pSubMesh = new MeshProto();
+				meshData& meshDataSubMesh = aB.meshes[i];
+				pSubMesh->SetFromMeshData(meshDataSubMesh);
+				AttachSubMesh(pSubMesh);
+
+				Trace::out("Attached submesh for %s [%d]\n", pMeshFileName, (int)i);
+			}
+		}
+
+		Trace::out("Mesh %s loaded from converter v%d\n", pMeshFileName, aB.converterVersion);
+	}
+
 	MeshProto::MeshProto(const char* const pMeshFileName, unsigned int index)
 		: Mesh(0, 0)
 	{

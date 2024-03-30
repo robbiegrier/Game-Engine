@@ -198,6 +198,11 @@ namespace Azul
 		Engine::GetContext()->UpdateSubresource(poConstantBuff_boneWorld, 0, nullptr, pBoneWorldArray, 8, 0);
 	}
 
+	void Mesh::AttachSubMesh(Mesh* pInSubMesh)
+	{
+		subMeshes.Add(pInSubMesh);
+	}
+
 	void Mesh::TransferUVCorrection(Mat4* pUVMatrix)
 	{
 		assert(pUVMatrix);

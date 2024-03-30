@@ -67,7 +67,7 @@
       2.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -102,7 +102,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -137,7 +137,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -172,7 +172,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -207,7 +207,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -242,7 +242,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -277,7 +277,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -312,7 +312,7 @@
       4.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -347,7 +347,7 @@
       0.20000000298023224
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1047,7 +1047,7 @@
       0.09999995678663254
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1082,7 +1082,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1117,7 +1117,7 @@
       0.10000000149011612
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1642,7 +1642,7 @@
       0.0010000000474974513
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1677,7 +1677,7 @@
       19999.998046875
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1712,7 +1712,7 @@
       1.0
     ],
     "Shader": 4,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1782,7 +1782,7 @@
       1.0
     ],
     "Shader": 1,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1817,7 +1817,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1852,7 +1852,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1887,7 +1887,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -1922,7 +1922,7 @@
       0.25
     ],
     "Shader": 1,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -2361,7 +2361,7 @@
       6.133009910583496,
       -2.085883617401123
     ],
-    "Mesh": 91,
+    "Mesh": 93,
     "Object Name": "Player",
     "Parent Name": "Objects",
     "Render Shell": true,
@@ -2377,7 +2377,7 @@
       1.0
     ],
     "Shader": 8,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -3532,7 +3532,7 @@
       1.0
     ],
     "Shader": 6,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -3569,7 +3569,7 @@
       1.0
     ],
     "Shader": 6,
-    "Texture": 91
+    "Texture": 93
   },
   {
     "Color": [
@@ -3635,7 +3635,7 @@
     "Location": [
       30.0,
       -1.0,
-      -51.5
+      -57.2099609375
     ],
     "Mesh": 89,
     "Object Name": "Mannequin",
@@ -3696,5 +3696,131 @@
     ],
     "Shader": 7,
     "Texture": 90
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Components": [
+      {
+        "Active Clip": 11,
+        "Animation Speed": 1.0,
+        "Skeleton": 3,
+        "Type": "Animator"
+      }
+    ],
+    "Game Object": 0,
+    "Graphics Object": 6,
+    "Image": 6,
+    "Is Selectable": true,
+    "Location": [
+      32.01777648925781,
+      -1.0,
+      -50.08010482788086
+    ],
+    "Mesh": 90,
+    "Object Name": "Paladin",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      -0.0,
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "Scale": [
+      2.8056640625,
+      2.8056640625,
+      2.8056640625
+    ],
+    "Shader": 7,
+    "Texture": 91
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Components": [
+      {
+        "Active Clip": 11,
+        "Animation Speed": 1.0,
+        "Skeleton": 3,
+        "Type": "Animator"
+      }
+    ],
+    "Game Object": 0,
+    "Graphics Object": 6,
+    "Image": 6,
+    "Is Selectable": true,
+    "Location": [
+      52.40986633300781,
+      -1.0,
+      -40.83500671386719
+    ],
+    "Mesh": 90,
+    "Object Name": "Paladin (1)",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      -0.7983075976371765,
+      0.0,
+      0.6022499799728394
+    ],
+    "Scale": [
+      2.4306640625,
+      2.4306640625,
+      2.4306640625
+    ],
+    "Shader": 7,
+    "Texture": 91
+  },
+  {
+    "Color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "Components": [
+      {
+        "Active Clip": 12,
+        "Animation Speed": 1.0,
+        "Skeleton": 4,
+        "Type": "Animator"
+      }
+    ],
+    "Game Object": 0,
+    "Graphics Object": 6,
+    "Image": 6,
+    "Is Selectable": true,
+    "Location": [
+      35.0,
+      -1.0,
+      -50.4169921875
+    ],
+    "Mesh": 91,
+    "Object Name": "Knight",
+    "Parent Name": "Objects",
+    "Render Shell": true,
+    "Rotation": [
+      0.0,
+      0.09159891307353973,
+      0.0,
+      0.9957959651947021
+    ],
+    "Scale": [
+      2.4521484375,
+      2.4521484375,
+      2.4521484375
+    ],
+    "Shader": 7,
+    "Texture": 92
   }
 ]

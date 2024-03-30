@@ -11,14 +11,15 @@ namespace Azul
 	{
 	public:
 		// Big four
-		MeshProto(const char* const pMeshFileName, unsigned int index = 0);
+		MeshProto(const char* const pMeshFileName);
+		MeshProto(const char* const pMeshFileName, unsigned int index);
 		MeshProto(const meshData& mB);
-		MeshProto() = delete;
 		MeshProto(const MeshProto&) = delete;
 		MeshProto& operator = (MeshProto&) = delete;
 		virtual ~MeshProto();
 
 	private:
+		MeshProto();
 		void SetFromMeshData(const meshData& mB);
 		void VerifyImportedData(const meshData& mB) const;
 	};

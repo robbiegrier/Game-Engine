@@ -119,7 +119,7 @@ namespace Azul
 
 	void HierarchyWindow::ReorderSpacer(GameObject* pParent, GameObject* pPrev)
 	{
-		ImGui::Dummy(ImVec2(ImGui::GetWindowWidth(), ImGui::GetTextLineHeight() / 2.f));
+		ImGui::Dummy(ImVec2(ImGui::GetWindowWidth(), ImGui::GetTextLineHeight() / 6.f));
 
 		if (ImGui::BeginDragDropTarget())
 		{

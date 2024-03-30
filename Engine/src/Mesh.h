@@ -107,6 +107,8 @@ namespace Azul
 			Sprite,
 			ChickenBotSkin,
 			MannequinSkin,
+			PaladinSkin,
+			KnightSkin,
 			Null,
 			None
 		};
@@ -143,6 +145,8 @@ namespace Azul
 		void TransferUVCorrection(Mat4* pUVMatrix);
 		void TransferConstantBufferBoneWorldArray(Mat4* pWorldBoneArray);
 
+		void AttachSubMesh(Mesh* pInSubMesh);
+
 	protected:
 		void HackSetBoundingSphereData(VertexPos* pData);
 
@@ -168,6 +172,8 @@ namespace Azul
 		ID3D11Buffer* poConstantBuff_uvMatrix;
 		ID3D11Buffer* poConstantBuff_boneWorld;
 		Mat4* poInvBindArray;
+
+		DLinkedList subMeshes;
 	};
 }
 

@@ -24,8 +24,6 @@ namespace Azul
 	void GOSkinLightTexture::ActivateGraphics()
 	{
 		pTex->ActivateTexture();
-
-		pModel->TransferConstantBufferBoneWorldArray(this->pBoneWorld);
 	}
 
 	GraphicsObject* GOSkinLightTexture::Clone()
@@ -35,6 +33,14 @@ namespace Azul
 
 	void GOSkinLightTexture::Draw()
 	{
+		pModel->TransferConstantBufferBoneWorldArray(this->pBoneWorld);
 		pModel->RenderIndexBuffer();
+
+		for (Iterator& it = *pModel->subMeshes.GetIterator(); !it.IsDone(); it.Next())
+		{
+			Mesh* pSubMesh = (Mesh*)it.Curr();
+			pSubMesh->TransferConstantBufferBoneWorldArray(this->pBoneWorld);
+			pSubMesh->RenderIndexBuffer();
+		}
 	}
 }

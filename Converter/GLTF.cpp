@@ -435,7 +435,7 @@ bool GLTF::SetTexture(Model& gltfModel, unsigned int index, textureData& text, c
 {
 	if (gltfModel.images.empty())
 	{
-		Trace::out("There are no images!\n");
+		Trace::out("There is no texture data!\n");
 		text.poData = new unsigned char[text.dataSize]();
 		memset(text.poData, 0, text.dataSize);
 		assert(text.poData);
@@ -489,8 +489,8 @@ bool GLTF::SetTexture(Model& gltfModel, unsigned int index, textureData& text, c
 
 		char* pBuffStart = pBinaryBuff + buffView.byteOffset;
 
-		Trace::out("byteLength: %d \n", text.dataSize);
-		Trace::out("byteOffset: %d \n", buffView.byteOffset);
+		//Trace::out("byteLength: %d \n", text.dataSize);
+		//Trace::out("byteOffset: %d \n", buffView.byteOffset);
 
 		// in case there's data
 		delete[] text.poData;
@@ -515,11 +515,11 @@ bool GLTF::SetExternalTexture(const char* const filename, unsigned int index, te
 	constexpr static int importImageDesiredComponents = 4;
 
 	stbi_uc* pImage = stbi_load(filename, &importImageWidth, &importImageHeight, &importImageComponents, importImageDesiredComponents);
-	Trace::out("%s image:\n\n", filename);
-	Trace::out("\tw: %d\n", importImageWidth);
-	Trace::out("\th: %d\n", importImageHeight);
-	Trace::out("\tc: %d\n", importImageComponents);
-	Trace::out("\tdesiredC: %d\n\n", importImageDesiredComponents);
+	//Trace::out("%s image:\n\n", filename);
+	//Trace::out("\tw: %d\n", importImageWidth);
+	//Trace::out("\th: %d\n", importImageHeight);
+	//Trace::out("\tc: %d\n", importImageComponents);
+	//Trace::out("\tdesiredC: %d\n\n", importImageDesiredComponents);
 
 	text.textType = textureData::TEXTURE_TYPE::PNG;
 	text.magFilter = textureData::TEXTURE_MAG_FILTER::DEFAULT;
@@ -536,7 +536,7 @@ bool GLTF::SetExternalTexture(const char* const filename, unsigned int index, te
 	memcpy_s(text.pFileName, text.FILE_NAME_SIZE, filename, strlen(filename));
 
 	text.dataSize = text.component * text.width * text.height;
-	Trace::out("byteLength: %u \n", text.dataSize);
+	//Trace::out("byteLength: %u \n", text.dataSize);
 
 	// in case there's data
 	delete[] text.poData;

@@ -11,9 +11,8 @@ using namespace Azul;
 void ConvertFont(const char* const pFileName)
 {
 	std::string pFileString = std::string(pFileName);
-	const char* textureName = pFileString.replace(pFileString.end() - 4, pFileString.end(), ".png").c_str();
 
-	Trace::out("Converting font:\n\txml: %s\n\tpng: %s\n\n", pFileName, textureName);
+	Trace::out("Converting Font: %s\n", pFileName);
 
 	std::string str = ConverterUtils::FileToString(pFileName);
 
@@ -30,11 +29,11 @@ void ConvertFont(const char* const pFileName)
 	xml_node<>* node = doc.first_node("fontMetrics");
 	while (node)
 	{
-		Trace::out("node %s\n", node->name());
+		//Trace::out("node %s\n", node->name());
 		for (xml_attribute<>* attr = node->first_attribute(); attr; attr = attr->next_attribute())
 		{
-			Trace::out("attribute %s ", attr->name());
-			Trace::out("=> %s\n", attr->value());
+			//Trace::out("attribute %s ", attr->name());
+			//Trace::out("=> %s\n", attr->value());
 		}
 
 		for (xml_node<>* child = node->first_node(); child; child = child->next_sibling())
@@ -88,10 +87,12 @@ void ConvertFont(const char* const pFileName)
 
 	delete[] pBuff;
 
-	font.Print("Century Font");
+	//font.Print("Century Font");
 
 	fontData_proto proto;
 	font.Serialize(proto);
 	const char* outFile = pFileString.replace(pFileString.end() - 4, pFileString.end(), ".proto.azul").c_str();
 	ProtoAzul::WriteProtoFile(proto, outFile);
+
+	Trace::out("  => Created %s\n", outFile);
 }

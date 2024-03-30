@@ -104,6 +104,8 @@ namespace Azul
 			Birds,
 			CenturyFont,
 			Mannequin,
+			Paladin,
+			Knight,
 			None
 		};
 

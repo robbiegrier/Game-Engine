@@ -21,36 +21,46 @@ namespace Azul
 		return retval;
 	}
 
-	std::string ConverterUtils::FileToString(const char* const pMeshFileName)
+	std::string ConverterUtils::FileToString(const char* const pFileName)
 	{
 		File::Handle fh;
-		File::Error ferror;
+		File::Error err;
 		DWORD length;
 
-		ferror = File::Open(fh, pMeshFileName, File::Mode::READ);
-		assert(ferror == File::Error::SUCCESS);
-
-		ferror = File::Seek(fh, File::Position::END, 0);
-		assert(ferror == File::Error::SUCCESS);
-
-		ferror = File::Tell(fh, length);
-		assert(ferror == File::Error::SUCCESS);
-
-		ferror = File::Seek(fh, File::Position::BEGIN, 0);
-		assert(ferror == File::Error::SUCCESS);
+		err = File::Open(fh, pFileName, File::Mode::READ);		assert(err == File::Error::SUCCESS);
+		err = File::Seek(fh, File::Position::END, 0);			assert(err == File::Error::SUCCESS);
+		err = File::Tell(fh, length);							assert(err == File::Error::SUCCESS);
+		err = File::Seek(fh, File::Position::BEGIN, 0);			assert(err == File::Error::SUCCESS);
 
 		char* poBuff = new char[length];
-		assert(poBuff);
 
-		ferror = File::Read(fh, poBuff, length);
-		assert(ferror == File::Error::SUCCESS);
-
-		ferror = File::Close(fh);
-		assert(ferror == File::Error::SUCCESS);
+		err = File::Read(fh, poBuff, length);					assert(err == File::Error::SUCCESS);
+		err = File::Close(fh);									assert(err == File::Error::SUCCESS);
 
 		std::string output = std::string(poBuff, length);
 		delete[] poBuff;
 
 		return output;
+	}
+
+	std::vector<std::string> ConverterUtils::GetAllSourceFileNames(const std::string& pattern)
+	{
+		std::vector<std::string> names;
+		WIN32_FIND_DATA fd;
+
+		HANDLE hFind = FindFirstFile(pattern.c_str(), &fd);
+
+		if (hFind != INVALID_HANDLE_VALUE) {
+			do
+			{
+				if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+				{
+					names.push_back(fd.cFileName);
+				}
+			} while (FindNextFile(hFind, &fd));
+			FindClose(hFind);
+		}
+
+		return names;
 	}
 }

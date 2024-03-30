@@ -115,26 +115,26 @@ void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, c
 
 void WriteAndVerifyRuntimeModel(azulModel& azulRunModel, const char* const filenameIn)
 {
-	azulRunModel.Print("azul_mA");
+	//azulRunModel.Print("azul_mA");
 	azulModel_proto mA_proto;
 	azulRunModel.Serialize(mA_proto);
 
-	Trace::out("message size: %d \n", mA_proto.ByteSizeLong());
-	Trace::out("\n");
+	//Trace::out("message size: %d \n", mA_proto.ByteSizeLong());
+	//Trace::out("\n");
 
 	std::string meshName = std::string(filenameIn);
 	const char* filename = meshName.replace(meshName.end() - 4, meshName.end(), ".proto.azul").c_str();
 
 	ProtoAzul::WriteProtoFile(mA_proto, filename);
 
-	azulModel_proto mB_proto;
-	ProtoAzul::ReadProtoFile(mB_proto, filename);
+	Trace::out("  => Created %s\n", filename);
 
-	azulModel mB;
-	mB.Deserialize(mB_proto);
-	mB.Print("azul_mB");
-
-	PTrace("Created %s\\%s\n", NPath, filename);
+	//azulModel_proto mB_proto;
+	//ProtoAzul::ReadProtoFile(mB_proto, filename);
+	//azulModel mB;
+	//mB.Deserialize(mB_proto);
+	//mB.Print("azul_mB");
+	//PTrace("Created %s\\%s\n", NPath, filename);
 }
 
 void ConvertModel(const char* const pFileName)
@@ -148,30 +148,16 @@ void ConvertModel(const char* const pFileName)
 	tinygltf::Model gltfModel;
 	azulModel azulRunModel;
 
-	PTrace("\n\n\nConverting %s\n", pFileName);
+	Trace::out("Converting Mesh: %s\n", pFileName);
 
-	bool status = GLTF::GetGLBRawBuffer(poBuff, BuffSize, pFileName);
-	assert(status);
-
-	// First is the GLB header
-	GLTF::DumpGLBHeader(poBuff, BuffSize);
-
-	// Then the JSON description
-	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize);
-	assert(status);
-
-	// Everything else is the Binary buffer
-	status = GLTF::GetBinaryBuffPtr(pBinaryBuff, BinaryBuffSize, poBuff, BuffSize);
-	assert(status);
-
-	status = GLTF::Load(gltfModel, pFileName);
-	assert(status);
+	bool status = GLTF::GetGLBRawBuffer(poBuff, BuffSize, pFileName); assert(status);
+	//GLTF::DumpGLBHeader(poBuff, BuffSize);
+	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize); assert(status);
+	status = GLTF::GetBinaryBuffPtr(pBinaryBuff, BinaryBuffSize, poBuff, BuffSize); assert(status);
+	status = GLTF::Load(gltfModel, pFileName); assert(status);
 
 	ConvertGltfToRuntime(gltfModel, azulRunModel, pBinaryBuff, pFileName);
-
 	WriteAndVerifyRuntimeModel(azulRunModel, pFileName);
-
-	PTrace("Success: converted %s\n", pFileName);
 
 	delete[] poBuff;
 	delete[] poJSON;
@@ -188,73 +174,50 @@ void ConvertTexture(const char* const pFileName)
 	tinygltf::Model gltfModel;
 	azulModel azulRunModel;
 
-	PTrace("\n\n\nConverting texture: %s\n", pFileName);
+	Trace::out("Converting Texture: %s\n", pFileName);
 
 	const char* const pPlaceholderName = "cube.glb";
 
-	bool status = GLTF::GetGLBRawBuffer(poBuff, BuffSize, pPlaceholderName);
-	assert(status);
-
-	// First is the GLB header
-	GLTF::DumpGLBHeader(poBuff, BuffSize);
-
-	// Then the JSON description
-	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize);
-	assert(status);
-
-	// Everything else is the Binary buffer
-	status = GLTF::GetBinaryBuffPtr(pBinaryBuff, BinaryBuffSize, poBuff, BuffSize);
-	assert(status);
-
-	status = GLTF::Load(gltfModel, pPlaceholderName);
-	assert(status);
+	bool status = GLTF::GetGLBRawBuffer(poBuff, BuffSize, pPlaceholderName); assert(status);
+	//GLTF::DumpGLBHeader(poBuff, BuffSize);
+	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize); assert(status);
+	status = GLTF::GetBinaryBuffPtr(pBinaryBuff, BinaryBuffSize, poBuff, BuffSize); assert(status);
+	status = GLTF::Load(gltfModel, pPlaceholderName); assert(status);
 
 	ConvertGltfToRuntime(gltfModel, azulRunModel, pBinaryBuff, pPlaceholderName);
-
 	meshData& runModel = azulRunModel.meshes[0];
-
-	//memcpy_s(
-	//	runModel.pMeshName, meshData::FILE_NAME_SIZE,
-	//	pFileName, strlen(pFileName)
-	//);
-
 	GLTF::SetExternalTexture(pFileName, 0, runModel.text_color);
-
 	azulRunModel.converterVersion = CONVERTER_VERSION;
-
 	WriteAndVerifyRuntimeModel(azulRunModel, pFileName);
-
-	PTrace("Success: converted texture: %s\n", pFileName);
 
 	delete[] poBuff;
 	delete[] poJSON;
 }
 
-std::vector<std::string> GetAllSourceFileNames(const std::string& pattern)
-{
-	std::vector<std::string> names;
-	WIN32_FIND_DATA fd;
-
-	HANDLE hFind = FindFirstFile(pattern.c_str(), &fd);
-
-	if (hFind != INVALID_HANDLE_VALUE) {
-		do
-		{
-			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-			{
-				names.push_back(fd.cFileName);
-			}
-		} while (FindNextFile(hFind, &fd));
-		FindClose(hFind);
-	}
-
-	return names;
-}
+// Input types:
+//
+// GLB as Skinned Mesh:
+//		- Mesh						(combine all sub-meshes as one)
+//		- Skeleton					(compare with existing skeletons to see if it can be reused)
+//		- Texture					(if there is texture data)
+//		- Animations				(for each animation)
+//
+// GLB with Animations Only:
+//		- Animations				(for each animation)
+//
+// GLB as Static Mesh:
+//		- Mesh						(option to combine as one, or kitbash)
+//		- Texture					(if there is texture data)
+//
+// TGA or PNG:
+//		- Texture
+//
+// font.xml:
+//		- Font Description			(texture converted as PNG job)
 
 int main(int argc, char* argv[])
 {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
-
 	GetCurrentDirectory(MAX_PATH, NPath);
 	PTrace("path: %s\n", NPath);
 
@@ -267,7 +230,7 @@ int main(int argc, char* argv[])
 
 	if (argc == 1)
 	{
-		modelsToConvert = GetAllSourceFileNames("*.glb");
+		modelsToConvert = ConverterUtils::GetAllSourceFileNames("*.glb");
 	}
 	else
 	{
@@ -286,7 +249,7 @@ int main(int argc, char* argv[])
 
 	if (argc == 1)
 	{
-		for (const std::string& file : GetAllSourceFileNames("*.tga"))
+		for (const std::string& file : ConverterUtils::GetAllSourceFileNames("*.tga"))
 		{
 			ConvertTexture(file.c_str());
 		}
@@ -297,12 +260,12 @@ int main(int argc, char* argv[])
 		ConvertModel(file.c_str());
 	}
 
-	for (const std::string& file : GetAllSourceFileNames("*.png"))
+	for (const std::string& file : ConverterUtils::GetAllSourceFileNames("*.png"))
 	{
 		ConvertTexture(file.c_str());
 	}
 
-	for (const std::string& file : GetAllSourceFileNames("*.font.xml"))
+	for (const std::string& file : ConverterUtils::GetAllSourceFileNames("*.font.xml"))
 	{
 		ConvertFont(file.c_str());
 	}
@@ -320,6 +283,14 @@ int main(int argc, char* argv[])
 	ConvertSkeleton("mannequin.glb");
 	ConvertSkin("mannequin.glb");
 
+	ConvertSkin("Paladin.glb");
+	ConvertAnim("Paladin.glb");
+	ConvertSkeleton("Paladin.glb");
+
+	ConvertSkin("Knight.glb");
+	ConvertAnim("Knight.glb");
+	ConvertSkeleton("Knight.glb");
+
 	google::protobuf::ShutdownProtobufLibrary();
 
 	system("del *.glb");
@@ -329,5 +300,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
-// ---  End of File ---------------

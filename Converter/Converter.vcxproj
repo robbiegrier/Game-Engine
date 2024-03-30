@@ -245,6 +245,8 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClInclude Include="ConvertSkin.h" />
     <ClInclude Include="GLTF.h" />
     <ClInclude Include="GLTF_Helper.h" />
+    <ClInclude Include="InputShelf.h" />
+    <ClInclude Include="Job.h" />
     <ClInclude Include="md5.h" />
     <ClInclude Include="meshDataConverter.h" />
     <ClInclude Include="ProtoAzul.h" />
@@ -628,6 +630,8 @@ REM copy .\..\Models\*.tga .\..\data</Command>
     <ClCompile Include="ConvertSkin.cpp" />
     <ClCompile Include="GLTF.cpp" />
     <ClCompile Include="GLTF_Helper.cpp" />
+    <ClCompile Include="InputShelf.cpp" />
+    <ClCompile Include="Job.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="md5.cpp" />
     <ClCompile Include="meshDataConverter.cpp" />
