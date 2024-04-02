@@ -475,7 +475,7 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::R2D2, new MeshProto("R2-D2.proto.azul"));
 		MeshManager::Add(Mesh::Name::Duck, new MeshProto("Duck.proto.azul"));
 		MeshManager::Add(Mesh::Name::Corset, new MeshProto("Corset.proto.azul"));
-		MeshManager::Add(Mesh::Name::AntiqueCameraTripod, new MeshProto("AntiqueCamera.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::AntiqueCameraTripod, new MeshProto("AntiqueCamera.proto.azul"));
 		MeshManager::Add(Mesh::Name::AntiqueCamera, new MeshProto("AntiqueCamera.proto.azul", 1));
 		MeshManager::Add(Mesh::Name::Dog, new MeshProto("dog.proto.azul"));
 		MeshManager::Add(Mesh::Name::WesternTownHouse, new MeshProto("western_town_house.proto.azul", 0));

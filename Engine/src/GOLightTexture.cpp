@@ -26,6 +26,12 @@ namespace Azul
 	void GOLightTexture::Draw()
 	{
 		pModel->RenderIndexBuffer();
+
+		for (Iterator& it = *pModel->subMeshes.GetIterator(); !it.IsDone(); it.Next())
+		{
+			Mesh* pSubMesh = (Mesh*)it.Curr();
+			pSubMesh->RenderIndexBuffer();
+		}
 	}
 
 	GraphicsObject* GOLightTexture::Clone()
