@@ -462,6 +462,7 @@ namespace Azul
 
 		MeshManager::Add(Mesh::Name::Sprite, new MeshProto("UnitSquare.proto.azul"));
 		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
+		MeshManager::Add(Mesh::Name::UnitCube, new MeshProto("UnitCube.proto.azul"));
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
 		MeshManager::Add(Mesh::Name::Pyramid, new PyramidMesh());
 		MeshManager::Add(Mesh::Name::Diamond, new DiamondMesh());

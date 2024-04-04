@@ -1447,9 +1447,9 @@
     "Image": 6,
     "Is Selectable": true,
     "Location": [
-      -261.875,
-      -189.36972045898438,
-      1.4073683023452759
+      -261.8395690917969,
+      -189.31695556640625,
+      1.4073714017868042
     ],
     "Mesh": 10,
     "Object Name": "Dog House Huge",
@@ -1500,111 +1500,6 @@
       1.0,
       1.0,
       1.0
-    ],
-    "Shader": 0,
-    "Texture": 5
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Components": null,
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Image": 6,
-    "Is Selectable": true,
-    "Location": [
-      -70.0,
-      4.4541015625,
-      29.931640625
-    ],
-    "Mesh": 2,
-    "Object Name": "BIG Pyramid1",
-    "Parent Name": "Objects",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      7.0,
-      7.0,
-      7.0
-    ],
-    "Shader": 0,
-    "Texture": 5
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Components": null,
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Image": 6,
-    "Is Selectable": true,
-    "Location": [
-      5.280555248260498,
-      -0.11690959334373474,
-      5.714296340942383
-    ],
-    "Mesh": 2,
-    "Object Name": "BIG Pyramid3",
-    "Parent Name": "BIG Pyramid1",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.4310826063156128,
-      1.4307968616485596,
-      1.4310826063156128
-    ],
-    "Shader": 0,
-    "Texture": 5
-  },
-  {
-    "Color": [
-      1.0,
-      1.0,
-      1.0,
-      1.0
-    ],
-    "Components": null,
-    "Game Object": 0,
-    "Graphics Object": 3,
-    "Image": 6,
-    "Is Selectable": true,
-    "Location": [
-      2.5506434440612793,
-      0.602398693561554,
-      2.8571481704711914
-    ],
-    "Mesh": 2,
-    "Object Name": "BIG Pyramid2",
-    "Parent Name": "BIG Pyramid1",
-    "Render Shell": true,
-    "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
-      1.0
-    ],
-    "Scale": [
-      1.4832592010498047,
-      1.483687400817871,
-      1.4832592010498047
     ],
     "Shader": 0,
     "Texture": 5
@@ -1727,18 +1622,18 @@
     "Image": 6,
     "Is Selectable": true,
     "Location": [
-      10.172155380249023,
-      12.517712593078613,
-      22.633569717407227
+      10.0,
+      10.0,
+      10.0
     ],
     "Mesh": 6,
     "Object Name": "Spawned Object 1",
     "Parent Name": "Objects",
     "Render Shell": true,
     "Rotation": [
-      -0.0,
-      -0.0,
-      -0.0,
+      0.0,
+      0.0,
+      7.450580596923828e-09,
       1.0
     ],
     "Scale": [
@@ -2361,7 +2256,7 @@
       6.133009910583496,
       -2.085883617401123
     ],
-    "Mesh": 93,
+    "Mesh": 94,
     "Object Name": "Player",
     "Parent Name": "Objects",
     "Render Shell": true,
@@ -3512,9 +3407,9 @@
     "Image": 2,
     "Is Selectable": true,
     "Location": [
-      72.05416870117188,
-      101.32434844970703,
-      0.0
+      87.19774627685547,
+      105.5240707397461,
+      -9.5367431640625e-06
     ],
     "Mesh": 87,
     "Object Name": "pBirdsTmp 2",
@@ -3548,8 +3443,8 @@
     "Image": 5,
     "Is Selectable": true,
     "Location": [
-      15.0,
-      20.0,
+      14.999994277954102,
+      19.9999942779541,
       0.0
     ],
     "Mesh": 87,
@@ -3564,8 +3459,8 @@
       1.0
     ],
     "Scale": [
-      0.0,
-      0.0,
+      1.0,
+      1.0,
       1.0
     ],
     "Shader": 6,

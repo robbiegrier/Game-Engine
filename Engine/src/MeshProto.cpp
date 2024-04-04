@@ -95,6 +95,12 @@ namespace Azul
 
 		boundingSphereRadius = mB.boundingSphereRadius;
 		pBoundingSphereCenter->set(mB.boundingSphereCenter[0], mB.boundingSphereCenter[1], mB.boundingSphereCenter[2]);
+
+		pAABBMax->set(mB.aabbMax[0], mB.aabbMax[1], mB.aabbMax[2]);
+		pAABBMin->set(mB.aabbMin[0], mB.aabbMin[1], mB.aabbMin[2]);
+
+		Trace::out("MIN: %f %f %f\n", pAABBMin->x(), pAABBMin->y(), pAABBMin->z());
+		Trace::out("MAX: %f %f %f\n", pAABBMax->x(), pAABBMax->y(), pAABBMax->z());
 	}
 
 	void MeshProto::VerifyImportedData(const meshData& mB) const

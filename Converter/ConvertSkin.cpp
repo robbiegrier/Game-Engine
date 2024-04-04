@@ -184,6 +184,7 @@ namespace Azul
 			assert(runModel.mode == meshData::RENDER_MODE::MODE_TRIANGLES);
 
 			GLTF::InsertBoundingSphereData(runModel);
+			GLTF::InsertBoundingBoxData(runModel);
 
 			meshData_proto mA_proto;
 			runModel.Serialize(mA_proto);

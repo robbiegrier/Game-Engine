@@ -42,6 +42,19 @@ namespace Azul
 				ImGui::BulletText("Model: %s", pGO->GetModel() ? pGO->GetModel()->NameToString() : "nullptr");
 				ImGui::BulletText("Shader: %s", pGO->GetModel() ? pGO->GetShader()->NameToString() : "nullptr");
 				ImGui::BulletText("Texture: %s", pGO->GetTexture() ? pGO->GetTexture()->NameToString() : "nullptr");
+
+				if (pGO->GetModel())
+				{
+					Vec3 aabbMin = pGO->GetModel()->GetAABBMin();
+					Vec3 aabbMax = pGO->GetModel()->GetAABBMax();
+					ImGui::DragFloat3("AABB Min", &aabbMin[x]);
+					ImGui::DragFloat3("AABB Max", &aabbMax[x]);
+
+					Vec3 obbMin = pGameObject->GetOBBMin();
+					Vec3 obbMax = pGameObject->GetOBBMax();
+					ImGui::DragFloat3("OBB Min", &obbMin[x]);
+					ImGui::DragFloat3("OBB Max", &obbMax[x]);
+				}
 			}
 
 			if (ImGui::CollapsingHeader("Tree", flags))

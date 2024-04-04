@@ -318,7 +318,29 @@ namespace Azul
 				const float sphereRadius = pCurr->GetShellRadius();
 				const Vec3& sphereCenter = pCurr->GetShellCenter();
 
-				if (EditorMath::RayVsSphere(rayOrigin, rayDir, sphereCenter, sphereRadius))
+				Vec3 aabbMin(-1.f, -1.f, -1.f);
+				Vec3 aabbMax(1.f, 1.f, 1.f);
+
+				if (pCurr->GetGraphicsObject()->GetModel())
+				{
+					aabbMin = pCurr->GetGraphicsObject()->GetModel()->GetAABBMin();
+					aabbMax = pCurr->GetGraphicsObject()->GetModel()->GetAABBMax();
+				}
+
+				float intersectDist;
+				float intersectError;
+
+				const bool intersectOBB = EditorMath::RayVsOBBIntersection(
+					rayOrigin,
+					rayDir,
+					aabbMin,
+					aabbMax,
+					pCurr->GetWorld(),
+					intersectDist, intersectError
+				);
+
+				//if (EditorMath::RayVsSphere(rayOrigin, rayDir, sphereCenter, sphereRadius))
+				if (intersectOBB)
 				{
 					const float dist = (rayOrigin - pCurr->GetWorldLocation()).len();
 

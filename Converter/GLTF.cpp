@@ -755,6 +755,45 @@ void GLTF::InsertBoundingSphereData(meshData& runModel)
 	delete[] pVerts;
 }
 
+void GLTF::InsertBoundingBoxData(meshData& runModel)
+{
+	Vec3* pVerts = new Vec3[runModel.vertCount];
+
+	Vec3f& first = *(Vec3f*)runModel.vbo_vert.poData;
+	float minx = first.x;
+	float miny = first.y;
+	float minz = first.z;
+	float maxx = first.x;
+	float maxy = first.y;
+	float maxz = first.z;
+
+	for (int i = 1; i < runModel.vertCount; i++)
+	{
+		Vec3f* pVec3f = (Vec3f*)runModel.vbo_vert.poData;
+		const Vec3f& w_vert = pVec3f[i];
+
+		if (w_vert.x > maxx)	maxx = w_vert.x;
+		else if (w_vert.x < minx)	minx = w_vert.x;
+		if (w_vert.y > maxy)	maxy = w_vert.y;
+		else if (w_vert.y < miny)	miny = w_vert.y;
+		if (w_vert.z > maxz)	maxz = w_vert.z;
+		else if (w_vert.z < minz)	minz = w_vert.z;
+	}
+
+	runModel.aabbMax[0] = maxx;
+	runModel.aabbMax[1] = maxy;
+	runModel.aabbMax[2] = maxz;
+
+	runModel.aabbMin[0] = minx;
+	runModel.aabbMin[1] = miny;
+	runModel.aabbMin[2] = minz;
+
+	//Trace::out("MIN: %f %f %f\n", runModel.aabbMin[0], runModel.aabbMin[1], runModel.aabbMin[2]);
+	//Trace::out("MAX: %f %f %f\n", runModel.aabbMax[0], runModel.aabbMax[1], runModel.aabbMax[2]);
+
+	delete[] pVerts;
+}
+
 bool GLTF::OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone)
 {
 	static_cast<void>(NodeIndex);

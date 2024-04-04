@@ -1,7 +1,3 @@
-//----------------------------------------------------------------------------
-// Copyright 2023, Ed Keenan, all rights reserved.
-//----------------------------------------------------------------------------
-
 syntax = "proto3";
 
 import "vboData.proto";
@@ -35,6 +31,6 @@ message meshData_proto
 	optional vboData_proto     vbo_weights   = 12;
 	optional vboData_proto     vbo_joints    = 13;
 	optional vboData_proto     vbo_invBind   = 14;
+	repeated float aabbMin = 15;
+	repeated float aabbMax = 16;
 }
-
-// -- End of File ---

@@ -24,6 +24,7 @@ namespace Azul
 		assert(pGraphicsObject);
 
 		pShell = new GOConstColor(MeshManager::Find(Mesh::Name::Sphere), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(0.5f, 0.5f, 0.5f));
+		pBoundingBox = new GOConstColor(MeshManager::Find(Mesh::Name::UnitCube), ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(0.8f, 0.7f, 0.3f));
 	}
 
 	GameObject::~GameObject()
@@ -34,6 +35,7 @@ namespace Azul
 		delete pGraphicsObject;
 		delete pWorld;
 		delete pShell;
+		delete pBoundingBox;
 	}
 
 	void GameObject::SetRelativeLocation(const Vec3& v)
@@ -257,6 +259,16 @@ namespace Azul
 		components.Add(pInComponent);
 	}
 
+	Vec3 GameObject::GetOBBMax() const
+	{
+		return Vec3(Vec4(GetGraphicsObject()->GetModel()->GetAABBMax(), 1.f) * *pWorld);
+	}
+
+	Vec3 GameObject::GetOBBMin() const
+	{
+		return Vec3(Vec4(GetGraphicsObject()->GetModel()->GetAABBMin(), 1.f) * *pWorld);
+	}
+
 	Mat4 GameObject::GetShellWorld() const
 	{
 		Trans shellTrans = Trans();
@@ -319,7 +331,17 @@ namespace Azul
 
 		if (renderShell && globalRenderShell || (Engine::GetEditorMode() && alwaysRenderShell))
 		{
-			pShell->Render();
+			//pShell->Render();
+
+			if (GetGraphicsObject()->GetModel())
+			{
+				Vec4 RelativeMin = Vec4(GetGraphicsObject()->GetModel()->GetAABBMin(), 1.f);
+				Vec4 RelativeMax = Vec4(GetGraphicsObject()->GetModel()->GetAABBMax(), 1.f);
+				Mat4 minMaxMat = Scale(Vec3(RelativeMax - RelativeMin)) * Trans(Vec3(0.5f * (RelativeMax + RelativeMin))) * *pWorld;
+
+				pBoundingBox->SetWorld(minMaxMat);
+				pBoundingBox->Render();
+			}
 		}
 	}
 }

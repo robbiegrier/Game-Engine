@@ -20,6 +20,8 @@ namespace Azul
 		poVertexBuffer_weights{ nullptr },
 		poConstantBuff_boneWorld{ nullptr },
 		pBoundingSphereCenter{ new Vec3() },
+		pAABBMax{ new Vec3() },
+		pAABBMin{ new Vec3() },
 		poInvBindArray{ new Mat4[BoneCountMax]() }
 	{
 		poConstantBuff_uvMatrix = CreateConstantBuffer(sizeof(Mat4));
@@ -120,6 +122,16 @@ namespace Azul
 		return *pBoundingSphereCenter;
 	}
 
+	const Vec3& Mesh::GetAABBMax() const
+	{
+		return *pAABBMax;
+	}
+
+	const Vec3& Mesh::GetAABBMin() const
+	{
+		return *pAABBMin;
+	}
+
 	void Mesh::HackSetBoundingSphereData(VertexPos* pData)
 	{
 		Sphere sphere;
@@ -138,6 +150,33 @@ namespace Azul
 		delete[] pVerts;
 	}
 
+	void Mesh::HackSetBoundingBoxData(VertexPos* pData)
+	{
+		Vec3f& first = *(Vec3f*)pData;
+		float minx = first.x;
+		float miny = first.y;
+		float minz = first.z;
+		float maxx = first.x;
+		float maxy = first.y;
+		float maxz = first.z;
+
+		for (int i = 1; i < (int)numVerts; i++)
+		{
+			Vec3f* pVec3f = (Vec3f*)pData;
+			const Vec3f& w_vert = pVec3f[i];
+
+			if (w_vert.x > maxx)	maxx = w_vert.x;
+			else if (w_vert.x < minx)	minx = w_vert.x;
+			if (w_vert.y > maxy)	maxy = w_vert.y;
+			else if (w_vert.y < miny)	miny = w_vert.y;
+			if (w_vert.z > maxz)	maxz = w_vert.z;
+			else if (w_vert.z < minz)	minz = w_vert.z;
+		}
+
+		pAABBMax->set(maxx, maxy, maxz);
+		pAABBMin->set(minx, miny, minz);
+	}
+
 	Mesh::~Mesh()
 	{
 		SafeRelease(poVertexBuffer_pos);
@@ -152,6 +191,8 @@ namespace Azul
 		SafeRelease(poVertexBuffer_weights);
 		SafeRelease(poConstantBuff_boneWorld);
 		delete pBoundingSphereCenter;
+		delete pAABBMax;
+		delete pAABBMin;
 		delete[] poInvBindArray;
 	}
 

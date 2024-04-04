@@ -107,6 +107,8 @@ void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, c
 		runModel.boundingSphereCenter[1] = sphere.cntr[y];
 		runModel.boundingSphereCenter[2] = sphere.cntr[z];
 
+		GLTF::InsertBoundingBoxData(runModel);
+
 		delete[] pVerts;
 	}
 

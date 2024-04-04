@@ -106,6 +106,9 @@ namespace Azul
 
 		DLinkedList& GetComponents() { return components; }
 
+		Vec3 GetOBBMax() const;
+		Vec3 GetOBBMin() const;
+
 	protected:
 		bool alwaysRenderShell = false;
 		bool renderShell;
@@ -128,6 +131,7 @@ namespace Azul
 		GraphicsObject* pGraphicsObject;
 
 		GraphicsObject* pShell;
+		GraphicsObject* pBoundingBox;
 
 		Name typeName;
 

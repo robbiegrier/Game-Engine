@@ -101,6 +101,7 @@ public:
 	static bool OutputTrans(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
 	static bool OutputQuat(Model& model, size_t AccessorIndex, size_t NodeIndex, size_t FrameIndex, boneData* pBone);
 	static void InsertBoundingSphereData(meshData& runModel);
+	static void InsertBoundingBoxData(meshData& runModel);
 };
 
 #endif

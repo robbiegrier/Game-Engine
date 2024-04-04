@@ -109,6 +109,7 @@ namespace Azul
 			MannequinSkin,
 			PaladinSkin,
 			KnightSkin,
+			UnitCube,
 			Null,
 			None
 		};
@@ -141,6 +142,8 @@ namespace Azul
 
 		float GetBoundingSphereRadius() const;
 		const Vec3& GetBoundSphereCenter() const;
+		const Vec3& GetAABBMax() const;
+		const Vec3& GetAABBMin() const;
 
 		void TransferUVCorrection(Mat4* pUVMatrix);
 		void TransferConstantBufferBoneWorldArray(Mat4* pWorldBoneArray);
@@ -149,6 +152,7 @@ namespace Azul
 
 	protected:
 		void HackSetBoundingSphereData(VertexPos* pData);
+		void HackSetBoundingBoxData(VertexPos* pData);
 
 		Name name;
 
@@ -165,6 +169,9 @@ namespace Azul
 
 		float boundingSphereRadius;
 		Vec3* pBoundingSphereCenter;
+
+		Vec3* pAABBMax;
+		Vec3* pAABBMin;
 
 	public:
 		ID3D11Buffer* poConstantBuff_lightColor;

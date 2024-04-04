@@ -271,6 +271,7 @@ namespace Azul
 		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
 
 		HackSetBoundingSphereData(g_Vertices_pos);
+		HackSetBoundingBoxData(g_Vertices_pos);
 	}
 
 	CubeMesh::~CubeMesh()

@@ -20,6 +20,8 @@ meshData::meshData()
 	boundingSphereRadius(0u)
 {
 	memset(boundingSphereCenter, 0, sizeof(boundingSphereCenter));
+	memset(aabbMax, 0, sizeof(aabbMax));
+	memset(aabbMin, 0, sizeof(aabbMin));
 }
 
 void meshData::Serialize(meshData_proto& out) const
@@ -72,6 +74,14 @@ void meshData::Serialize(meshData_proto& out) const
 	out.add_boundingspherecenter(boundingSphereCenter[0]);
 	out.add_boundingspherecenter(boundingSphereCenter[1]);
 	out.add_boundingspherecenter(boundingSphereCenter[2]);
+
+	out.add_aabbmin(aabbMin[0]);
+	out.add_aabbmin(aabbMin[1]);
+	out.add_aabbmin(aabbMin[2]);
+
+	out.add_aabbmax(aabbMax[0]);
+	out.add_aabbmax(aabbMax[1]);
+	out.add_aabbmax(aabbMax[2]);
 }
 
 void meshData::Deserialize(const meshData_proto& in)
@@ -84,13 +94,20 @@ void meshData::Deserialize(const meshData_proto& in)
 	this->vbo_norm.Deserialize(in.vbo_norm());
 	this->vbo_uv.Deserialize(in.vbo_uv());
 	this->vbo_index.Deserialize(in.vbo_index());
-
 	this->text_color.Deserialize(in.text_color());
 
 	boundingSphereRadius = in.boundingsphereradius();
 	boundingSphereCenter[0] = in.boundingspherecenter().at(0);
 	boundingSphereCenter[1] = in.boundingspherecenter().at(1);
 	boundingSphereCenter[2] = in.boundingspherecenter().at(2);
+
+	aabbMin[0] = in.aabbmin().at(0);
+	aabbMin[1] = in.aabbmin().at(1);
+	aabbMin[2] = in.aabbmin().at(2);
+
+	aabbMax[0] = in.aabbmax().at(0);
+	aabbMax[1] = in.aabbmax().at(1);
+	aabbMax[2] = in.aabbmax().at(2);
 
 	this->vbo_weights.Deserialize(in.vbo_weights());
 	this->vbo_joints.Deserialize(in.vbo_joints());

@@ -60,6 +60,9 @@ public:
 	textureData      text_color;
 	float boundingSphereRadius;
 	float boundingSphereCenter[3];
+
+	float aabbMin[3];
+	float aabbMax[3];
 };
 
 #endif

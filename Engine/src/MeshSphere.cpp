@@ -598,6 +598,7 @@ MeshSphere::MeshSphere()
 	poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
 
 	HackSetBoundingSphereData(g_SphereVertices_pos);
+	HackSetBoundingBoxData(g_SphereVertices_pos);
 }
 
 MeshSphere::~MeshSphere()
