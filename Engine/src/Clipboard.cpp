@@ -28,6 +28,10 @@
 #include "FontLibrary.h"
 #include "GOSkinLightTexture.h"
 #include "Animator.h"
+#include "Terrain.h"
+#include "TerrainMesh.h"
+#include "TerrainSystem.h"
+#include "Light.h"
 
 using json = nlohmann::json;
 
@@ -108,6 +112,12 @@ namespace Azul
 				output["Image"] = ((GOSprite*)pObject->GetGraphicsObject())->pImage->GetName();
 			}
 
+			if (pObject->GetTypeName() == GameObject::Name::Terrain)
+			{
+				Terrain* pTerrain = (Terrain*)pObject;
+				output["Terrain Name"] = pTerrain->GetTerrainMesh()->GetTerrainMeshName();
+			}
+
 			output["Components"] = {};
 
 			for (Iterator& it = *pObject->GetComponents().GetIterator(); !it.IsDone(); it.Next())
@@ -150,6 +160,7 @@ namespace Azul
 		Image::Name imageName = Image::Name::Null;
 		Font::Name fontName = Font::Name::Null;
 		char message[GameObjectText::MaxMessageSize];
+		char terrainName[TerrainMesh::NAME_SIZE];
 		Vec4 color;
 		Vec3 location;
 		Vec3 scale;
@@ -171,6 +182,7 @@ namespace Azul
 			else if (strcmp(propertyName, "Image") == 0)			imageName = (Image::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Font") == 0)				fontName = (Font::Name)prop.value().template get<unsigned int>();
 			else if (strcmp(propertyName, "Message") == 0)			memcpy_s(message, GameObjectText::MaxMessageSize, prop.value().template get<std::string>().c_str(), GameObjectText::MaxMessageSize);
+			else if (strcmp(propertyName, "Terrain Name") == 0)		memcpy_s(terrainName, TerrainMesh::NAME_SIZE, prop.value().template get<std::string>().c_str(), TerrainMesh::NAME_SIZE);
 			else if (strcmp(propertyName, "Render Shell") == 0)		renderShell = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Is Selectable") == 0)	isSelectable = prop.value().template get<bool>();
 			else if (strcmp(propertyName, "Copy Relative Location") == 0) {}
@@ -184,6 +196,18 @@ namespace Azul
 				else if (strcmp(propertyName, "Scale") == 0)		scale.set(list[0], list[1], list[2]);
 				else if (strcmp(propertyName, "Rotation") == 0)		rotation.set(list[0], list[1], list[2], list[3]);
 			}
+		}
+
+		if (typeName == GameObject::Name::Terrain)
+		{
+			GameObject* pGameObject = TerrainSystem::LoadTerrainFromDisk(terrainName);
+			pGameObject->SetRelativeScale(scale);
+			pGameObject->SetRelativeLocation(location);
+			pGameObject->SetRelativeRotation(rotation);
+			pGameObject->SetRenderShell(renderShell);
+			pGameObject->SetIsSelectable(isSelectable);
+			pGameObject->SetName(objectName);
+			return pGameObject;
 		}
 
 		GraphicsObject* pGo = nullptr;
@@ -240,6 +264,12 @@ namespace Azul
 					Animator* pAnimator = new Animator();
 					pAnimator->Deserialize(componentJson);
 					pGameObject->AttachComponent(pAnimator);
+				}
+				if (strcmp(componentJson["Type"].template get<std::string>().c_str(), "Light") == 0)
+				{
+					Light* pComponent = new Light();
+					pComponent->Deserialize(componentJson);
+					pGameObject->AttachComponent(pComponent);
 				}
 			}
 		}

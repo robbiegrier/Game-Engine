@@ -110,6 +110,30 @@ namespace Azul
 			PaladinSkin,
 			KnightSkin,
 			UnitCube,
+			Terrain,
+			SimpleRock,
+			SimpleRock2,
+			DryGrass0,
+			DryGrass1,
+			DryGrass2,
+			DryGrass3,
+			TropicalTree0,
+			TropicalTree1,
+			TropicalTree2,
+			TropicalTree3,
+			BirchTree0,
+			BirchTree1,
+			BirchTree2,
+			BirchTree3,
+			BirchTree4,
+			BirchTree5,
+			BirchTree6,
+			BirchTree7,
+			Cylinder,
+			SimpleRock3,
+			SimpleRock4,
+			SimpleRock5,
+			SimpleRock6,
 			Null,
 			None
 		};
@@ -129,7 +153,6 @@ namespace Azul
 
 		// Called during rendering
 		void ActivateModel();
-		void TransferConstantBuffer(Camera* pCam, const Mat4& pWorld);
 		void RenderIndexBuffer();
 
 		// As a DLink Node
@@ -150,37 +173,58 @@ namespace Azul
 
 		void AttachSubMesh(Mesh* pInSubMesh);
 
+		ID3D11Buffer* GetConstantBufferLightColor() const { return pConstantBufferLightColor; }
+		Mat4* GetInverseBindArray() const { return pInverseBindArray; }
+		const DLinkedList& GetSubMeshList() const { return subMeshes; }
+
+		unsigned int GetNumIndicies() const { return numIndices; }
+
 	protected:
 		void HackSetBoundingSphereData(VertexPos* pData);
 		void HackSetBoundingBoxData(VertexPos* pData);
 
-		Name name;
+		// Index buffer
+		ID3D11Buffer* pIndexBufferTriangles;
 
+		// Vertex Buffers
+		ID3D11Buffer* pVertexBufferPosition;
+		ID3D11Buffer* pVertexBufferColor;
+		ID3D11Buffer* pVertexBufferNormal;
+		ID3D11Buffer* pVertexBufferTextureCoordinates;
+		ID3D11Buffer* pVertexBufferJoints;
+		ID3D11Buffer* pVertexBufferWeights;
+
+		// Constant Buffers
+		ID3D11Buffer* pConstantBufferLightColor;
+		ID3D11Buffer* pConstantBufferLightPosition;
+		ID3D11Buffer* pConstantBufferUVMatrix;
+		ID3D11Buffer* pConstantBufferBoneWorld;
+
+		// Animation Data
+		Mat4* pInverseBindArray;
+
+		// Submeshes as a composite
+		DLinkedList subMeshes;
+
+		// Metadata
+		Name name;
 		unsigned int numVerts;
 		unsigned int numIndices;
 
-		ID3D11Buffer* poVertexBuffer_pos;
-		ID3D11Buffer* poVertexBuffer_color;
-		ID3D11Buffer* poVertexBuffer_norm;
-		ID3D11Buffer* poVertexBuffer_texCoord;
-		ID3D11Buffer* poIndexBuffer;
-		ID3D11Buffer* poVertexBuffer_joints;
-		ID3D11Buffer* poVertexBuffer_weights;
-
+		// Bounding volume data
 		float boundingSphereRadius;
 		Vec3* pBoundingSphereCenter;
-
 		Vec3* pAABBMax;
 		Vec3* pAABBMin;
 
 	public:
-		ID3D11Buffer* poConstantBuff_lightColor;
-		ID3D11Buffer* poConstantBuff_lightPos;
-		ID3D11Buffer* poConstantBuff_uvMatrix;
-		ID3D11Buffer* poConstantBuff_boneWorld;
-		Mat4* poInvBindArray;
-
-		DLinkedList subMeshes;
+		constexpr static UINT vertexStride_pos = sizeof(VertexPos);
+		constexpr static UINT vertexStride_color = sizeof(VertexColor);
+		constexpr static UINT vertexStride_norm = sizeof(VertexNorm);
+		constexpr static UINT vertexStride_texCoord = sizeof(VertexTexCoord);
+		constexpr static UINT vertexStride_weights = sizeof(VertexWeights);
+		constexpr static UINT vertexStride_joints = sizeof(VertexJoints);
+		constexpr static UINT offset = 0u;
 	};
 }
 

@@ -67,7 +67,12 @@ namespace Azul
 				if (pGameObject->GetPrevSibling()) ImGui::BulletText("Prev Sibling: %s", pGameObject->GetPrevSibling()->GetNamePtr());
 				ImGui::BulletText("Depth: %d", pGameObject->GetDepth());
 			}
+
+			GameObject* pGameObject = (GameObject*)EditorGui::GetSelection().GetFocusObject()->GetGameObject();
+			pGameObject->UpdateInspectorGui();
 		}
+
+
 
 		ImGui::End();
 	}

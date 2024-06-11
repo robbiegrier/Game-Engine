@@ -59,7 +59,12 @@ namespace Azul
 
 	const char* TextureObject::NameToString()
 	{
-		switch (name)
+		return NameToString(name);
+	}
+
+	const char* TextureObject::NameToString(TextureObject::Name inName)
+	{
+		switch (inName)
 		{
 		case Name::Brick:
 			return "Brick";
@@ -69,6 +74,30 @@ namespace Azul
 			return "Rocks";
 		case Name::Stone:
 			return "Stone";
+		case Name::Desert:
+			return "Desert";
+		case Name::SnowRocks:
+			return "SnowRocks";
+		case Name::Snow:
+			return "Snow";
+		case Name::Red:
+			return "Red";
+		case Name::Blue:
+			return "Blue";
+		case Name::Green:
+			return "Green";
+		case Name::Yellow:
+			return "Yellow";
+		case Name::RockyTrail:
+			return "RockyTrail";
+		case Name::CoastalSandRocks:
+			return "CoastalSandRocks";
+		case Name::Cobblestone:
+			return "Cobblestone";
+		case Name::Mud:
+			return "Mud";
+		case Name::Sandstone:
+			return "Sandstone";
 		case Name::NullTexture:
 			return "NullTexture";
 		default:

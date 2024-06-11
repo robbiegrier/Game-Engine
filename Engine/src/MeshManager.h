@@ -6,6 +6,8 @@
 
 namespace Azul
 {
+	class TerrainMesh;
+
 	class MeshManager : public ManagerBase
 	{
 	public:
@@ -15,6 +17,8 @@ namespace Azul
 		static Mesh* Add(Mesh::Name name, Mesh* pModel);
 		static Mesh* Find(Mesh::Name name);
 		static void Dump();
+
+		static TerrainMesh* FindTerrainMesh(const char* pTerrainName);
 
 	protected:
 		// Big four

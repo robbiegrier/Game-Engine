@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "EditActionSpawn.h"
+#include "GONull.h"
+#include "Light.h"
 
 namespace Azul
 {
@@ -29,8 +31,66 @@ namespace Azul
 				new Player(), spawnPos
 			)->SetRelativeScale(spawnScale);
 		}
+
+		if (ImGui::Button("Directional Light"))
+		{
+			Vec3 spawnPos = CameraManager::GetCurrentCamera()->GetLocation() + (-CameraManager::GetCurrentCamera()->GetDirection().getNorm() * spawnDistance);
+
+			GameObject* pObj = GameObjectManager::SpawnObject("Directional Light", new GameObject(new GONull()), spawnPos);
+			pObj->SetAlwaysRenderShell(true);
+
+			Vec3 dirLightAmbient = .2f * Vec3(1, 1, .8f);
+			Vec3 dirLightDiffuse = .9f * Vec3(1, 1, .8f);
+			Vec3 dirLightSpecular = Vec3(0.5f, 0.5f, 0.5f);
+
+			Light* pLight = new Light();
+			pLight->lightType = Light::Type::Directional;
+			pLight->lightMaterial.ambient = Vec4(dirLightAmbient, 1.f);
+			pLight->lightMaterial.diffuse = Vec4(dirLightDiffuse, 1.f);
+			pLight->lightMaterial.specular = Vec4(dirLightSpecular, 1.f);
+
+			pObj->AttachComponent(pLight);
+		}
+
+		if (ImGui::Button("Point Light"))
+		{
+			Vec3 spawnPos = CameraManager::GetCurrentCamera()->GetLocation() + (-CameraManager::GetCurrentCamera()->GetDirection().getNorm() * spawnDistance);
+
+			GameObject* pObj = GameObjectManager::SpawnObject("Point Light", new GameObject(new GONull()), spawnPos);
+			pObj->SetAlwaysRenderShell(true);
+
+			Vec3 lightAmbient = .2f * Vec3(1, 1, .8f);
+			Vec3 lightDiffuse = .9f * Vec3(1, 1, .8f);
+			Vec3 lightSpecular = Vec3(0.5f, 0.5f, 0.5f);
+
+			Light* pLight = new Light();
+			pLight->lightType = Light::Type::Point;
+
+			float diffScale = 0.5f;
+			float radius = 300.f;
+			float attenScale = .02f;
+
+			Vec3 attenVec = attenScale * Vec3(1, 1, 1);
+			Vec3 a = 0.f * Vec3(0.3f, 0.3f, 0.3f);
+			Vec3 d = diffScale * Vec3(.8f, .1f, .1f);
+			Vec3 s = Vec3(0.8f, .8f, .6f);
+
+			Vec3 yellow = Vec3(0.8f, .8f, .6f) * diffScale;
+
+			PointLight pointLightData0;
+			pLight->attenuation = Vec4(attenVec, 1.f);
+			pLight->range = radius;
+			pLight->intensity = 100.f;
+			pLight->lightMaterial.ambient = Vec4(a, 1.f);
+			pLight->lightMaterial.diffuse = Vec4(yellow, 1.f);
+			pLight->lightMaterial.specular = Vec4(s, 1.f);
+
+			pObj->AttachComponent(pLight);
+		}
+
 		if (ImGui::Button("World Sprite")) { meshToSpawn = Mesh::Name::Sprite; textureToSpawn = TextureObject::Name::ChickenBot; }
 		if (ImGui::Button("Unit Cube")) { meshToSpawn = Mesh::Name::Cube; textureToSpawn = TextureObject::Name::Mannequin; }
+		if (ImGui::Button("Cylinder")) { meshToSpawn = Mesh::Name::Cylinder; textureToSpawn = TextureObject::Name::Brick; }
 		if (ImGui::Button("Unit Sphere")) meshToSpawn = Mesh::Name::Sphere;
 		if (ImGui::Button("Unit Pyramid")) meshToSpawn = Mesh::Name::Pyramid;
 		if (ImGui::Button("Wooden Crate"))
@@ -44,6 +104,13 @@ namespace Azul
 			textureToSpawn = TextureObject::Name::ChickenBot;
 			spawnScale = Vec3(300, 300, 300);
 		}
+		if (ImGui::Button("Tropical Tree 0")) { meshToSpawn = Mesh::Name::TropicalTree0; textureToSpawn = TextureObject::Name::TropicalTree0; }
+		if (ImGui::Button("Simple Rock")) { meshToSpawn = Mesh::Name::SimpleRock; textureToSpawn = TextureObject::Name::SimpleRock; }
+		if (ImGui::Button("Simple Rock 2")) { meshToSpawn = Mesh::Name::SimpleRock2; textureToSpawn = TextureObject::Name::SimpleRock2; }
+		if (ImGui::Button("Simple Rock 3")) { meshToSpawn = Mesh::Name::SimpleRock3; textureToSpawn = TextureObject::Name::SimpleRock3; }
+		if (ImGui::Button("Simple Rock 4")) { meshToSpawn = Mesh::Name::SimpleRock4; textureToSpawn = TextureObject::Name::SimpleRock4; }
+		if (ImGui::Button("Simple Rock 5")) { meshToSpawn = Mesh::Name::SimpleRock5; textureToSpawn = TextureObject::Name::SimpleRock5; }
+		if (ImGui::Button("Simple Rock 6")) { meshToSpawn = Mesh::Name::SimpleRock6; textureToSpawn = TextureObject::Name::SimpleRock6; }
 		if (ImGui::Button("Desert Rock 0")) { meshToSpawn = Mesh::Name::DesertRock0; textureToSpawn = TextureObject::Name::DesertRock0; }
 		if (ImGui::Button("Desert Rock 1")) { meshToSpawn = Mesh::Name::DesertRock1; textureToSpawn = TextureObject::Name::DesertRock1; }
 		if (ImGui::Button("Desert Rock 2")) { meshToSpawn = Mesh::Name::DesertRock2; textureToSpawn = TextureObject::Name::DesertRock2; }

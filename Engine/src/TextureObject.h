@@ -106,6 +106,45 @@ namespace Azul
 			Mannequin,
 			Paladin,
 			Knight,
+			SnowRocks,
+			Snow,
+			RockyTrail,
+			CoastalSandRocks,
+			Cobblestone,
+			Mud,
+			Mud_Disp,
+			CoastalSandRocks_Disp,
+			Cobblestone_Disp,
+			RockyTrail_Disp,
+			SimpleRock,
+			SimpleRock2,
+			DryGrass0,
+			DryGrass1,
+			DryGrass2,
+			DryGrass3,
+			TropicalTree0,
+			TropicalTree1,
+			TropicalTree2,
+			TropicalTree3,
+			BirchTree0,
+			BirchTree1,
+			BirchTree2,
+			BirchTree3,
+			BirchTree4,
+			BirchTree5,
+			BirchTree6,
+			BirchTree7,
+			CoastalSandRocks_Norm,
+			Cobblestone_Norm,
+			RockyTrail_Norm,
+			Sandstone,
+			Sandstone_Norm,
+			Mud_Norm,
+			Black,
+			SimpleRock3,
+			SimpleRock4,
+			SimpleRock5,
+			SimpleRock6,
 			None
 		};
 
@@ -131,10 +170,16 @@ namespace Azul
 		Name GetName() const;
 		void SetName(TextureObject::Name _name);
 		const char* NameToString();
+		static const char* NameToString(TextureObject::Name inName);
 
 		ID3D11ShaderResourceView* GetResourceView() const { return poTextureRV; }
 		int GetWidth() const { return width; }
 		int GetHeight() const { return height; }
+
+		ID3D11SamplerState* GetSamplerState() const { return poSampler; }
+
+		TextureObject* pDisplacement = nullptr;
+		TextureObject* pNormalMap = nullptr;
 
 	protected:
 		TextureObject::Name name;

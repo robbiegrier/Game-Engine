@@ -65,7 +65,6 @@ namespace Azul
 		InitBackBuffer();
 		InitDepthStencilBuffer();
 		InitDepthStencilState();
-		InitBlendState();
 		InitRasterizerState();
 		InitViewport();
 	}
@@ -208,58 +207,6 @@ namespace Azul
 		viewport.MaxDepth = 1.0f;
 	}
 
-	void Engine::InitBlendState()
-	{
-		CD3D11_BLEND_DESC BlendState;
-		ZeroMemory(&BlendState, sizeof(CD3D11_BLEND_DESC));
-		BlendState.RenderTarget[0].BlendEnable = FALSE;
-		BlendState.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-		HRESULT hr = pDevice->CreateBlendState(&BlendState, &pBlendStateOff);
-		assert(SUCCEEDED(hr));
-
-		CD3D11_BLEND_DESC BlendState2;
-		ZeroMemory(&BlendState2, sizeof(CD3D11_BLEND_DESC));
-		BlendState2.RenderTarget[0].BlendEnable = TRUE;
-		BlendState2.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-		BlendState2.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-		BlendState2.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-		BlendState2.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-		BlendState2.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-		BlendState2.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-		BlendState2.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-		hr = pDevice->CreateBlendState(&BlendState2, &pBlendStateAlpha);
-		assert(SUCCEEDED(hr));
-
-		static const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		static const UINT sampleMask = 0xffffffff;
-		Engine::GetContext()->OMSetBlendState(pBlendStateAlpha, blendFactor, sampleMask);
-	}
-
-	void Engine::ToggleBlending(bool blendOn)
-	{
-		if (GetEditorMode())
-		{
-			EditorGui::GetWorldViewport()->ToggleBlending(blendOn);
-		}
-		else
-		{
-			Engine& self = GetEngineInstance();
-
-			static const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-			static const UINT sampleMask = 0xffffffff;
-
-			if (blendOn)
-			{
-				Engine::GetContext()->OMSetBlendState(self.pBlendStateAlpha, blendFactor, sampleMask);
-			}
-			else
-			{
-				Engine::GetContext()->OMSetBlendState(self.pBlendStateOff, blendFactor, sampleMask);
-			}
-		}
-	}
-
 	int Engine::Run()
 	{
 		MSG msg = { 0 };
@@ -296,12 +243,13 @@ namespace Azul
 				pCurrentState->Update(GetDeltaTime());
 
 				SetDefaultTargetMode();
-				ClearDepthStencilBuffer({ 0.1f, 0.1f, 0.1f, 1.000000000f });
+				ClearDepthStencilBuffer({ 0.529411793f, 0.807843208f, 0.980392218f, 1.000000000f });
 				pCurrentState->Draw();
 
 				LockFramerate(engineTime);
 				Present();
 				UpdateWindowName(storedDeltaTime);
+				mouseWheelDelta = 0;
 			}
 		}
 
@@ -423,6 +371,22 @@ namespace Azul
 	void Engine::ClearDepthStencil(const Vec4& color)
 	{
 		GetEngineInstance().ClearDepthStencilBuffer(color);
+	}
+
+	void Engine::RevertRasterState()
+	{
+		Engine& self = GetEngineInstance();
+		self.pContext->RSSetState(self.pRasterizerState);
+	}
+
+	void Engine::OnMouseWheelEvent(int wheelDelta)
+	{
+		GetEngineInstance().mouseWheelDelta = wheelDelta;
+	}
+
+	int Engine::GetMouseWheelDelta()
+	{
+		return GetEngineInstance().mouseWheelDelta;
 	}
 
 	void Engine::SetMouseVisibility(bool visible)
@@ -598,8 +562,6 @@ namespace Azul
 		SafeRelease(pDepthStencilBuffer);
 		SafeRelease(pDepthStencilState);
 		SafeRelease(pRasterizerState);
-		SafeRelease(pBlendStateAlpha);
-		SafeRelease(pBlendStateOff);
 		SafeRelease(pSwapChain);
 		SafeRelease(pContext);
 

@@ -48,33 +48,29 @@ namespace Azul
 		hr = Engine::GetDevice()->CreateBuffer(&buffDescObject, nullptr, &pConstBuffObject);
 		assert(SUCCEEDED(hr));
 
-		memset(pointLights, 0, sizeof(PointLight) * MaxLights);
+		D3D11_BUFFER_DESC buffDescFog;
+		buffDescFog.Usage = D3D11_USAGE_DEFAULT;
+		buffDescFog.ByteWidth = sizeof(CBFog);
+		buffDescFog.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		buffDescFog.CPUAccessFlags = 0;
+		buffDescFog.MiscFlags = 0;
+		buffDescFog.StructureByteStride = 0;
+		hr = Engine::GetDevice()->CreateBuffer(&buffDescFog, nullptr, &pConstBuffFog);
+		assert(SUCCEEDED(hr));
 	}
 
 	SOSkinLightTexture::~SOSkinLightTexture()
 	{
 		SafeRelease(pConstBuffObject);
 		SafeRelease(pConstBuffLightscape);
+		SafeRelease(pConstBuffFog);
 	}
 
-	void SOSkinLightTexture::SetPointLightParameters(int index, const Vec3& pos, float r, const Vec3& att, const Vec3& amb, const Vec3& dif, const Vec3& sp)
+	void SOSkinLightTexture::SetFogParameters(float start, float range, const Vec4& col)
 	{
-		pointLight.light.ambient = Vec4(amb, 1.0f);
-		pointLight.light.diffuse = Vec4(dif, 1.0f);
-		pointLight.light.specular = Vec4(sp, 1.0f);
-		pointLight.position = Vec4(pos, 1.0f);
-		pointLight.attenuation = Vec4(att, 0.0f);
-		pointLight.range = r;
-
-		pointLights[index] = pointLight;
-	}
-
-	void SOSkinLightTexture::SetDirectionalLightParameters(const Vec3& dir, const Vec3& amb, const Vec3& dif, const Vec3& sp)
-	{
-		directionalLight.light.ambient = Vec4(amb, 1.0f);
-		directionalLight.light.diffuse = Vec4(dif, 1.0f);
-		directionalLight.light.specular = Vec4(sp, 1.0f);
-		directionalLight.direction = Vec4(dir, 0.0f);
+		fog.FogStart = start;
+		fog.FogRange = range;
+		fog.FogColor = col;
 	}
 
 	void SOSkinLightTexture::SetCurrentObject(GraphicsObject* pObject)
@@ -96,13 +92,17 @@ namespace Azul
 	{
 		// Per Frame Lightscape data (can be optimized out of per-object rendering)
 		CBLightscape lightscape;
-		lightscape.numPointLights = MaxLights;
-		memcpy(lightscape.pointLights, pointLights, sizeof(PointLight) * MaxLights);
-		lightscape.directionalLight = directionalLight;
+		lightscape.numPointLights = LightSystem::MAX_LIGHTS;
+		memcpy(lightscape.pointLights, LightSystem::GetPointLights(), sizeof(PointLight) * LightSystem::MAX_LIGHTS);
+		lightscape.directionalLight = LightSystem::GetDirectionalLight();
 		lightscape.eyePositionWorld = Vec4(GetCamera()->GetLocation(), 1.0f);
 		Engine::GetContext()->UpdateSubresource(pConstBuffLightscape, 0, nullptr, &lightscape, 0, 0);
 		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Lightscape, 1, &pConstBuffLightscape);
 		Engine::GetContext()->PSSetConstantBuffers((UINT)ConstBuffSlot::Lightscape, 1, &pConstBuffLightscape);
+
+		Engine::GetContext()->UpdateSubresource(pConstBuffFog, 0, nullptr, &fog, 0, 0);
+		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Fog, 1, &pConstBuffFog);
+		Engine::GetContext()->PSSetConstantBuffers((UINT)ConstBuffSlot::Fog, 1, &pConstBuffFog);
 
 		// Per object data
 		Engine::GetContext()->VSSetConstantBuffers((UINT)ConstBuffSlot::Object, 1, &pConstBuffObject);

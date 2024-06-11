@@ -91,11 +91,11 @@ namespace Azul
 
 		if (!walkMode)
 		{
-			if (GetKeyState(VK_SPACE) & 0x8000)
+			if (GetKeyState('E') & 0x8000)
 			{
 				cameraMove[y] += moveSpeed;
 			}
-			if (GetKeyState(VK_SHIFT) & 0x8000)
+			if (GetKeyState('Q') & 0x8000)
 			{
 				cameraMove[y] -= moveSpeed;
 			}

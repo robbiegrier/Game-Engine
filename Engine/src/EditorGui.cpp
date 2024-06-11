@@ -72,14 +72,17 @@ namespace Azul
 
 	void EditorGui::OnLeftClickDragInProgress(const MousePosition& start, const MousePosition& curr)
 	{
+		static_cast<void>(start);
+		static_cast<void>(curr);
+
 		if (IsDraggingSomething())
 		{
 			pVizDragging->OnDragUpdate();
 		}
 		else if (IsMouseInWorld())
 		{
-			ImGui::GetForegroundDrawList()->AddRect(ImVec2((float)start.x, (float)start.y), ImVec2((float)curr.x, (float)curr.y), IM_COL32(255, 191, 0, 255), 0, ImDrawFlags(), 2);
-			ImGui::GetForegroundDrawList()->AddRectFilled(ImVec2((float)start.x, (float)start.y), ImVec2((float)curr.x, (float)curr.y), IM_COL32(255, 191, 0, 40));
+			//ImGui::GetForegroundDrawList()->AddRect(ImVec2((float)start.x, (float)start.y), ImVec2((float)curr.x, (float)curr.y), IM_COL32(255, 191, 0, 255), 0, ImDrawFlags(), 2);
+			//ImGui::GetForegroundDrawList()->AddRectFilled(ImVec2((float)start.x, (float)start.y), ImVec2((float)curr.x, (float)curr.y), IM_COL32(255, 191, 0, 40));
 		}
 	}
 
@@ -315,9 +318,6 @@ namespace Azul
 
 			if (pCurr->IsSelectable())
 			{
-				const float sphereRadius = pCurr->GetShellRadius();
-				const Vec3& sphereCenter = pCurr->GetShellCenter();
-
 				Vec3 aabbMin(-1.f, -1.f, -1.f);
 				Vec3 aabbMax(1.f, 1.f, 1.f);
 
@@ -489,6 +489,7 @@ namespace Azul
 		inspector.Update();
 		world.Update();
 		assets.Update();
+		terrain.Update();
 	}
 
 	void EditorGui::Draw()
@@ -499,6 +500,7 @@ namespace Azul
 
 		GameObjectManager::Draw();
 		self.selection.Draw();
+		self.terrain.Draw();
 		self.pWorldViewport->Close();
 
 		//const bool fDown = (GetKeyState('F') & 0x8000);

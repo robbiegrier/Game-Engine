@@ -34,6 +34,8 @@ namespace Azul
 		// Debug history stacks
 		static void Dump();
 
+		static void EraseAction(EditAction* pAction);
+
 	private:
 		// Big four
 		EditorHistory();

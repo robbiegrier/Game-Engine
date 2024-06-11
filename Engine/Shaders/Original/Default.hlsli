@@ -1,5 +1,7 @@
 #include "Phong.hlsli"
 
+static const row_major matrix Identity = { { 1.f, 0.f, 0.f, 0.f }, { 0.f, 1.f, 0.f, 0.f }, { 0.f, 0.f, 1.f, 0.f }, { 0.f, 0.f, 0.f, 1.f } };
+
 cbuffer AA0 : register(b0) // slot 0  (ConstantBufferSlot::Projection)
 {
     matrix projectionMatrix;

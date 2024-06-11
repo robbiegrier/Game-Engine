@@ -16,6 +16,7 @@
 #include "Player.h"
 #include "EditorGui.h"
 #include "Clipboard.h"
+#include "TerrainSystem.h"
 
 using json = nlohmann::json;
 
@@ -48,6 +49,8 @@ namespace Azul
 		}
 
 		err = File::Close(fh); assert(err == File::Error::SUCCESS);
+
+		TerrainSystem::OnSceneSaved();
 	}
 
 	void SceneManager::ChangeScene(const char* pSceneName)
@@ -86,6 +89,8 @@ namespace Azul
 
 			GameObjectManager::SpawnObject(protoName, pGameObject, pGameObject->GetRelativeLocation(), pGameObjectParent);
 		}
+
+		TerrainSystem::OnSceneLoaded();
 
 		Trace::out("Finished Loading Scene: %s\n", pSceneName);
 	}

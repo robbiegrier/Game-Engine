@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+message terrain_proto
+{
+	optional bytes pVertexData = 1;
+	optional uint32 numVerts = 2;
+	optional uint32 vertexResolution = 3;
+	optional float worldScale = 4;
+	optional string terrainName = 5;
+	optional float heightScale = 6;
+	optional bytes pSurfaceWeightsData = 7;
+	repeated uint32 surfaceTextureIds = 8;
+	repeated uint32 foliageTypeIds = 9;
+	repeated bytes foliageInstanceData = 10;
+}

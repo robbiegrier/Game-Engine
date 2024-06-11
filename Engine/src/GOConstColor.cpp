@@ -4,6 +4,8 @@
 #include "GOConstColor.h"
 #include "Engine.h"
 #include "CameraManager.h"
+#include "MeshManager.h"
+#include "ShaderObjectManager.h"
 
 namespace Azul
 {
@@ -24,12 +26,11 @@ namespace Azul
 
 	void GOConstColor::ActivateGraphics()
 	{
-		pModel->TransferConstantBuffer(CameraManager::GetCurrentCamera(), *pWorld);
 	}
 
 	void GOConstColor::Draw()
 	{
-		Engine::GetContext()->UpdateSubresource(pModel->poConstantBuff_lightColor, 0, nullptr, poLightColor, 0, 0);
+		Engine::GetContext()->UpdateSubresource(pModel->GetConstantBufferLightColor(), 0, nullptr, poLightColor, 0, 0);
 		pModel->RenderIndexBuffer();
 	}
 
@@ -41,5 +42,14 @@ namespace Azul
 	Vec4 GOConstColor::GetColor()
 	{
 		return Vec4(*poLightColor, 1.f);
+	}
+
+	GOConstColor* GOConstColor::MakeWireframeCube(const Vec3& lightColor)
+	{
+		return new GOConstColor(
+			MeshManager::Find(Mesh::Name::UnitCube),
+			ShaderObjectManager::Find(ShaderObject::Name::ConstColor),
+			lightColor
+		);
 	}
 }

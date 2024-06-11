@@ -35,6 +35,8 @@ namespace Azul
 			RunJump,
 			PaladinWalk,
 			KnightWalk,
+			PaladinRun,
+			PaladinIdle,
 			Null,
 			None
 		};

@@ -5,6 +5,8 @@
 
 namespace Azul
 {
+	class PlayerScript;
+
 	// Temporary player class to encapsulate demo logic
 	class Player : public GameObject
 	{
@@ -13,20 +15,11 @@ namespace Azul
 		virtual ~Player();
 
 		virtual void Start() override;
-
 		virtual void Tick(float deltaTime) override;
+		virtual void Draw() override;
 
 	private:
-		void CheckMovement(float deltaTime);
-		void CheckLookAt(float deltaTime);
-		void ProcessGravity(float deltaTime);
-
-		POINT prevPoint;
-		bool jumping = false;
-		bool sprinting = false;
-		float jumpImpulse = 0.f;
-
-		Camera* pPlayerCamera;
+		PlayerScript* pScript = nullptr;
 	};
 }
 

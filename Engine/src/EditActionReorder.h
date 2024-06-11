@@ -6,7 +6,7 @@
 
 namespace Azul
 {
-	// Action to rotate an object with a quaternion
+	// Action to reorder an object in the game object hierarchy.
 	class EditActionReorder : public EditAction, public Align16
 	{
 	public:

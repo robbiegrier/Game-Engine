@@ -24,6 +24,9 @@ namespace Azul
 		virtual Camera* GetCamera() const override;
 
 	private:
+		ID3D11BlendState* pBlendStateSprite;
+		static constexpr float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		static constexpr UINT sampleMask = 0xffffffff;
 	};
 }
 

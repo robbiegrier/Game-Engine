@@ -25,6 +25,9 @@ namespace Azul
 			EditorVisual,
 			Sprite,
 			SkinLightTexture,
+			Terrain,
+			Foliage,
+			SurfaceShape,
 			Null,
 			None
 		};

@@ -11,7 +11,7 @@ namespace Azul
 	{
 		EditorGui::NewFrame();
 		EditorInput::Update();
-		EditorGui().Controller().Update();
+		EditorGui::Controller().Update();
 		Engine::NativeUpdate(0.0f);
 		//Engine::NativeUpdate(deltaTime);
 		CameraManager::Update(deltaTime);

@@ -20,6 +20,9 @@ namespace Azul
 		virtual GraphicsObject* Clone() override;
 
 		virtual Vec4 GetColor() override;
+		void SetColor(const Vec3& inColor)  const { *poLightColor = inColor; }
+
+		static GOConstColor* MakeWireframeCube(const Vec3& lightColor);
 
 		Vec3* poLightColor;
 	};

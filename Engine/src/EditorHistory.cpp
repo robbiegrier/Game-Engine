@@ -112,4 +112,12 @@ namespace Azul
 		}
 		Trace::out("\n");
 	}
+
+	void EditorHistory::EraseAction(EditAction* pAction)
+	{
+		EditorHistory& self = GetInstance();
+
+		self.historyStack.Remove(pAction);
+		self.undoneStack.Remove(pAction);
+	}
 }

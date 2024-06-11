@@ -86,6 +86,8 @@ public:
 
 	static bool SetVBO(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff);
 	static bool SetVBO_pos(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff);
+	static bool SetVBO_pos(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff, const Mat4& transform);
+	static bool SetVBO_norm(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff, const Mat4& transform);
 	static bool SetVBO_uv(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff);
 	static bool SetVBO_index(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff);
 	static bool SetTexture(Model& gltfModel, unsigned int index, textureData& text, char* pBinaryBuff);

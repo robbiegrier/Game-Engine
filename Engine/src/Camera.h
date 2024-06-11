@@ -3,6 +3,7 @@
 
 #include "DLink.h"
 #include "MathEngine.h"
+#include "Frustum.h"
 
 struct ID3D11Buffer;
 
@@ -27,6 +28,7 @@ namespace Azul
 			Aux,
 			Player,
 			Sprite,
+			DirectionalLight,
 			None
 		};
 
@@ -47,6 +49,7 @@ namespace Azul
 		void AddLocationOffset(const Vec3& offset);
 		void AddHorizontalLocationOffset(const Vec3& offset);
 		void AddLookAtOffset(const Vec3& offset);
+		void RotateAround(const Vec3& point, const Vec3& delta);
 
 		// Update called by core loop
 		void UpdateCamera();
@@ -60,6 +63,7 @@ namespace Azul
 		void GetDirection(Vec3& outDir) const;
 		const Vec3& GetDirection() const;
 		void GetUp(Vec3& outUp) const;
+		const Vec3& GetUp() const { return vUp; }
 		void GetLookAt(Vec3& outLookAt) const;
 		const Vec3& GetLookAt() const;
 		void GetRight(Vec3& outRight) const;
@@ -80,6 +84,9 @@ namespace Azul
 		float GetFovY() const;
 		int GetScreenWidth() const;
 		int GetScreenHeight() const;
+
+		Frustum GetFrustum() const;
+		Frustum GetFrustum(float customFarDistance) const;
 
 	private:
 		void UpdateProjectionMatrix();

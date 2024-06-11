@@ -72,24 +72,24 @@ namespace Azul
 
 		VerifyImportedData(mB);
 
-		poVertexBuffer_pos = CreateVertexBuffer(mB.vbo_vert.dataSize, mB.vbo_vert.poData);
-		poVertexBuffer_texCoord = CreateVertexBuffer(mB.vbo_uv.dataSize, mB.vbo_uv.poData);
-		poVertexBuffer_norm = CreateVertexBuffer(mB.vbo_norm.dataSize, mB.vbo_norm.poData);
-		poIndexBuffer = CreateIndexBuffer(mB.vbo_index.dataSize, mB.vbo_index.poData);
-		poVertexBuffer_color = nullptr;
-		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
-		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+		pVertexBufferPosition = CreateVertexBuffer(mB.vbo_vert.dataSize, mB.vbo_vert.poData);
+		pVertexBufferTextureCoordinates = CreateVertexBuffer(mB.vbo_uv.dataSize, mB.vbo_uv.poData);
+		pVertexBufferNormal = CreateVertexBuffer(mB.vbo_norm.dataSize, mB.vbo_norm.poData);
+		pIndexBufferTriangles = CreateIndexBuffer(mB.vbo_index.dataSize, mB.vbo_index.poData);
+		pVertexBufferColor = nullptr;
+		pConstantBufferLightColor = CreateConstantBuffer(sizeof(Vec3));
+		pConstantBufferLightPosition = CreateConstantBuffer(sizeof(Vec3));
 
 		if (mB.vbo_joints.dataSize != 0)
 		{
-			poVertexBuffer_joints = CreateVertexBuffer(mB.vbo_joints.dataSize, mB.vbo_joints.poData);
-			poVertexBuffer_weights = CreateVertexBuffer(mB.vbo_weights.dataSize, mB.vbo_weights.poData);
-			poConstantBuff_boneWorld = CreateConstantBuffer(sizeof(Mat4) * Mesh::BoneCountMax);
+			pVertexBufferJoints = CreateVertexBuffer(mB.vbo_joints.dataSize, mB.vbo_joints.poData);
+			pVertexBufferWeights = CreateVertexBuffer(mB.vbo_weights.dataSize, mB.vbo_weights.poData);
+			pConstantBufferBoneWorld = CreateConstantBuffer(sizeof(Mat4) * Mesh::BoneCountMax);
 
 			Mat4* pMat = (Mat4*)mB.vbo_invBind.poData;
 			for (size_t i = 0; i < mB.vbo_invBind.count; i++)
 			{
-				poInvBindArray[i].set(pMat[i]);
+				pInverseBindArray[i].set(pMat[i]);
 			}
 		}
 
@@ -98,9 +98,6 @@ namespace Azul
 
 		pAABBMax->set(mB.aabbMax[0], mB.aabbMax[1], mB.aabbMax[2]);
 		pAABBMin->set(mB.aabbMin[0], mB.aabbMin[1], mB.aabbMin[2]);
-
-		Trace::out("MIN: %f %f %f\n", pAABBMin->x(), pAABBMin->y(), pAABBMin->z());
-		Trace::out("MAX: %f %f %f\n", pAABBMax->x(), pAABBMax->y(), pAABBMax->z());
 	}
 
 	void MeshProto::VerifyImportedData(const meshData& mB) const

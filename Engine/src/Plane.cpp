@@ -47,13 +47,13 @@ namespace Azul
 	PlaneMesh::PlaneMesh()
 		: Mesh(NUM_VERTS, NUM_INDICES)
 	{
-		poVertexBuffer_pos = CreateVertexBuffer(sizeof(g_Vertices_pos), g_Vertices_pos);
-		poVertexBuffer_color = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
-		poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_PlaneVertices_texCoord), g_PlaneVertices_texCoord);
-		poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_PlaneVertices_norm), g_PlaneVertices_norm);
-		poIndexBuffer = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
-		poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
-		poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+		pVertexBufferPosition = CreateVertexBuffer(sizeof(g_Vertices_pos), g_Vertices_pos);
+		pVertexBufferColor = CreateVertexBuffer(sizeof(g_Vertices_color), g_Vertices_color);
+		pVertexBufferTextureCoordinates = CreateVertexBuffer(sizeof(g_PlaneVertices_texCoord), g_PlaneVertices_texCoord);
+		pVertexBufferNormal = CreateVertexBuffer(sizeof(g_PlaneVertices_norm), g_PlaneVertices_norm);
+		pIndexBufferTriangles = CreateIndexBuffer(sizeof(g_Indicies), g_Indicies);
+		pConstantBufferLightColor = CreateConstantBuffer(sizeof(Vec3));
+		pConstantBufferLightPosition = CreateConstantBuffer(sizeof(Vec3));
 
 		HackSetBoundingSphereData(g_Vertices_pos);
 		HackSetBoundingBoxData(g_Vertices_pos);

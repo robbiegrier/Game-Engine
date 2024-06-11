@@ -159,6 +159,16 @@ namespace Azul
 		return d * MATH_PI_180;
 	}
 
+	float EditorMath::SquareDistance(const Vec3& a, const Vec3& b)
+	{
+		return SquareLen(b - a);
+	}
+
+	float EditorMath::SquareLen(const Vec3& a)
+	{
+		return (a.x() * a.x()) + (a.y() * a.y()) + (a.z() * a.z());
+	}
+
 	void EditorMath::Print(const Vec3& v, const char* m)
 	{
 		Trace::out("%s: [%.4f %.4f %.4f]\n", m, v[x], v[y], v[z]);

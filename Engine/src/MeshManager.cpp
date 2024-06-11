@@ -1,6 +1,7 @@
 #include "MeshManager.h"
 #include "DLinkedList.h"
 #include "ListNode.h"
+#include "TerrainMesh.h"
 
 namespace Azul
 {
@@ -73,5 +74,29 @@ namespace Azul
 		MeshManager& self = GetInstance();
 		Trace::out("%s\n", STRING_ME(MeshManager));
 		self.ManagerBase::Dump();
+	}
+
+	TerrainMesh* MeshManager::FindTerrainMesh(const char* pTerrainName)
+	{
+		MeshManager& self = GetInstance();
+
+		Iterator& it = *self.GetActiveIterator();
+
+		for (it.First(); !it.IsDone(); it.Next())
+		{
+			ListNode* pNode = (ListNode*)it.Curr();
+			Mesh* pAsset = (Mesh*)pNode->Get();
+
+			if (pAsset->GetName() == Mesh::Name::Terrain)
+			{
+				TerrainMesh* pAssetTerrain = (TerrainMesh*)pAsset;
+				if (strcmp(pAssetTerrain->GetTerrainMeshName(), pTerrainName) == 0)
+				{
+					return pAssetTerrain;
+				}
+			}
+		}
+
+		return nullptr;
 	}
 }

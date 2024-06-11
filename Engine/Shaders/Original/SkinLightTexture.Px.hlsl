@@ -5,6 +5,14 @@ SamplerState aSampler : register(s0);
 
 float4 main(VS_OUTPUT input) : SV_TARGET
 {
-    return Light(input.position, input.positionModelSpace, input.norm) *
+    float4 litTextureSample = Light(input.position, input.positionModelSpace, input.norm, inverse) *
         mainTexture.Sample(aSampler, input.textureCoordinate);
+    
+    float4 msEyePos = mul(eyePositionWorld, inverse);
+    float distToEye = length(msEyePos - input.positionModelSpace);
+    float FogPercent = saturate((distToEye - FogStart) / FogRange);
+
+    litTextureSample = lerp(litTextureSample, FogColor, FogPercent);
+    
+    return litTextureSample;
 }

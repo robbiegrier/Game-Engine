@@ -24,6 +24,9 @@ namespace Azul
 			GraphicsObjectNull,
 			GraphicsObjectSprite,
 			GraphicsObjectSkinLightTexture,
+			GraphicsObjectTerrain,
+			GraphicsObjectFoliage,
+			GraphicsObjectSurfaceShape,
 			None
 		};
 

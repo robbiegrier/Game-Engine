@@ -115,6 +115,93 @@ void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, c
 	azulRunModel.converterVersion = CONVERTER_VERSION;
 }
 
+void ConvertGltfToRuntime(tinygltf::Model& gltfModel, azulModel& azulRunModel, char* pBinaryBuff, const char* const pFileName, const Mat4& transform)
+{
+	for (int i = 0; i < (int)gltfModel.meshes.size(); i++)
+	{
+		tinygltf::Mesh& gltfMesh = gltfModel.meshes[i];
+		tinygltf::Primitive& primitive = gltfMesh.primitives[0];
+
+		if (primitive.material < 0)
+		{
+			tinygltf::Material mat;
+			mat.name = pFileName;
+			gltfModel.materials.push_back(mat);
+			primitive.material = 0;
+		}
+
+		tinygltf::Material& gltfMaterial = gltfModel.materials[primitive.material];
+		meshData& runModel = azulRunModel.meshes[i];
+
+		memcpy_s(
+			runModel.pMeshName, meshData::FILE_NAME_SIZE,
+			gltfMaterial.name.c_str(), gltfMaterial.name.length()
+		);
+
+		auto& attributes = primitive.attributes;
+		GLTF::SetVBO_pos(gltfModel, attributes["POSITION"], runModel.vbo_vert, pBinaryBuff, transform);
+		GLTF::SetVBO_norm(gltfModel, attributes["NORMAL"], runModel.vbo_norm, pBinaryBuff, transform);
+		GLTF::SetVBO_uv(gltfModel, attributes["TEXCOORD_0"], runModel.vbo_uv, pBinaryBuff);
+		GLTF::SetVBO_index(gltfModel, primitive.indices, runModel.vbo_index, pBinaryBuff);
+
+		runModel.triCount = runModel.vbo_index.count / 3;
+		runModel.vertCount = runModel.vbo_vert.count;
+		runModel.mode = meshDataConverter::GetMode(primitive.mode);
+
+		const int textureIndexInt = gltfMaterial.pbrMetallicRoughness.baseColorTexture.index;
+		unsigned int colorIndex;
+
+		if (textureIndexInt > 0)
+		{
+			colorIndex = (unsigned int)textureIndexInt;
+		}
+		else
+		{
+			colorIndex = 0u;
+		}
+
+		std::string fs = std::string(pFileName);
+		ConverterUtils::StringReplace(fs, ".glb", "_BaseColor.png");
+
+		if (ConverterUtils::DoesFileExist(fs))
+		{
+			PTrace("\tUsing external texture: %s\n", fs.c_str());
+			GLTF::SetExternalTexture(fs.c_str(), colorIndex, runModel.text_color);
+		}
+		else
+		{
+			GLTF::SetTexture(gltfModel, colorIndex, runModel.text_color, pBinaryBuff);
+		}
+
+		runModel.boundingSphereRadius = 10.f;
+		runModel.boundingSphereCenter[0] = 1.f;
+		runModel.boundingSphereCenter[1] = 2.f;
+		runModel.boundingSphereCenter[2] = 3.f;
+
+		Sphere sphere;
+		Vec3* pVerts = new Vec3[runModel.vertCount];
+
+		for (unsigned int j = 0; j < runModel.vertCount; j++)
+		{
+			Vec3f* pVec3f = (Vec3f*)runModel.vbo_vert.poData;
+			pVerts[j].set(pVec3f[j].x, pVec3f[j].y, pVec3f[j].z);
+		}
+
+		RitterSphere(sphere, pVerts, runModel.vertCount);
+
+		runModel.boundingSphereRadius = sphere.rad;
+		runModel.boundingSphereCenter[0] = sphere.cntr[x];
+		runModel.boundingSphereCenter[1] = sphere.cntr[y];
+		runModel.boundingSphereCenter[2] = sphere.cntr[z];
+
+		GLTF::InsertBoundingBoxData(runModel);
+
+		delete[] pVerts;
+	}
+
+	azulRunModel.converterVersion = CONVERTER_VERSION;
+}
+
 void WriteAndVerifyRuntimeModel(azulModel& azulRunModel, const char* const filenameIn)
 {
 	//azulRunModel.Print("azul_mA");
@@ -159,6 +246,32 @@ void ConvertModel(const char* const pFileName)
 	status = GLTF::Load(gltfModel, pFileName); assert(status);
 
 	ConvertGltfToRuntime(gltfModel, azulRunModel, pBinaryBuff, pFileName);
+	WriteAndVerifyRuntimeModel(azulRunModel, pFileName);
+
+	delete[] poBuff;
+	delete[] poJSON;
+}
+
+void ConvertModel(const char* const pFileName, const Mat4& transform)
+{
+	char* poBuff = nullptr;
+	char* poJSON = nullptr;
+	char* pBinaryBuff = nullptr;
+	unsigned int BuffSize = 0u;
+	unsigned int BinaryBuffSize = 0u;
+	unsigned int JsonSize = 0u;
+	tinygltf::Model gltfModel;
+	azulModel azulRunModel;
+
+	Trace::out("Converting Mesh: %s\n", pFileName);
+
+	bool status = GLTF::GetGLBRawBuffer(poBuff, BuffSize, pFileName); assert(status);
+	//GLTF::DumpGLBHeader(poBuff, BuffSize);
+	status = GLTF::GetRawJSON(poJSON, JsonSize, poBuff, BuffSize); assert(status);
+	status = GLTF::GetBinaryBuffPtr(pBinaryBuff, BinaryBuffSize, poBuff, BuffSize); assert(status);
+	status = GLTF::Load(gltfModel, pFileName); assert(status);
+
+	ConvertGltfToRuntime(gltfModel, azulRunModel, pBinaryBuff, pFileName, transform);
 	WriteAndVerifyRuntimeModel(azulRunModel, pFileName);
 
 	delete[] poBuff;
@@ -287,11 +400,19 @@ int main(int argc, char* argv[])
 
 	ConvertSkin("Paladin.glb");
 	ConvertAnim("Paladin.glb");
+	ConvertAnim("PaladinWeirdRunning.glb");
+	ConvertAnim("PaladinStandIdle.glb");
 	ConvertSkeleton("Paladin.glb");
 
 	ConvertSkin("Knight.glb");
 	ConvertAnim("Knight.glb");
 	ConvertSkeleton("Knight.glb");
+
+	Mat4 transform = Rot(Rot1::X, -MATH_PI2);
+	ConvertModel("birch_trees.glb", transform);
+	ConvertModel("trees_new.glb", transform);
+
+	ConvertModel("cylinder.glb");
 
 	google::protobuf::ShutdownProtobufLibrary();
 

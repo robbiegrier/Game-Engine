@@ -186,6 +186,11 @@ namespace Azul
 		renderShell = render;
 	}
 
+	void GameObject::SetAlwaysRenderShell(bool render)
+	{
+		alwaysRenderShell = render;
+	}
+
 	bool GameObject::GetRenderShell() const
 	{
 		return renderShell;
@@ -342,6 +347,27 @@ namespace Azul
 				pBoundingBox->SetWorld(minMaxMat);
 				pBoundingBox->Render();
 			}
+			else
+			{
+				static constexpr float bbSize = 0.333f;
+				Vec4 RelativeMin = Vec4(-bbSize, -bbSize, -bbSize, 1.f);
+				Vec4 RelativeMax = Vec4(bbSize, bbSize, bbSize, 1.f);
+				Mat4 minMaxMat = Scale(Vec3(RelativeMax - RelativeMin)) * Trans(Vec3(0.5f * (RelativeMax + RelativeMin))) * *pWorld;
+
+				pBoundingBox->SetWorld(minMaxMat);
+				pBoundingBox->Render();
+			}
+
+			DebugDraw();
+		}
+	}
+
+	void GameObject::UpdateInspectorGui()
+	{
+		for (Iterator& it = *components.GetIterator(); !it.IsDone(); it.Next())
+		{
+			Component* pComponent = (Component*)it.Curr();
+			pComponent->UpdateInspectorGui();
 		}
 	}
 }

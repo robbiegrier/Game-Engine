@@ -52,6 +52,16 @@
 #include "ClipProto.h"
 #include "Animator.h"
 #include "GOSkinLightTexture.h"
+#include "TerrainMesh.h"
+#include "Terrain.h"
+#include "TerrainSystem.h"
+#include "SOTerrain.h"
+#include "SOFoliage.h"
+#include "GOFoliage.h"
+#include "TerrainFoliage.h"
+#include "FoliageLibrary.h"
+#include "SOSurfaceShape.h"
+#include "LightSystem.h"
 
 namespace Azul
 {
@@ -77,6 +87,13 @@ namespace Azul
 
 	Vec3 lightColor = Vec3(Azul::Colors::LightYellow);
 	Vec3 lightPos = Vec3(50, 2, -40);
+	static float fogDistMin = 400.f;
+	static float fogDistMax = 700.f;
+
+	GOFoliage* pGoFoliage;
+	GOFoliage* pGoFoliage2;
+
+	Vec3 dirLightDirection;
 
 	int WINAPI Game::Launch(HINSTANCE pInstanceHandle, int cmdShow)
 	{
@@ -112,6 +129,9 @@ namespace Azul
 		ImageManager::Create();
 		FontLibrary::Create();
 		AnimationSystem::Create();
+		TerrainSystem::Create();
+		FoliageLibrary::Create();
+		LightSystem::Create();
 
 		LoadShaders();
 		LoadCameras();
@@ -134,58 +154,200 @@ namespace Azul
 		ClipManager::Add(Clip::Name::HumanoidRun, new ClipProto("mannequin.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::RunJump, new ClipProto("RunJump.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::PaladinWalk, new ClipProto("Paladin.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::PaladinRun, new ClipProto("PaladinWeirdRunning.anim.proto.azul"));
+		ClipManager::Add(Clip::Name::PaladinIdle, new ClipProto("PaladinStandIdle.anim.proto.azul"));
 		ClipManager::Add(Clip::Name::KnightWalk, new ClipProto("Knight.anim.proto.azul"));
+
+		FoliageLibrary::Add(FoliageType::Name::DryGrassA, new FoliageType(Mesh::Name::DryGrass0, TextureObject::Name::DryGrass0, .5f));
+		FoliageLibrary::Add(FoliageType::Name::DryGrassB, new FoliageType(Mesh::Name::DryGrass1, TextureObject::Name::DryGrass1, .5f));
+		FoliageLibrary::Add(FoliageType::Name::DryGrassC, new FoliageType(Mesh::Name::DryGrass2, TextureObject::Name::DryGrass2, .5f));
+		FoliageLibrary::Add(FoliageType::Name::DryGrassD, new FoliageType(Mesh::Name::DryGrass3, TextureObject::Name::DryGrass3, .5f));
+		FoliageLibrary::Add(FoliageType::Name::SmallRockA, new FoliageType(Mesh::Name::SimpleRock, TextureObject::Name::SimpleRock, 6.f));
+		FoliageLibrary::Add(FoliageType::Name::SmallRockB, new FoliageType(Mesh::Name::SimpleRock2, TextureObject::Name::SimpleRock2, 6.f));
+
+		FoliageType* pTreeType = FoliageLibrary::Add(FoliageType::Name::TreeA, new FoliageType(Mesh::Name::TropicalTree0, TextureObject::Name::TropicalTree0, 0.5f));
+		pTreeType->AddModel(Mesh::Name::TropicalTree1, TextureObject::Name::TropicalTree1);
+		pTreeType->SetFollowNormal(false);
+
+		FoliageType* pTreeType2 = FoliageLibrary::Add(FoliageType::Name::TreeB, new FoliageType(Mesh::Name::TropicalTree2, TextureObject::Name::TropicalTree2, 0.5f));
+		pTreeType2->AddModel(Mesh::Name::TropicalTree3, TextureObject::Name::TropicalTree3);
+		pTreeType2->SetFollowNormal(false);
+
+		FoliageType* pTreeType3 = FoliageLibrary::Add(FoliageType::Name::TreeBirchA, new FoliageType(Mesh::Name::BirchTree0, TextureObject::Name::BirchTree0, 5.0f));
+		pTreeType3->AddModel(Mesh::Name::BirchTree1, TextureObject::Name::BirchTree1);
+		pTreeType3->SetFollowNormal(false);
 
 		// Scene Directional Light
 		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
-		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, 1), .5f * Vec3(1, 1, 1), Vec3(0.5f, 0.5f, 0.5f));
-		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShader->SetFogParameters(fogDistMin, fogDistMax, Colors::LightSkyBlue * 0.4f);
 
-		pShader->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, .5f), .5f * Vec3(1, 1, .8f), Vec3(0.5f, 0.5f, 0.5f));
-		pShaderSkin->SetDirectionalLightParameters(Vec3(-1, -1, 1).getNorm(), .01f * Vec3(1, 1, .5f), .5f * Vec3(1, 1, .8f), Vec3(0.5f, 0.5f, 0.5f));
+		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShaderSkin->SetFogParameters(fogDistMin, fogDistMax, Colors::LightSkyBlue * 0.4f);
+
+		SOTerrain* pShaderTerrain = (SOTerrain*)ShaderObjectManager::Find(ShaderObject::Name::Terrain);
+		pShaderTerrain->SetFogParameters(fogDistMin, fogDistMax, Colors::LightSkyBlue * 0.4f);
+
+		SOFoliage* pShaderFoliage = (SOFoliage*)ShaderObjectManager::Find(ShaderObject::Name::Foliage);
+		pShaderFoliage->SetFogParameters(fogDistMin, fogDistMax, Colors::LightSkyBlue * 0.4f);
+
+		Vec3 dirLightAmbient = .2f * Vec3(1, 1, .8f);
+		Vec3 dirLightDiffuse = .9f * Vec3(1, 1, .8f);
+		Vec3 dirLightSpecular = Vec3(0.5f, 0.5f, 0.5f);
+		dirLightDirection = Vec3(-1, -1, 1).getNorm();
+
+		//DirectionalLight dirLightData;
+		//dirLightData.direction = Vec4(dirLightDirection, 1.f);
+		//dirLightData.light.ambient = Vec4(dirLightAmbient, 1.f);
+		//dirLightData.light.diffuse = Vec4(dirLightDiffuse, 1.f);
+		//dirLightData.light.specular = Vec4(dirLightSpecular, 1.f);
+
+		//LightSystem::SetDirectionalLight(dirLightData);
 
 		GameObject::SetRenderShellGlobal(false);
 		Engine::ToggleMaxFramerate(false);
 
 		SceneManager::ChangeScene("AzulScene");
 
-		//pChickenBot = GameObjectManager::SpawnObject("ChickenBot", new GameObject(
-		//	new GOSkinLightTexture(
-		//		MeshManager::Find(Mesh::Name::ChickenBotSkin),
-		//		ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
-		//		TextureObjectManager::Find(TextureObject::Name::ChickenBot))), Vec3(30, -1, -50));
-		//pChickenBot->SetRelativeScale(30.f);
-		//pChickenBot->SetRelativeRotation(Rot(Rot1::Z, MATH_PI2));
+		static bool genTerrain = false;
 
-		//GameObject* pPaladin = GameObjectManager::SpawnObject("Knight", new GameObject(
-		//	new GOSkinLightTexture(
-		//		MeshManager::Find(Mesh::Name::KnightSkin),
-		//		ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture),
-		//		TextureObjectManager::Find(TextureObject::Name::Knight))), Vec3(35, -1, -50) + Vec3(0, 0, -1.5f));
-		//pPaladin->SetRelativeScale(3.f);
-		//Animator* pAnim = new Animator();
-		//pAnim->SetSkeleton(Skeleton::Name::Knight);
-		//pAnim->SetActiveClip(Clip::Name::KnightWalk);
-		//pPaladin->AttachComponent(pAnim);
+		if (genTerrain)
+		{
+			//TerrainMesh* pTerrainMesh = new TerrainMesh(1000.f, 2048);
+			TerrainMesh* pTerrainMesh = new TerrainMesh("Meadows", 1300.f, 1000.f, "..\\Models\\Heightmap_03_Meadows.png");
+			//TerrainMesh* pTerrainMesh = new TerrainMesh(2200.f, 500.f, "..\\Models\\HeightMapExample.png");
+			//TerrainMesh* pTerrainMesh = new TerrainMesh(1500.f, 500.f, "..\\Models\\Moro_River.heightmap.jpg");
+			//TerrainMesh* pTerrainMesh = new TerrainMesh(1500.f, "..\\Models\\windingmap.tga");
+			//TerrainMesh* pTerrainMesh = new TerrainMesh("Dunes", 1000.f, 500.f, "..\\Models\\Heightmap_05_Dunes.png");
+			MeshManager::Add(Mesh::Name::Terrain, pTerrainMesh);
 
-		////pChickenAnimator = new Animator();
-		////pChickenAnimator->SetSkeleton(Skeleton::Name::ChickenBot);
-		////pChickenAnimator->SetActiveClip(Clip::Name::Walk);
-		////pChickenBot->AttachComponent(pChickenAnimator);
+			//GraphicsObject* pGoTerrain = new GOConstColor(pTerrainMesh, ShaderObjectManager::Find(ShaderObject::Name::ConstColor), Vec3(0.f, 1.f, 0.f));
+			//GraphicsObject* pGoTerrain = new GOFlatTexture(pTerrainMesh, ShaderObjectManager::Find(ShaderObject::Name::FlatTexture), TextureObjectManager::Find(TextureObject::Name::Desert));
+			GraphicsObject* pGoTerrain = new GOLightTexture(pTerrainMesh, ShaderObjectManager::Find(ShaderObject::Name::Default), TextureObjectManager::Find(TextureObject::Name::Desert));
+			Terrain* pTerrainGameObject = new Terrain(pGoTerrain);
+
+			GameObjectManager::SpawnObject("Terrain", pTerrainGameObject, Vec3());
+
+			TerrainSystem::SetCurrentTerrain(pTerrainGameObject);
+		}
+
+		//Terrain* pTerrain = TerrainSystem::GetCurrentTerrain();
+		//pTerrain->GetTerrainMesh()->GetFoliage()->AddFoliageType(FoliageType::Name::DryGrassA);
+		//pTerrain->GetTerrainMesh()->GetFoliage()->AddFoliageType(FoliageType::Name::SmallRockA);
+
+		//int totalInst = 1000000;
+		//int totalInst = 100000;
+
+		//int dimensionSize = totalInst / 4;
+		//float objScaleMax = 0.5f;
+		//float scale = 1200.f;
+		//Vec3 offset(-scale / 2, 0, -scale / 2);
+		//for (int i = 0; i < dimensionSize; i++)
+		//{
+		//	FoliageInstance instance;
+
+		//	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r2 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r3 = .25f + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		//	Vec3 spawnPos(scale * r, 0.f, scale * r2);
+		//	spawnPos += offset;
+
+		//	float objScale = r3 * objScaleMax;
+
+		//	instance.scale = objScale;
+		//	instance.x = spawnPos.x();
+		//	instance.z = spawnPos.z();
+		//	instance.angle = 0.f;
+
+		//	float r4 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r5 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r6 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float tintFactor = 0.1f;
+		//	instance.color = Vec4(r4, r5, r6, 1) * tintFactor;
+
+		//	pGoFoliage->AddInstance(instance);
+		//}
+
+		//Trace::out("Spawned %d rocks 1\n", dimensionSize);
+
+		//int dimensionSize2 = totalInst / 4;
+		//for (int i = 0; i < dimensionSize2; i++)
+		//{
+		//	FoliageInstance instance;
+		//	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r2 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r3 = .25f + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		//	Vec3 spawnPos(scale * r, 0.f, scale * r2);
+		//	spawnPos += offset;
+
+		//	float objScale = r3 * objScaleMax;
+		//	instance.scale = objScale;
+		//	instance.x = spawnPos.x();
+		//	instance.z = spawnPos.z();
+		//	instance.angle = 0.f;
+		//	float r4 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r5 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r6 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float tintFactor = 0.1f;
+		//	instance.color = Vec4(r4, r5, r6, 1) * tintFactor;
+
+		//	pGoFoliage2->AddInstance(instance);
+		//}
+
+		//for (int i = 0; i < dimensionSize2; i++)
+		//{
+		//	FoliageInstance instance;
+		//	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r2 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r3 = .25f + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		//	Vec3 spawnPos(scale * r, 0.f, scale * r2);
+		//	spawnPos += offset;
+
+		//	float objScale = r3 * objScaleMax;
+		//	instance.scale = objScale;
+		//	instance.x = spawnPos.x();
+		//	instance.z = spawnPos.z();
+		//	instance.angle = 0.f;
+		//	float r4 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r5 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r6 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float tintFactor = 0.1f;
+		//	instance.color = Vec4(r4, r5, r6, 1) * tintFactor;
+
+		//	pGoFoliage3->AddInstance(instance);
+		//}
+
+		//for (int i = 0; i < dimensionSize2; i++)
+		//{
+		//	FoliageInstance instance;
+		//	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r2 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r3 = .25f + static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		//	Vec3 spawnPos(scale * r, 0.f, scale * r2);
+		//	spawnPos += offset;
+
+		//	float objScale = r3 * objScaleMax;
+		//	instance.scale = objScale;
+		//	instance.x = spawnPos.x();
+		//	instance.z = spawnPos.z();
+		//	instance.angle = 0.f;
+		//	float r4 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r5 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float r6 = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		//	float tintFactor = 0.1f;
+		//	instance.color = Vec4(r4, r5, r6, 1) * tintFactor;
+
+		//	pGoFoliage4->AddInstance(instance);
+		//}
+
+		//Trace::out("Spawned %d rocks 2\n", dimensionSize2);
 
 		//GameObjectManager::Dump();
 
-		//GameObjectManager::SpawnObject("Text Object", new GameObjectText(FontLibrary::Find(Font::Name::Century), "Robbie is Awesome"), Vec3(850.f, 850.f, 0.f));
-
-		//GameObjectManager::SpawnObject("pBirdsTmp 2",
-		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::GreenBird), Rect(400, 300, 200, 200))),
-		//	Vec3(200.f, 200.f, 0.f)
-		//);
-
-		//GameObjectManager::SpawnObject("Stitch",
-		//	new GameObjectSprite(new GOSprite(ImageManager::Find(Image::Name::Stitch), Rect(400, 300, 100, 150))),
-		//	Vec3(1075.f, 250.f, 0.f)
-		//)->SetRelativeRotation(Rot(Rot1::Z, MATH_PI4));
+		lightPos = GameObjectManager::FindObject("Light Yellow")->GetRelativeLocation();
 
 		return true;
 	}
@@ -194,6 +356,7 @@ namespace Azul
 	{
 		UpdateDemo(deltaTime);
 		//AnimationSystem::Update();
+		LightSystem::Update();
 		GameObjectManager::Update(deltaTime);
 		EndFrame();
 	}
@@ -215,6 +378,12 @@ namespace Azul
 		ImageManager::Destroy();
 		FontLibrary::Destroy();
 		AnimationSystem::Destroy();
+		TerrainSystem::Destroy();
+		FoliageLibrary::Destroy();
+		LightSystem::Destroy();
+
+		//delete pGoFoliage;
+		//delete pGoFoliage2;
 	}
 
 	void Game::EndFrame()
@@ -273,37 +442,49 @@ namespace Azul
 		//	lightPos[y] -= 10 * deltaTime;
 		//}
 
-		//if (GetKeyState('E') & 0x8000)
+		//if (GetKeyState(VK_LEFT) & 0x8000)
 		//{
 		//	lightPos[x] += 10 * deltaTime;
 		//}
-		//if (GetKeyState('T') & 0x8000)
+		//if (GetKeyState(VK_RIGHT) & 0x8000)
 		//{
 		//	lightPos[x] -= 10 * deltaTime;
 		//}
 
-		//if (GetKeyState('4') & 0x8000)
+		//if (GetKeyState(VK_UP) & 0x8000)
 		//{
 		//	lightPos[z] += 10 * deltaTime;
 		//}
-		//if (GetKeyState('R') & 0x8000)
+		//if (GetKeyState(VK_DOWN) & 0x8000)
 		//{
 		//	lightPos[z] -= 10 * deltaTime;
 		//}
+		lightPos = GameObjectManager::FindObject("Light Yellow")->GetWorldLocation();
+		//GameObjectManager::FindObject("Light Yellow")->SetWorldLocation(lightPos);
+		//GameObjectManager::FindObject("Light Red")->SetWorldLocation(lightPos + Vec3(5, 0, 0));
+		//GameObjectManager::FindObject("Light Blue")->SetWorldLocation(lightPos + Vec3(-5, 0, 0));
 
-	/*	LightSource->SetRelativeLocation(lightPos);
-		LightSource1->SetRelativeLocation(lightPos + Vec3(5, 0, 0));
-		LightSource2->SetRelativeLocation(lightPos + Vec3(-5, 0, 0));*/
+		//float diffScale = 0.5f;
+		//float radius = 300.f;
+		//float attenScale = .02f;
 
-		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
-		pShader->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
-		pShader->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
-		pShader->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
+		//Vec3 attenVec = attenScale * Vec3(1, 1, 1);
+		//Vec3 a = 0.f * Vec3(0.3f, 0.3f, 0.3f);
+		//Vec3 d = diffScale * Vec3(.8f, .1f, .1f);
+		//Vec3 s = Vec3(0.8f, .8f, .6f);
 
-		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
-		pShaderSkin->SetPointLightParameters(0, lightPos, 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(0.8f, .8f, .6f), Vec3(0.8f, .8f, .6f));
-		pShaderSkin->SetPointLightParameters(1, lightPos + Vec3(5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.8f, .1f, .1f), Vec3(0.8f, .8f, .6f));
-		pShaderSkin->SetPointLightParameters(2, lightPos + Vec3(-5, 0, 0), 1500.f, 0.3f * Vec3(1.f, 1.f, 1.f), Vec3(0.3f, 0.3f, 0.3f), Vec3(.1f, .1f, .8f), Vec3(0.8f, .8f, .6f));
+		//Vec3 yellow = Vec3(0.8f, .8f, .6f) * diffScale;
+		//Vec3 red = Vec3(.8f, .1f, .1f) * diffScale;
+		//Vec3 blue = Vec3(.1f, .1f, .8f) * diffScale;
+
+		//PointLight pointLightData0;
+		//pointLightData0.attenuation = Vec4(attenVec, 1.f);
+		//pointLightData0.position = Vec4(lightPos, 1.f);
+		//pointLightData0.range = radius;
+		//pointLightData0.light.ambient = Vec4(a, 1.f);
+		//pointLightData0.light.diffuse = Vec4(yellow, 1.f);
+		//pointLightData0.light.specular = Vec4(s, 1.f);
+		//LightSystem::SetPointLight(0, pointLightData0);
 	}
 
 	void Game::LoadShaders()
@@ -317,17 +498,20 @@ namespace Azul
 		ShaderObjectManager::Add(ShaderObject::Name::EditorVisual, new SOEditorVisual());
 		ShaderObjectManager::Add(ShaderObject::Name::Sprite, new SOSprite());
 		ShaderObjectManager::Add(ShaderObject::Name::SkinLightTexture, new SOSkinLightTexture());
+		ShaderObjectManager::Add(ShaderObject::Name::Terrain, new SOTerrain());
+		ShaderObjectManager::Add(ShaderObject::Name::Foliage, new SOFoliage());
+		ShaderObjectManager::Add(ShaderObject::Name::SurfaceShape, new SOSurfaceShape());
 	}
 
 	void Game::LoadCameras()
 	{
 		Camera* pCamera = CameraManager::Add(Camera::Name::Default, new Camera());
-		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 10), Vec3(0, 0, 0));
-		pCamera->SetPerspective(65.0f, GetAspectRatio(), 0.1f, 1000.0f);
+		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 10), Vec3(0, 100, 100));
+		pCamera->SetPerspective(75.0f, GetAspectRatio(), 0.1f, 10000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::Player, new Camera());
 		pCamera->SetOrientAndPosition(Vec3(0.f, 1.f, 0.f), Vec3(0, 0, 10), Vec3(0, 0, 0));
-		pCamera->SetPerspective(85.0f, GetAspectRatio(), 0.1f, 1000.0f);
+		pCamera->SetPerspective(75.0f, GetAspectRatio(), 0.1f, 1000.0f);
 
 		pCamera = CameraManager::Add(Camera::Name::Sprite, new Camera());
 		pCamera->SetViewport(0, 0, Engine::GetWindowWidth(), Engine::GetWindowHeight());
@@ -366,6 +550,28 @@ namespace Azul
 		azulModel tattoineData;
 		tattoineData.Deserialize(aB_protoBuildings);
 
+		TextureObject* pTexCurr;
+
+		pTexCurr = TextureObjectManager::Add(TextureObject::Name::Cobblestone, new TextureProto("square_cobblestone.proto.azul"));
+		pTexCurr->pDisplacement = TextureObjectManager::Add(TextureObject::Name::Cobblestone_Disp, new TextureProto("square_cobblestone_disp.proto.azul"));
+
+		pTexCurr = TextureObjectManager::Add(TextureObject::Name::Mud, new TextureProto("brown_mud_rocks.proto.azul"));
+		pTexCurr->pDisplacement = TextureObjectManager::Add(TextureObject::Name::Mud_Disp, new TextureProto("brown_mud_rocks_disp.proto.azul"));
+		pTexCurr->pNormalMap = TextureObjectManager::Add(TextureObject::Name::Mud_Norm, new TextureProto("brown_mud_rocks_nor.proto.azul"));
+
+		pTexCurr = TextureObjectManager::Add(TextureObject::Name::CoastalSandRocks, new TextureProto("coast_sand_rocks.proto.azul"));
+		pTexCurr->pDisplacement = TextureObjectManager::Add(TextureObject::Name::CoastalSandRocks_Disp, new TextureProto("coast_sand_rocks_disp.proto.azul"));
+		pTexCurr->pNormalMap = TextureObjectManager::Add(TextureObject::Name::CoastalSandRocks_Norm, new TextureProto("coast_sand_rocks_nor.proto.azul"));
+
+		pTexCurr = TextureObjectManager::Add(TextureObject::Name::RockyTrail, new TextureProto("rocky_trail.proto.azul"));
+		pTexCurr->pDisplacement = TextureObjectManager::Add(TextureObject::Name::RockyTrail_Disp, new TextureProto("rocky_trail_disp.proto.azul"));
+		pTexCurr->pNormalMap = TextureObjectManager::Add(TextureObject::Name::RockyTrail_Norm, new TextureProto("rocky_trail_nor.proto.azul"));
+
+		pTexCurr = TextureObjectManager::Add(TextureObject::Name::Sandstone, new TextureProto("sandstone_cracks.proto.azul"));
+		pTexCurr->pNormalMap = TextureObjectManager::Add(TextureObject::Name::Sandstone_Norm, new TextureProto("sandstone_cracks_nor.proto.azul"));
+
+		TextureObjectManager::Add(TextureObject::Name::SnowRocks, new TextureProto("snow_rocks.proto.azul"));
+		TextureObjectManager::Add(TextureObject::Name::Snow, new TextureProto("snow.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::Brick, new TextureProto("RedBrick.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::Rocks, new TextureProto("Rocks.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::Duckweed, new TextureProto("Duckweed.proto.azul"));
@@ -387,6 +593,7 @@ namespace Azul
 		TextureObjectManager::Add(TextureObject::Name::Blue, new TextureProto("Blue.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Yellow, new TextureProto("Yellow.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Green, new TextureProto("Green.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::Black, new TextureProto("Black.proto.azul"));
 		TextureObjectManager::Add(TextureObject::Name::Hovered, new TextureProto("Hovered.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Disabled, new TextureProto("Disabled.proto.azul", 0));
 		TextureObjectManager::Add(TextureObject::Name::Birds, new TextureProto("Birds.proto.azul"));
@@ -463,6 +670,7 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::Sprite, new MeshProto("UnitSquare.proto.azul"));
 		MeshManager::Add(Mesh::Name::Sphere, new MeshProto("UnitSphere.proto.azul"));
 		MeshManager::Add(Mesh::Name::UnitCube, new MeshProto("UnitCube.proto.azul"));
+		MeshManager::Add(Mesh::Name::Cylinder, new MeshProto("cylinder.proto.azul"));
 		MeshManager::Add(Mesh::Name::Cube, new CubeMesh());
 		MeshManager::Add(Mesh::Name::Pyramid, new PyramidMesh());
 		MeshManager::Add(Mesh::Name::Diamond, new DiamondMesh());
@@ -489,6 +697,44 @@ namespace Azul
 		MeshManager::Add(Mesh::Name::MannequinSkin, new MeshProto("mannequin.skin.proto.azul"));
 		MeshManager::Add(Mesh::Name::PaladinSkin, new MeshProto("Paladin.skin.proto.azul"));
 		MeshManager::Add(Mesh::Name::KnightSkin, new MeshProto("Knight.skin.proto.azul"));
+
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock, new TextureProto("rocks_pack.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock2, new TextureProto("rocks_pack.proto.azul", 8));
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock3, new TextureProto("rocks_pack.proto.azul", 9));
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock4, new TextureProto("rocks_pack.proto.azul", 10));
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock5, new TextureProto("rocks_pack.proto.azul", 11));
+		TextureObjectManager::Add(TextureObject::Name::SimpleRock6, new TextureProto("rocks_pack.proto.azul", 12));
+
+		MeshManager::Add(Mesh::Name::SimpleRock, new MeshProto("rocks_pack.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::SimpleRock2, new MeshProto("rocks_pack.proto.azul", 8));
+		MeshManager::Add(Mesh::Name::SimpleRock3, new MeshProto("rocks_pack.proto.azul", 9));
+		MeshManager::Add(Mesh::Name::SimpleRock4, new MeshProto("rocks_pack.proto.azul", 10));
+		MeshManager::Add(Mesh::Name::SimpleRock5, new MeshProto("rocks_pack.proto.azul", 11));
+		MeshManager::Add(Mesh::Name::SimpleRock6, new MeshProto("rocks_pack.proto.azul", 12));
+
+		TextureObjectManager::Add(TextureObject::Name::DryGrass0, new TextureProto("grass_var.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::DryGrass1, new TextureProto("grass_var.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::DryGrass2, new TextureProto("grass_var.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::DryGrass3, new TextureProto("grass_var.proto.azul", 0));
+
+		MeshManager::Add(Mesh::Name::DryGrass0, new MeshProto("grass_var.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::DryGrass1, new MeshProto("grass_var.proto.azul", 1));
+		MeshManager::Add(Mesh::Name::DryGrass2, new MeshProto("grass_var.proto.azul", 2));
+		MeshManager::Add(Mesh::Name::DryGrass3, new MeshProto("grass_var.proto.azul", 3));
+
+		TextureObjectManager::Add(TextureObject::Name::TropicalTree0, new TextureProto("trees_new.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::TropicalTree1, new TextureProto("trees_new.proto.azul", 1));
+		TextureObjectManager::Add(TextureObject::Name::TropicalTree2, new TextureProto("trees_new.proto.azul", 2));
+		TextureObjectManager::Add(TextureObject::Name::TropicalTree3, new TextureProto("trees_new.proto.azul", 3));
+		MeshManager::Add(Mesh::Name::TropicalTree0, new MeshProto("trees_new.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::TropicalTree1, new MeshProto("trees_new.proto.azul", 1));
+		MeshManager::Add(Mesh::Name::TropicalTree2, new MeshProto("trees_new.proto.azul", 2));
+		MeshManager::Add(Mesh::Name::TropicalTree3, new MeshProto("trees_new.proto.azul", 3));
+
+		TextureObjectManager::Add(TextureObject::Name::BirchTree0, new TextureProto("birch_trees.proto.azul", 0));
+		TextureObjectManager::Add(TextureObject::Name::BirchTree1, new TextureProto("birch_trees.proto.azul", 1));
+		MeshManager::Add(Mesh::Name::BirchTree0, new MeshProto("birch_trees.proto.azul", 0));
+		MeshManager::Add(Mesh::Name::BirchTree1, new MeshProto("birch_trees.proto.azul", 1));
 
 		int meshI = 0;
 		MeshManager::Add(Mesh::Name::DesertRock0, new MeshProto(desertRocksData.meshes[meshI++]));
@@ -569,5 +815,14 @@ namespace Azul
 		uint8_t clearStencil = 0;
 		pContext->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&color);
 		pContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, (FLOAT)clearDepth, (UINT8)clearStencil);
+
+		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
+		pShader->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShaderSkin->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOTerrain* pShaderTerrain = (SOTerrain*)ShaderObjectManager::Find(ShaderObject::Name::Terrain);
+		pShaderTerrain->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOFoliage* pShaderFoliage = (SOFoliage*)ShaderObjectManager::Find(ShaderObject::Name::Foliage);
+		pShaderFoliage->SetFogParameters(fogDistMin, fogDistMax, color);
 	}
 }

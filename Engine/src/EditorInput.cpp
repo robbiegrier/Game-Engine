@@ -21,7 +21,7 @@ namespace Azul
 		ImVec2 mousePos = ImGui::GetMousePos();
 		MousePosition currMousePos((int)mousePos.x, (int)mousePos.y);
 
-		const bool shiftDown = (GetKeyState(VK_SHIFT) & 0x8000);
+		self.shiftDown = (GetKeyState(VK_SHIFT) & 0x8000);
 		const bool controlDown = (GetKeyState(VK_CONTROL) & 0x8000);
 		const bool altDown = (GetKeyState(18) & 0x8000);
 
@@ -61,20 +61,20 @@ namespace Azul
 		const bool rotateDown = (GetKeyState('E') & 0x8000);
 		const bool rotateDownThisFrame = rotateDown && !self.wasRotateModeDown;
 
-		const bool leftClickDown = (GetKeyState(VK_LBUTTON) & 0x8000);
-		const bool leftClickPressedThisFrame = leftClickDown && !self.wasLeftClickDown;
-		const bool leftClickReleasedThisFrame = !leftClickDown && self.wasLeftClickDown;
+		self.leftClickDown = (GetKeyState(VK_LBUTTON) & 0x8000);
+		self.leftClickPressedThisFrame = self.leftClickDown && !self.wasLeftClickDown;
+		self.leftClickReleasedThisFrame = !self.leftClickDown && self.wasLeftClickDown;
 
-		const bool rightClickDown = (GetKeyState(VK_RBUTTON) & 0x8000);
-		const bool rightClickPressedThisFrame = rightClickDown && !self.wasRightClickDown;
-		const bool rightClickReleasedThisFrame = !rightClickDown && self.wasRightClickDown;
+		self.rightClickDown = (GetKeyState(VK_RBUTTON) & 0x8000);
+		self.rightClickPressedThisFrame = self.rightClickDown && !self.wasRightClickDown;
+		self.rightClickReleasedThisFrame = !self.rightClickDown && self.wasRightClickDown;
 
-		const bool leftMouseDragging = leftClickDown && ((currMousePos != self.prevMousePos) || self.wasLeftDragging);
+		const bool leftMouseDragging = self.leftClickDown && ((currMousePos != self.prevMousePos) || self.wasLeftDragging);
 		const bool leftMouseStartDraggingThisFrame = leftMouseDragging && !self.wasLeftDragging;
 		const bool leftMouseStopDraggingThisFrame = !leftMouseDragging && self.wasLeftDragging;
 
-		self.wasLeftClickDown = leftClickDown;
-		self.wasRightClickDown = rightClickDown;
+		self.wasLeftClickDown = self.leftClickDown;
+		self.wasRightClickDown = self.rightClickDown;
 		self.prevMousePos = currMousePos;
 		self.wasLeftDragging = leftMouseDragging;
 		self.wasTranslateModeDown = translateDown;
@@ -89,7 +89,7 @@ namespace Azul
 		self.wasCtrlSDown = ctrlSDown;
 
 		self.mod = InputModifier::None;
-		if (shiftDown) self.mod = InputModifier::Shift;
+		if (self.shiftDown) self.mod = InputModifier::Shift;
 		if (controlDown) self.mod = InputModifier::Control;
 		if (altDown) self.mod = InputModifier::Alt;
 
@@ -207,7 +207,7 @@ namespace Azul
 
 		ImGui::End();
 
-		if (leftClickPressedThisFrame)
+		if (self.leftClickPressedThisFrame)
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{
@@ -216,7 +216,7 @@ namespace Azul
 			}
 		}
 
-		if (leftClickReleasedThisFrame)
+		if (self.leftClickReleasedThisFrame)
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{
@@ -225,7 +225,7 @@ namespace Azul
 			}
 		}
 
-		if (rightClickPressedThisFrame)
+		if (self.rightClickPressedThisFrame)
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{
@@ -234,7 +234,7 @@ namespace Azul
 			}
 		}
 
-		if (rightClickReleasedThisFrame)
+		if (self.rightClickReleasedThisFrame)
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{

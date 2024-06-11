@@ -179,6 +179,20 @@ namespace Azul
 		SetOrientAndPosition(Vec3(0, 1, 0), vPos + toLookAt, vPos);
 	}
 
+	void Camera::RotateAround(const Vec3& point, const Vec3& delta)
+	{
+		Vec3 toPoint = point - GetLocation();
+		float initialDist = toPoint.len();
+
+		Vec3 newTentitiveLoc = GetLocation() + delta;
+
+		Vec3 newDir = (newTentitiveLoc - point).getNorm();
+
+		Vec3 newPos = point + (newDir * initialDist);
+
+		SetOrientAndPosition(Vec3(0, 1, 0), point, newPos);
+	}
+
 	void Camera::Wash()
 	{
 		name = Name::None;
@@ -292,6 +306,34 @@ namespace Azul
 		return this->viewport_height;
 	}
 
+	Frustum Camera::GetFrustum() const
+	{
+		Frustum output;
+
+		output.planes[0] = Plane(frontNorm, nearBottomLeft);
+		output.planes[1] = Plane(backNorm, farBottomLeft);
+		output.planes[2] = Plane(leftNorm, nearBottomLeft);
+		output.planes[3] = Plane(rightNorm, nearBottomRight);
+		output.planes[4] = Plane(topNorm, nearTopLeft);
+		output.planes[5] = Plane(bottomNorm, nearBottomLeft);
+
+		return output;
+	}
+
+	Frustum Camera::GetFrustum(float customFarDistance) const
+	{
+		Frustum output;
+
+		output.planes[0] = Plane(frontNorm, nearBottomLeft);
+		output.planes[1] = Plane(backNorm, vPos + ((farBottomLeft - vPos).getNorm() * customFarDistance));
+		output.planes[2] = Plane(leftNorm, nearBottomLeft);
+		output.planes[3] = Plane(rightNorm, nearBottomRight);
+		output.planes[4] = Plane(topNorm, nearTopLeft);
+		output.planes[5] = Plane(bottomNorm, nearBottomLeft);
+
+		return output;
+	}
+
 	void Camera::UpdateViewMatrix()
 	{
 		// This functions assumes the your vUp, vRight, vDir are still unit
@@ -325,6 +367,9 @@ namespace Azul
 	{
 		UpdateProjectionMatrix();
 		UpdateViewMatrix();
+		privCalcPlaneHeightWidth();
+		privCalcFrustumVerts();
+		privCalcFrustumCollisionNormals();
 	}
 
 	Camera::Type Camera::GetType() const

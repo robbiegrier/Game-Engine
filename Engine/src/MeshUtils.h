@@ -21,6 +21,50 @@ namespace Azul
 		float v;
 	};
 
+	template<typename T>
+	struct Point
+	{
+		Point() : x(T()), y(T()) {}
+		Point(const Point<T>&) = default;
+		Point& operator = (const Point<T>&) = default;
+		~Point() = default;
+
+		bool operator == (const Point<T>& rhs)
+		{
+			return x == rhs.x && y == rhs.y;
+		}
+
+		bool operator != (const Point<T>& rhs)
+		{
+			return !(*this == rhs);
+		}
+
+		Point(T _x, T _y)
+			: x(_x), y(_y) {}
+
+		T x;
+		T y;
+	};
+
+	template<typename T>
+	struct TVec3
+	{
+		TVec3()
+			: x(T()), y(T()), z(T()) {}
+		TVec3(const TVec3&) = default;
+		TVec3& operator = (const TVec3&) = default;
+		~TVec3() = default;
+
+		TVec3(T a, T b, T c)
+			: x(a), y(b), z(c) {}
+
+		TVec3 operator*(T s) { return TVec3(x * s, y * s, z * s); }
+
+		T x;
+		T y;
+		T z;
+	};
+
 	struct Vec3f
 	{
 		Vec3f()
@@ -33,6 +77,7 @@ namespace Azul
 			: x(a), y(b), z(c) {}
 
 		Vec3f operator*(float s) { return Vec3f(x * s, y * s, z * s); }
+		Vec3f operator+(const Vec3f& v) const { return Vec3f(x + v.x, y + v.y, z + v.z); }
 
 		float x;
 		float y;

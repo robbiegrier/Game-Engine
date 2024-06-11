@@ -295,6 +295,7 @@
     <ClInclude Include="MeshLayout.h" />
     <ClInclude Include="skeletonData.h" />
     <ClInclude Include="skeletonData.pb.h" />
+    <ClInclude Include="terrain.pb.h" />
     <ClInclude Include="textureData.h" />
     <ClInclude Include="textureData.pb.h" />
     <ClInclude Include="vboData.h" />
@@ -318,6 +319,7 @@
     <None Include="glyphData.proto" />
     <None Include="meshData.proto" />
     <None Include="skeletonData.proto" />
+    <None Include="terrain.proto" />
     <None Include="textureData.proto" />
     <None Include="vboData.proto" />
   </ItemGroup>
@@ -868,6 +870,7 @@
     <ClCompile Include="meshData.pb.cc" />
     <ClCompile Include="skeletonData.cpp" />
     <ClCompile Include="skeletonData.pb.cc" />
+    <ClCompile Include="terrain.pb.cc" />
     <ClCompile Include="textureData.cpp" />
     <ClCompile Include="textureData.pb.cc" />
     <ClCompile Include="vboData.cpp" />

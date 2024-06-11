@@ -27,6 +27,7 @@ namespace Azul
 			Player,
 			GameObjectSprite,
 			GameObjectText,
+			Terrain,
 			None
 		};
 
@@ -39,6 +40,9 @@ namespace Azul
 		// Core update and draw
 		virtual void Update(float deltaTime);
 		virtual void Draw();
+
+		virtual void UpdateInspectorGui();
+		virtual void DebugDraw() {}
 
 		virtual void Start() {}
 		virtual void Tick(float deltaTime) { static_cast<void>(deltaTime); }
@@ -80,11 +84,13 @@ namespace Azul
 
 		// Get the low level graphics object
 		GraphicsObject* GetGraphicsObject() const;
+		GraphicsObject* GetBoundingBoxVisual() const { return pBoundingBox; }
 
 		void RenderShell();
 		void SetShellColor(const Vec4& inColor);
 
 		void SetRenderShell(bool render);
+		void SetAlwaysRenderShell(bool render);
 		bool GetRenderShell() const;
 		static void SetRenderShellGlobal(bool render);
 

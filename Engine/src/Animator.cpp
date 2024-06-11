@@ -31,7 +31,7 @@ namespace Azul
 
 		CSAnimationWorld& computeShaderWorld = AnimationSystem::GetComputeShaderWorld();
 		GOSkinLightTexture* pGoSkin = (GOSkinLightTexture*)GetGameObject()->GetGraphicsObject();
-		computeShaderWorld.Open(pSkeleton->GetHierarchyTable(), pSkeleton->GetHierarchyDepth(), GetGameObject()->GetWorld(), pGoSkin->GetModel()->poInvBindArray);
+		computeShaderWorld.Open(pSkeleton->GetHierarchyTable(), pSkeleton->GetHierarchyDepth(), GetGameObject()->GetWorld(), pGoSkin->GetModel()->GetInverseBindArray());
 		computeShaderWorld.Run();
 		computeShaderWorld.AwaitResults(pGoSkin->pBoneWorld);
 		computeShaderWorld.Close();

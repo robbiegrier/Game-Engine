@@ -37,6 +37,13 @@ cbuffer InstanceData : register(b6)
     Material material;
 };
 
+cbuffer FogParameters : register(b7)
+{
+    float FogStart;
+    float FogRange;
+    float4 FogColor;
+};
+
 void PhongModel(Material mat, Material lightint, float3 L, float3 normal, float3 DirToEye,
 	out float4 ambient, out float4 diffuse, out float4 spec)
 {
@@ -62,7 +69,7 @@ void PhongModel(Material mat, Material lightint, float3 L, float3 normal, float3
     }
 }
 
-void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms, float4 normal, float4 DirToEye,
+void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms, float4 normal, float4 DirToEye, matrix inv,
 	out float4 ambient, out float4 diffuse, out float4 spec)
 {
     ambient = float4(0.f, 0.f, 0.f, 0.f);
@@ -70,7 +77,7 @@ void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms
     spec = float4(0.f, 0.f, 0.f, 0.f);
     
 	// we compute the model-space position
-    float3 litPosMS = mul(pointLightInstance.Position, inverse).xyz;
+    float3 litPosMS = mul(pointLightInstance.Position, inv).xyz;
     float3 L = litPosMS - posms.xyz;
 
 	// Early out if out of range
@@ -86,7 +93,7 @@ void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms
     float att = 1 / dot(pointLightInstance.Attenuation.xyz, float3(1, d, d * d));
     
         // MOD: Adjusted by approx Scale
-    float approxScale = length(inverse._m00_m01_m02);
+    float approxScale = length(inv._m00_m01_m02);
     att *= approxScale;
     
 	// Ambient not attenuated
@@ -94,7 +101,7 @@ void ComputePointLight(Material mat, PointLight pointLightInstance, float4 posms
     spec *= att;
 }
 
-void ComputeDirectionalLight(Material mat, DirectionalLight lightInstance, float4 normal, float4 DirToEye,
+void ComputeDirectionalLight(Material mat, DirectionalLight lightInstance, float4 normal, float4 DirToEye, matrix inv,
 	out float4 ambient, out float4 diffuse, out float4 spec)
 {
     ambient = float4(0.f, 0.f, 0.f, 0.f);
@@ -103,15 +110,15 @@ void ComputeDirectionalLight(Material mat, DirectionalLight lightInstance, float
 
 	// we compute ligth in the model-space
 	// For directional light, the source is infinitely far, so translation have no effect
-    float3 L = normalize(mul(-lightInstance.Direction.xyz, (float3x3) inverse));
+    float3 L = normalize(mul(-lightInstance.Direction.xyz, (float3x3) inv));
 
     PhongModel(mat, lightInstance.LightInt, L, normal.xyz, DirToEye.xyz, ambient, diffuse, spec);
 }
 
-float4 Light(float4 position, float4 positionModelSpace, float4 norm)
+float4 Light(float4 position, float4 positionModelSpace, float4 norm, matrix inv)
 {
 	// Compute light values in model-space
-    float4 msEyePos = mul(eyePositionWorld, inverse);
+    float4 msEyePos = mul(eyePositionWorld, inv);
     float4 msDirToEye = normalize(msEyePos - positionModelSpace);
 
     float4 ambient = float4(0.f, 0.f, 0.f, 0.f);
@@ -120,18 +127,24 @@ float4 Light(float4 position, float4 positionModelSpace, float4 norm)
 
     float4 A, D, S;
     
-    ComputeDirectionalLight(material, directionalLight, normalize(norm), msDirToEye, A, D, S);
+    ComputeDirectionalLight(material, directionalLight, normalize(norm), msDirToEye, inv, A, D, S);
     ambient += A;
     diffuse += D;
     spec += S;
     
     for (int i = 0; i < numPointLights; i++)
     {
-        ComputePointLight(material, pointlights[i], positionModelSpace, normalize(norm), msDirToEye, A, D, S);
+        ComputePointLight(material, pointlights[i], positionModelSpace, normalize(norm), msDirToEye, inv, A, D, S);
         ambient += A;
         diffuse += D;
         spec += S;
     }
+    
+    float4 litTextureSample = ambient + diffuse + spec;
+    
+    //float distToEye = length(msEyePos - positionModelSpace);
+    //float FogPercent = saturate((distToEye - FogStart) / FogRange);
+    //litTextureSample = lerp(litTextureSample, FogColor, FogPercent);
 
-    return ambient + diffuse + spec;
+    return litTextureSample;
 }

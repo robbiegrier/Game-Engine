@@ -10,6 +10,7 @@ namespace Azul
 	class EngineState;
 	class EngineStateEditor;
 	class EngineStatePlay;
+	class ShadowMap;
 
 	// The Engine encapsulates low level interaction with Windows and DirectX
 	// so that the Game derived class can be streamlined around game loop logic.
@@ -36,13 +37,16 @@ namespace Azul
 		static bool GetEditorMode();
 		static void SetEditorMode(bool enabled);
 		static float GetDeltaTime();
+		static int GetMouseWheelDelta();
 
 		static void NativeUpdate(float deltaTime);
 		static void NativeRender();
+		static void OnMouseWheelEvent(int wheelDelta);
 
 		static void SetDefaultTargetMode();
 		static void ClearDepthStencil(const Vec4& color);
-		static void ToggleBlending(bool blendOn);
+
+		static void RevertRasterState();
 
 	protected:
 		// Big four
@@ -70,7 +74,6 @@ namespace Azul
 		void InitDepthStencilState();
 		void InitRasterizerState();
 		void InitViewport();
-		void InitBlendState();
 
 		// Runtime
 		int Run();
@@ -94,8 +97,6 @@ namespace Azul
 		ID3D11Texture2D* pDepthStencilBuffer;
 		ID3D11DepthStencilState* pDepthStencilState;
 		ID3D11RasterizerState* pRasterizerState;
-		ID3D11BlendState* pBlendStateAlpha;
-		ID3D11BlendState* pBlendStateOff;
 		D3D11_VIEWPORT viewport;
 
 		// Display Parameters
@@ -113,6 +114,7 @@ namespace Azul
 		unsigned int g_ResizeWidth = 0;
 		unsigned int g_ResizeHeight = 0;
 		bool editorMode = true;
+		int mouseWheelDelta = 0;
 
 		// Derived Singleton
 		static Engine* pEngineInstance;

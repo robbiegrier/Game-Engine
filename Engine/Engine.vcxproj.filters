@@ -143,6 +143,69 @@
     <Filter Include="src\Components">
       <UniqueIdentifier>{c9e0c1ef-e4c2-45ef-bad0-cc91934eed70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Terrain">
+      <UniqueIdentifier>{fdca3385-cb10-4f93-8c00-3bde6013aa20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_TinyGLTF">
+      <UniqueIdentifier>{9b81a9a2-a75a-46c8-90a9-5d4826f47f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Quad Tree">
+      <UniqueIdentifier>{1819d8bd-19fb-46aa-94d1-289953c95d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Area">
+      <UniqueIdentifier>{646cd6d8-2e48-4c90-ac39-e6c141952a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Editor">
+      <UniqueIdentifier>{a30e6c9f-f90b-4173-a67d-51cb5c4c9f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Editor\GPU Brush">
+      <UniqueIdentifier>{bec19764-e0b0-4d91-a7f2-3aa11bcaf14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Core">
+      <UniqueIdentifier>{faf64535-dff5-4d22-83b9-b20eeb0048af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Graphics">
+      <UniqueIdentifier>{23ad22e7-d645-4f37-b7de-ed241df6dba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute">
+      <UniqueIdentifier>{9ba1b195-19cc-44b4-b690-4c77a284758c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute\Animation">
+      <UniqueIdentifier>{21559e75-0223-4f08-abf2-cec04622929a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute\Terrain Brushes">
+      <UniqueIdentifier>{58e5e069-c53c-4af6-b80c-c845984391a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Editor\GPU Brush\Surface">
+      <UniqueIdentifier>{236164bc-5bca-4d54-814a-e9271c8bfdef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Editor\GPU Brush\Terrain Sculpt">
+      <UniqueIdentifier>{12159237-b38d-44b4-a62b-3509571262a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute\Terrain Brushes\Lib">
+      <UniqueIdentifier>{12a234e5-5dc9-450c-aa90-dcd0b9b5e211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute\Terrain Brushes\Terrain Sculpt">
+      <UniqueIdentifier>{5ce46b79-0ad6-41ab-a1aa-dc7b04c6d17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Original\Compute\Terrain Brushes\Terrain Surface">
+      <UniqueIdentifier>{737bbeeb-0197-457c-9f44-5401e99b3c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Editor\GPU Brush\Foliage">
+      <UniqueIdentifier>{0093a931-c8ae-48f7-89d9-06c39f311b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Terrain\Foliage">
+      <UniqueIdentifier>{2d609028-6551-4c3a-be6e-9cc688ed525d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObject\Player">
+      <UniqueIdentifier>{c2f647b1-8e3a-4a8a-aee5-67576ea75bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObject\Core">
+      <UniqueIdentifier>{b1222992-9d31-4496-bc27-a3bf3bacf869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics\Effects">
+      <UniqueIdentifier>{74df2cbd-e6dc-43b4-9ec2-f8ee761788ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -179,13 +242,25 @@
       <Filter>_Proto\include\google\protobuf</Filter>
     </None>
     <None Include="Shaders\Original\Default.hlsli">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Graphics</Filter>
     </None>
     <None Include="Shaders\Original\Phong.hlsli">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Graphics</Filter>
     </None>
     <None Include="Shaders\Original\SkinLightTexture.hlsli">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Graphics</Filter>
+    </None>
+    <None Include="Shaders\Original\Terrain.hlsli">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </None>
+    <None Include="Shaders\Original\ComputeShaderBrush.hlsli">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Lib</Filter>
+    </None>
+    <None Include="Shaders\Original\TerrainBrushBase.hlsli">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Lib</Filter>
+    </None>
+    <None Include="Shaders\Original\SurfaceBrushBase.hlsli">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Lib</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +287,6 @@
     </ClInclude>
     <ClInclude Include="src\Game.h">
       <Filter>src\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameObject.h">
-      <Filter>src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GraphicsObject.h">
       <Filter>src\Graphics\GraphicsObject</Filter>
@@ -687,9 +759,6 @@
     <ClInclude Include="src\EngineUtils.h">
       <Filter>src\Game</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObjectManager.h">
-      <Filter>src\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="src\GOColorByVertex.h">
       <Filter>src\Graphics\GraphicsObject</Filter>
     </ClInclude>
@@ -716,9 +785,6 @@
     </ClInclude>
     <ClInclude Include="src\Plane.h">
       <Filter>src\Graphics\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player.h">
-      <Filter>src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\PyramidMesh.h">
       <Filter>src\Graphics\Mesh</Filter>
@@ -957,12 +1023,6 @@
     <ClInclude Include="src\TimerController.h">
       <Filter>src\Animation\Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render.h">
-      <Filter>src\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Colors.h">
-      <Filter>src\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\Image.h">
       <Filter>src\Graphics\Image</Filter>
     </ClInclude>
@@ -978,61 +1038,259 @@
     <ClInclude Include="src\Animator.h">
       <Filter>src\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\TinyGLTF\stb_image.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TinyGLTF\stb_image_write.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TinyGLTF\tiny_gltf.h">
+      <Filter>_TinyGLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="src\QuadTree.h">
+      <Filter>src\Terrain\Quad Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="src\QTNode.h">
+      <Filter>src\Terrain\Quad Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainArea.h">
+      <Filter>src\Terrain\Area</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOTerrain.h">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOTerrain.h">
+      <Filter>src\Graphics\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainWindow.h">
+      <Filter>src\Terrain\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
+      <Filter>src\Terrain\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainMesh.h">
+      <Filter>src\Terrain\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainSystem.h">
+      <Filter>src\Terrain\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainUtils.h">
+      <Filter>src\Terrain\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Terrain.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\Terrain.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrush.Cx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrush.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrush.Px.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrush.Vx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrushConvolution.Cx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrushFlatten.Cx.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Compiled\TerrainBrushFlatten.h">
+      <Filter>Shaders\Compiled</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainEditor.h">
+      <Filter>src\Terrain\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditActionTerrain.h">
+      <Filter>src\Editor\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSSurfaceBrush.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSTerrainBrush.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainBrushConvolution.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainBrushFlatten.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainBrushNoise.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainBrushRaise.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SurfaceBrushPaint.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComputeShaderBrush.h">
+      <Filter>src\Terrain\Editor\GPU Brush</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SurfaceBrushConvolution.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOFoliage.h">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Frustum.h">
+      <Filter>src\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FoliageBrush.h">
+      <Filter>src\Terrain\Editor\GPU Brush\Foliage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FoliageLibrary.h">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TerrainFoliage.h">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FoliageType.h">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOFoliage.h">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>src\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>src\GameObject\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjectManager.h">
+      <Filter>src\GameObject\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render.h">
+      <Filter>src\GameObject\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerScript.h">
+      <Filter>src\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerScriptFps.h">
+      <Filter>src\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerScriptAdventure.h">
+      <Filter>src\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOSurfaceShape.h">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GOSurfaceShape.h">
+      <Filter>src\Graphics\GraphicsObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Colors.h">
+      <Filter>src\Graphics\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightSystem.h">
+      <Filter>src\Graphics\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightCommon.h">
+      <Filter>src\Graphics\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProtoAzul.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\ColorByVertex.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Null.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Null.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\FlatTexture.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\FlatTexture.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\LightTexture.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\LightTexture.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\ConstColor.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\ConstColor.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Default.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Default.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Sprite.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
-    <FxCompile Include="Shaders\Original\Sprite.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
-    </FxCompile>
     <FxCompile Include="Shaders\Original\AnimationMixer.hlsl">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Compute\Animation</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\Original\AnimationWorld.hlsl">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Compute\Animation</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ColorByVertex.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ColorByVertex.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ConstColor.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\ConstColor.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Default.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Default.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\FlatTexture.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\FlatTexture.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\LightTexture.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\LightTexture.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Null.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Null.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\Original\SkinLightTexture.Px.hlsl">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Graphics</Filter>
     </FxCompile>
     <FxCompile Include="Shaders\Original\SkinLightTexture.Vx.hlsl">
-      <Filter>Shaders\Original</Filter>
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Sprite.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Terrain.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Terrain.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\TerrainBrush.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Sculpt</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\TerrainBrushConvolution.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Sculpt</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\TerrainBrushFlatten.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Sculpt</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\TerrainBrushNoise.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Sculpt</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SurfaceBrushPaint.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Surface</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SurfaceBrushConvolution.hlsl">
+      <Filter>Shaders\Original\Compute\Terrain Brushes\Terrain Surface</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Foliage.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\Foliage.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SurfaceShape.Px.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Original\SurfaceShape.Vx.hlsl">
+      <Filter>Shaders\Original\Graphics</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1050,12 +1308,6 @@
     </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>src\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObject.cpp">
-      <Filter>src\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameHelper.cpp">
-      <Filter>src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicsObject.cpp">
       <Filter>src\Graphics\GraphicsObject</Filter>
@@ -1081,9 +1333,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src\Game</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObjectManager.cpp">
-      <Filter>src\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="src\GOColorByVertex.cpp">
       <Filter>src\Graphics\GraphicsObject</Filter>
     </ClCompile>
@@ -1107,9 +1356,6 @@
     </ClCompile>
     <ClCompile Include="src\Plane.cpp">
       <Filter>src\Graphics\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="src\PyramidMesh.cpp">
       <Filter>src\Graphics\Mesh</Filter>
@@ -1343,6 +1589,126 @@
       <Filter>src\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Animator.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TinyGLTF\tiny_gltf.cc">
+      <Filter>_TinyGLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuadTree.cpp">
+      <Filter>src\Terrain\Quad Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QTNode.cpp">
+      <Filter>src\Terrain\Quad Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainArea.cpp">
+      <Filter>src\Terrain\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOTerrain.cpp">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOTerrain.cpp">
+      <Filter>src\Graphics\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainWindow.cpp">
+      <Filter>src\Terrain\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>src\Terrain\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainMesh.cpp">
+      <Filter>src\Terrain\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainSystem.cpp">
+      <Filter>src\Terrain\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainUtils.cpp">
+      <Filter>src\Terrain\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainEditor.cpp">
+      <Filter>src\Terrain\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditActionTerrain.cpp">
+      <Filter>src\Editor\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSSurfaceBrush.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSTerrainBrush.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainBrushConvolution.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainBrushFlatten.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainBrushNoise.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainBrushRaise.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Terrain Sculpt</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SurfaceBrushPaint.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ComputeShaderBrush.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SurfaceBrushConvolution.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOFoliage.cpp">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Frustum.cpp">
+      <Filter>src\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FoliageBrush.cpp">
+      <Filter>src\Terrain\Editor\GPU Brush\Foliage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FoliageLibrary.cpp">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TerrainFoliage.cpp">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FoliageType.cpp">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOFoliage.cpp">
+      <Filter>src\Terrain\Foliage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>src\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameHelper.cpp">
+      <Filter>src\GameObject\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>src\GameObject\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectManager.cpp">
+      <Filter>src\GameObject\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerScript.cpp">
+      <Filter>src\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerScriptFps.cpp">
+      <Filter>src\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlayerScriptAdventure.cpp">
+      <Filter>src\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOSurfaceShape.cpp">
+      <Filter>src\Graphics\ShaderObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GOSurfaceShape.cpp">
+      <Filter>src\Graphics\GraphicsObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LightSystem.cpp">
+      <Filter>src\Graphics\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
       <Filter>src\Components</Filter>
     </ClCompile>
   </ItemGroup>

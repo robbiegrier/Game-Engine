@@ -63,7 +63,6 @@ namespace Azul
 		SRVDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		SRVDesc.Texture2D.MipLevels = 1;
-
 		hr = Engine::GetDevice()->CreateShaderResourceView(poTex, &SRVDesc, &poTextureRV);
 		assert(SUCCEEDED(hr));
 

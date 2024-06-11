@@ -16,9 +16,13 @@
 #include "TextureObjectManager.h"
 #include "EditorGui.h"
 #include "Player.h"
+#include "GOFoliage.h"
 
 namespace Azul
 {
+	extern GOFoliage* pGoFoliage;
+	extern GOFoliage* pGoFoliage2;
+
 	void GameObjectManager::Create()
 	{
 		GameObjectManager& self = GetInstance();

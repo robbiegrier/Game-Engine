@@ -22,6 +22,8 @@ namespace Azul
 		static Quat EulerAnglesToQuat(const Vec3& q);
 		static float RadiansToDegrees(float r);
 		static float DegreesToRadians(float d);
+		static float SquareDistance(const Vec3& a, const Vec3& b);
+		static float SquareLen(const Vec3& a);
 
 		static void Print(const Vec3& v, const char* m);
 	};

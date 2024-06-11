@@ -23,16 +23,32 @@ namespace Azul
 
 		CreateInputLayout(g_Sprite_VxShader, sizeof(g_Sprite_VxShader), vertexLayoutDesc, sizeof(vertexLayoutDesc));
 		CreatePixelShader(g_Sprite_PxShader, sizeof(g_Sprite_PxShader));
+
+		HRESULT hr;
+
+		CD3D11_BLEND_DESC bsd;
+		ZeroMemory(&bsd, sizeof(CD3D11_BLEND_DESC));
+		bsd.RenderTarget[0].BlendEnable = TRUE;
+		bsd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		bsd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		bsd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		bsd.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		bsd.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+		bsd.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		bsd.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		hr = Engine::GetDevice()->CreateBlendState(&bsd, &pBlendStateSprite);
+		assert(SUCCEEDED(hr));
 	}
 
 	SOSprite::~SOSprite()
 	{
+		SafeRelease(pBlendStateSprite);
 	}
 
 	void SOSprite::OnOpen(GraphicsObject* pObject)
 	{
-		static_cast<void>(pObject);
-		Engine::ToggleBlending(true);
+		Engine::GetContext()->OMSetBlendState(pBlendStateSprite, blendFactor, sampleMask);
 
 		GOSprite* pGOSprite = (GOSprite*)pObject;
 
@@ -47,7 +63,7 @@ namespace Azul
 
 	void SOSprite::OnClose()
 	{
-		Engine::ToggleBlending(false);
+		Engine::GetContext()->OMSetBlendState(nullptr, blendFactor, sampleMask);
 	}
 
 	Camera* SOSprite::GetCamera() const

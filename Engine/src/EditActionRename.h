@@ -6,7 +6,7 @@
 
 namespace Azul
 {
-	// Action to rotate an object with a quaternion
+	// Action to rename an object.
 	class EditActionRename : public EditAction, public Align16
 	{
 	public:

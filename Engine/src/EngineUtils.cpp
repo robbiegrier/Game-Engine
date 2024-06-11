@@ -131,6 +131,7 @@ namespace Azul
 		{
 			short wheelDelta = GET_WHEEL_DELTA_WPARAM(wParam);
 			EditorInput::OnMouseWheelEvent((int)wheelDelta);
+			Engine::OnMouseWheelEvent((int)wheelDelta);
 		}
 		break;
 

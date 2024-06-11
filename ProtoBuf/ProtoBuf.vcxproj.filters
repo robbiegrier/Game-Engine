@@ -71,6 +71,15 @@
     <Filter Include="Source Files\Font\Proto">
       <UniqueIdentifier>{e18582a6-30a4-4985-a431-7f62b5f7c764}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Terrain">
+      <UniqueIdentifier>{11b0fd5d-f8f2-48b0-a433-fd39a0b24e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Terrain\Generated">
+      <UniqueIdentifier>{6c1444a7-9cd5-48e6-b3c4-265a305d856d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Terrain\Proto">
+      <UniqueIdentifier>{1a88e2ba-585a-4261-a403-e95171a0b66d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Framework\__DO NOT MODIFY__">
@@ -129,6 +138,9 @@
     </None>
     <None Include="glyphData.proto">
       <Filter>Source Files\Font\Proto</Filter>
+    </None>
+    <None Include="terrain.proto">
+      <Filter>Source Files\Terrain\Proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -653,6 +665,9 @@
     </ClInclude>
     <ClInclude Include="fontData.pb.h">
       <Filter>Source Files\Font\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain.pb.h">
+      <Filter>Source Files\Terrain\Generated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1245,6 +1260,9 @@
     </ClCompile>
     <ClCompile Include="glyphData.pb.cc">
       <Filter>Source Files\Font\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="terrain.pb.cc">
+      <Filter>Source Files\Terrain\Generated</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

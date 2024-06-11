@@ -36,7 +36,7 @@ namespace Azul
 		pModel->TransferConstantBufferBoneWorldArray(this->pBoneWorld);
 		pModel->RenderIndexBuffer();
 
-		for (Iterator& it = *pModel->subMeshes.GetIterator(); !it.IsDone(); it.Next())
+		for (Iterator& it = *pModel->GetSubMeshList().GetIterator(); !it.IsDone(); it.Next())
 		{
 			Mesh* pSubMesh = (Mesh*)it.Curr();
 			pSubMesh->TransferConstantBufferBoneWorldArray(this->pBoneWorld);

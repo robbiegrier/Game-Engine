@@ -14,7 +14,6 @@ namespace Azul
 
 	void GOColorByVertex::ActivateGraphics()
 	{
-		pModel->TransferConstantBuffer(CameraManager::GetCurrentCamera(), *pWorld);
 	}
 
 	void GOColorByVertex::Draw()

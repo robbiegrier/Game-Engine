@@ -22,6 +22,12 @@ namespace Azul
 		// Get the key modifier state this frame (shft, ctrl, alt, etc)
 		static InputModifier GetModState();
 
+		static bool GetLeftClickDown() { return GetInstance().leftClickDown; }
+		static bool GetRightClickDown() { return GetInstance().rightClickDown; }
+
+		static bool GetLeftClickReleased() { return GetInstance().leftClickReleasedThisFrame; }
+		static bool GetRightClickReleased() { return GetInstance().rightClickReleasedThisFrame; }
+
 	private:
 		// Big four
 		EditorInput();
@@ -48,6 +54,15 @@ namespace Azul
 		bool wasCtrlVDown = false;
 		bool wasDeleteDown = false;
 		bool wasCtrlSDown = false;
+
+		bool leftClickDown = false;
+		bool leftClickPressedThisFrame = false;
+		bool leftClickReleasedThisFrame = false;
+		bool rightClickDown = false;
+		bool rightClickPressedThisFrame = false;
+		bool rightClickReleasedThisFrame = false;
+
+		bool shiftDown = false;
 
 		int mouseWheelDelta = 0;
 

@@ -14,6 +14,8 @@
 #include "InspectorWindow.h"
 #include "WorldWindow.h"
 #include "AssetsWindow.h"
+#include "TerrainWindow.h"
+#include "TerrainEditor.h"
 
 namespace Azul
 {
@@ -70,6 +72,8 @@ namespace Azul
 		static ImVec2 GetNormalizedMousePosition(const ImVec2& inPos);
 		static void SortMousePointsClockwise(MousePosition* arr);
 
+		static TerrainEditor& GetTerrainEditor() { return GetInstance().terrainEditor; }
+
 	private:
 		// Private helpers
 		void Update();
@@ -104,6 +108,9 @@ namespace Azul
 		InspectorWindow inspector;
 		WorldWindow world;
 		AssetsWindow assets;
+		TerrainWindow terrain;
+
+		TerrainEditor terrainEditor;
 	};
 
 	void Log(const char* msg, ...);

@@ -294,6 +294,162 @@ bool GLTF::SetVBO_pos(Model& gltfModel, unsigned int index, vboData& vbo, char* 
 	return true;
 }
 
+bool GLTF::SetVBO_pos(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff, const Mat4& transform)
+{
+	// Get the accessor, buffer view
+	auto accessor = gltfModel.accessors[index];
+	size_t buffIndex = (size_t)accessor.bufferView;
+	auto bufferView = gltfModel.bufferViews[buffIndex];
+
+	vbo.targetType = vboDataConverter::GetTarget(bufferView.target);
+	vbo.componentType = vboDataConverter::GetComponent(accessor.componentType);
+	vbo.vboType = vboDataConverter::GetType(accessor.type);
+
+	vbo.attribIndex = index;
+	vbo.count = accessor.count;
+	vbo.dataSize = bufferView.byteLength;
+
+	// poData
+	assert(pBinaryBuff);
+	char* pBuffStart(nullptr);
+
+	// Start address
+	pBuffStart = pBinaryBuff + bufferView.byteOffset + accessor.byteOffset;
+
+	// in case there's data
+	delete[] vbo.poData;
+
+	vbo.poData = new unsigned char[vbo.dataSize]();
+	assert(vbo.poData);
+	memcpy_s(vbo.poData, vbo.dataSize, pBuffStart, vbo.dataSize);
+
+	auto& mesh = gltfModel.meshes[0];
+
+	Scale scale(1.f, 1.f, 1.f);
+	Rot rotation(Special::Identity);
+	Trans translation(0.f, 0.f, 0.f);
+
+	tinygltf::Node& meshNode = gltfModel.nodes[0];
+
+	for (const auto& node : gltfModel.nodes)
+	{
+		if (node.name == mesh.name)
+		{
+			meshNode = node;
+			break;
+		}
+	}
+
+	if (meshNode.rotation.size() > 3)
+	{
+		rotation = Rot(Quat((float)meshNode.rotation[0], (float)meshNode.rotation[1], (float)meshNode.rotation[2], (float)meshNode.rotation[3]));
+	}
+
+	if (meshNode.scale.size() > 2)
+	{
+		scale = Scale((float)meshNode.scale[0], (float)meshNode.scale[1], (float)meshNode.scale[2]);
+	}
+
+	if (meshNode.translation.size() > 2)
+	{
+		translation = Trans((float)meshNode.translation[0], (float)meshNode.translation[1], (float)meshNode.translation[2]);
+	}
+
+	Mat4 modelSpace = rotation * scale * translation * transform;
+
+	float* pSource = (float*)vbo.poData;
+	for (unsigned int i = 0; i < accessor.count; i++)
+	{
+		Vec4 pSourceVec(*pSource, *(pSource + 1), *(pSource + 2), 1);
+
+		pSourceVec *= modelSpace;
+
+		*pSource = pSourceVec[x]; pSource++;
+		*pSource = pSourceVec[y]; pSource++;
+		*pSource = pSourceVec[z]; pSource++;
+	}
+
+	return true;
+}
+
+bool GLTF::SetVBO_norm(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff, const Mat4& transform)
+{
+	// Get the accessor, buffer view
+	auto accessor = gltfModel.accessors[index];
+	size_t buffIndex = (size_t)accessor.bufferView;
+	auto bufferView = gltfModel.bufferViews[buffIndex];
+
+	vbo.targetType = vboDataConverter::GetTarget(bufferView.target);
+	vbo.componentType = vboDataConverter::GetComponent(accessor.componentType);
+	vbo.vboType = vboDataConverter::GetType(accessor.type);
+
+	vbo.attribIndex = index;
+	vbo.count = accessor.count;
+	vbo.dataSize = bufferView.byteLength;
+
+	// poData
+	assert(pBinaryBuff);
+	char* pBuffStart(nullptr);
+
+	// Start address
+	pBuffStart = pBinaryBuff + bufferView.byteOffset + accessor.byteOffset;
+
+	// in case there's data
+	delete[] vbo.poData;
+
+	vbo.poData = new unsigned char[vbo.dataSize]();
+	assert(vbo.poData);
+	memcpy_s(vbo.poData, vbo.dataSize, pBuffStart, vbo.dataSize);
+
+	auto& mesh = gltfModel.meshes[0];
+
+	Scale scale(1.f, 1.f, 1.f);
+	Rot rotation(Special::Identity);
+	Trans translation(0.f, 0.f, 0.f);
+
+	tinygltf::Node& meshNode = gltfModel.nodes[0];
+
+	for (const auto& node : gltfModel.nodes)
+	{
+		if (node.name == mesh.name)
+		{
+			meshNode = node;
+			break;
+		}
+	}
+
+	if (meshNode.rotation.size() > 3)
+	{
+		rotation = Rot(Quat((float)meshNode.rotation[0], (float)meshNode.rotation[1], (float)meshNode.rotation[2], (float)meshNode.rotation[3]));
+	}
+
+	if (meshNode.scale.size() > 2)
+	{
+		scale = Scale((float)meshNode.scale[0], (float)meshNode.scale[1], (float)meshNode.scale[2]);
+	}
+
+	if (meshNode.translation.size() > 2)
+	{
+		translation = Trans((float)meshNode.translation[0], (float)meshNode.translation[1], (float)meshNode.translation[2]);
+	}
+
+	Mat4 modelSpace = rotation * scale * translation * transform;
+
+	float* pSource = (float*)vbo.poData;
+	for (unsigned int i = 0; i < accessor.count; i++)
+	{
+		Vec4 pSourceVec(*pSource, *(pSource + 1), *(pSource + 2), 1);
+
+		pSourceVec *= modelSpace;
+
+		*pSource = pSourceVec[x]; pSource++;
+		*pSource = pSourceVec[y]; pSource++;
+		*pSource = pSourceVec[z]; pSource++;
+	}
+
+	return true;
+}
+
 bool GLTF::SetVBO_uv(Model& gltfModel, unsigned int index, vboData& vbo, char* pBinaryBuff)
 {
 	// Get the accessor, buffer view
@@ -436,6 +592,15 @@ bool GLTF::SetTexture(Model& gltfModel, unsigned int index, textureData& text, c
 	if (gltfModel.images.empty())
 	{
 		Trace::out("There is no texture data!\n");
+		text.poData = new unsigned char[text.dataSize]();
+		memset(text.poData, 0, text.dataSize);
+		assert(text.poData);
+		return false;
+	}
+
+	if (index >= gltfModel.images.size())
+	{
+		Trace::out("There is no texture data at index %d!\n", index);
 		text.poData = new unsigned char[text.dataSize]();
 		memset(text.poData, 0, text.dataSize);
 		assert(text.poData);

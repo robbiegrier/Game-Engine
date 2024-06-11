@@ -1,6 +1,11 @@
 #include "Viewport.h"
 #include "Engine.h"
 #include "CameraManager.h"
+#include "SODefault.h"
+#include "SOSkinLightTexture.h"
+#include "ShaderObjectManager.h"
+#include "SOTerrain.h"
+#include "SOFoliage.h"
 
 namespace Azul
 {
@@ -18,8 +23,19 @@ namespace Azul
 	void Viewport::Activate()
 	{
 		//Vec4 col = Vec4{ 0.500000000f, 0.749019623f, 0.800000000f, 1.000000000f };
-		Vec4 col = Vec4{ 0.5f, 0.5f, 0.5f, 1.f };
-		GetContext()->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&col);
+		Vec4 color = Vec4{ 0.5f, 0.5f, 0.5f, 1.f };
+		GetContext()->ClearRenderTargetView(pRenderTargetView, (const FLOAT*)&color);
+
+		static float fogDistMin = std::numeric_limits<float>().max();
+		static float fogDistMax = std::numeric_limits<float>().max();
+		SODefault* pShader = (SODefault*)ShaderObjectManager::Find(ShaderObject::Name::Default);
+		pShader->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOSkinLightTexture* pShaderSkin = (SOSkinLightTexture*)ShaderObjectManager::Find(ShaderObject::Name::SkinLightTexture);
+		pShaderSkin->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOTerrain* pShaderTerrain = (SOTerrain*)ShaderObjectManager::Find(ShaderObject::Name::Terrain);
+		pShaderTerrain->SetFogParameters(fogDistMin, fogDistMax, color);
+		SOFoliage* pShaderFoliage = (SOFoliage*)ShaderObjectManager::Find(ShaderObject::Name::Foliage);
+		pShaderFoliage->SetFogParameters(fogDistMin, fogDistMax, color);
 
 		GetContext()->RSSetState(pRasterizerState);
 		GetContext()->RSSetViewports(1, &viewport);
@@ -36,17 +52,11 @@ namespace Azul
 			1.0f, 1000.0f
 		);
 
-		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		UINT sampleMask = 0xffffffff;
-		GetContext()->OMSetBlendState(pBlendStateAlpha, blendFactor, sampleMask);
 		GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 	}
 
 	void Viewport::Close()
 	{
-		//float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		//UINT sampleMask = 0xffffffff;
-		//GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
 	}
 
 	void Viewport::Resize(UINT inWidth, UINT inHeight)
@@ -98,21 +108,6 @@ namespace Azul
 		GetContext()->OMSetDepthStencilState(pDepthStencilState, 1);
 	}
 
-	void Viewport::ToggleBlending(bool blendOn)
-	{
-		static const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		static const UINT sampleMask = 0xffffffff;
-
-		if (blendOn)
-		{
-			Engine::GetContext()->OMSetBlendState(pBlendStateAlpha, blendFactor, sampleMask);
-		}
-		else
-		{
-			Engine::GetContext()->OMSetBlendState(pBlendStateOff, blendFactor, sampleMask);
-		}
-	}
-
 	void Viewport::Refresh()
 	{
 		Clean();
@@ -152,9 +147,9 @@ namespace Azul
 
 		D3D11_TEXTURE2D_DESC depthStencilBufferDesc{ 0 };
 		depthStencilBufferDesc.ArraySize = 1;
-		depthStencilBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		depthStencilBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL | D3D11_BIND_SHADER_RESOURCE;
 		depthStencilBufferDesc.CPUAccessFlags = 0;
-		depthStencilBufferDesc.Format = DXGI_FORMAT_D32_FLOAT;
+		depthStencilBufferDesc.Format = DXGI_FORMAT_R32_TYPELESS;
 		depthStencilBufferDesc.Width = worldWidth;
 		depthStencilBufferDesc.Height = worldHeight;
 		depthStencilBufferDesc.MipLevels = 1;
@@ -165,7 +160,12 @@ namespace Azul
 		hr = GetDevice()->CreateTexture2D(&depthStencilBufferDesc, nullptr, &pDepthStencilBuffer);
 		assert(SUCCEEDED(hr));
 
-		hr = GetDevice()->CreateDepthStencilView(pDepthStencilBuffer, nullptr, &pDepthStencilView);
+		D3D11_DEPTH_STENCIL_VIEW_DESC ddesc;
+		ZeroMemory(&ddesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
+		ddesc.Format = DXGI_FORMAT_D32_FLOAT;
+		ddesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		ddesc.Texture2D.MipSlice = 0;
+		hr = GetDevice()->CreateDepthStencilView(pDepthStencilBuffer, &ddesc, &pDepthStencilView);
 		assert(SUCCEEDED(hr));
 
 		D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc{ 0 };
@@ -195,33 +195,18 @@ namespace Azul
 		assert(SUCCEEDED(hr));
 		static_cast<void>(hr);
 
-		CD3D11_BLEND_DESC BlendState;
-		ZeroMemory(&BlendState, sizeof(CD3D11_BLEND_DESC));
-		BlendState.RenderTarget[0].BlendEnable = FALSE;
-		BlendState.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-		hr = GetDevice()->CreateBlendState(&BlendState, &pBlendStateOff);
-		assert(SUCCEEDED(hr));
-
-		CD3D11_BLEND_DESC BlendState2;
-		ZeroMemory(&BlendState2, sizeof(CD3D11_BLEND_DESC));
-		BlendState2.RenderTarget[0].BlendEnable = TRUE;
-		BlendState2.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-		BlendState2.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-		BlendState2.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-		BlendState2.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-		BlendState2.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-		BlendState2.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-		BlendState2.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-		hr = GetDevice()->CreateBlendState(&BlendState2, &pBlendStateAlpha);
-		assert(SUCCEEDED(hr));
-
 		viewport.Width = static_cast<float>(worldWidth);
 		viewport.Height = static_cast<float>(worldHeight);
 		viewport.TopLeftX = 0.0f;
 		viewport.TopLeftY = 0.0f;
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;
+
+		shaderResourceViewDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
+		shaderResourceViewDesc.Texture2D.MipLevels = 1;
+		GetDevice()->CreateShaderResourceView(pDepthStencilBuffer, &shaderResourceViewDesc, &pDepthBufferView);
 	}
 
 	void Viewport::Clean()
@@ -233,8 +218,7 @@ namespace Azul
 		SafeRelease(pDepthStencilView);
 		SafeRelease(pDepthStencilState);
 		SafeRelease(pRasterizerState);
-		SafeRelease(pBlendStateAlpha);
-		SafeRelease(pBlendStateOff);
+		SafeRelease(pDepthBufferView);
 	}
 
 	ID3D11Device* Viewport::GetDevice() const

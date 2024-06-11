@@ -589,13 +589,13 @@ unsigned int NumSphereIndices = sizeof(g_SphereIndices) / sizeof(g_SphereIndices
 MeshSphere::MeshSphere()
 	: Mesh(NumSphereVerts, NumSphereIndices)
 {
-	poVertexBuffer_pos = CreateVertexBuffer(sizeof(g_SphereVertices_pos), g_SphereVertices_pos);
-	poVertexBuffer_color = nullptr;
-	poVertexBuffer_texCoord = CreateVertexBuffer(sizeof(g_SphereVertices_texCoord), g_SphereVertices_texCoord);
-	poVertexBuffer_norm = CreateVertexBuffer(sizeof(g_SphereVertices_norm), g_SphereVertices_norm);
-	poIndexBuffer = CreateIndexBuffer(sizeof(g_SphereIndices), g_SphereIndices);
-	poConstantBuff_lightColor = CreateConstantBuffer(sizeof(Vec3));
-	poConstantBuff_lightPos = CreateConstantBuffer(sizeof(Vec3));
+	pVertexBufferPosition = CreateVertexBuffer(sizeof(g_SphereVertices_pos), g_SphereVertices_pos);
+	pVertexBufferColor = nullptr;
+	pVertexBufferTextureCoordinates = CreateVertexBuffer(sizeof(g_SphereVertices_texCoord), g_SphereVertices_texCoord);
+	pVertexBufferNormal = CreateVertexBuffer(sizeof(g_SphereVertices_norm), g_SphereVertices_norm);
+	pIndexBufferTriangles = CreateIndexBuffer(sizeof(g_SphereIndices), g_SphereIndices);
+	pConstantBufferLightColor = CreateConstantBuffer(sizeof(Vec3));
+	pConstantBufferLightPosition = CreateConstantBuffer(sizeof(Vec3));
 
 	HackSetBoundingSphereData(g_SphereVertices_pos);
 	HackSetBoundingBoxData(g_SphereVertices_pos);

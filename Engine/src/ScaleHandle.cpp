@@ -39,7 +39,7 @@ namespace Azul
 	{
 		const Vec3 worldSpaceTotalDelta = GetClosestApproachFromMouseRay() - (dragStartPos + originalDragOffset);
 		const Vec3 worldSpaceFramewiseDelta = worldSpaceTotalDelta - prevVal;
-		const float sign = (worldSpaceTotalDelta - prevVal).dot(GetMutationAxis()) > 0 ? 1.f : -1.f;
+		const float sign = (worldSpaceTotalDelta - prevVal).dot(GetMutationAxis()) > 0.f ? 1.f : -1.f;
 		const float framewiseScaling = worldSpaceFramewiseDelta.len() * sign;
 
 		for (Iterator& it = *pParentSelection->GetSelectedObjectReferences().GetIterator(); !it.IsDone(); it.Next())

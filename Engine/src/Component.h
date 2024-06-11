@@ -21,6 +21,8 @@ namespace Azul
 
 		virtual void Update(float deltaTime) { static_cast<void>(deltaTime); }
 
+		virtual void UpdateInspectorGui() {}
+
 		void Wash() override;
 		bool Compare(DLink* pTargetNode) override;
 
