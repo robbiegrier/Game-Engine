@@ -1,6 +1,10 @@
 ## Azul 3D
 Game Engine Research Project at DePaul University.
 
+### [Click to Watch  an Overview of the Terrain & World Editor!](https://youtu.be/L6XEXuVbLBU)
+[![Watch the video](https://img.youtube.com/vi/L6XEXuVbLBU/maxresdefault.jpg)](https://youtu.be/L6XEXuVbLBU)
+---
+
 ### Main Contents:
 1. Standalone 3D Game Engine Core
 2. Interactive World Editor with Gizmos and GUI
