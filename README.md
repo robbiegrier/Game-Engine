@@ -52,7 +52,7 @@ HLSL Shaders are under [`Engine/Shaders/Original`](https://github.com/robbiegrie
 2. `Scenes/`: contains JSON scene save files
 3. `Terrains/`: contains saved terrain assets created in the engine
 
-#### Included depdencies:
+#### Included dependencies:
 1. [`IMGUI`](https://github.com/ocornut/imgui): stored under `GUI/` as a VS project
 2. `RapidXML`: under `RapidXML`
 3. `Protobuf`: wrapped with the `ProtoBuf/` project
