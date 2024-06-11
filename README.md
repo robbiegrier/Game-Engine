@@ -1,8 +1,13 @@
 ## Azul 3D
 Game Engine Research Project at DePaul University.
 
-### [Click to Watch  an Overview of the Terrain & World Editor!](https://youtu.be/L6XEXuVbLBU)
+### [Click to Watch  an Overview of the Terrain & World Builder!](https://youtu.be/L6XEXuVbLBU)
 [![Watch the video](https://img.youtube.com/vi/L6XEXuVbLBU/maxresdefault.jpg)](https://youtu.be/L6XEXuVbLBU)
+
+#### All Demos:
+1. [Terrain & World Builder](https://youtu.be/L6XEXuVbLBU) developed March to June 2024
+2. [Game Object World Editor](https://www.youtube.com/watch?v=mWYN3-QDYbc&t=0s) developed January to March 2024
+3. [Animation System Overview](https://youtu.be/0vGIcO0gV6I?si=SvI_-_ceF2pQHnoW) September to November 2023
 ---
 
 ### Main Contents:
