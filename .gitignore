@@ -402,6 +402,6 @@ FodyWeavers.xsd
 
 *.pb.cc
 *.pb.h
-*.proto.azul
+Data/*.proto.azul
 *.Vx.h
 *.Px.h
