@@ -37,7 +37,7 @@ namespace Azul
 	void PlayerScriptAdventure::Start()
 	{
 		PlayerScript::Start();
-		Trace::out("\tPlayer FPS: Start!\n");
+		Trace::out("\tPlayer Adventure: Start!\n");
 
 		pCharacter = GameObjectManager::FindObject("Paladin");
 
