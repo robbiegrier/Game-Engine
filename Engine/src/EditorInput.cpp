@@ -3,6 +3,7 @@
 #include "DLinkIterator.h"
 #include "ListNode.h"
 #include "imgui.h"
+#include "Engine.h"
 
 namespace Azul
 {
@@ -17,6 +18,11 @@ namespace Azul
 	void EditorInput::Update()
 	{
 		EditorInput& self = GetInstance();
+
+		if (!Engine::IsWindowFocused())
+		{
+			return;
+		}
 
 		ImVec2 mousePos = ImGui::GetMousePos();
 		MousePosition currMousePos((int)mousePos.x, (int)mousePos.y);
@@ -52,13 +58,13 @@ namespace Azul
 		const bool ctrlSDown = sDown && controlDown;
 		const bool ctrlSDownThisFrame = ctrlSDown && !self.wasCtrlSDown;
 
-		const bool translateDown = (GetKeyState('Q') & 0x8000);
+		const bool translateDown = (GetKeyState('W') & 0x8000) && controlDown;
 		const bool translateDownThisFrame = translateDown && !self.wasTranslateModeDown;
 
-		const bool scaleDown = (GetKeyState('R') & 0x8000);
+		const bool scaleDown = (GetKeyState('R') & 0x8000) && controlDown;
 		const bool scaleDownThisFrame = scaleDown && !self.wasScaleModeDown;
 
-		const bool rotateDown = (GetKeyState('E') & 0x8000);
+		const bool rotateDown = (GetKeyState('E') & 0x8000) && controlDown;
 		const bool rotateDownThisFrame = rotateDown && !self.wasRotateModeDown;
 
 		self.leftClickDown = (GetKeyState(VK_LBUTTON) & 0x8000);
@@ -176,7 +182,7 @@ namespace Azul
 
 		ImGui::Begin("Transform");
 
-		if (translateDownThisFrame || ImGui::Button("Translate", { 100, 50 }))
+		if (translateDownThisFrame || ImGui::Button("Translate (ctrl + W)", { 150, 25 }))
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{
@@ -186,7 +192,7 @@ namespace Azul
 		}
 
 		ImGui::SameLine();
-		if (rotateDownThisFrame || ImGui::Button("Rotate", { 100, 50 }))
+		if (rotateDownThisFrame || ImGui::Button("Rotate (ctrl + E)", { 150, 25 }))
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{
@@ -196,7 +202,7 @@ namespace Azul
 		}
 
 		ImGui::SameLine();
-		if (scaleDownThisFrame || ImGui::Button("Scale", { 100, 50 }))
+		if (scaleDownThisFrame || ImGui::Button("Scale (ctrl + R)", { 150, 25 }))
 		{
 			for (Iterator& it = *self.observers.GetIterator(); !it.IsDone(); it.Next())
 			{

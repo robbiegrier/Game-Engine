@@ -405,3 +405,5 @@ FodyWeavers.xsd
 Data/*.proto.azul
 *.Vx.h
 *.Px.h
+*.Cx.h
+Engine/Shaders/Compiled

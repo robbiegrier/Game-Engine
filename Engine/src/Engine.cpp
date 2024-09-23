@@ -429,6 +429,11 @@ namespace Azul
 		return GetEngineInstance().pWindowHandle;
 	}
 
+	bool Engine::IsWindowFocused()
+	{
+		return GetWindowHandle() == GetFocus();
+	}
+
 	void Engine::Resize(unsigned int w, unsigned int h)
 	{
 		Engine& self = GetEngineInstance();

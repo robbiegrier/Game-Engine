@@ -11,6 +11,11 @@ namespace Azul
 {
 	void EditorController::Update()
 	{
+		if (!Engine::IsWindowFocused() || GetKeyState(VK_CONTROL) & 0x8000)
+		{
+			return;
+		}
+
 		float moveScale = Engine::GetDeltaTime();
 
 		if (EditorGui::IsWorldInFocus() && EditorInput::GetModState() != InputModifier::Control)

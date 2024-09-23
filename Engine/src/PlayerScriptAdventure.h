@@ -8,7 +8,7 @@ namespace Azul
 {
 	class Camera;
 
-	class PlayerScriptAdventure : public PlayerScript
+	class PlayerScriptAdventure : public PlayerScript, public Align16
 	{
 	public:
 		PlayerScriptAdventure();
